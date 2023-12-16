@@ -7,7 +7,7 @@ function Sidebar() {
                 <img src={logo} alt="logo"/>
             </div>
 
-            <div className="text-sm">
+            <div className="text-base">
                 <div className="mb-3">
                     <button className="flex items-end py-2 px-12">
                         <span className="mr-2">
