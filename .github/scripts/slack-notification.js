@@ -1,7 +1,7 @@
 const axios = require("axios");
 
 const SLACK_BOT_TOKEN = process.env.SLACK_BOT_TOKEN;
-const SLACK_CHANNEL = "#your-channel"; // Replace with your Slack channel
+const SLACK_CHANNEL = "frontend"; // Replace with your Slack channel
 
 const message = {
   channel: SLACK_CHANNEL,
