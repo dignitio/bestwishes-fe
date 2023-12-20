@@ -8,5 +8,4 @@ function App() {
     </div>
   );
 }
-// test event
 export default App;
