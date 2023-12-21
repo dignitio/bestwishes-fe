@@ -1,4 +1,4 @@
-import Layout from "layout/AuthLayout/DashboardLayout/Layout";
+import Layout from "layout/DashboardLayout/Layout";
 import "./App.css";
 
 function App() {
