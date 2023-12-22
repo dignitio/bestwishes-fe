@@ -1,14 +1,15 @@
+import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 
 function Layout() {
     return ( 
-        <div className="bg-gray-200 flex font-nunito">
+        <div className="bg-gray-100  flex font-nunito">
             <Sidebar/>
-            <div className="w-full">
+            <div className="w-11/12">
                 <Header />
-                <main className="text-gray-300 text-6xl text-center mt-40">
-                    main element
+                <main className="w-11/12">
+                    <Outlet />
                 </main>
             </div>
            

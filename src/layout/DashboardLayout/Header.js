@@ -1,5 +1,5 @@
 import Button from "components/Button";
-import userPix from "./images/userPix.png"
+import userPix from "./assets/images/userPix.png"
 import { ReactComponent as BellIcon } from "./assets/icons/bell.svg"
 import { ReactComponent as ArrowDown } from "./assets/icons/downArrow.svg"
 import { ReactComponent as SearchIcon } from "./assets/icons/search.svg"
