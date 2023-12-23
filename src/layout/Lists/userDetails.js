@@ -1,5 +1,5 @@
-import  ruthImage from "../DashboardLayout/assets/images/ruth.jpg"
-import  bensonImage from "../DashboardLayout/assets/images/benson.jpg"
+import  ruthImage from "../../assets/images/ruth.jpg"
+import  bensonImage from "../../assets/images/benson.jpg"
 
 const userDetails = [
     {

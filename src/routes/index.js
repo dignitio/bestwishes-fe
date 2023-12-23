@@ -2,15 +2,15 @@ import AuthGuard from "guards/AuthGuard";
 import GuestGuard from "guards/GuestGuard";
 import AuthLayout from "layout/AuthLayout";
 import Layout from "layout/DashboardLayout/Layout";
+import MainLayout from "layout/MainLayout";
 import { Suspense, lazy } from "react";
 import { useRoutes } from "react-router-dom";
-
 // eslint-disable-next-line react-hooks/rules-of-hooks
 const Loadable = (Component) => (props) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
 
   return (
-    <Suspense fallback={<>loading</>}>
+    <Suspense fallback={<div className="text-3xl text-slate-400 mt-8 ml-12">Loading...</div>}>
       <Component {...props} />
     </Suspense>
   );
@@ -30,6 +30,8 @@ export default function Router() {
           element: <div> login page </div>,
           path: "login",
         },
+
+
         {
           element: <div> register </div>,
           path: "register",
@@ -53,7 +55,7 @@ export default function Router() {
       ),
       children: [
         {
-          element: <div>dashboard</div>,
+          element: <div><Dashboard /></div>,
           index: true,
         },
         {
@@ -61,21 +63,37 @@ export default function Router() {
           path: "tribute",
         },
         {
-          element: <div>create card</div>,
+          element: <div><CreateCard /></div>,
           path: "create-card",
         },
         {
-          element: <div>settings</div>,
+          element: <div><Settings /></div>,
           path: "settings",
         },
         {
-          element: <div>support</div>,
+          element: <div><Support /></div>,
           path: "support",
         },
+      ],
+    },
+    {
+      path: "/",
+      element: (
+        <MainLayout />
+      ),
+      children: [
+        {
+          element: <div><Home /></div>,
+          index: true,
+        }
       ],
     },
   ]);
 }
 
-// const Dashboard = Loadable(lazy(() => import("/")));
+const Dashboard = Loadable(lazy(() => import("../pages/Dashboard")));
 const Tribute = Loadable(lazy(() => import("../pages/Tribute")));
+const CreateCard = Loadable(lazy(() => import("../pages/CreateCard")));
+const Settings = Loadable(lazy(() => import("../pages/Settings")));
+const Support = Loadable(lazy(() => import("../pages/Support")));
+const Home = Loadable(lazy(() => import("../pages/Home")));

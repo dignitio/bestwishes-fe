@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import userDetails from "layout/Lists/userDetails";
 import activities from "layout/Lists/activities";
-import { ReactComponent as XCircleIcon } from "../DashboardLayout/assets/icons/Xcircle.svg"
-import { ReactComponent as SubtractIcon } from "../DashboardLayout/assets/icons/Subtract.svg"
-import { ReactComponent as SwitchIcon } from "../DashboardLayout/assets/icons/switch.svg"
-import { ReactComponent as SendIcon } from "../DashboardLayout/assets/icons/send.svg"
-import { ReactComponent as TrashIcon } from "../DashboardLayout/assets/icons/trash.svg"
-import { ReactComponent as CircleIcon } from "../DashboardLayout/assets/icons/circle.svg"
+import { ReactComponent as XCircleIcon } from "../../assets/icons/Xcircle.svg"
+import { ReactComponent as SubtractIcon } from "../../assets/icons/Subtract.svg"
+import { ReactComponent as SwitchIcon } from "../../assets/icons/switch.svg"
+import { ReactComponent as SendIcon } from "../../assets/icons/send.svg"
+import { ReactComponent as TrashIcon } from "../../assets/icons/trash.svg"
+import { ReactComponent as CircleIcon } from "../../assets/icons/circle.svg"
 
 
 function Dashboard() {
