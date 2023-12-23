@@ -23,6 +23,12 @@
     "react/no-children-prop": 0,
     "react/button-has-type": 0,
     "no-console": 1,
+    "no-return-assign": 0,
+    "import/no-cycle": 0,
+    "arrow-body-style": 1,
+    "consistent-return": 1,
+    "no-param-reassign": 0,
+    "react/function-component-definition": 0,
     "no-unused-vars": [
       1,
       {
