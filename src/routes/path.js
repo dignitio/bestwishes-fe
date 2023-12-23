@@ -13,6 +13,10 @@ export const PATH_AUTH = {
 
 export const PATH_DASHBOARD = {
   root: ROOTS_DASHBOARD,
+  tribute: path(ROOTS_DASHBOARD, "/tribute"),
+  createCard: path(ROOTS_DASHBOARD, "/create-card"),
+  settings: path(ROOTS_DASHBOARD, "/settings"),
+  support: path(ROOTS_DASHBOARD, "/support"),
   profile: path(ROOTS_DASHBOARD, "/profile"),
 };
 
