@@ -55,7 +55,7 @@ export default function Router() {
       ),
       children: [
         {
-          element: <div><Dashboard /></div>,
+          element: <Dashboard />,
           index: true,
         },
         {
@@ -63,15 +63,15 @@ export default function Router() {
           path: "tribute",
         },
         {
-          element: <div><CreateCard /></div>,
+          element: <CreateCard />,
           path: "create-card",
         },
         {
-          element: <div><Settings /></div>,
+          element: <Settings />,
           path: "settings",
         },
         {
-          element: <div><Support /></div>,
+          element: <Support />,
           path: "support",
         },
       ],
@@ -83,7 +83,7 @@ export default function Router() {
       ),
       children: [
         {
-          element: <div><Home /></div>,
+          element: <Home />,
           index: true,
         }
       ],
