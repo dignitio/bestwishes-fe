@@ -8,12 +8,6 @@ import OauthButton from 'components/Button/OauthButton'
 import { ReactComponent as FacebookLogo } from "../assets/facebook.svg";
 import { ReactComponent as GoogleLogo } from "../assets/google.svg";
 
-// const onSubmit = async (values, actions) => {
-//   await new Promise((resolve) => setTimeout(resolve, 1000));
-//   actions.resetForm();
-//   // No need for a return statement here
-// };
-
 export default function Login() {
   return (
     <div className='flex flex-col gap-10'>
