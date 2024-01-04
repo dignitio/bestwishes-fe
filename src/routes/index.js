@@ -1,6 +1,9 @@
 import AuthGuard from "guards/AuthGuard";
 import GuestGuard from "guards/GuestGuard";
 import AuthLayout from "layout/AuthLayout";
+import Register from "pages/Register";
+import Login from "pages/Login";
+import ResetPassword from "pages/ResetPassword";
 import Layout from "layout/DashboardLayout/Layout";
 import MainLayout from "layout/MainLayout";
 import { Suspense, lazy } from "react";
@@ -20,6 +23,21 @@ export default function Router() {
   return useRoutes([
     {
       path: "/auth",
+
+      // element: <AuthLayout />,
+      // children: [
+      //   {
+      //     path: "register",
+      //     element: <Register />,
+      //   },
+      //   {
+      //     path: "login",
+      //     element: <Login />
+      //   },
+      //   {
+      //     path: "reset-password",
+      //     element: <ResetPassword />
+      //   },
       element: (
         <GuestGuard>
           <AuthLayout />
@@ -30,8 +48,6 @@ export default function Router() {
           element: <div> login page </div>,
           path: "login",
         },
-
-
         {
           element: <div> register </div>,
           path: "register",
@@ -44,6 +60,7 @@ export default function Router() {
           element: <div> reset password </div>,
           path: "reset-password",
         },
+
       ],
     },
     {
