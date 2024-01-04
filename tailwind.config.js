@@ -4,9 +4,14 @@ module.exports = {
   theme: {
     colors: {
       primary: "#FF433C",
-      white: "#ffff"
+      white: "#ffff",
+      OauthButton: "#E8E8E8"
     },
-    extend: {},
+    extend: {
+      fontFamily:{
+        lexend:['Lexend', 'sans-serif']
+      },
+    },
   },
   plugins: [],
 };

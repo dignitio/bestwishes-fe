@@ -1,10 +1,10 @@
 import "./App.css";
-import Button from "components/Button";
+import Router from "routes";
 
 function App() {
   return (
-    <div className="flex bg-black h-screen justify-center items-center flex-nowrap">
-      <Button type="submit">Click me</Button>
+    <div className=" text-[#1E1B1A] bg-black w-full h-screen  font-lexend">
+      <Router />
     </div>
   );
 }
