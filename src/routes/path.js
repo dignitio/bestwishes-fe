@@ -20,4 +20,5 @@ export const PATH_DASHBOARD = {
   profile: path(ROOTS_DASHBOARD, "/profile"),
 };
 
+
 export const PATH_AFTER_LOGIN = PATH_DASHBOARD.root;

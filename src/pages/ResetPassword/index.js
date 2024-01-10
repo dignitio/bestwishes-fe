@@ -4,7 +4,7 @@ import CustomInput from 'components/CustonFormInputs/CustomInput'
 import { Form, Formik } from 'formik'
 import React from 'react'
 
-export default function ResetPassword() {
+function ResetPassword() {
   return (
     <div className='flex flex-col gap-10'>
       <span className='w-full text-center text-3xl font-medium uppercase'>Password Reset</span>
@@ -29,3 +29,5 @@ export default function ResetPassword() {
     </div>
   )
 }
+
+export default ResetPassword

@@ -1,14 +1,13 @@
 import React from 'react'
-import { Form, Formik, useFormik } from 'formik'
-import { Link } from "react-router-dom";
+import { Form, Formik, } from 'formik'
 import Schema from 'Schemas'
 import Button from 'components/Button'
 import CustomInput from 'components/CustonFormInputs/CustomInput'
 import OauthButton from 'components/Button/OauthButton'
-import { ReactComponent as FacebookLogo } from "../assets/facebook.svg";
-import { ReactComponent as GoogleLogo } from "../assets/google.svg";
+import { ReactComponent as FacebookLogo } from "../../assets/icons/facebook.svg";
+import { ReactComponent as GoogleLogo } from "../../assets/icons/google.svg";
 
-export default function Login() {
+ function Login() {
   return (
     <div className='flex flex-col gap-10'>
       <span className='w-full text-center text-2xl font-medium uppercase'>
@@ -54,3 +53,4 @@ export default function Login() {
 
   )
 }
+export default Login

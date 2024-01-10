@@ -1,7 +1,7 @@
 import { useField } from "formik";
 import React from "react";
-import { ReactComponent as Eye } from "../../assets/eye.svg";
-import { ReactComponent as EyeSlash } from "../../assets/eye-slash.svg";
+import { ReactComponent as Eye } from "../../assets/icons/eye.svg";
+import { ReactComponent as EyeSlash } from "../../assets/icons/eye-slash.svg";
 
 export default function CustomInput({ label, type, obscured, ...props }) {
   const [field, meta] = useField(props);

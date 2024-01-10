@@ -1,19 +1,19 @@
 import Button from "components/Button";
-import { Form, Formik, useFormik } from "formik";
+import { Form, Formik } from "formik";
 import { Link } from "react-router-dom";
 import Schema from "Schemas";
 import React from "react";
 import CustomInput from "components/CustonFormInputs/CustomInput";
 import CustomCheckbox from "components/CustonFormInputs/CustomCheckbox";
 import OauthButton from "components/Button/OauthButton";
-import { ReactComponent as FacebookLogo } from "../assets/facebook.svg";
-import { ReactComponent as GoogleLogo } from "../assets/google.svg";
+import { ReactComponent as FacebookLogo } from "../../assets/icons/facebook.svg";
+import { ReactComponent as GoogleLogo } from "../../assets/icons/google.svg";
 
 const onSubmit = async (values) => {
   console.log(values);
 };
 
-export default function Register() {
+ function Register() {
   return (
     <div className="flex flex-col gap-10">
       <span className="w-full text-center text-2xl font-medium uppercase ">
@@ -80,3 +80,5 @@ export default function Register() {
     </div>
   );
 }
+
+export default Register

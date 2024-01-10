@@ -1,9 +1,6 @@
 import AuthGuard from "guards/AuthGuard";
 import GuestGuard from "guards/GuestGuard";
-import AuthLayout from "layout/AuthLayout";
-import Register from "pages/Register";
-import Login from "pages/Login";
-import ResetPassword from "pages/ResetPassword";
+import AuthLayout from "layout/AuthLayout/Layout";
 import Layout from "layout/DashboardLayout/Layout";
 import MainLayout from "layout/MainLayout";
 import { Suspense, lazy } from "react";
@@ -23,21 +20,6 @@ export default function Router() {
   return useRoutes([
     {
       path: "/auth",
-
-      // element: <AuthLayout />,
-      // children: [
-      //   {
-      //     path: "register",
-      //     element: <Register />,
-      //   },
-      //   {
-      //     path: "login",
-      //     element: <Login />
-      //   },
-      //   {
-      //     path: "reset-password",
-      //     element: <ResetPassword />
-      //   },
       element: (
         <GuestGuard>
           <AuthLayout />
@@ -45,11 +27,11 @@ export default function Router() {
       ),
       children: [
         {
-          element: <div> login page </div>,
+          element: <Login/>,
           path: "login",
         },
         {
-          element: <div> register </div>,
+          element: <Register/>,
           path: "register",
         },
         {
@@ -57,7 +39,7 @@ export default function Router() {
           path: "forgot-password",
         },
         {
-          element: <div> reset password </div>,
+          element: <ResetPassword/>,
           path: "reset-password",
         },
 
@@ -114,3 +96,6 @@ const CreateCard = Loadable(lazy(() => import("../pages/CreateCard")));
 const Settings = Loadable(lazy(() => import("../pages/Settings")));
 const Support = Loadable(lazy(() => import("../pages/Support")));
 const Home = Loadable(lazy(() => import("../pages/Home")));
+const Login = Loadable(lazy(() => import("../pages/Login")));
+const Register = Loadable(lazy(() => import("../pages/Register")));
+const ResetPassword = Loadable(lazy(() => import("../pages/ResetPassword")));
