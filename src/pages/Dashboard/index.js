@@ -78,13 +78,13 @@ function Dashboard() {
                 </div>
                 <div className="mt-9 ">
                     <p className="tracking-tight pb-2 text-lg pl-2">Recent Activities</p>
-                    <div className="bg-white mb-8 pt-1 pb-1 px-3 rounded-xl w-80">
+                    <div className="bg-white pt-1 pb-1 px-4 rounded-xl w-96">
                             { activities.map(activity => (
-                                <div className="flex my-5">
+                                <div className="flex my-6">
                                     <div>
                                         <CircleIcon />
                                     </div>
-                                    <div className="pl-3.5">
+                                    <div className="pl-4">
                                         <p className="pb-1.5 leading-tight text-sm">{activity.title}</p>
                                         <p className="text-gray-300 tracking-tight text-xs">{activity.createdDate}</p>
                                     </div>
