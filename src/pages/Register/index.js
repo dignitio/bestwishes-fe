@@ -8,6 +8,7 @@ import CustomCheckbox from "components/CustonFormInputs/CustomCheckbox";
 import OauthButton from "components/Button/OauthButton";
 import { ReactComponent as FacebookLogo } from "../../assets/icons/facebook.svg";
 import { ReactComponent as GoogleLogo } from "../../assets/icons/google.svg";
+import { ReactComponent as AppleLogo } from "../../assets/icons/apple-logo.svg";
 
 const onSubmit = async (values) => {
   console.log(values);
@@ -73,7 +74,10 @@ const onSubmit = async (values) => {
               <GoogleLogo />
               Sign in with Google
             </OauthButton>
-            <OauthButton>Sign in With Apple</OauthButton>
+            <OauthButton>
+             <AppleLogo/> 
+             Sign in With Apple
+            </OauthButton>
           </Form>
         )}
       </Formik>

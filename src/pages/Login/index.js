@@ -6,6 +6,7 @@ import CustomInput from 'components/CustonFormInputs/CustomInput'
 import OauthButton from 'components/Button/OauthButton'
 import { ReactComponent as FacebookLogo } from "../../assets/icons/facebook.svg";
 import { ReactComponent as GoogleLogo } from "../../assets/icons/google.svg";
+import { ReactComponent as AppleLogo } from "../../assets/icons/apple-logo.svg"
 
  function Login() {
   return (
@@ -44,7 +45,10 @@ import { ReactComponent as GoogleLogo } from "../../assets/icons/google.svg";
               <GoogleLogo />
               Sign in with Google
             </OauthButton>
-            <OauthButton>Sign in With Apple</OauthButton>
+            <OauthButton>
+              <AppleLogo/>
+              Sign in With Apple
+            </OauthButton>
           </Form>
         )}
       </Formik>
