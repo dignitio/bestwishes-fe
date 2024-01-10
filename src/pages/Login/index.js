@@ -3,11 +3,12 @@ import { Form, Formik, } from 'formik'
 import Schema from 'Schemas'
 import Button from 'components/Button'
 import CustomInput from 'components/CustonFormInputs/CustomInput'
+import { Link } from 'react-router-dom'  
 import OauthButton from 'components/Button/OauthButton'
 import { ReactComponent as FacebookLogo } from "../../assets/icons/facebook.svg";
 import { ReactComponent as GoogleLogo } from "../../assets/icons/google.svg";
 import { ReactComponent as AppleLogo } from "../../assets/icons/apple-logo.svg"
-
+ 
  function Login() {
   return (
     <div className='flex flex-col gap-10'>
@@ -34,9 +35,11 @@ import { ReactComponent as AppleLogo } from "../../assets/icons/apple-logo.svg"
               readOnly={false}
               placeholder="Enter your password"
             />
-            <a href="reset-password"><span className='flex flex-col text-end underline'>Forgot password</span> </a>
+            <Link to="/reset-password"> 
+              <span className='flex flex-col text-end underline'>Forgot password</span>
+            </Link>
             <Button disabled={isSubmitting}> LOGIN </Button>
-            <p className="my-2 text-lg text-center"> Do not have an Account? <a href='register' className='underline'>Create an Account</a></p>
+            <p className="my-2 text-lg text-center"> Do not have an Account? <Link to="/register" className='underline'>Create an Account</Link></p>
             <OauthButton>
               <FacebookLogo />
               Sign in With Facebook

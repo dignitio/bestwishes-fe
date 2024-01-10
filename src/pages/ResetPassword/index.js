@@ -3,6 +3,7 @@ import Button from 'components/Button'
 import CustomInput from 'components/CustonFormInputs/CustomInput'
 import { Form, Formik } from 'formik'
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function ResetPassword() {
   return (
@@ -22,7 +23,7 @@ function ResetPassword() {
               placeholder="Enter Your email address"
             />
             <Button disabled={isSubmitting}> Reset Password </Button>
-              <p className='my-2 text-lg text-center'>Remember Password? <a href="login" className='underline'><span> Login </span></a></p>
+              <p className='my-2 text-lg text-center'>Remember Password? <Link to="/login" className='underline'><span> Login </span></Link></p>
           </Form>
         )}
       </Formik>
