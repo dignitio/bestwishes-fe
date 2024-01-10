@@ -4,7 +4,7 @@ import Sidebar from "./Sidebar";
 
 function Layout() {
   return (
-    <div className="bg-gray-100  flex font-nunito">
+    <div className="bg-gray-100 h-screen flex font-nunito">
       <Sidebar />
       <div className="w-11/12">
         <Header />

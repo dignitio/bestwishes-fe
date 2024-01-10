@@ -10,14 +10,14 @@ import { ReactComponent as LogOutIcon } from "../../assets/icons/login.svg";
 
 function Sidebar() {
   return (
-    <div className="bg-white h-screen flex flex-col items-center py-4 px-8">
-      <div className="mt-4 mb-20 mr-8">
+    <div className="bg-white flex flex-col items-center py-4 px-6">
+      <div className="w-20 mt-4 mb-16 mr-5">
         <img src={logo} alt="logo" />
       </div>
 
-      <div className="text-base">
+      <div className="text-sm">
         <div className="mb-3">
-          <Link to={PATH_DASHBOARD.root} className="flex items-end py-3 px-3">
+          <Link to={PATH_DASHBOARD.root} className="flex items-end py-2.5 px-3 hover:bg-gradient-to-r from-gray-200 to-white">
             <span className="mr-2">
               <CategoryIcon />
             </span>
@@ -25,7 +25,7 @@ function Sidebar() {
           </Link>
         </div>
         <div className="mb-3">
-          <Link to={PATH_DASHBOARD.tribute} className="flex py-3 px-3">
+          <Link to={PATH_DASHBOARD.tribute} className="flex py-2.5 px-3 hover:bg-gradient-to-r from-gray-200 to-white">
             <span className="mr-2">
               <LayerIcon />
             </span>
@@ -33,7 +33,7 @@ function Sidebar() {
           </Link>
         </div>
         <div className="mb-3">
-          <Link to={PATH_DASHBOARD.createCard} className="flex cursor-pointer py-3 px-3">
+          <Link to={PATH_DASHBOARD.createCard} className="flex cursor-pointer py-2.5 px-3 hover:bg-gradient-to-r from-gray-200 to-white">
             <span className="mr-2">
               <EditIcon />
             </span>
@@ -41,7 +41,7 @@ function Sidebar() {
           </Link>
         </div>
         <div className="mb-3">
-          <Link to={PATH_DASHBOARD.settings} className="flex cursor-pointer py-3 px-3">
+          <Link to={PATH_DASHBOARD.settings} className="flex cursor-pointer py-2.5 px-3 hover:bg-gradient-to-r from-gray-200 to-white">
             <span className="mr-2">
               <GearIcon />
             </span>
@@ -49,7 +49,7 @@ function Sidebar() {
           </Link>
         </div>
         <div className="mb-3">
-          <Link to={PATH_DASHBOARD.support} className="flex cursor-pointer py-3 px-3">
+          <Link to={PATH_DASHBOARD.support} className="flex cursor-pointer py-2.5 px-3 hover:bg-gradient-to-r from-gray-200 to-white">
             <span className="mr-2">
               <SupportIcon />
             </span>
@@ -57,7 +57,7 @@ function Sidebar() {
           </Link>
         </div>
         <div className="mb-3">
-          <button className="flex cursor-pointer py-3 px-3 pr-24">
+          <button className="flex cursor-pointer py-2.5 px-3 hover:bg-gradient-to-r from-gray-200 to-white pr-24">
             <span className="mr-2">
               <LogOutIcon />
             </span>
