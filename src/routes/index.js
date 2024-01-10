@@ -19,7 +19,7 @@ const Loadable = (Component) => (props) => {
 export default function Router() {
   return useRoutes([
     {
-      path: "/auth",
+      path: "/",
       element: (
         <GuestGuard>
           <AuthLayout />

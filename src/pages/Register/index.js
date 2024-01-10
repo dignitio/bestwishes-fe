@@ -66,15 +66,15 @@ const onSubmit = async (values) => {
             />
             <Button disabled={isSubmitting}>Create Account</Button>
             <p className="my-2 text-lg text-center">Already got an account? <a href="login"><span className="underline">Login</span></a> </p>
-            <OauthButton>
+            <OauthButton  >
               <FacebookLogo />
               Sign in With Facebook
             </OauthButton>
-            <OauthButton>
+            <OauthButton  >
               <GoogleLogo />
               Sign in with Google
             </OauthButton>
-            <OauthButton>
+            <OauthButton  >
              <AppleLogo/> 
              Sign in With Apple
             </OauthButton>
