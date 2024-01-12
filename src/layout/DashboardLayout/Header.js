@@ -22,17 +22,17 @@ function Header() {
                 </span>
             </button>
             <div className="flex items-center text-xs">
-                <Button type={Button}>
-                    <span className="bg-red-500 px-4 py-2 rounded-sm text-white hover:bg-red-600">+ Create Card</span>
+                <Button type={Button} className="bg-primary text-white h-8 hover:bg-red-500">
+                    + Create Card
                 </Button>
-                <Button type={Button}>
-                    <span className="bg-red-500 px-4 py-2 rounded-sm text-white hover:bg-red-600">Create Tribute +</span>
+                <Button type={Button} className="bg-primary text-white mx-10 h-8 hover:bg-red-500">
+                    Create Tribute 
                 </Button>
-                <Button type={Button} className="hover:bg-gray-100 rounded-xl p-2">
+                <div className="hover:bg-gray-100 rounded-xl p-2 mr-4">
                     <span>
                         <BellIcon />
                     </span>
-                </Button>
+                </div>
                 <div className="mx-3 flex items-center">
                     <img src={userPix} alt="userPix" className="w-9"/>
                     <span  className="ml-3 hover:bg-gray-100 rounded-md p-2">

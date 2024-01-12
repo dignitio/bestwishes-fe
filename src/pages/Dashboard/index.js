@@ -26,7 +26,7 @@ function Dashboard() {
           </div>
           <div className="flex items-center">
             <Link to="setting">
-              <span className="bg-red-500 hover:bg-red-600 text-white rounded px-4 py-2 mr-6 text-xs">
+              <span className="bg-red-500 hover:bg-red-500 text-white rounded px-4 py-2 mr-6 text-xs">
                 Complete profile
               </span>
             </Link>
@@ -36,7 +36,7 @@ function Dashboard() {
           </div>
         </div>
 
-        <Button onClick={() => setOpen(!open)}> Open Modal</Button>
+        <Button onClick={() => setOpen(!open)} className="bg-red-500"> Open Modal</Button>
         <div className="flex justify-between mt-7 mx-8">
           <div className="bg-white py-5 px-5 w-1/3 rounded-md">
             <p className="text-sm pb-3 tracking-tight text-sky-700">Total Tributes</p>
