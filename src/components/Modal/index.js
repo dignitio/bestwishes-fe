@@ -20,13 +20,14 @@ const Modal = ({ open, onClose, customClass, width, children }) => {
       }}
     >
       <div className="header" onClick={onClose} style={{ cursor: "pointer" }}>
-        <Closeicon />
+        <Closeicon className="w-4"/>
       </div>
       <div
         style={{
           boxSizing: "border-box",
           overflowY: "auto",
           padding: "24px",
+          fontFamily: "Nunito Sans",
         }}
       >
         {children}

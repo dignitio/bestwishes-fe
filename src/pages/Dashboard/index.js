@@ -1,8 +1,6 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import userDetails from "layout/Lists/userDetails";
 import activities from "layout/Lists/activities";
-import Modal from "components/Modal";
 import Button from "components/Button";
 import { ReactComponent as XCircleIcon } from "../../assets/icons/Xcircle.svg";
 import { ReactComponent as SubtractIcon } from "../../assets/icons/Subtract.svg";
@@ -12,31 +10,30 @@ import { ReactComponent as TrashIcon } from "../../assets/icons/trash.svg";
 import { ReactComponent as CircleIcon } from "../../assets/icons/circle.svg";
 
 function Dashboard() {
-  const [open, setOpen] = useState(false);
+
   return (
     <>
-      <div className="pt-8">
-        <div className="outline outline-1 outline-red-400 rounded-md flex justify-between bg-red-100 mx-8 py-3.5 px-5">
+      <div className="pt-8 max-md:pt-6 max-md:mb-5">
+        <div className="outline outline-1 outline-red-400 rounded-md flex justify-between bg-red-100 mx-8 max-md:py-3 py-3.5 px-5">
           <div className="flex items-center">
-            <SubtractIcon />
-            <p className="pl-3 pt-1 text-sm">
+            <SubtractIcon className="max-md:w-3.5 max-md:h-3.5" />
+            <p className="pl-3 max-md:pl-1.5 pt-1 max-md:pt-0.5 text-sm max-md:text-[11px]">
               Please finalise your profile verification to be eligible to receive gifts from
               well-wishers
             </p>
           </div>
           <div className="flex items-center">
-            <Link to="setting">
-              <span className="bg-red-500 hover:bg-red-500 text-white rounded px-4 py-2 mr-6 text-xs">
+            <Link to="settings">
+              <span className="bg-red-500 hover:bg-red-500 text-white rounded px-4 py-2 mr-6 text-xs max-md:text-[10px] max-md:px-2">
                 Complete profile
               </span>
             </Link>
             <span>
-              <XCircleIcon />
+              <XCircleIcon className="max-md:w-5 max-md:h-5"/>
             </span>
           </div>
         </div>
 
-        <Button onClick={() => setOpen(!open)} className="bg-red-500"> Open Modal</Button>
         <div className="flex justify-between mt-7 mx-8">
           <div className="bg-white py-5 px-5 w-1/3 rounded-md">
             <p className="text-sm pb-3 tracking-tight text-sky-700">Total Tributes</p>
@@ -52,8 +49,8 @@ function Dashboard() {
           </div>
         </div>
 
-        <div className="flex justify-between mx-8">
-          <div className="mt-9 mr-16 w-9/12">
+        <div className="flex justify-between mx-8 max-md:block">
+          <div className="mt-9 mr-16 w-9/12 max-md:w-full">
             <p className="tracking-tight pb-2 text-lg pl-2">Your Active Tributes</p>
 
             <div className="bg-white rounded-xl px-4 pt-1 pb-6">
@@ -86,17 +83,17 @@ function Dashboard() {
               ))}
             </div>
           </div>
-          <div className="mt-9 ">
+          <div className="mt-9 max-md:mt-12">
             <p className="tracking-tight pb-2 text-lg pl-2">Recent Activities</p>
-            <div className="bg-white pt-1 pb-1 px-4 rounded-xl w-96">
+            <div className="bg-white pt-1 pb-1 px-4  max-md:px-8 rounded-xl w-96 max-md:w-full">
               {activities.map((activity) => (
-                <div className="flex my-6">
+                <div className="flex my-6  max-md:my-8">
                   <div>
-                    <CircleIcon />
+                    <CircleIcon className=" max-md:w-[55px]  max-md:h-[55px]"/>
                   </div>
-                  <div className="pl-4">
-                    <p className="pb-1.5 leading-tight text-sm">{activity.title}</p>
-                    <p className="text-gray-300 tracking-tight text-xs">{activity.createdDate}</p>
+                  <div className="pl-4  max-md:pt-1">
+                    <p className="pb-1.5  max-md:pb-1 leading-tight text-sm  max-md:text-base">{activity.title}</p>
+                    <p className="text-gray-300 tracking-tight text-xs  max-md:text-sm">{activity.createdDate}</p>
                   </div>
                 </div>
               ))}
@@ -104,10 +101,6 @@ function Dashboard() {
           </div>
         </div>
       </div>
-
-      <Modal width={300} open={open} onClose={() => setOpen(!open)}>
-        <div>hello</div>
-      </Modal>
     </>
   );
 }
