@@ -50,7 +50,7 @@ function Header() {
                     </span>
                 </div>
             </div>
-            <Modal width={550} open={open} onClose={() => setOpen(!open)}>
+            <Modal width={600} open={open} onClose={() => setOpen(!open)}>
                 <CreateTribute />
             </Modal>
         </div>

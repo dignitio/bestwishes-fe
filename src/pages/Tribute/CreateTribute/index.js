@@ -23,17 +23,38 @@ function CreateTribute() {
         tributeKey: "",
         otherImages: []
     });
+    const [formError, setFormError] = useState(false)
 
     const openSecondPage = () => {
-        document.getElementById("first-page").classList.add("hidden")
-        document.getElementById("second-page").classList.remove("hidden")
-        document.getElementById("third-page").classList.add("hidden")
+
+        if(formData.tributeTitle && formData.fullName && formData.tributeType) {
+            document.getElementById("first-page").classList.add("hidden")
+            document.getElementById("second-page").classList.remove("hidden")
+            document.getElementById("third-page").classList.add("hidden")
+            setFormError(false)
+        }else if(!formData.tributeType) {
+            document.getElementById("first-form-error").innerText = 'Choose the tribute type'
+            setFormError(true)
+        } else if (!formData.tributeTitle) {
+            document.getElementById("first-form-error").innerText = 'Enter the title of the tribute'
+            setFormError(true)
+        } else if (!formData.fullName) {
+            document.getElementById("first-form-error").innerText = 'Enter your name'
+            setFormError(true)
+        }      
+
     }
 
     const openThirdPage = () => {
-        document.getElementById("first-page").classList.add("hidden")
-        document.getElementById("second-page").classList.add("hidden")
-        document.getElementById("third-page").classList.remove("hidden")
+
+        if(formData.tributeBio) {
+            document.getElementById("first-page").classList.add("hidden")
+            document.getElementById("second-page").classList.add("hidden")
+            document.getElementById("third-page").classList.remove("hidden")
+        }else if(!formData.tributeBio) {
+            document.getElementById("second-form-error").innerText = 'Please enter a short bio'
+            setFormError(true)
+        }
     }
 
     const handleChange = (e) => {
@@ -54,18 +75,20 @@ function CreateTribute() {
         <div>
           {/* // First Page********* */}
             <div className="text-[10px] tracking-tight" id="first-page">
+          
                 <div className="bg-gray-200 rounded-full -mt-4 mb-8 w-16 h-16 flex items-center justify-center mx-auto">
                     <img src={uploadPix} alt="upload-pix" className="w-9" />
                     <UploadIcon  className="absolute w-3.5"/>
                 </div>
-                <div className="flex justify-between my-6 placeholder:italic">
+                      <p id="first-form-error" className={formError ? "text-red-500 text-center text-xs font-semibold absolute top-5 left-0 right-0" : "hidden"}>.</p>
+                <div className="flex justify-between my-8 placeholder:italic">
                     <div>
                         <p>Type of Tribute</p>
                         <select 
                             name="tributeType"
                             value={formData.tributeType}
                             onChange={handleChange}
-                            className="border rounded-md w-60 py-2 px-2 mt-0.5 outline-0 placeholder:tracking-tighter text-[9px] text-gray-600">
+                            className="border rounded-md w-64 py-2 px-2 mt-0.5 outline-0 placeholder:tracking-tighter text-[11.5px] text-gray-600">
                             <option value="" className="text-gray-400">Click here to select tribute type</option>
                             <option value="anniversary">Anniversary</option>
                             <option value="birthday">Birthday</option>
@@ -83,10 +106,10 @@ function CreateTribute() {
                             onChange={(e) => handleChange(e)} 
                             name='tributeTitle'
                             placeholder="Click to enter title of tribute" 
-                            className="border text-gray-600 rounded-md w-60 py-2 px-2 mt-0.5 outline-0 placeholder:tracking-tighter placeholder:text-[8px] placeholder:text-gray-400"/>
+                            className="border text-gray-600 rounded-md w-64 py-1.5 px-2 mt-0.5 outline-0 placeholder:tracking-tighter placeholder:text-[12px] placeholder:text-gray-400 text-sm"/>
                     </div>
                 </div>
-                <div className="my-6">
+                <div className="my-8">
                     <p>Full Name</p>
                     <input 
                         type="text" 
@@ -94,9 +117,9 @@ function CreateTribute() {
                         onChange={(e) => handleChange(e)} 
                         name='fullName'
                         placeholder="Click to enter to enter full name" 
-                        className="border text-gray-600 rounded-md w-full py-2 px-2 mt-0.5 outline-0 placeholder:tracking-tighter placeholder:text-[8px] placeholder:text-gray-400" />
+                        className="border text-gray-600 rounded-md w-full py-2 px-2 mt-0.5 outline-0 placeholder:tracking-tighter placeholder:text-[12px] placeholder:text-gray-400 text-sm" />
                 </div>
-                <div className="flex justify-between my-6">
+                <div className="flex justify-between my-8">
                     <div>
                         <p>Date of Birth</p>
                         <input 
@@ -104,7 +127,7 @@ function CreateTribute() {
                             value={formData.dateOfBirth}
                             onChange={(e) => handleChange(e)} 
                             name='dateOfBirth'
-                            className="border text-gray-600 rounded-md w-60 py-2 px-2 mt-0.5 outline-0 text-[9px]"/>
+                            className="border text-gray-600 rounded-md w-60 py-2 px-2 mt-0.5 outline-0 text-[12px]"/>
                     </div>
                     <div>
                         <p>Date of Death <span className="text-[8px] text-primary">(funeral only)</span></p>
@@ -113,7 +136,7 @@ function CreateTribute() {
                             value={formData.dateOfDeath}
                             onChange={(e) => handleChange(e)} 
                             name='dateOfDeath'
-                            className="border text-gray-600 rounded-md w-60 py-2 px-2 mt-0.5 outline-0 text-[9px]"/>
+                            className="border text-gray-600 rounded-md w-60 py-2 px-2 mt-0.5 outline-0 text-[12px]"/>
                     </div>
                 </div>
                 <div className="flex justify-end">
@@ -127,12 +150,13 @@ function CreateTribute() {
             {/* // ************Second Page*** */}
             <div className="text-[10px] tracking-tight hidden -mt-6" id="second-page">
                 <div>
+                <p id="second-form-error" className={formError ? "text-red-500 text-center text-xs font-semibold" : "hidden"}>.</p>
                     <p>Bio</p>
                     <textarea 
                         value={formData.tributeBio}
                         onChange={(e) => handleChange(e)} 
                         name='tributeBio'
-                        className="border text-gray-600 rounded-md w-full h-48 p-3 mt-0.5 outline-0 placeholder:tracking-tighter placeholder:text-[8px] placeholder:text-slate-400 resize-none" 
+                        className="border text-gray-600 rounded-md w-full h-48 p-3 mt-0.5 outline-0 placeholder:tracking-tighter placeholder:text-[12px] placeholder:text-slate-400 resize-none text-sm" 
                         placeholder="write a bio about yourself" />
                 </div>
                 <div className="flex my-4 items-center">
@@ -193,7 +217,7 @@ function CreateTribute() {
                             name="relationship"
                             value={formData.relationship}
                             onChange={handleChange} 
-                            className="border text-gray-600 rounded-md w-60 py-2 px-2 mt-0.5 outline-0 placeholder:tracking-tighter text-[9px]">
+                            className="border text-gray-600 rounded-md w-60 py-2 px-2 mt-0.5 outline-0 placeholder:tracking-tighter text-[11.5px]">
                             <option value="">please select</option>
                             <option value="father">Father</option>
                             <option value="mother">Mother</option>
@@ -211,15 +235,15 @@ function CreateTribute() {
                                 onChange={(e) => handleChange(e)} 
                                 name='musicLink'
                                 placeholder="Add music link"  
-                                className="border text-gray-600 rounded-md w-60 py-2 px-2 mt-0.5 outline-0 placeholder:tracking-tighter placeholder:text-[8px] placeholder:text-gray-400"/>
+                                className="border text-gray-600 rounded-md w-60 py-1.5 px-2 mt-0.5 outline-0 placeholder:tracking-tighter placeholder:text-[11px] placeholder:text-gray-400 text-sm"/>
                             <MusicIcon className="w-3 -ml-6"/>
                         </div>
                     </div>
                 </div>
-                <div className="my-5 flex justify-between">
+                <div className="my-7 flex justify-between">
                     <div>
                         <p className="mr-3">Would you prefer this Tribute to be</p>
-                        <div className="flex items-center mt-2.5 tracking-tighter">
+                        <div className="flex items-center mt-3 tracking-tighter">
                             <div className="mr-4 flex items-center">
                                 <input 
                                     type="radio" 

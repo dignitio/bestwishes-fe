@@ -102,7 +102,7 @@ function EditTribute() {
                                 onChange={(e) => handleChange(e)} 
                                 name='tributeTitle'
                                 placeholder="Click to enter title of tribute" 
-                                className="border text-gray-600 rounded-md w-full py-2 px-2 mt-0.5 outline-0 placeholder:tracking-tight placeholder:text-[8px] placeholder:text-gray-400"/>
+                                className="border text-gray-600 rounded-md w-full py-2 px-2 mt-0.5 outline-0 placeholder:tracking-tight placeholder:text-[10px] placeholder:text-gray-400"/>
                         </div>
                     </div>
                     <div className="my-6">
@@ -113,7 +113,7 @@ function EditTribute() {
                             onChange={(e) => handleChange(e)} 
                             name='fullName'
                             placeholder="Click to enter to enter full name" 
-                            className="border text-gray-600 rounded-md w-full py-2 px-2 mt-0.5 outline-0 placeholder:tracking-tight placeholder:text-[8px] placeholder:text-gray-400" />
+                            className="border text-gray-600 rounded-md w-full py-2 px-2 mt-0.5 outline-0 placeholder:tracking-tight placeholder:text-[10px] placeholder:text-gray-400" />
                     </div>
                     <div className="flex justify-between my-6">
                         <div className="w-2/3 mr-3">
