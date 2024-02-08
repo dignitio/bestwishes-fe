@@ -10,7 +10,7 @@ import { ReactComponent as LogOutIcon } from "../../assets/icons/login.svg";
 
 function Sidebar() {
   return (
-    <div className="bg-white flex flex-col max-md:hidden items-center py-4 px-6">
+    <div className="bg-white flex flex-col max-lg:hidden items-center py-4 px-6">
       <div className="w-20 mt-4 mb-16 mr-5">
         <img src={logo} alt="logo" />
       </div>

@@ -17,7 +17,7 @@ const Dropdown = ({heading, children}) => {
       </div>
 
       {isOpen && (
-        <div className="origin-top-right absolute left-6 py-0.5 top-0 w-36 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5" style={{fontFamily: "Nunito Sans",}}>
+        <div className="origin-top-right absolute left-4 max-sm:-left-44 max-lg:-left-36 py-1.5 pb-3 top-5 w-40 max-sm:w-48 max-lg:w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5" style={{fontFamily: "Nunito Sans",}}>
             {children}
         </div>
       )}
