@@ -18,6 +18,8 @@ export const PATH_DASHBOARD = {
   settings: path(ROOTS_DASHBOARD, "/settings"),
   support: path(ROOTS_DASHBOARD, "/support"),
   profile: path(ROOTS_DASHBOARD, "/profile"),
+  bank: path(ROOTS_DASHBOARD, "/bank"),
+  security: path(ROOTS_DASHBOARD, "/security"),
 };
 
 

@@ -70,6 +70,18 @@ export default function Router() {
           path: "settings",
         },
         {
+          element: <Profile />,
+          path: "profile",
+        },
+        {
+          element: <BankDetails />,
+          path: "bank",
+        },
+        {
+          element: <Security />,
+          path: "security",
+        },
+        {
           element: <Support />,
           path: "support",
         },
@@ -94,6 +106,9 @@ const Dashboard = Loadable(lazy(() => import("../pages/Dashboard")));
 const Tribute = Loadable(lazy(() => import("../pages/Tribute")));
 const CreateCard = Loadable(lazy(() => import("../pages/CreateCard")));
 const Settings = Loadable(lazy(() => import("../pages/Settings")));
+const Profile = Loadable(lazy(() => import("../pages/Profile")));
+const BankDetails = Loadable(lazy(() => import("../pages/Bank")));
+const Security = Loadable(lazy(() => import("../pages/Security")));
 const Support = Loadable(lazy(() => import("../pages/Support")));
 const Home = Loadable(lazy(() => import("../pages/Home")));
 const Login = Loadable(lazy(() => import("../pages/Login")));

@@ -11,7 +11,7 @@ export default function CustomInput({ label, type, obscured, ...props }) {
   };
   return (
     <div className="flex flex-col w-full">
-      <label className="text-[#1E1B1A] font-medium text-lg " htmlFor={props.id}>
+      <label className="text-[#1E1B1A] font-medium text-[18px] mb-2" htmlFor={props.id}>
         {label}
       </label>
       <div className="relative">
@@ -22,7 +22,7 @@ export default function CustomInput({ label, type, obscured, ...props }) {
           type={viewPassword ? "text" : type}
           className={` w-full border text-[#8593AD]   ${
             meta.touched && meta.error ? "border-primary" : "border-[#8593AD]"
-          }  rounded-md p-2 outline-none`}
+          }  rounded-md px-[26px] py-[18px] outline-none`}
           style={{ appearance: 'none', WebkitAppearance: 'none', MozAppearance: 'none' }}
         />
         {obscured && (
