@@ -1,45 +1,23 @@
 import { Link } from "react-router-dom";
 import { PATH_DASHBOARD } from "routes/path";
 import React, { useState } from "react";
-import CustomInput from "components/CustonFormInputs/CustomInput";
-import { useForm } from "react-hook-form";
+import { Formik } from "formik";
 
 function Security() {
   const [isActive, setIsActive] = useState(false);
-  const[isButtonDisabled, setIsButtonDisabled] = useState(true)
 
   const handleLinkClick = (link) => {
     setIsActive(link);
   };
 
-  const {
-    register,
-    formState: { errors },
-    reset,
-    handleSubmit,
-    setValue,
-  } = useForm();
-
-  const onsubmit = (data) => {
-    console.log(data);
-  };
-
-  const handleInputChange = (e) => {
-    if (e.target.value === '0') {
-      setIsButtonDisabled(true);
-    } else {
-      setIsButtonDisabled(false);
-    }
-  }
-
   return (
-    <div className="flex flex-col p-[38px] ">
-      <div className="bg-white flex p-[16px] gap-[50px] rounded-[16px]">
-        <div className="flex justify-center px-[21px] py-[84px]">
-          <div className="flex flex-col gap-[28px]">
+    <div className="flex flex-col lg:p-[38px] ">
+      <div className="bg-white flex flex-col lg:flex-row lg:p-[16px] lg:gap-[50px] rounded-[16px] justify-center gap-[20px] ">
+        <div className="flex flex-col lg:flex-row justify-center lg:px-[21px] lg:py-[84px]">
+          <div className="flex lg:flex-col flex-row lg:gap-[28px] lg:justify-start justify-between mb-2">
             <Link
               to={PATH_DASHBOARD.profile}
-              className={`text-[16px] cursor-pointer px-[47px] py-[15px] ${
+              className={`text-[16px] cursor-pointer lg:px-[47px] lg:py-[15px] ${
                 isActive === "profile" ? "text-[#FF433C]" : "text-[#000000]"
               }`}
               onClick={() => handleLinkClick("profile")}
@@ -48,7 +26,7 @@ function Security() {
             </Link>
             <Link
               to={PATH_DASHBOARD.bank}
-              className={`text-[16px] cursor-pointer px-[47px] py-[15px] ${
+              className={`text-[16px] cursor-pointer lg:px-[47px] lg:py-[15px] ${
                 isActive === "bank" ? "text-[#FF433C]" : "text-[#000000]"
               }`}
               onClick={() => handleLinkClick("bank")}
@@ -57,39 +35,62 @@ function Security() {
             </Link>
             <Link
               to={PATH_DASHBOARD.security}
-              className="text-[16px] cursor-pointer px-[47px] py-[15px] text-[#FF433C]"
+              className="text-[16px] cursor-pointer lg:px-[47px] lg:py-[15px] text-[#FF433C]"
             >
               <span>Security</span>
             </Link>
           </div>
+          {/* eslint-disable-next-line react/self-closing-comp */}
+          <div className="lg:hidden inline-block outline outline-1 outline-[#C1D8E6] w-full lg:w-[0.1px] lg:h-[820px] h-[0.1px]"></div>
         </div>
 
         {/* eslint-disable-next-line react/self-closing-comp */}
-        <div className="outline outline-1 outline-[#C1D8E6] w-[0.1px] h-[820px]"></div>
+        <div className="hidden lg:block outline outline-1 outline-[#C1D8E6] w-full lg:w-[0.1px] lg:h-[820px] h-[0.1px]"></div>
         {/* eslint-disable-next-line react/self-closing-comp */}
-        <div className="p-[84px]">
-          <div className="w-[577px] flex flex-col gap-[13px] ">
+        <div className="lg:p-[84px]">
+          <div className="lg:w-[577px] w-[100%] flex flex-col gap-[32px]">
             <h1 className="text-[18px] font-bold">Change Password</h1>
-          
-              <form onSubmit={handleSubmit(onsubmit)} className="flex flex-col gap-[32px]">
-                <input
-                  type="email"
-                  {...register("email")}
-                  required
-                  className="w-full mt-1 border border-1 border-[#AFAFAF] rounded-[4px] px-[26px] py-[18px]"
-                  placeholder="enter old password"
-                  onChange={handleInputChange}
-                />
+            <Formik
+              initialValues={{ oldPassword: "", newPassword: "" }}
+              onSubmit={(values) => console.log(values)}
+            >
+              {({ values, handleSubmit, handleChange }) => (
+                <form onSubmit={handleSubmit} className="flex flex-col gap-[32px]">
+                  <div>
+                    <p>Old Password</p>
+                    <input
+                      type="password"
+                      name="oldPassword"
+                      value={values.oldPassword}
+                      required
+                      className="w-full mt-1 border border-1 border-[#AFAFAF] rounded-[4px] px-[26px] py-[18px]"
+                      placeholder="enter old password"
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div>
+                    <p>New Password</p>
+                    <input
+                      type="password"
+                      name="newPassword"
+                      value={values.newPassword}
+                      required
+                      className="w-full mt-1 border border-1 border-[#AFAFAF] rounded-[4px] px-[26px] py-[18px]"
+                      placeholder="enter new password"
+                      onChange={handleChange}
+                    />
+                  </div>
 
-                <button
-                  type="submit"
-                  className={`w-full bg-[#FF433C] px-[26px] py-[18px] text-white rounded-[4px] ${isButtonDisabled ? 'opacity-[0.2] cursor-not-allowed' : ''}`}
-                  disabled = {isButtonDisabled}
-                >
-                  Send link
-                </button>
-              </form>
-            
+                  <button
+                    type="submit"
+                    className={`w-full bg-[#FF433C] px-[26px] py-[18px] text-white rounded-[4px] ${!values.oldPassword || !values.newPassword ? "opacity-[0.2] cursor-not-allowed" : ""}`}
+                    disabled={!values.oldPassword || !values.newPassword}
+                  >
+                    Send link
+                  </button>
+                </form>
+              )}
+            </Formik>
           </div>
         </div>
       </div>
