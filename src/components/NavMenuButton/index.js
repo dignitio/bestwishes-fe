@@ -5,6 +5,7 @@ import logo from "../../assets/images/logo.png";
 import { ReactComponent as HamburgerIcon } from "../../assets/icons/hamburger.svg";
 import { ReactComponent as CategoryIcon } from "../../assets/icons/category.svg";
 import { ReactComponent as LayerIcon } from "../../assets/icons/layer.svg";
+import { ReactComponent as NoteIcon } from "../../assets/icons/note.svg";
 import { ReactComponent as EditIcon } from "../../assets/icons/edit.svg";
 import { ReactComponent as GearIcon } from "../../assets/icons/gear.svg";
 import { ReactComponent as SupportIcon } from "../../assets/icons/like-dislike.svg";
@@ -24,7 +25,7 @@ const NavMenuButton = () => {
             {isMenuOpen ? (
                 <span className='absolute text-2xl z-20 max-sm:text-base top-0 max-sm:-right-48 -right-80'>x</span>
             ) : (
-                <HamburgerIcon className='max-lg:w-8 max-lg:h-8'/>
+                <HamburgerIcon className=' max-lg:w-7 max-lg:h-7'/>
             )}
             </p>
         </button>
@@ -52,9 +53,17 @@ const NavMenuButton = () => {
                 <div className="mb-6">
                     <NavLink to={PATH_DASHBOARD.createCard} className={({ isActive }) => isActive ? "flex max-sm:items-end max-lg:items-center py-2.5 px-4 bg-gradient-to-r from-gray-200 to-white" : "flex max-sm:items-end max-lg:items-center py-2.5 px-4 hover:bg-gradient-to-r from-gray-200 to-white"}>
                         <span className='mr-2'>
+                        <NoteIcon className='w-6 h-6 max-sm:w-4 max-sm:h-4'/>
+                        </span>
+                        <span className="tracking-tight">Wishlist</span>
+                    </NavLink>
+                </div>
+                <div className="mb-6">
+                    <NavLink to={PATH_DASHBOARD.createCard} className={({ isActive }) => isActive ? "flex max-sm:items-end max-lg:items-center py-2.5 px-4 bg-gradient-to-r from-gray-200 to-white" : "flex max-sm:items-end max-lg:items-center py-2.5 px-4 hover:bg-gradient-to-r from-gray-200 to-white"}>
+                        <span className='mr-2'>
                         <EditIcon className='w-6 h-6 max-sm:w-4 max-sm:h-4'/>
                         </span>
-                        <span className="tracking-tight">Create Wish Card</span>
+                        <span className="tracking-tight">Wish Card</span>
                     </NavLink>
                 </div>
                 <div className="mb-6">

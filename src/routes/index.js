@@ -66,6 +66,10 @@ export default function Router() {
           path: "tribute/edit",
         },
         {
+          element: <Wishlist />,
+          path: "wishlist",
+        },
+        {
           element: <CreateCard />,
           path: "create-card",
         },
@@ -97,6 +101,7 @@ export default function Router() {
 const Dashboard = Loadable(lazy(() => import("../pages/Dashboard")));
 const Tribute = Loadable(lazy(() => import("../pages/Tribute")));
 const EditTribute = Loadable(lazy(() => import("../pages/EditTribute")));
+const Wishlist = Loadable(lazy(() => import("../pages/Wishlist")));
 const CreateCard = Loadable(lazy(() => import("../pages/CreateCard")));
 const Settings = Loadable(lazy(() => import("../pages/Settings")));
 const Support = Loadable(lazy(() => import("../pages/Support")));

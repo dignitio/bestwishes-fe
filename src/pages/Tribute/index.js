@@ -96,7 +96,7 @@ function Tribute() {
         <Modal width={500} open={duplicateModal} onClose={() => setDuplicateModal(!duplicateModal) }>
             <DuplicateTribute />
         </Modal>
-        <Modal width={510} open={contributionModal} onClose={() => setContributionModal(!contributionModal)}>
+        <Modal width={550} open={contributionModal} onClose={() => setContributionModal(!contributionModal)}>
             <TributeContributions />
         </Modal>
 

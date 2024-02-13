@@ -3,6 +3,7 @@ import { PATH_DASHBOARD } from "routes/path";
 import logo from "../../assets/images/logo.png";
 import { ReactComponent as CategoryIcon } from "../../assets/icons/category.svg";
 import { ReactComponent as LayerIcon } from "../../assets/icons/layer.svg";
+import { ReactComponent as NoteIcon } from "../../assets/icons/note.svg";
 import { ReactComponent as EditIcon } from "../../assets/icons/edit.svg";
 import { ReactComponent as GearIcon } from "../../assets/icons/gear.svg";
 import { ReactComponent as SupportIcon } from "../../assets/icons/like-dislike.svg";
@@ -33,11 +34,19 @@ function Sidebar() {
           </NavLink>
         </div>
         <div className="mb-3">
+          <NavLink to={PATH_DASHBOARD.wishlist} className={({ isActive }) => isActive ? "flex items-end py-2.5 px-3 bg-gradient-to-r from-gray-200 to-white" : "flex items-end py-2.5 px-3 hover:bg-gradient-to-r from-gray-200 to-white"}>
+            <span className="mr-2">
+              <NoteIcon />
+            </span>
+            <span className="tracking-tight">Wishlist</span>
+          </NavLink>
+        </div>
+        <div className="mb-3">
           <NavLink to={PATH_DASHBOARD.createCard} className={({ isActive }) => isActive ? "flex items-end py-2.5 px-3 bg-gradient-to-r from-gray-200 to-white" : "flex items-end py-2.5 px-3 hover:bg-gradient-to-r from-gray-200 to-white"}>
-            <span>
+            <span className="mr-2">
               <EditIcon />
             </span>
-            <span className="tracking-tight">Create Wish Card</span>
+            <span className="tracking-tight">Wish Card</span>
           </NavLink>
         </div>
         <div className="mb-3">

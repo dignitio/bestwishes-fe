@@ -72,23 +72,23 @@ function CreateTribute() {
     // }
 
     return ( 
-        <div>
+        <div className="max-sm:w-80 max-sm:mx-auto">
           {/* // First Page********* */}
-            <div className="text-[10px] tracking-tight" id="first-page">
+            <div className="text-xs max-sm:text-sm max-lg:text-base tracking-tight" id="first-page">
           
                 <div className="bg-gray-200 rounded-full -mt-4 mb-8 w-16 h-16 flex items-center justify-center mx-auto">
                     <img src={uploadPix} alt="upload-pix" className="w-9" />
                     <UploadIcon  className="absolute w-3.5"/>
                 </div>
-                      <p id="first-form-error" className={formError ? "text-red-500 text-center text-xs font-semibold absolute top-5 left-0 right-0" : "hidden"}>.</p>
-                <div className="flex justify-between my-8 placeholder:italic">
-                    <div>
+                      <p id="first-form-error" className={formError ? "text-red-500 text-center text-sm font-semibold absolute top-5 left-0 right-0" : "hidden"}>.</p>
+                <div className="flex justify-between my-8 max-sm:my-6 placeholder:italic max-sm:block">
+                    <div className="max-sm:mb-5">
                         <p>Type of Tribute</p>
                         <select 
                             name="tributeType"
                             value={formData.tributeType}
                             onChange={handleChange}
-                            className="border rounded-md w-64 py-2 px-2 mt-0.5 outline-0 placeholder:tracking-tighter text-[11.5px] text-gray-600">
+                            className="border rounded-md w-64 py-2 max-sm:py-2.5 px-2 mt-0.5 outline-0 placeholder:tracking-tighter text-xs max-sm:text-sm max-lg:text-base text-gray-600 max-sm:w-full">
                             <option value="" className="text-gray-400">Click here to select tribute type</option>
                             <option value="anniversary">Anniversary</option>
                             <option value="birthday">Birthday</option>
@@ -106,10 +106,10 @@ function CreateTribute() {
                             onChange={(e) => handleChange(e)} 
                             name='tributeTitle'
                             placeholder="Click to enter title of tribute" 
-                            className="border text-gray-600 rounded-md w-64 py-1.5 px-2 mt-0.5 outline-0 placeholder:tracking-tighter placeholder:text-[12px] placeholder:text-gray-400 text-sm"/>
+                            className="border text-gray-600 rounded-md w-64 py-1.5 max-sm:py-2.5 px-2 mt-0.5 outline-0 placeholder:tracking-tighter placeholder:text-sm placeholder:text-gray-400  max-sm:w-full"/>
                     </div>
                 </div>
-                <div className="my-8">
+                <div className="my-8 max-sm:my-5">
                     <p>Full Name</p>
                     <input 
                         type="text" 
@@ -117,9 +117,9 @@ function CreateTribute() {
                         onChange={(e) => handleChange(e)} 
                         name='fullName'
                         placeholder="Click to enter to enter full name" 
-                        className="border text-gray-600 rounded-md w-full py-2 px-2 mt-0.5 outline-0 placeholder:tracking-tighter placeholder:text-[12px] placeholder:text-gray-400 text-sm" />
+                        className="border text-gray-600 rounded-md w-full py-2 max-sm:py-2.5 px-2 mt-0.5 outline-0 placeholder:tracking-tighter placeholder:text-sm placeholder:text-gray-400 text-sm" />
                 </div>
-                <div className="flex justify-between my-8">
+                <div className="flex justify-between my-8 max-sm:my-6 max-sm:block">
                     <div>
                         <p>Date of Birth</p>
                         <input 
@@ -127,20 +127,20 @@ function CreateTribute() {
                             value={formData.dateOfBirth}
                             onChange={(e) => handleChange(e)} 
                             name='dateOfBirth'
-                            className="border text-gray-600 rounded-md w-60 py-2 px-2 mt-0.5 outline-0 text-[12px]"/>
+                            className="border text-gray-600 rounded-md w-60 py-2 max-sm:py-2.5 px-2 mt-0.5 outline-0 max-sm:w-full"/>
                     </div>
-                    <div>
-                        <p>Date of Death <span className="text-[8px] text-primary">(funeral only)</span></p>
+                    <div className="max-sm:mt-6">
+                        <p>Date of Death <span className="text-xs text-primary">(funeral only)</span></p>
                         <input 
                             type="date"
                             value={formData.dateOfDeath}
                             onChange={(e) => handleChange(e)} 
                             name='dateOfDeath'
-                            className="border text-gray-600 rounded-md w-60 py-2 px-2 mt-0.5 outline-0 text-[12px]"/>
+                            className="border text-gray-600 rounded-md w-60 py-2 max-sm:py-2.5 px-2 mt-0.5 outline-0 max-sm:w-full"/>
                     </div>
                 </div>
                 <div className="flex justify-end">
-                        <Button type="button" className="h-6 w-24 rounded-[2px] text-white text-[9px]" onClick={openSecondPage} >
+                        <Button type="button" className="h-6 w-24 rounded-[2px] text-white text-sm max-sm:w-full" onClick={openSecondPage} >
                             Next
                         </Button>
                 </div>
@@ -148,7 +148,7 @@ function CreateTribute() {
             </div>
 
             {/* // ************Second Page*** */}
-            <div className="text-[10px] tracking-tight hidden -mt-6" id="second-page">
+            <div className="text-xs max-sm:text-sm tracking-tight hidden -mt-6" id="second-page">
                 <div>
                 <p id="second-form-error" className={formError ? "text-red-500 text-center text-xs font-semibold" : "hidden"}>.</p>
                     <p>Bio</p>
@@ -156,7 +156,7 @@ function CreateTribute() {
                         value={formData.tributeBio}
                         onChange={(e) => handleChange(e)} 
                         name='tributeBio'
-                        className="border text-gray-600 rounded-md w-full h-48 p-3 mt-0.5 outline-0 placeholder:tracking-tighter placeholder:text-[12px] placeholder:text-slate-400 resize-none text-sm" 
+                        className="border text-gray-600 rounded-md w-full h-48 p-3 mt-0.5 outline-0 placeholder:tracking-tighter placeholder:text-sm placeholder:text-slate-400 resize-none text-sm" 
                         placeholder="write a bio about yourself" />
                 </div>
                 <div className="flex my-4 items-center">
@@ -189,7 +189,7 @@ function CreateTribute() {
                 {formData.addWishList === "Yes" ?
                     <div className="my-4">
                         <p>Select from wishlist you have created</p>
-                            <Button type="button" className="border rounded-md px-0 w-64 h-8 bg-white mt-1 text-left tracking-tighter text-gray-400 text-[8px]">
+                            <Button type="button" className="border rounded-md px-0 w-64 h-8 bg-white mt-1 text-left tracking-tighter text-gray-400 text-xs max-sm:text-sm">
                                 Click here to select
                             </Button>
                     </div> :
@@ -198,10 +198,10 @@ function CreateTribute() {
                     </div>
                 }
                 <div className="flex justify-between mt-5">
-                    <Button type="button" className="h-6 bg-sky-700 tracking-tighter px-0 rounded-[2px] text-white text-[9px]">
+                    <Button type="button" className="h-6 max-sm:h-7 bg-sky-700 tracking-tighter px-0 rounded-[2px] text-white text-xs max-sm:text-sm">
                         save & continue later
                     </Button>
-                    <Button type="button" className="h-6 w-24 rounded-[2px] text-white text-[9px]" onClick={openThirdPage}>
+                    <Button type="button" className="h-6 max-sm:h-7 w-24 rounded-[2px] text-white text-xs max-sm:text-sm" onClick={openThirdPage}>
                         Next
                     </Button>
                 </div>
@@ -209,15 +209,15 @@ function CreateTribute() {
 
 
             {/* ********Third Page */}
-            <div className="text-[10px] tracking-tight hidden -mt-6" id="third-page">
-                <div className="flex justify-between">
-                    <div>
+            <div className="text-xs max-sm:text-sm tracking-tight hidden -mt-6" id="third-page">
+                <div className="flex justify-between max-sm:block">
+                    <div className="max-sm:mb-5">
                         <p>Please descibe your relationship</p>
                         <select 
                             name="relationship"
                             value={formData.relationship}
                             onChange={handleChange} 
-                            className="border text-gray-600 rounded-md w-60 py-2 px-2 mt-0.5 outline-0 placeholder:tracking-tighter text-[11.5px]">
+                            className="border text-gray-600 rounded-md w-60 py-2 max-sm:py-2.5 px-2 mt-0.5 outline-0 placeholder:tracking-tighter text-xs max-sm:text-sm max-sm:w-full">
                             <option value="">please select</option>
                             <option value="father">Father</option>
                             <option value="mother">Mother</option>
@@ -228,19 +228,19 @@ function CreateTribute() {
                     </div>
                     <div>
                         <p>Add music to your tribute</p>
-                        <div className="flex items-center text-gray-200 w-60 pr-2">
+                        <div className="flex items-center text-gray-200 w-60 pr-2 max-sm:w-full">
                             <input 
                                 type="text" 
                                 value={formData.musicLink}
                                 onChange={(e) => handleChange(e)} 
                                 name='musicLink'
                                 placeholder="Add music link"  
-                                className="border text-gray-600 rounded-md w-60 py-1.5 px-2 mt-0.5 outline-0 placeholder:tracking-tighter placeholder:text-[11px] placeholder:text-gray-400 text-sm"/>
+                                className="border text-gray-600 rounded-md w-60 py-1.5 max-sm:py-2.5 px-2 mt-0.5 outline-0 placeholder:tracking-tighter placeholder:text-sm placeholder:text-gray-400 text-xs max-sm:text-sm max-sm:w-full"/>
                             <MusicIcon className="w-3 -ml-6"/>
                         </div>
                     </div>
                 </div>
-                <div className="my-7 flex justify-between">
+                <div className="my-7 flex justify-between max-sm:block">
                     <div>
                         <p className="mr-3">Would you prefer this Tribute to be</p>
                         <div className="flex items-center mt-3 tracking-tighter">
@@ -267,7 +267,7 @@ function CreateTribute() {
                         </div>
                     </div>
                     {formData.publicType === "private" ?
-                        <div>
+                        <div className="max-sm:mt-3">
                             <p>Tribute key</p>
                             <input 
                                 type="text" 
@@ -275,7 +275,7 @@ function CreateTribute() {
                                 onChange={(e) => handleChange(e)} 
                                 name='tributeKey'
                                 placeholder="Create a tribute key" 
-                                className="border text-gray-600 rounded-md w-60 py-2 px-2 mt-0.5 outline-0 placeholder:tracking-tighter placeholder:text-[8px] placeholder:text-gray-400"/>
+                                className="border text-gray-600 rounded-md w-60 py-2 max-sm:py-2.5 px-2 mt-0.5 outline-0 placeholder:tracking-tighter placeholder:text-xs placeholder:text-gray-400 max-sm:w-full"/>
                         </div> :
                         <div className="text-white"> - </div>
                     }
@@ -285,16 +285,16 @@ function CreateTribute() {
                     <div>
                         <div className="flex">
                             {Array(6).fill(
-                                <div className="w-11 h-11 flex items-center justify-center bg-slate-100 rounded-sm mr-3 my-2">+</div>
+                                <div className="w-11 h-11 flex wrap items-center justify-center bg-slate-100 rounded-sm mr-3 my-2">+</div>
                             )}
                         </div>
-                        <p className="mr-3 text-[9px] text-sky-500">First image will be set as header and Image size should be more than 2MB</p>
+                        <p className="mr-3 text-xs text-sky-500">First image will be set as header and Image size should be more than 2MB</p>
                     </div>
                 </div>
                 <div className="flex justify-end mt-16">
                     <Button 
                         type="button" 
-                        className="h-6 w-24 rounded-[2px] text-white text-[9px]"
+                        className="h-6 w-24 rounded-[2px] text-white text-xs max-sm:text-sm max-sm:w-full max-sm:h-7"
                         >
                         Publish
                     </Button>

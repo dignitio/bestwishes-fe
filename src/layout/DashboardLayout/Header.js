@@ -22,7 +22,7 @@ function Header() {
                 <p className="font-light text-xs inline">Welcome to your Dashboard!</p>
                 <span className="text-lg">👋</span>
             </div>
-            <button className="border border-gray-200 max-sm:hidden bg-gray-50 rounded-sm py-1.5 px-1 flex items-center w-1/4 max-md:w-52 max-lg:w-64">
+            <button className="border border-gray-200 max-sm:hidden bg-gray-50 rounded-sm py-1.5 px-1 flex items-center w-5/12 max-md:w-64 max-lg:w-80">
                 {}
                 <span className="px-2 max-lg:px-1.5">
                     <SearchIcon className="max-lg:w-3 max-lg:h-3" />
@@ -32,11 +32,8 @@ function Header() {
                 </span>
             </button>
             <div className="flex items-center text-xs">
-                <Button type={Button} className="bg-primary max-md:h-7  text-white h-8 hover:bg-red-500 max-sm:px-2.5">
-                    + Create Card
-                </Button>
-                <Button onClick={() => setOpen(!open)} type={Button} className="bg-primary max-md:h-7 text-white max-md:ml-16 mx-10 max-md:mx-4  max-sm:ml-6 h-8 hover:bg-red-500 max-sm:px-2.5">
-                    Create Tribute 
+                <Button onClick={() => setOpen(!open)} type={Button} className="bg-primary max-md:h-7 text-white max-md:ml-16 mx-10 max-md:mx-4  max-sm:ml-6 h-8 hover:bg-red-500 max-sm:px-2.5 max-sm:w-60">
+                    Create Tribute +
                 </Button>
                 <div className="hover:bg-gray-100 rounded-xl p-2 mr-4 max-lg:hidden">
                     <span>
