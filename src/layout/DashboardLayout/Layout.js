@@ -4,11 +4,11 @@ import Sidebar from "./Sidebar";
 
 function Layout() {
   return (
-    <div className="bg-gray-100 h-screen flex font-nunito">
-      <Sidebar />
-      <div className="w-11/12">
+    <div className="bg-gray-100 h-full flex font-nunito">
+      <Sidebar/>
+      <div className="w-11/12 max-lg:w-full">
         <Header />
-        <main className="w-11/12">
+        <main className="w-11/12 max-lg:w-full h-screen overflow-y-scroll">
           <Outlet />
         </main>
       </div>

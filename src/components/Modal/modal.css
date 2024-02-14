@@ -52,7 +52,7 @@
   justify-content: flex-end;
   width: 100%;
   cursor: pointer;
-  padding: 24px;
+  padding: 12px 24px;
 }
 
 @keyframes Transisition {
