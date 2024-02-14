@@ -5,9 +5,9 @@ import Layout from "layout/DashboardLayout/Layout";
 import MainLayout from "layout/MainLayout";
 import { Suspense, lazy } from "react";
 import { useRoutes } from "react-router-dom";
-// eslint-disable-next-line react-hooks/rules-of-hooks
+
 const Loadable = (Component) => (props) => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+ 
 
   return (
     <Suspense fallback={<div className="text-3xl text-slate-400 mt-8 ml-12">Loading...</div>}>
