@@ -12,10 +12,10 @@ function Security() {
   };
 
   return (
-    <div className="flex flex-col lg:p-[38px] ">
-      <div className="bg-white flex flex-col lg:flex-row lg:px-[16px] lg:gap-[50px] rounded-[16px] justify-center gap-[20px] ">
-        <div className="flex flex-col lg:flex-row justify-center lg:px-[21px] lg:py-[84px]">
-          <div className="flex lg:flex-col flex-row lg:gap-[28px] lg:justify-start justify-between mb-2">
+    <div className="flex justify-center lg:p-[38px] ">
+    <div className="bg-white flex flex-col lg:flex-row p-[16px] lg:px-[16px] lg:p-0 lg:gap-[50px] rounded-[16px] justify-center gap-[20px] w-full">
+      <div className="flex flex-col lg:flex-row justify-center lg:px-[21px] lg:py-[84px]">
+        <div className="flex lg:flex-col flex-row lg:gap-[28px] lg:justify-start justify-between mb-2">
             <Link
               to={PATH_DASHBOARD.profile}
               className={`text-[16px] cursor-pointer lg:px-[47px] lg:py-[15px] ${
