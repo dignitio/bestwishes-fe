@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 import { PATH_DASHBOARD } from "routes/path";
 import React, { useState } from "react";
+import CustomInput from "components/CustonFormInputs/CustomInput";
 import { Formik } from "formik";
 import user from "../../assets/icons/edit-profile.svg";
 import exportIcon from "../../assets/icons/Export.svg";
 
 function Profile() {
   const [isActive, setIsActive] = useState(false);
-  
 
   const handleLinkClick = (link) => {
     setIsActive(link);
@@ -20,7 +20,7 @@ function Profile() {
 
   return (
     <div className="flex flex-col lg:p-[38px]">
-      <div className="bg-white flex flex-col lg:flex-row lg:p-[16px] lg:gap-[50px] rounded-[16px] justify-center gap-[20px] ">
+      <div className="bg-white flex flex-col lg:flex-row lg:px-[16px] lg:gap-[50px] rounded-[16px] justify-center gap-[20px] ">
         <div className="flex flex-col lg:flex-row justify-center lg:px-[21px] lg:py-[84px]">
           <div className="flex lg:flex-col flex-row lg:gap-[28px] lg:justify-start justify-between mb-2">
             <Link
@@ -36,7 +36,7 @@ function Profile() {
               }`}
               onClick={() => handleLinkClick("bank")}
             >
-              <span>Bank Details</span>
+               <span className="whitespace-nowrap">Bank Details</span>
             </Link>
             <Link
               to={PATH_DASHBOARD.security}
@@ -77,54 +77,43 @@ function Profile() {
             >
               {({ values, handleSubmit, handleChange }) => (
                 <form onSubmit={handleSubmit} className="text-[18px] flex flex-col gap-[32px]">
-                  <div>
-                    <p className="mb-2">First Name</p>
-                    <input
-                      name="firstName"
-                      value={values.firstName}
-                      required
-                      type="text"
-                      className=" w-full border border-1 border-[#AFAFAF] rounded-[4px] px-[10px] py-[18px] h-[62px] text-[#828282]"
-                      placeholder=""
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div>
-                    <p className="mb-2">Last Name</p>
-                    <input
-                      name="lastName"
-                      value={values.lastName}
-                      required
-                      type="text"
-                      className="w-full border border-1 border-[#AFAFAF] rounded-[4px] px-[10px] py-[18px] text-[#828282]"
-                      placeholder=""
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div>
-                    <p className="mb-2">Email Address</p>
-                    <input
-                      name="email"
-                      value={values.email}
-                      required
-                      type="email"
-                      className=" w-full border border-1 border-[#AFAFAF] rounded-[4px] px-[10px] py-[18px] text-[#828282]"
-                      placeholder=""
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div>
-                    <p className="mb-2">Phone Number</p>
-                    <input
-                      name="phoneNumber"
-                      value={values.phoneNumber}
-                      required
-                      type="tel"
-                      className="required w-full border border-1 border-[#AFAFAF] rounded-[4px] px-[10px] py-[18px] text-[#828282]"
-                      placeholder=""
-                      onChange={handleChange}
-                    />
-                  </div>
+                  <CustomInput
+                    label="First Name"
+                    name="firstName"
+                    value={values.firstName}
+                    required
+                    type="text"
+                    placeholder=""
+                    onChange={handleChange}
+                  />
+                  <CustomInput
+                    label="Last Name"
+                    name="lastName"
+                    value={values.lastName}
+                    required
+                    type="text"
+                    placeholder=""
+                    onChange={handleChange}
+                  />
+
+                  <CustomInput
+                    label="Email Address"
+                    name="email"
+                    value={values.email}
+                    required
+                    type="email"
+                    placeholder=""
+                    onChange={handleChange}
+                  />
+                  <CustomInput
+                    label="Phone Number"
+                    name="phoneNumber"
+                    value={values.phoneNumber}
+                    required
+                    type="tel"
+                    placeholder=""
+                    onChange={handleChange}
+                  />
 
                   <button
                     type="submit"
@@ -134,7 +123,7 @@ function Profile() {
                       !values.firstName || !values.lastName || !values.email || !values.phoneNumber
                     }
                   >
-                    Saved
+                    Save
                   </button>
                 </form>
               )}
