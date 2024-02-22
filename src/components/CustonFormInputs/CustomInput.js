@@ -3,7 +3,7 @@ import React from "react";
 import { ReactComponent as Eye } from "../../assets/icons/eye.svg";
 import { ReactComponent as EyeSlash } from "../../assets/icons/eye-slash.svg";
 
-export default function CustomInput({ label, type, obscured, ...props }) {
+export default function CustomInput({ label, type, obscured, options, ...props }) {
   const [field, meta] = useField(props);
   const [viewPassword, setViewPassword] = React.useState(false);
   const handleViewPassword = () => {
@@ -15,6 +15,23 @@ export default function CustomInput({ label, type, obscured, ...props }) {
         {label}
       </label>
       <div className="relative">
+      {type === "select" ? (
+          <select
+            id={props.id}
+            {...field}
+            {...props}
+            className={` w-full border text-[#8593AD]   ${
+              meta.touched && meta.error ? "border-primary" : "border-[#8593AD]"
+            }  rounded-md px-[26px] py-[18px] outline-none`}
+           
+          >
+            {options.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        ) : (
         <input
           id={props.id}
           {...field}
@@ -25,6 +42,7 @@ export default function CustomInput({ label, type, obscured, ...props }) {
           }  rounded-md px-[26px] py-[18px] outline-none`}
           style={{ appearance: 'none', WebkitAppearance: 'none', MozAppearance: 'none' }}
         />
+        )}
         {obscured && (
           <div
             className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
