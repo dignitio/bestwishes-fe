@@ -1,10 +1,10 @@
 import Button from "components/Button";
 import { Form, Formik } from "formik";
 import { Link } from "react-router-dom";
-import Schema from "Schemas";
+import { Schema } from "Schemas";
 import React from "react";
-import CustomInput from "components/CustonFormInputs/CustomInput";
-import CustomCheckbox from "components/CustonFormInputs/CustomCheckbox";
+import CustomInput from "components/CustomFormInputs/CustomInput";
+import CustomCheckbox from "components/CustomFormInputs/CustomCheckbox";
 import OauthButton from "components/Button/OauthButton";
 import { ReactComponent as FacebookLogo } from "../../assets/icons/facebook.svg";
 import { ReactComponent as GoogleLogo } from "../../assets/icons/google.svg";
@@ -14,7 +14,7 @@ const onSubmit = async (values) => {
   console.log(values);
 };
 
- function Register() {
+function Register() {
   return (
     <div className="flex flex-col gap-10">
       <span className="w-full text-center text-2xl font-medium uppercase ">
@@ -65,7 +65,12 @@ const onSubmit = async (values) => {
               name="acceptedTos"
             />
             <Button disabled={isSubmitting}>Create Account</Button>
-            <p className="my-2 text-lg text-center">Already got an account? <Link to="/login"><span className="underline">Login</span></Link> </p>
+            <p className="my-2 text-lg text-center">
+              Already got an account?{" "}
+              <Link to="/login">
+                <span className="underline">Login</span>
+              </Link>{" "}
+            </p>
             <OauthButton>
               <FacebookLogo />
               Sign in With Facebook
@@ -75,8 +80,8 @@ const onSubmit = async (values) => {
               Sign in with Google
             </OauthButton>
             <OauthButton>
-             <AppleLogo/> 
-             Sign in With Apple
+              <AppleLogo />
+              Sign in With Apple
             </OauthButton>
           </Form>
         )}
@@ -85,4 +90,4 @@ const onSubmit = async (values) => {
   );
 }
 
-export default Register
+export default Register;

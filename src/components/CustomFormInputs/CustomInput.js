@@ -3,14 +3,20 @@ import React from "react";
 import { ReactComponent as Eye } from "../../assets/icons/eye.svg";
 import { ReactComponent as EyeSlash } from "../../assets/icons/eye-slash.svg";
 
-export default function CustomInput({ label, type, obscured, ...props }) {
+export default function CustomInput({ label, type, obscured, numeric, ...props }) {
   const [field, meta] = useField(props);
   const [viewPassword, setViewPassword] = React.useState(false);
+  let inputType = type;
+  if (viewPassword) {
+    inputType = "text";
+  } else if (numeric) {
+    inputType = "number";
+  }
   const handleViewPassword = () => {
     setViewPassword(!viewPassword);
   };
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col gap-2 w-full">
       <label className="text-[#1E1B1A] font-medium text-[18px] mb-2" htmlFor={props.id}>
         {label}
       </label>
@@ -19,11 +25,11 @@ export default function CustomInput({ label, type, obscured, ...props }) {
           id={props.id}
           {...field}
           {...props}
-          type={viewPassword ? "text" : type}
+          type={inputType}
           className={` w-full border text-[#8593AD]   ${
             meta.touched && meta.error ? "border-primary" : "border-[#8593AD]"
-          }  rounded-md px-[26px] py-[18px] outline-none`}
-          style={{ appearance: 'none', WebkitAppearance: 'none', MozAppearance: 'none' }}
+          }  rounded-md px-[26px] py-[18px] outline-none `}
+          style={{ appearance: "none", WebkitAppearance: "none", MozAppearance: "none" }}
         />
         {obscured && (
           <div
