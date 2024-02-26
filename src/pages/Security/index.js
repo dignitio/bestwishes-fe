@@ -12,10 +12,10 @@ function Security() {
   };
 
   return (
-    <div className="flex justify-center lg:p-[38px] ">
-    <div className="bg-white flex flex-col lg:flex-row p-[16px] lg:px-[16px] lg:p-0 lg:gap-[50px] rounded-[16px] justify-center gap-[20px] w-full">
-      <div className="flex flex-col lg:flex-row justify-center lg:px-[21px] lg:py-[84px]">
-        <div className="flex lg:flex-col flex-row lg:gap-[28px] lg:justify-start justify-between mb-2">
+    <div className="flex justify-center lg:p-[38px]">
+      <div className="bg-white min-h-[100%] flex flex-col lg:flex-row p-[16px] lg:px-[16px] lg:p-0 lg:gap-[50px] rounded-[16px] justify-center gap-[20px] w-full">
+        <div className="flex flex-col lg:flex-row justify-center lg:px-[21px] lg:py-[84px]">
+          <div className="flex lg:flex-col flex-row lg:gap-[28px] lg:justify-start justify-between mb-2">
             <Link
               to={PATH_DASHBOARD.profile}
               className={`text-[16px] cursor-pointer lg:px-[47px] lg:py-[15px] ${
@@ -57,28 +57,30 @@ function Security() {
             >
               {({ values, handleSubmit, handleChange }) => (
                 <form onSubmit={handleSubmit} className="flex flex-col gap-[32px]">
-                  
-                    <CustomInput
-                      label="Old password"
-                      type="password"
-                      name="oldPassword"
-                      value={values.oldPassword}
-                      required
-                      // className="w-full mt-1 border border-1 border-[#AFAFAF] rounded-[4px] px-[26px] py-[18px]"
-                      placeholder="enter old password"
-                      onChange={handleChange}
-                    />
-                     <CustomInput
-                      label="New password"
-                      type="password"
-                      name="newPassword"
-                      value={values.newPassword}
-                      required
-                      placeholder="enter new password"
-                      onChange={handleChange}
-                    />
-                   
+                  <CustomInput
+                    label="Old password"
+                    type="password"
+                    name="oldPassword"
+                    value={values.oldPassword}
+                    required
+                    obscured
+                    readOnly={false}
+                    // className="w-full mt-1 border border-1 border-[#AFAFAF] rounded-[4px] px-[26px] py-[18px]"
+                    placeholder="enter old password"
+                    onChange={handleChange}
+                  />
                  
+                  <CustomInput
+                    label="New password"
+                    type="password"
+                    name="newPassword"
+                    value={values.newPassword}
+                    required
+                    obscured
+                    readOnly={false}
+                    placeholder="enter new password"
+                    onChange={handleChange}
+                  />
 
                   <button
                     type="submit"
