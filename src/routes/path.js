@@ -1,5 +1,6 @@
 const ROOTS_AUTH = "/auth";
 const ROOTS_DASHBOARD = "/dashboard";
+const ROOTS_HOME = "/";
 
 function path(root, sublink) {
   return `${root}${sublink}`;
@@ -25,3 +26,9 @@ export const PATH_DASHBOARD = {
 
 
 export const PATH_AFTER_LOGIN = PATH_DASHBOARD.root;
+
+export const PATH_HOME = {
+  root: ROOTS_HOME,
+  about: path(ROOTS_HOME, "about"),
+ features: path(ROOTS_HOME, "features"),
+}
