@@ -31,7 +31,8 @@ export default function CustomInput({ label, type, obscured, options, ...props }
               </option>
             ))}
           </select>
-        ) : (
+        ) :
+        (
         <input
           id={props.id}
           {...field}

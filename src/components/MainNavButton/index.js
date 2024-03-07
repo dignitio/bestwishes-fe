@@ -4,6 +4,7 @@ import { PATH_DASHBOARD, PATH_HOME } from "routes/path";
 import Button from "components/Button";
 import CreateTribute from "pages/Tribute/CreateTribute";
 import Modal from "components/Modal";
+import { ReactComponent as Closeicon } from "assets/icons/close.svg";
 import logo from "../../assets/images/logo.png";
 import { ReactComponent as HamburgerIcon } from "../../assets/icons/hamburger.svg";
 import { ReactComponent as CategoryIcon } from "../../assets/icons/category.svg";
@@ -25,16 +26,14 @@ const MainNavButton = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="relative">
+    <div className="relative font-lexend">
       <button
         onClick={toggleMenu}
         className="text-gray-500 focus:outline-none focus:shadow-outline"
       >
         <p>
           {isMenuOpen ? (
-            <span className="absolute text-2xl z-20 max-sm:text-base top-0 max-sm:-right-48 -right-80">
-              x
-            </span>
+            <Closeicon className="w-4 absolute text-2xl z-20 max-sm:text-base top-0 max-sm:-right-48 -right-80" />
           ) : (
             <HamburgerIcon className=" max-lg:w-7 max-lg:h-7" />
           )}
@@ -47,9 +46,11 @@ const MainNavButton = () => {
             <img src={logo} alt="logo" className="max-sm:w-16 max-sm:ml-12 max-lg:mx-auto" />
             <div className="flex flex-col gap-[48px] ">
               <NavLink
-                onClick={() => setOpen(!open)}
+                onClick={() => {
+                  setOpen(!open); 
+                  toggleMenu(); 
+                }}
                 className=""
-                
               >
                 <span>Create a Tribute</span>
               </NavLink>
@@ -57,33 +58,21 @@ const MainNavButton = () => {
               <NavLink
                 onClick={toggleMenu}
                 to={PATH_HOME.root}
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-primary"
-                    : "text-[#000000]"
-                }
+                className={({ isActive }) => (isActive ? "text-primary" : "text-[#000000]")}
               >
                 Home
               </NavLink>
               <NavLink
                 onClick={toggleMenu}
                 to={PATH_HOME.features}
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-primary"
-                    : "text-[#000000]"
-                }
+                className={({ isActive }) => (isActive ? "text-primary" : "text-[#000000]")}
               >
                 <span>Features</span>
               </NavLink>
               <NavLink
                 onClick={toggleMenu}
                 to={PATH_HOME.about}
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-primary"
-                    : "text-[#000000]"
-                }
+                className={({ isActive }) => (isActive ? "text-primary" : "text-[#000000]")}
               >
                 Why BestWishes.io
               </NavLink>
