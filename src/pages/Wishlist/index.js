@@ -29,8 +29,8 @@ const onSubmit = async (values) => {
 
 function Wishlist() {
   const [modeValue, setModeValue] = useState();
-  const switchMode = (tributeId) => {
-    wishListData[tributeId - 1].publishedValue = !wishListData[tributeId - 1].publishedValue;
+  const switchMode = (wishlistID) => {
+    wishListData[wishlistID - 1].publishedValue = !wishListData[wishlistID - 1].publishedValue;
     setModeValue((prevMode) => !prevMode);
   };
   const [open, setOpen] = useState(false);
@@ -57,6 +57,7 @@ function Wishlist() {
         )}
         <button
           className="bg-black text-white p-3 w-fit self-end m-6 rounded-lg"
+          type="button"
           onClick={() => setOpen(!open)}
         >
           {" "}
@@ -141,7 +142,7 @@ function Wishlist() {
                       </div>
                       <div className="flex items-center my-1.5 max-sm:my-3 max-lg:my-2 cursor-pointer hover:bg-gray-100 pl-2 max-sm:pl-3">
                         <EditIcon className="w-3 max-sm:w-4 max-lg:w-3.5 mb-1 mr-1 max-sm:mr-2 max-lg:mr-1.5" />
-                        <Link to="edit">Edit wishlist</Link>
+                        <Link to={`/dashboard/wishlist/${wishlist.id}/edit`}>Edit wishlist</Link>
                       </div>
                       <div className="flex items-center my-1.5 max-sm:my-3 max-lg:my-2 cursor-pointer hover:bg-gray-100 pl-2 max-sm:pl-3">
                         <ShareIcon className="w-3 max-sm:w-4 max-lg:w-3.5 mb-0.5 mr-1 max-sm:mr-2 max-lg:mr-1.5" />
@@ -185,10 +186,10 @@ function Wishlist() {
               {/* STEP 1 */}
               {activeStep === 0 && (
                 <div className=" flex flex-col gap-4 ">
-                  <div className="w-full grid  grid-cols-2 gap-4">
+                  <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
                     {/* <CustomUploader name="coverImage" /> */}
                     <fieldset
-                      className={`relative flex flex-col justify-end items-start border-2 border-solid border-[#8593AD] rounded-lg  cursor-pointer rounded-5 bg-white mt-1`}
+                      className={`relative h-[200px] md:h-full flex flex-col justify-end items-start border-2 border-solid border-[#8593AD] rounded-lg  cursor-pointer rounded-5 bg-white mt-1`}
                     >
                       {values.coverImage ? (
                         <img
@@ -238,15 +239,16 @@ function Wishlist() {
                         label="Wishlist Description"
                         name="wishListDescription"
                         rows="6"
-                        className={` min-h-[120px] resize-none `}
+                        className={` min-h-[90px] md:min-h-[120px] resize-none `}
                         placeholder="Click here to write wishlist description"
                       />
                     </div>
                   </div>
-                  <div className="w-full grid  grid-cols-2 gap-4">
+                  <div className="w-full flex flex-col-reverse md:grid  md:grid-cols-2 gap-4">
                     <Button
                       onClick={() => setActiveStep(activeStep + 1)}
-                      className={`w-full self-end py-[30px] outline-none rounded-md flex justify-center items-center text-white
+                      type="button"
+                      className={`w-full self-end py-[24px] md:py-[30px] outline-none rounded-md flex justify-center items-center text-white
                       ${
                         values.wishListCategory &&
                         values.wishListTitle &&
@@ -277,9 +279,9 @@ function Wishlist() {
               {/* Step 2 */}
               {activeStep === 1 && (
                 <div className="flex flex-col gap-4">
-                  <div className="w-full grid  grid-cols-2 gap-4">
+                  <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
                     <fieldset
-                      className={`relative flex flex-col justify-end items-start border-2 border-solid border-[#8593AD] rounded-lg  cursor-pointer rounded-5 bg-white mt-1`}
+                      className={`relative h-[200px] md:h-full flex flex-col justify-end items-start border-2 border-solid border-[#8593AD] rounded-lg  cursor-pointer rounded-5 bg-white mt-1`}
                     >
                       {values.coverImage ? (
                         <img
@@ -326,7 +328,7 @@ function Wishlist() {
                     </div>
                   </div>
                   <p className=" text-primary">Generate image with AI</p>
-                  <div className=" w-full grid grid-cols-2 gap-4 ">
+                  <div className=" w-full flex flex-col md:grid md:grid-cols-2 gap-4 ">
                     <button
                       className={` py-[17px] text-white w-[167px] rounded-md
                       ${values.itemName && values.price && values.coverImage ? " bg-Draft" : " bg-blue-200 pointer-events-none"}

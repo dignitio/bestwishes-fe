@@ -4,7 +4,7 @@ import ruthImage2 from "../../assets/images/wishlist-ruth-2.png";
 const wishListData = [
   {
     id: 1,
-    Title: "Ruth Birthday List",
+    Title: "Ruth Birthday Wishlist",
     Items: "8 items",
     photoSrc: ruthImage2,
     photoAlt: "ruth image 1",
@@ -12,7 +12,7 @@ const wishListData = [
   },
   {
     id: 2,
-    Title: "John Birthday List",
+    Title: "John Birthday Wishlist",
     Items: "0 items",
     photoSrc: ruthImage1,
     photoAlt: "ruth image 2",

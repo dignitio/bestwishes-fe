@@ -18,34 +18,33 @@ export default function CustomCalendar({ label, type, value, onChange, ...props 
         {label}
       </label>
       <div className="relative w-full">
-        <div className="relative w-full">
-          <ReactDatePicker
-            {...field}
-            {...props}
-            type={type}
-            selected={value}
-            className={` w-[367px] border text-[#8593AD]   ${
-              meta.touched && meta.error ? "border-primary" : "border-[#8593AD]"
-            }  rounded-md px-[26px] py-[18px] outline-none`}
-            onChange={(date) => {
-              onChange(date);
-              setFieldValue(props.name, date);
-            }}
-          />
-          <label htmlFor={props.id} className="sr-only">
-            {label}
-          </label>
-          <button
-            className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
-            type="button"
-            aria-label={`Open ${label} calendar`}
-            onClick={openCalendar} // Call openCalendar when the button is clicked
-          >
-            <span className="text-[#8593AD]">
-              <CalendarLogo />
-            </span>
-          </button>
-        </div>
+        <ReactDatePicker
+          type={type}
+          selected={value}
+          {...field}
+          {...props}
+          wrapperClassName="w-full"
+          className={` w-full max-w-full md:max-w-[367px] border text-[#8593AD]   ${
+            meta.touched && meta.error ? "border-primary" : "border-[#8593AD]"
+          }  rounded-md px-[26px] py-[18px] outline-none`}
+          onChange={(date) => {
+            onChange(date);
+            setFieldValue(props.name, date);
+          }}
+        />
+        <label htmlFor={props.id} className="sr-only">
+          {label}
+        </label>
+        <button
+          className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
+          type="button"
+          aria-label={`Open ${label} calendar`}
+          onClick={openCalendar} // Call openCalendar when the button is clicked
+        >
+          <span className="text-[#8593AD]">
+            <CalendarLogo />
+          </span>
+        </button>
       </div>
       {meta.touched && meta.error && <div className="text-xs text-primary mt-1">{meta.error}</div>}
     </div>
