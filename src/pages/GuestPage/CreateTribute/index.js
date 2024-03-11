@@ -3,13 +3,13 @@ import CustomInput from "components/CustonFormInputs/CustomInput";
 import { Formik } from "formik";
 import Button from "components/Button";
 
-function CreateGuestTribute() {
+function CreateGuestTribute({selectedWishlist}) {
   return (
     <div className="">
       <div className="flex flex-col gap-[20px] md:px-3">
         <p className="text-[14px] md:text-[24px] text-justify leading-5">
           You are about to make contribution for Olakunle’s{" "}
-          <span className="text-[#3684F7] leading-5">Nike Airmax Sneaker</span>
+          <span className="text-[#3684F7] leading-5">{selectedWishlist?.name}</span>
         </p>
         <Formik
           initialValues={{ name: "", email: "", amount: "" }}

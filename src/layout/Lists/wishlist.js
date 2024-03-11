@@ -38,7 +38,7 @@ const WishItems = [
     id: 1,
     image: shoes,
     price: "₦4000,000.00",
-    name: "MacBook Air 2025",
+    name: "Sneakers",
     discountPrice: "₦500,000",
     discountPercent: "18%",
   },

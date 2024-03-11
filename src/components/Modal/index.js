@@ -12,7 +12,6 @@ const Modal = ({ open, onClose, customClass, width, children, isWishList }) => {
     <ReactModal
       isOpen={!!open}
       onClose={onClose}
-      isWishList={isWishList}
       onRequestClose={onClose}
       className={`modal ${customClass}`}
       overlayClassName={"overlay"}

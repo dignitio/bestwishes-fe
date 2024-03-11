@@ -4,6 +4,7 @@ import Modal from "components/Modal";
 import Button from "components/Button";
 import contributions from "layout/Lists/contributions";
 import WishItems from "layout/Lists/wishlist";
+import images from "layout/Lists/images";
 import CreateGuestTribute from "pages/GuestPage/CreateTribute";
 import CustomInput from "components/CustonFormInputs/CustomInput";
 import WishListModal from "../wishlistModal";
@@ -14,16 +15,25 @@ import wishlistImage from "../../../assets/images/wishlistimage.jpeg";
 
 function Home() {
   const [open, setOpen] = useState(false);
-  const [isWishList, setIsWishList] = useState(false);
+  const [openCreateTribute, setOpenCreateTribute] = useState(false);
+  const [selectedWishlist, setSelectedWishlist] = useState();
 
+  function handleModal(item) {
+    setOpenCreateTribute(!openCreateTribute);
+    setSelectedWishlist(item);
+  }
 
+  function handleDonate() {
+    setOpenCreateTribute(!openCreateTribute);
+    setSelectedWishlist();
+  }
 
   return (
     <div className="font-nunito">
       <h1 className="text-[24px] font-dancing font-[700] text-center p-[30px] text-[24px] lg:text-[60px]">
         Celebration of Life
       </h1>
-      <div className="w-[100%] font-nunito ">
+      <div className="w-[100%] font-nunito">
         <img className="w-full h-[100px] lg:h-[300px]" src={rectangle} alt="background" />
         <div className="px-5 flex md:flex-col items-center gap-[66px] md:gap-[4px] justify-between md:justify-center">
           <div className="w-[100px] h-[80px] lg:w-[250px] lg:h-[250px] translate-y-[-20%]">
@@ -36,11 +46,16 @@ function Home() {
           <div className="flex gap-[10px] text-white translate-y-[-10%] md:hidden">
             <button
               className="font-[14px] bg-[#3684F7] p-2 rounded-md cursor-pointer"
-              onClick={() => setOpen(!open)}
+              onClick={() => handleDonate()}
             >
               Donate
             </button>
-            <button className="font-[14px] bg-[#FF433C] p-2 rounded-md" onClick={() => {setIsWishList(true); setOpen(!open)}}>Wishlist</button>
+            <button
+              className="font-[14px] bg-[#FF433C] p-2 rounded-md"
+              onClick={() => setOpen(!open)}
+            >
+              Wishlist
+            </button>
           </div>
         </div>
         <div className="font-bold px-4 flex flex-col gap-[2px] md:hidden">
@@ -48,9 +63,9 @@ function Home() {
           <p className="text-[14px]">May 23rd, 1982 - October 28th, 2022</p>
         </div>
       </div>
-      <div className="grid lg:grid-cols-12 gap-[58px] px-[20px] lg:px-[40px] mt-[20px]">
-        <div className="grid lg:col-span-8 gap-[32px] ">
-          <div className="bg-white md:px-[40px] md:py-[28px] p-3 rounded-md flex flex-col gap-[12px]">
+      <div className="lg:grid lg:grid-cols-12 flex flex-col gap-[58px] px-[20px] lg:px-[40px] mt-[20px]">
+        <div className="lg:col-span-8 flex flex-col gap-[32px] ">
+          <div className="bg-white md:px-[40px] md:py-[28px] py-[24px] px-[19px] rounded-md flex flex-col justify-center gap-[12px]">
             <h2 className="text-[18px] md:text-[24px] font-bold">Biography</h2>
             <p className="leading-loose text-[16px] text-wrap">
               It is with heavy hearts that we bid farewell to a cherished soul, a beacon of love,
@@ -106,11 +121,11 @@ function Home() {
           <div className="bg-white lg:px-[40px] lg:py-[28px] px-[19px] py-[24px] rounded-md flex flex-col gap-[32px]">
             <h1 className="text-[24px] font-bold">Contributions ({contributions.length})</h1>
             {contributions.map((contribution) => (
-              <div className="grid grid-cols-12 items-center">
-                <p className=" col-span-2 bg-gray-200 w-14 h-14 max-sm:w-10 max-sm:h-10 max-lg:w-14 max-lg:h-14 rounded-full flex items-center max-sm:pt-2.5 text-center justify-center -mt-0.5 font-semibold mr-3 tracking-tighter text-base max-sm:text-sm max-lg:text-lg max-sm:block">
+              <div className="lg:grid grid-cols-12 items-center ">
+                <p className="lg:col-span-2 xl:col-span-1 bg-gray-200 mb-3 w-14 h-14 max-sm:w-10 max-sm:h-10 max-lg:w-14 max-lg:h-14 rounded-full flex items-center max-sm:pt-2.5 text-center justify-center font-semibold mr-3 tracking-tighter text-base max-sm:text-sm max-lg:text-lg max-sm:block">
                   {contribution.initial}
                 </p>
-                <div className=" col-span-10">
+                <div className="lg:col-span-10 xl:col-span-11">
                   <h4 className="text-[18px] font-bold">{contribution.fullName}</h4>
                   <p className="leading-loose text-[16px]">{contribution.description}</p>
                 </div>
@@ -118,7 +133,7 @@ function Home() {
             ))}
           </div>
           <div className="bg-white lg:px-[40px] lg:py-[28px] px-[19px] py-[24px] rounded-md flex flex-col gap-[32px]">
-            <h1>Send a Tribute</h1>
+            <h1 className="text-[24px]">Send a Tribute</h1>
 
             <Formik
               initialValues={{ fullName: "", memories: "", Tribute: "" }}
@@ -129,15 +144,16 @@ function Home() {
               {({ values, handleSubmit, handleChange }) => (
                 <form
                   onSubmit={handleSubmit}
-                  className="grid grid-cols-12 text-[18px] flex flex-col gap-[32px]"
+                  className="md:grid md:grid-cols-12 text-[18px] flex flex-col gap-[32px]"
                 >
-                  <div className="grid col-span-6 gap-[32px]">
+                  <div className="md:grid md:col-span-6 flex flex-col gap-[32px]">
                     <CustomInput
                       label="Full Name"
                       name="fullName"
                       value={values.fullName}
                       required
                       type="text"
+                      className="mb-2"
                       placeholder=""
                       onChange={handleChange}
                     />
@@ -145,22 +161,24 @@ function Home() {
                       label="Upload Memories"
                       name="memories"
                       value={values.memories}
+                      className="mb-2"
                       required
                       type="text"
                       placeholder=""
                       onChange={handleChange}
                     />
+
                     <button
                       type="submit"
                       // onClick={() => handleReset()}
-                      className={`w-full bg-[#FF433C] px-[26px] py-[18px] text-white rounded-[4px] ${!values.fullName || !values.memories || !values.Tribute ? "opacity-[0.2] cursor-not-allowed" : ""}`}
+                      className={`w-full bg-[#FF433C] px-[26px] py-[18px] text-white rounded-[4px] hidden md:block ${!values.fullName || !values.memories || !values.Tribute ? "opacity-[0.2] cursor-not-allowed" : ""}`}
                       disabled={!values.fullName || !values.memories || !values.Tribute}
                     >
                       Contribute
                     </button>
                   </div>
 
-                  <div className="col-span-6">
+                  <div className="md:col-span-6 ">
                     <CustomInput
                       label="Tribute"
                       name="tribute"
@@ -171,13 +189,32 @@ function Home() {
                       onChange={handleChange}
                     />
                   </div>
+                  <button
+                    type="submit"
+                    // onClick={() => handleReset()}
+                    className={`w-full bg-[#FF433C] px-[26px] py-[18px] text-white rounded-[4px] block md:hidden ${!values.fullName || !values.memories || !values.Tribute ? "opacity-[0.2] cursor-not-allowed" : ""}`}
+                    disabled={!values.fullName || !values.memories || !values.Tribute}
+                  >
+                    Contribute
+                  </button>
                 </form>
               )}
             </Formik>
           </div>
         </div>
-        <div className="grid lg:col-span-4 gap-[32px]">
-          <div className="bg-white p-3 rounded-md">ergrfds</div>
+        <div className="lg:col-span-4 flex flex-col gap-[32px]">
+        <div className="bg-white py-[39px] px-[29px] rounded-md ">
+            <div className="mx-auto flex flex-col gap-[10px]">
+              <h1 className="text-[24px]">Images by Others</h1>
+              <div className="grid grid-cols-4 gap-[24px] w-[100%]">
+                {images.map((image) => (
+                  <div className="col-span-1 w-[100px] h-[100px] rounded-lg bg-[#D9D9D9] ">
+                    {image}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
           <div className="bg-white p-3 rounded-md">
             <div className="flex flex-col ">
               <img src={wishlistImage} className="rounded-lg" alt="pic" />
@@ -190,9 +227,7 @@ function Home() {
               {WishItems.map((items) => (
                 <div
                   className="bg-[#F0F1F5] rounded-xl cursor-pointer"
-                  onClick={() => {
-                    setOpen(!open);
-                  }}
+                  onClick={() => handleModal(items)}
                 >
                   <img src={items.image} className="rounded-t-xl" alt="wish" />
                   <div className="flex items-center p-[12px] justify-between">
@@ -207,8 +242,8 @@ function Home() {
               ))}
             </div>
           </div>
-          <div className="bg-white p-3 rounded-md flex flex-col gap-[17px]">
-            <div className="flex flex-col gap-[12px]">
+          <div className="bg-white p-3 rounded-md flex flex-col gap-[17px] h-fit">
+            <div className="flex flex-col gap-[12px] ">
               <h1 className="text-[24px]">Gifts</h1>
               <p className="text-[14px]">
                 Benson is accepting donations for this tribute, click the button below to donate
@@ -217,16 +252,34 @@ function Home() {
 
             <Button
               className="font-[18px] text-white w-[100%] p-2 rounded-md cursor-pointer"
-              onClick={() => setOpen(!open)}
+              onClick={() => handleDonate()}
             >
               Donate
             </Button>
           </div>
-          <div className="bg-white p-3 rounded-md"> serdtghjk</div>
+          <div className="bg-white py-[39px] px-[29px] rounded-md ">
+            <div className="mx-auto flex flex-col gap-[10px]">
+              <h1 className="text-[24px]">Images by Others</h1>
+              <div className="grid grid-cols-4 gap-[24px] w-[100%]">
+                {images.map((image) => (
+                  <div className="col-span-1 w-[100px] h-[100px] rounded-lg bg-[#D9D9D9] ">
+                    {image}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <Modal className="w-[100%] md:w-[700px]" isWishList={isWishList} open={open} onClose={() => setOpen(!open)}>
-       <CreateGuestTribute />
+      <Modal className="w-[100%] md:w-[700px]" open={open} onClose={() => setOpen(!open)}>
+        <WishListModal />
+      </Modal>
+      <Modal
+        className="w-[100%] md:w-[700px]"
+        open={openCreateTribute}
+        onClose={() => setOpenCreateTribute(!openCreateTribute)}
+      >
+        <CreateGuestTribute selectedWishlist={selectedWishlist} />
       </Modal>
     </div>
   );
