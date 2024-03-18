@@ -30,7 +30,10 @@ function Login() {
             <Link to="/reset-password">
               <span className="flex flex-col text-end underline">Forgot password</span>
             </Link>
-            <Button disabled={isSubmitting}> LOGIN </Button>
+            <Button disabled={isSubmitting} className=" text-white">
+              {" "}
+              LOGIN{" "}
+            </Button>
             <p className="my-2 text-lg text-center">
               {" "}
               Do not have an Account?{" "}

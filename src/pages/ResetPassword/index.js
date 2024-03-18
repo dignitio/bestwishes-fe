@@ -21,7 +21,10 @@ function ResetPassword() {
               type="email"
               placeholder="Enter Your email address"
             />
-            <Button disabled={isSubmitting}> Reset Password </Button>
+            <Button disabled={isSubmitting} className=" text-white">
+              {" "}
+              Reset Password{" "}
+            </Button>
             <p className="my-2 text-lg text-center">
               Remember Password?{" "}
               <Link to="/login" className="underline">

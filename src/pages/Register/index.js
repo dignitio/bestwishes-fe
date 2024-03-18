@@ -64,7 +64,9 @@ function Register() {
               type="checkbox"
               name="acceptedTos"
             />
-            <Button disabled={isSubmitting}>Create Account</Button>
+            <Button disabled={isSubmitting} className=" text-white">
+              Create Account
+            </Button>
             <p className="my-2 text-lg text-center">
               Already got an account?{" "}
               <Link to="/login">

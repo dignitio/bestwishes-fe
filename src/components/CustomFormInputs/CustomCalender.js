@@ -25,7 +25,7 @@ export default function CustomCalendar({ label, type, value, onChange, ...props 
           {...props}
           wrapperClassName="w-full"
           className={` w-full max-w-full md:max-w-[367px] border text-[#8593AD]   ${
-            meta.touched && meta.error ? "border-primary" : "border-[#8593AD]"
+            meta.touched && meta.error ? "border-errorColor" : "border-primary"
           }  rounded-md px-[26px] py-[18px] outline-none`}
           onChange={(date) => {
             onChange(date);
@@ -46,7 +46,9 @@ export default function CustomCalendar({ label, type, value, onChange, ...props 
           </span>
         </button>
       </div>
-      {meta.touched && meta.error && <div className="text-xs text-primary mt-1">{meta.error}</div>}
+      {meta.touched && meta.error && (
+        <div className="text-xs text-errorColor mt-1">{meta.error}</div>
+      )}
     </div>
   );
 }

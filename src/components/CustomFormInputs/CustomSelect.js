@@ -12,7 +12,7 @@ export default function CustomSelect({ label, ...props }) {
       </label>
       <select
         className={` text-sm placeholder:text-sm md:text-base w-full border text-[#8593AD]   ${
-          meta.touched && meta.error ? "border-primary" : "border-[#8593AD]"
+          meta.touched && meta.error ? "border-errorColor" : "border-primary"
         }  rounded-md px-[20px] py-[14px] md:px-[26px] md:py-[18px] outline-none`}
         style={{ appearance: "none", WebkitAppearance: "none", MozAppearance: "none" }}
         {...field}
@@ -20,7 +20,7 @@ export default function CustomSelect({ label, ...props }) {
       />
 
       <span>
-        {meta.touched && meta.error && <div className="text-primary text-xs">{meta.error}</div>}
+        {meta.touched && meta.error && <div className="text-errorColor text-xs">{meta.error}</div>}
       </span>
     </>
   );

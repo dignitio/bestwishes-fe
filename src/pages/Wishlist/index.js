@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Modal from "components/Modal";
 import { Form, Formik } from "formik";
-import { Schema } from "Schemas";
+import { wishlistSchema } from "Schemas";
 import CustomSelect from "components/CustomFormInputs/CustomSelect";
 import CustomInput from "components/CustomFormInputs/CustomInput";
 import CustomCalendar from "components/CustomFormInputs/CustomCalender";
@@ -21,6 +21,7 @@ import { ReactComponent as SendIcon } from "../../assets/icons/wishlist-send.svg
 import { ReactComponent as ShareIcon } from "../../assets/icons/link.svg";
 import { ReactComponent as DuplicateIcon } from "../../assets/icons/simcard-2.svg";
 import { ReactComponent as CopyIcon } from "../../assets/icons/size.svg";
+import { ReactComponent as LeftArrowIcon } from "../../assets/icons/left.svg";
 import emptyWishlist from "../../assets/images/wishlist-empty-state-image.png";
 
 const onSubmit = async (values) => {
@@ -44,19 +45,19 @@ function Wishlist() {
   }, []);
 
   return (
-    <div className=" flex flex-col justify-between p-6">
+    <div className=" flex flex-col w-full justify-between p-6">
       <div className=" w-full flex justify-between ">
         {wishListData && (
           <div className=" py-[17px] text-black w-[290px] rounded-md bg-white">
-            <p className=" ml-4 text-lg text-bgWalletBalance">Wallet Balance</p>
-            <span className=" ml-4 mt-2 text-bgWalletBalanceFigure text-2xl flex">
+            <p className=" ml-4 text-lg font-nunito text-bgWalletBalance">Wallet Balance</p>
+            <span className=" ml-4 mt-2 text-bgWalletBalanceFigure text-2xl font-thin font-nunito flex">
               <p>&#x20A6;</p>
               <p>126,997.90</p>
             </span>
           </div>
         )}
         <button
-          className="bg-black text-white p-3 w-fit self-end m-6 rounded-lg"
+          className="bg-black text-white p-3 w-48 self-end m-6 rounded-md"
           type="button"
           onClick={() => setOpen(!open)}
         >
@@ -83,7 +84,8 @@ function Wishlist() {
         <div className="">
           <div className="grid-cols-3 max-lg:grid-cols-2 grid max-sm:block mt-9 max-lg:mx-0 max-lg:w-full">
             {wishListData.map((wishlist) => (
-              <div
+              <Link
+                to={`/dashboard/wishlist/${wishlist.id}/edit`}
                 className={` bg-no-repeat bg-cover flex flex-col justify-between bg-center  relative h-[282px] mb-8 py-3.5 px-4 max-lg:mx-4 mr-12 max-h-68 lg:text-xs text-sm rounded-xl `}
                 style={{ backgroundImage: `url(${wishlist.photoSrc})` }}
                 key={wishlist.id}
@@ -162,7 +164,7 @@ function Wishlist() {
                     </div>
                   </Dropdown>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -178,7 +180,7 @@ function Wishlist() {
             itemName: "",
             price: "",
           }}
-          validationSchema={Schema}
+          validationSchema={wishlistSchema}
           onSubmit={onSubmit}
         >
           {({ values, setFieldValue }) => (
@@ -189,7 +191,7 @@ function Wishlist() {
                   <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
                     {/* <CustomUploader name="coverImage" /> */}
                     <fieldset
-                      className={`relative h-[200px] md:h-full flex flex-col justify-end items-start border-2 border-solid border-[#8593AD] rounded-lg  cursor-pointer rounded-5 bg-white mt-1`}
+                      className={`relative h-[200px] md:h-full flex flex-col justify-end items-start border-2 border-solid border-primary rounded-lg  cursor-pointer rounded-5 bg-white mt-1`}
                     >
                       {values.coverImage ? (
                         <img
@@ -279,6 +281,10 @@ function Wishlist() {
               {/* Step 2 */}
               {activeStep === 1 && (
                 <div className="flex flex-col gap-4">
+                  <LeftArrowIcon
+                    className=" absolute z-20 top-4 left-6 cursor-pointer"
+                    onClick={() => setActiveStep(0)}
+                  />
                   <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
                     <fieldset
                       className={`relative h-[200px] md:h-full flex flex-col justify-end items-start border-2 border-solid border-[#8593AD] rounded-lg  cursor-pointer rounded-5 bg-white mt-1`}
@@ -322,12 +328,12 @@ function Wishlist() {
                         type="number"
                         placeholder="click here to enter price"
                       />
-                      <Button className=" bg-white text-black mt-[28px] border border-gray-700">
+                      <div className=" bg-white text-black mt-[28px] flex justify-center items-center hover:cursor-pointer border border-gray-700">
                         Add more Items
-                      </Button>
+                      </div>
                     </div>
                   </div>
-                  <p className=" text-primary">Generate image with AI</p>
+                  <p className=" text-errorColor cursor-pointer">Generate image with AI</p>
                   <div className=" w-full flex flex-col md:grid md:grid-cols-2 gap-4 ">
                     <button
                       className={` py-[17px] text-white w-[167px] rounded-md

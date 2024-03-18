@@ -28,12 +28,14 @@ export default function CustomPriceInput({ label, ...props }) {
           value={formatPrice(field.value)}
           onChange={handleChange}
           className={`w-full border text-[#8593AD] ${
-            meta.touched && meta.error ? "border-primary" : "border-[#8593AD]"
+            meta.touched && meta.error ? "border-errorColor" : "border-primary"
           } rounded-md px-[26px] py-[18px] outline-none`}
           style={{ appearance: "none", WebkitAppearance: "none", MozAppearance: "none" }}
         />
       </div>
-      {meta.touched && meta.error && <div className="text-xs text-primary mt-1">{meta.error}</div>}
+      {meta.touched && meta.error && (
+        <div className="text-xs text-errorColor mt-1">{meta.error}</div>
+      )}
     </div>
   );
 }

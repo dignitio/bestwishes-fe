@@ -8,7 +8,8 @@ module.exports = {
         nunito: ["Nunito", "sans-serif"],
       },
       colors: {
-        primary: "#FF433C",
+        primary: "#271F6B",
+        errorColor: "#FF433C",
         white: "#fff",
         OauthButton: "#E8E8E8",
         Draft: "#1061B1",

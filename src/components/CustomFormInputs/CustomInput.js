@@ -30,7 +30,7 @@ export default function CustomInput({ label, type, obscured, numeric, ...props }
           {...props}
           type={inputType}
           className={` text-sm placeholder:text-sm md:text-base w-full border text-[#8593AD]   ${
-            meta.touched && meta.error ? "border-primary" : "border-[#8593AD]"
+            meta.touched && meta.error ? "border-errorColor" : "border-primary"
           }  rounded-md px-[20px] py-[14px] md:px-[26px] md:py-[18px] outline-none `}
           style={{ appearance: "none", WebkitAppearance: "none", MozAppearance: "none" }}
         />
@@ -50,7 +50,9 @@ export default function CustomInput({ label, type, obscured, numeric, ...props }
           </div>
         )}
       </div>
-      {meta.touched && meta.error && <div className="text-xs text-primary mt-1">{meta.error}</div>}
+      {meta.touched && meta.error && (
+        <div className="text-xs text-errorColor mt-1">{meta.error}</div>
+      )}
     </div>
   );
 }
