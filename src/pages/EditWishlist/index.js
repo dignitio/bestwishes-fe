@@ -13,9 +13,7 @@ import { ReactComponent as WhiteVerticalDot } from "../../assets/icons/white-ver
 function EditWishlist() {
   const { id } = useParams();
   const [open, setOpen] = useState(false);
-
   const foundWishlist = wishListData.find((wishlist) => wishlist.id === parseInt(id, 10));
-
   const wishlistLength = editWishlistdata.length;
 
   return (
@@ -25,13 +23,13 @@ function EditWishlist() {
           {foundWishlist ? (
             <div className=" w-full">
               <div className=" flex justify-between p-10">
-                <div className=" flex items-center text-sky-600 text-xl">
+                <div className=" flex items-center text-sky-600 text-md">
                   <LeftArrowIcon className="mr-1  w-3.5 h-3.5 max-sm:h-3.5 max-sm:w-3.5 max-lg:w-5 max-lg:h-5" />
                   <Link to="/dashboard/wishlist">Back to Wishlist</Link>
                 </div>
               </div>
               <div className="bg-white h-full w-auto mx-10 p-6 overflow-hidden flex flex-col items-start border rounded-lg">
-                <div className=" font-nunito text-3xl font-medium flex justify-center items-center w-full pb-6 ">
+                <div className=" font-nunito text-xl font-medium flex justify-center items-center w-full pb-6 md:text-3xl">
                   {foundWishlist.Title}
                 </div>
 

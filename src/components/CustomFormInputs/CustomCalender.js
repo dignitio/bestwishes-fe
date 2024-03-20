@@ -21,6 +21,7 @@ export default function CustomCalendar({ label, type, value, onChange, ...props 
         <ReactDatePicker
           type={type}
           selected={value}
+          dateFormat="dd/MM/yyyy"
           {...field}
           {...props}
           wrapperClassName="w-full"
@@ -39,7 +40,7 @@ export default function CustomCalendar({ label, type, value, onChange, ...props 
           className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
           type="button"
           aria-label={`Open ${label} calendar`}
-          onClick={openCalendar} // Call openCalendar when the button is clicked
+          onClick={openCalendar}
         >
           <span className="text-[#8593AD]">
             <CalendarLogo />
