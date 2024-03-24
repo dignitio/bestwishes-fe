@@ -23,7 +23,7 @@ function Nav() {
       </div>
       <div className="bg-[red] xl:block col-span-2 lg:hidden">{/* eslint-disable-next-line react/self-closing-comp */}</div>
 
-      <div className="hidden lg:flex justify-between py-1.5 px-1 items-center gap-[48px] w-full lg:col-span-7 xl:col-span-5 ">
+      <div className="hidden lg:flex justify-center py-1.5 px-1 items-center gap-[48px] w-full lg:col-span-7 xl:col-span-5 ">
         <div onClick={() => setOpen(!open)}>
           <span className="text-[18px]" >Create a Tribute</span>
         </div>

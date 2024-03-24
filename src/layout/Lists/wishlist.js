@@ -34,14 +34,7 @@ const WishItems = [
     name: "MacBook Air 2025",
     discountPrice: "₦500,000",
     discountPercent: "18%",
-  },{
-    id: 1,
-    image: shoes,
-    price: "₦4000,000.00",
-    name: "Sneakers",
-    discountPrice: "₦500,000",
-    discountPercent: "18%",
-  },
-];
+  }
+]
 
 export default WishItems

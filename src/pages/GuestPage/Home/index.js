@@ -12,6 +12,7 @@ import WishListModal from "../wishlistModal";
 import rectangle from "../../../assets/images/rectangle.png";
 import tributeImage from "../../../assets/images/tributeimage.jpeg";
 import wishlistImage from "../../../assets/images/wishlistimage.jpeg";
+import upload from "../../../assets/images/upload.svg";
 
 function Home() {
   const [open, setOpen] = useState(false);
@@ -28,6 +29,7 @@ function Home() {
     setSelectedWishlist();
   }
 
+  const Upload = <input type="file" id="fileUpload" />;
   return (
     <div className="font-nunito">
       <h1 className="text-[24px] font-dancing font-[700] text-center p-[30px] text-[24px] lg:text-[60px]">
@@ -35,17 +37,17 @@ function Home() {
       </h1>
       <div className="w-[100%] font-nunito">
         <img className="w-full h-[100px] lg:h-[300px]" src={rectangle} alt="background" />
-        <div className="px-5 flex md:flex-col items-center gap-[66px] md:gap-[4px] justify-between md:justify-center">
-          <div className="w-[100px] h-[80px] lg:w-[250px] lg:h-[250px] translate-y-[-20%]">
-            <img className="w-full h-full rounded-full" src={tributeImage} alt="profilepic" />
+        <div className="px-5 flex md:flex-col items-center gap-[66px] md:gap-[4px] justify-between md:justify-center relative h-[130px] lg:h-[300px]">
+          <div className="absolute top-[-50px] lg:top-[-125px] flex flex-col gap-[17px] md:justify-center md:items-center">
+            <img className="w-[100px] h-[100px] lg:w-[250px] lg:h-[250px] rounded-full" src={tributeImage} alt="profilepic" />
+            <div className="font-bold flex flex-col gap-[2px] md:text-center">
+              <p className="font-bold text-[18px] lg:text-[40px]">Benson John </p>
+              <p className="font-semibold text-[14px] lg:text-[32px]">May 23rd, 1982 - October 28th, 2022</p>
+            </div>
           </div>
-          <div className="font-bold p-4 hidden md:flex flex-col gap-[2px] text-center translate-y-[-20%]">
-            <p className="text-[32px] lg:text-[40px]">Benson John </p>
-            <p className="text-[24px] lg:text-[32px]">May 23rd, 1982 - October 28th, 2022</p>
-          </div>
-          <div className="flex gap-[10px] text-white translate-y-[-10%] md:hidden">
+          <div className="flex md:hidden gap-[10px] text-white absolute right-[20px] top-[24px]">
             <button
-              className="font-[14px] bg-[#3684F7] p-2 rounded-md cursor-pointer"
+              className="font-[14px] bg-[black] p-2 drop-shadow-md rounded-md cursor-pointer"
               onClick={() => handleDonate()}
             >
               Donate
@@ -58,13 +60,9 @@ function Home() {
             </button>
           </div>
         </div>
-        <div className="font-bold px-4 flex flex-col gap-[2px] md:hidden">
-          <p className="text-[18px]">Benson John </p>
-          <p className="text-[14px]">May 23rd, 1982 - October 28th, 2022</p>
-        </div>
       </div>
-      <div className="lg:grid lg:grid-cols-12 flex flex-col gap-[58px] px-[20px] lg:px-[40px] mt-[20px]">
-        <div className="lg:col-span-8 flex flex-col gap-[32px] ">
+      <div className="xl:grid xl:grid-cols-12 flex flex-col gap-[58px] px-[15px] xl:px-[80px] ">
+        <div className="xl:col-span-8 flex flex-col gap-[32px] ">
           <div className="bg-white md:px-[40px] md:py-[28px] py-[24px] px-[19px] rounded-md flex flex-col justify-center gap-[12px]">
             <h2 className="text-[18px] md:text-[24px] font-bold">Biography</h2>
             <p className="leading-loose text-[16px] text-wrap">
@@ -118,14 +116,14 @@ function Home() {
               <br />
             </p>
           </div>
-          <div className="bg-white lg:px-[40px] lg:py-[28px] px-[19px] py-[24px] rounded-md flex flex-col gap-[32px]">
+          <div className="bg-white lg:px-[40px] lg:py-[28px] px-[19px] py-[24px] rounded-md flex flex-col gap-[32px] h-[800px] overflow-y-scroll">
             <h1 className="text-[24px] font-bold">Contributions ({contributions.length})</h1>
             {contributions.map((contribution) => (
-              <div className="lg:grid grid-cols-12 items-center ">
-                <p className="lg:col-span-2 xl:col-span-1 bg-gray-200 mb-3 w-14 h-14 max-sm:w-10 max-sm:h-10 max-lg:w-14 max-lg:h-14 rounded-full flex items-center max-sm:pt-2.5 text-center justify-center font-semibold mr-3 tracking-tighter text-base max-sm:text-sm max-lg:text-lg max-sm:block">
+              <div className="lg:grid grid-cols-12 items-center">
+                <p className="md:col-span-2 xl:col-span-1 bg-gray-200 mb-3 w-14 h-14 max-sm:w-10 max-sm:h-10 max-lg:w-14 max-lg:h-14 rounded-full flex items-center max-sm:pt-2.5 text-center justify-center font-semibold mr-3 tracking-tighter text-base max-sm:text-sm max-lg:text-lg max-sm:block">
                   {contribution.initial}
                 </p>
-                <div className="lg:col-span-10 xl:col-span-11">
+                <div className="md:col-span-10 xl:col-span-11">
                   <h4 className="text-[18px] font-bold">{contribution.fullName}</h4>
                   <p className="leading-loose text-[16px]">{contribution.description}</p>
                 </div>
@@ -157,16 +155,34 @@ function Home() {
                       placeholder=""
                       onChange={handleChange}
                     />
-                    <CustomInput
-                      label="Upload Memories"
-                      name="memories"
-                      value={values.memories}
-                      className="mb-2"
-                      required
-                      type="text"
-                      placeholder=""
-                      onChange={handleChange}
-                    />
+
+                    <div className="relative flex">
+                      <CustomInput
+                        label="Upload Memories"
+                        name="memories"
+                        value={values.memories}
+                        className="mb-2"
+                        required
+                        type="text"
+                        placeholder="click here to upload images"
+                        onChange={handleChange}
+                      />
+                      <img
+                        src={upload}
+                        alt="upload"
+                        className="cursor-pointer absolute translate-y-[170%] right-0 pr-4"
+                      />
+                      <input
+                        type="file"
+                        id="memoriesUpload"
+                        className="cursor-pointer w-4 absolute translate-y-[150%] right-0 pr-[70px] leading-tight focus:outline-none focus:border-blue-500 opacity-0"
+                        onChange={(e) => {console.log(e.target.files)}}
+                      />
+                    </div>
+
+                    {/* <div className="border border-[#8593AD] rounded-md py-[18px] px-[26px] flex">
+                      
+                    </div> */}
 
                     <button
                       type="submit"
@@ -189,6 +205,7 @@ function Home() {
                       onChange={handleChange}
                     />
                   </div>
+
                   <button
                     type="submit"
                     // onClick={() => handleReset()}
@@ -203,22 +220,20 @@ function Home() {
           </div>
         </div>
         <div className="lg:col-span-4 flex flex-col gap-[32px]">
-        <div className="bg-white py-[39px] px-[29px] rounded-md ">
-            <div className="mx-auto flex flex-col gap-[10px]">
+          <div className="bg-white py-[39px] px-[29px] rounded-md ">
+            <div className="mx-auto flex flex-col justify-center gap-[10px] w-[100%]">
               <h1 className="text-[24px]">Images by Others</h1>
-              <div className="grid grid-cols-4 gap-[24px] w-[100%]">
+              <div className="grid gap-[24px] gap-x-[24px] grid-cols-2 md:grid-cols-4 xl:grid-cols-4 w-full">
                 {images.map((image) => (
-                  <div className="col-span-1 w-[100px] h-[100px] rounded-lg bg-[#D9D9D9] ">
-                    {image}
-                  </div>
+                  <div className="w-[100px] h-[100px] lg:w-[60px] lg:h-[60px] 2xl:w-[100px] 2xl:h-[100px] rounded-lg bg-[#D9D9D9]">{image}</div>
                 ))}
               </div>
             </div>
           </div>
-          <div className="bg-white p-3 rounded-md">
+          <div className="bg-white p-[30px] rounded-md flex flex-col items-center gap-4">
             <div className="flex flex-col ">
               <img src={wishlistImage} className="rounded-lg" alt="pic" />
-              <div className="translate-y-[-180%] p-3">
+              <div className="translate-y-[-200%] translate-x-[5%] ">
                 <p className="text-[24px] font-bold">John Wishlist</p>
                 <p className="text-[14px]">12 days left</p>
               </div>
@@ -232,15 +247,18 @@ function Home() {
                   <img src={items.image} className="rounded-t-xl" alt="wish" />
                   <div className="flex items-center p-[12px] justify-between">
                     <div className="flex flex-col gap-[7px]">
-                      <p className="text-[9px]">{items.name}</p>
-                      <p className="text-[14px] font-semibold text-[#1061B1]">{items.price}</p>
-                      <p className="text-[7px]">{items.discountPrice}</p>
+                      <p className="text-[6px] md:text-[9px]">{items.name}</p>
+                      <p className="text-[8px] md:text-[14px] font-semibold text-[#1061B1]">
+                        {items.price}
+                      </p>
+                      <p className="text-[4px] md:text-[7px]">{items.discountPrice}</p>
                     </div>
-                    <p className="text-[10px]">{items.discountPercent}</p>
+                    <p className="text-[5px] md:text-[10px]">{items.discountPercent}</p>
                   </div>
                 </div>
               ))}
             </div>
+            <Button className="text-white font-bold">See more</Button>
           </div>
           <div className="bg-white p-3 rounded-md flex flex-col gap-[17px] h-fit">
             <div className="flex flex-col gap-[12px] ">
@@ -260,11 +278,9 @@ function Home() {
           <div className="bg-white py-[39px] px-[29px] rounded-md ">
             <div className="mx-auto flex flex-col gap-[10px]">
               <h1 className="text-[24px]">Images by Others</h1>
-              <div className="grid grid-cols-4 gap-[24px] w-[100%]">
+              <div className="grid gap-[24px] grid-cols-2 md:grid-cols-4 xl:grid-cols-4 w-full">
                 {images.map((image) => (
-                  <div className="col-span-1 w-[100px] h-[100px] rounded-lg bg-[#D9D9D9] ">
-                    {image}
-                  </div>
+                   <div className="w-[100px] h-[100px] lg:w-[60px] lg:h-[60px] 2xl:w-[100px] 2xl:h-[100px] rounded-lg bg-[#D9D9D9]">{image}</div>
                 ))}
               </div>
             </div>
