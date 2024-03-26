@@ -1,5 +1,6 @@
 import { useField } from "formik";
 import React from "react";
+import { motion } from "framer-motion";
 import { ReactComponent as Eye } from "../../assets/icons/eye.svg";
 import { ReactComponent as EyeSlash } from "../../assets/icons/eye-slash.svg";
 
@@ -18,18 +19,18 @@ export default function CustomInput({ label, type, obscured, numeric, ...props }
   return (
     <div className="flex flex-col gap-2 w-full">
       <label
-        className=" text-sm md:text-base text-[#1E1B1A] font-medium text-[18px] mb-2"
+        className=" text-sm md:text-base text-[#1E1B1A]  font-medium text-[18px] mb-2"
         htmlFor={props.id}
       >
         {label}
       </label>
-      <div className="relative">
+      <motion.div whileHover={{ scale: 0.98 }} className="relative">
         <input
           id={props.id}
           {...field}
           {...props}
           type={inputType}
-          className={` text-sm placeholder:text-sm md:text-base w-full border text-[#8593AD]   ${
+          className={` text-sm placeholder:text-sm md:text-base w-full border  text-[#1E1B1A]   ${
             meta.touched && meta.error ? "border-errorColor" : "border-primary"
           }  rounded-md px-[20px] py-[14px] md:px-[26px] md:py-[18px] outline-none `}
           style={{ appearance: "none", WebkitAppearance: "none", MozAppearance: "none" }}
@@ -49,7 +50,7 @@ export default function CustomInput({ label, type, obscured, numeric, ...props }
             {viewPassword ? <Eye /> : <EyeSlash />}
           </div>
         )}
-      </div>
+      </motion.div>
       {meta.touched && meta.error && (
         <div className="text-xs text-errorColor mt-1">{meta.error}</div>
       )}

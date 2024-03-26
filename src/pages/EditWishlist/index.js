@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Modal from "components/Modal";
+import { motion } from "framer-motion";
 import AddItemModal from "components/Modal/AddItemModal";
 import wishListData from "layout/Lists/wishListData";
 import editWishlistdata from "layout/Lists/editWishlistdata";
@@ -28,7 +29,7 @@ function EditWishlist() {
                   <Link to="/dashboard/wishlist">Back to Wishlist</Link>
                 </div>
               </div>
-              <div className="bg-white h-full w-auto mx-10 p-6 overflow-hidden flex flex-col items-start border rounded-lg">
+              <div className="bg-white h-full w-auto mx-10 p-10 overflow-hidden flex flex-col items-start border rounded-lg">
                 <div className=" font-nunito text-xl font-medium flex justify-center items-center w-full pb-6 md:text-3xl">
                   {foundWishlist.Title}
                 </div>
@@ -42,13 +43,15 @@ function EditWishlist() {
                 </div>
                 <div className=" w-full grid grid-cols-1 md:grid-cols-2  xl:grid-cols-3 gap-6 my-5 ">
                   <div className=" bg-blue-300 h-[317px] w-full flex justify-start items-end border rounded-md">
-                    <button
-                      className=" bg-primary h-10 rounded py-0 px-8 text-white ml-5 mb-10"
+                    <motion.button
+                      whileTap={{ scale: 0.8 }}
+                      whileHover={{ scale: 0.95 }}
+                      className=" bg-primary h-10 rounded py-0 px-8 text-white ml-5 mb-10 "
                       onClick={() => setOpen(!open)}
                     >
                       {" "}
                       Add more items +
-                    </button>
+                    </motion.button>
                   </div>
                   {editWishlistdata.map((editWishlist) => (
                     <div className="h-[317px] w-full rounded-md">

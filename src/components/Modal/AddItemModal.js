@@ -1,6 +1,7 @@
 /* eslint-disable object-shorthand */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { AddItemsSchema } from "Schemas";
+import { motion } from "framer-motion";
 import { Form, Formik } from "formik";
 import CustomInput from "components/CustomFormInputs/CustomInput";
 import CustomPriceInput from "components/CustomFormInputs/CustomPriceInput";
@@ -26,7 +27,7 @@ function AddItemModal({ wishlistLength }) {
               {values.items.map((item, index) => (
                 <div key={index} className="w-full py-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                   <fieldset
-                    className={`relative h-[200px] md:h-full flex flex-col justify-end items-start border-2 border-solid border-[#8593AD] rounded-lg  cursor-pointer rounded-5 bg-white mt-1`}
+                    className={`relative h-[200px] md:h-full flex flex-col justify-end items-start border-2 border-solid border-[#1E1B1A] ] rounded-lg  cursor-pointer rounded-5 bg-white mt-1`}
                   >
                     {item.img ? (
                       <img
@@ -48,7 +49,7 @@ function AddItemModal({ wishlistLength }) {
                         />
                         <label
                           htmlFor={`items.${index}.img`}
-                          className="absolute inset-0 flex justify-center items-center"
+                          className="absolute inset-0 flex justify-start items-center self-end mb-4 ml-6"
                         >
                           <UploadIcon size={60} />
                           <p className="ml-2">Upload Cover Image</p>
@@ -75,7 +76,9 @@ function AddItemModal({ wishlistLength }) {
                       placeholder="click here to enter price"
                     />
                     {index > 0 && (
-                      <button
+                      <motion.button
+                        whileHover={{ scale: 0.95 }}
+                        whileTap={{ scale: 0.8 }}
                         onClick={() => {
                           setFieldValue(
                             "items",
@@ -86,7 +89,7 @@ function AddItemModal({ wishlistLength }) {
                         className="bg-white text-black mt-[28px] h-10 rounded py-0 px-8 border border-gray-700"
                       >
                         Remove Item
-                      </button>
+                      </motion.button>
                     )}
                   </div>
                 </div>
@@ -95,24 +98,25 @@ function AddItemModal({ wishlistLength }) {
             {wishlistLength + values.items.length >= 10 ? (
               <p className="text-red-500 mt-4">You have reached the maximum limit of 10 items.</p>
             ) : (
-              <div
-                className="bg-white text-black mt-10 border border-gray-700 flex justify-center items-center hover:cursor-pointer"
+              <motion.div
+                whileHover={{ scale: 0.95 }}
+                className="bg-white text-black text-xl mt-10 border border-gray-700 flex justify-center items-center hover:cursor-pointer"
                 onClick={() => {
                   const newItem = { img: "", itemName: "", price: "" };
                   setFieldValue(`items.${values.items.length}`, newItem);
                 }}
               >
                 Add more Items
-              </div>
+              </motion.div>
             )}
             {values.items.length >= 1 && (
               <div className="flex justify-between">
-                <Button className="bg-white text-black mt-[28px] border border-gray-700">
+                <Button className="bg-white text-primary mt-[28px] border border-primary hover:bg-primary hover:text-white">
                   Save to Draft
                 </Button>
                 <Button
                   type="submit"
-                  className="bg-white text-black mt-[28px] border border-gray-700"
+                  className="bg-primary text-white mt-[28px] border border-gray-700"
                 >
                   Save Item
                 </Button>

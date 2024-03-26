@@ -1,5 +1,6 @@
 import React from "react";
 import { useField } from "formik";
+import { motion } from "framer-motion";
 
 export default function CustomTextArea({ label, className, ...props }) {
   const [field, meta] = useField(props);
@@ -11,10 +12,11 @@ export default function CustomTextArea({ label, className, ...props }) {
       >
         {label}
       </label>
-      <textarea
+      <motion.textarea
+        whileHover={{ scale: 0.98 }}
         {...field}
         {...props}
-        className={` text-sm placeholder:text-sm md:text-base w-full border text-[#8593AD] ${className}  ${
+        className={` text-sm placeholder:text-sm md:text-base w-full border text-[#1E1B1A]  ${className}  ${
           meta.touched && meta.error ? "border-errorColor" : "border-primary"
         }  rounded-md px-[26px] py-[18px] outline-none h-10`}
         style={{ appearance: "none", WebkitAppearance: "none", MozAppearance: "none" }}

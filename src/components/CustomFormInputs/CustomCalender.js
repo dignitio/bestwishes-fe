@@ -1,5 +1,6 @@
 import React from "react";
 import { useField, useFormikContext } from "formik";
+import { motion } from "framer-motion";
 import ReactDatePicker from "react-datepicker";
 import { ReactComponent as CalendarLogo } from "../../assets/icons/calendar.svg";
 import "react-datepicker/dist/react-datepicker.css";
@@ -17,7 +18,7 @@ export default function CustomCalendar({ label, type, value, onChange, ...props 
       <label htmlFor={props.id} className="text-[#1E1B1A] font-medium text-[18px] mb-2">
         {label}
       </label>
-      <div className="relative w-full">
+      <motion.div whileHover={{ scale: 0.98 }} className="relative w-full">
         <ReactDatePicker
           type={type}
           selected={value}
@@ -25,7 +26,7 @@ export default function CustomCalendar({ label, type, value, onChange, ...props 
           {...field}
           {...props}
           wrapperClassName="w-full"
-          className={` w-full max-w-full md:max-w-[367px] border text-[#8593AD]   ${
+          className={` w-full max-w-full md:max-w-[367px] border text-[#1E1B1A]   ${
             meta.touched && meta.error ? "border-errorColor" : "border-primary"
           }  rounded-md px-[26px] py-[18px] outline-none`}
           onChange={(date) => {
@@ -46,7 +47,7 @@ export default function CustomCalendar({ label, type, value, onChange, ...props 
             <CalendarLogo />
           </span>
         </button>
-      </div>
+      </motion.div>
       {meta.touched && meta.error && (
         <div className="text-xs text-errorColor mt-1">{meta.error}</div>
       )}

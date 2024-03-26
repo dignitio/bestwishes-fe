@@ -6,8 +6,6 @@ import tributeDetails from "layout/Lists/tributeDetails";
 import DeleteTribute from "./DeleteTribute";
 import DuplicateTribute from "./DuplicateTribute";
 import TributeContributions from "./TributeContributions";
-import { ReactComponent as XCircleIcon } from "../../assets/icons/Xcircle.svg";
-import { ReactComponent as SubtractIcon } from "../../assets/icons/Subtract.svg";
 import { ReactComponent as FilterIcon } from "../../assets/icons/filter.svg";
 import { ReactComponent as VerticalDot } from "../../assets/icons/dotsVertical.svg";
 import { ReactComponent as TrashIcon } from "../../assets/icons/trash.svg";

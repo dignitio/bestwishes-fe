@@ -4,6 +4,7 @@
 import { useEffect, useState } from "react";
 import Modal from "components/Modal";
 import { Form, Formik } from "formik";
+import { motion } from "framer-motion";
 import { wishlistSchema } from "Schemas";
 import CustomSelect from "components/CustomFormInputs/CustomSelect";
 import CustomInput from "components/CustomFormInputs/CustomInput";
@@ -14,6 +15,7 @@ import Button from "components/Button";
 import { Link, useNavigate } from "react-router-dom";
 import Dropdown from "components/Dropdown";
 import CustomPriceInput from "components/CustomFormInputs/CustomPriceInput";
+import DeleteWishlist from "./DeleteWishlist";
 import { ReactComponent as UploadIcon } from "../../assets/icons/picture-upload.svg";
 import { ReactComponent as VerticalDot } from "../../assets/icons/wishlist-vertical-dots.svg";
 import { ReactComponent as TrashIcon } from "../../assets/icons/trash.svg";
@@ -24,6 +26,7 @@ import { ReactComponent as DuplicateIcon } from "../../assets/icons/simcard-2.sv
 import { ReactComponent as CopyIcon } from "../../assets/icons/size.svg";
 import { ReactComponent as LeftArrowIcon } from "../../assets/icons/left.svg";
 import emptyWishlist from "../../assets/images/wishlist-empty-state-image.png";
+import DuplicateWishlist from "./DuplicateWishlist";
 
 const onSubmit = async (values) => {
   console.log(values);
@@ -58,14 +61,16 @@ function Wishlist() {
             </span>
           </div>
         )}
-        <button
-          className="bg-black text-white px-5 py-3 md:mr-6 md:mb-6 w-full md:w-auto  rounded-md self-center"
+        <motion.button
+          whileTap={{ scale: 0.8 }}
+          whileHover={{ scale: 0.95 }}
+          className="bg-white text-primary px-5 py-3 md:mr-6 md:mb-6 w-full md:w-auto  rounded-md self-center border border-primary outline-none hover:bg-primary hover:text-white"
           type="button"
           onClick={() => setOpen(!open)}
         >
           {" "}
           Create Wishlist +
-        </button>
+        </motion.button>
       </div>
       {wishListData === 0 ? (
         <div className=" bg-white h-[825px] w-auto mx-6 overflow-hidden flex flex-col justify-center items-center">
@@ -107,6 +112,9 @@ function Wishlist() {
                           ? "text-xs bg-green-600 flex justify-end items-center h-3.5 w-7 rounded-xl"
                           : "text-xs bg-slate-500 flex justify-start h-3.5 w-7 rounded-xl"
                       }
+                      onClick={(e) => {
+                        e.preventDefault();
+                      }}
                     >
                       <p className={wishlist.publishedValue ? "text-green-600" : "text-slate-500"}>
                         .
@@ -144,7 +152,7 @@ function Wishlist() {
                     onClick={(e) => {
                       e.preventDefault();
                     }}
-                    className="w-4 h-full"
+                    className="w-4 h-full bg-none"
                   >
                     <Dropdown
                       heading={
@@ -190,6 +198,12 @@ function Wishlist() {
           </div>
         </div>
       )}
+      <Modal width={500} open={deleteModal} onClose={() => setDeleteModal(!deleteModal)}>
+        <DeleteWishlist />
+      </Modal>
+      <Modal width={500} open={duplicateModal} onClose={() => setDuplicateModal(!duplicateModal)}>
+        <DuplicateWishlist />
+      </Modal>
       <Modal style={{ zIndex: 99 }} width={850} open={open} onClose={() => setOpen(!open)}>
         <Formik
           initialValues={{
