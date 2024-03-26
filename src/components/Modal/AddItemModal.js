@@ -111,9 +111,9 @@ function AddItemModal({ wishlistLength }) {
             )}
             {values.items.length >= 1 && (
               <div className="flex justify-between">
-                <Button className="bg-white text-primary mt-[28px] border border-primary hover:bg-primary hover:text-white">
+                <button className="bg-white h-10 rounded py-0 px-8 text-primary mt-[28px] border border-primary hover:bg-primary hover:text-white">
                   Save to Draft
-                </Button>
+                </button>
                 <Button
                   type="submit"
                   className="bg-primary text-white mt-[28px] border border-gray-700"
