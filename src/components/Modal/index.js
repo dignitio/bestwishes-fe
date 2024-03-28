@@ -2,7 +2,7 @@ import ReactModal from "react-modal";
 import { ReactComponent as Closeicon } from "assets/icons/close.svg";
 import "./modal.css";
 
-const Modal = ({ open, onClose, customClass, width, children }) => {
+const Modal = ({ open, onClose, customClass, width, children, isWishList }) => {
   const modalCustomStyles = {};
   if (width) {
     modalCustomStyles.width = `${width}px`;
@@ -17,6 +17,7 @@ const Modal = ({ open, onClose, customClass, width, children }) => {
       overlayClassName={"overlay"}
       style={{
         content: modalCustomStyles,
+        
       }}
     >
       <div className="header" onClick={onClose} style={{ cursor: "pointer" }}>

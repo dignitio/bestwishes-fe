@@ -31,13 +31,14 @@ export default function CustomInput({ label, type, obscured, options, ...props }
               </option>
             ))}
           </select>
-        ) : (
+        ) :
+        (
         <input
           id={props.id}
           {...field}
           {...props}
           type={viewPassword ? "text" : type}
-          className={` w-full border text-[#8593AD]   ${
+          className={` w-full border text-[#8593AD] md:text-[14px] text-[12px] ${
             meta.touched && meta.error ? "border-primary" : "border-[#8593AD]"
           }  rounded-md px-[26px] py-[18px] outline-none`}
           style={{ appearance: 'none', WebkitAppearance: 'none', MozAppearance: 'none' }}

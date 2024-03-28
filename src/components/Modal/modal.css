@@ -44,8 +44,19 @@
     margin-bottom: 0;
     overflow-y: scroll;
     border-bottom: 0;
+    position: relative;
+    bottom: 0;
+    border-radius: 
+    40px 0px 0px 0px;
+  }
+
+  .overlay{
+    justify-content: flex-end;
+    
   }
 }
+
+
 
 .header {
   display: flex;
