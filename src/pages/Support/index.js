@@ -1,4 +1,12 @@
-import CustomInput from "components/CustonFormInputs/CustomInput";
+import React, { useState } from "react";
+
+import {
+  Accordion,
+  AccordionItem,
+  AccordionItemHeading,
+  AccordionItemButton,
+  AccordionItemPanel,
+} from "react-accessible-accordion";
 import plus from "../../assets/images/add.png";
 import call from "../../assets/images/call.svg";
 import sms from "../../assets/images/sms.svg";
@@ -8,16 +16,47 @@ import tiktok from "../../assets/images/tik_tok.svg";
 import twitter from "../../assets/images/twitter.svg";
 import whatsapp from "../../assets/images/whatsapp.svg";
 import youtube from "../../assets/images/youtube.svg";
-import { ReactComponent as SearchIcon } from "../../assets/icons/search.svg"
+import { ReactComponent as SearchIcon } from "../../assets/icons/search.svg";
 
 function Support() {
   const FAQs = [
-    "What is bestwishes about?",
-    "How do i get my money from the plaform?",
-    "is my data safe here?",
-    "What is bestwishes about? ",
-    "What is bestwishes about? ",
+    {
+      Question: "What is bestwishes about?",
+      Answer: "sdfghjkl;iuytryguijklknbvbn",
+    },
+    {
+      Question: "What is bestwishes about?",
+      Answer: "sdfghjkl;iuytryguijklknbvbn",
+    },
+    {
+      Question: "What is bestwishes about?",
+      Answer: "sdfghjkl;iuytryguijklknbvbn",
+    },
+    {
+      Question: "What is bestwishes about?",
+      Answer: "sdfghjkl;iuytryguijklknbvbn",
+    },
+    {
+      Question: "What is bestwishes about?",
+      Answer: "sdfghjkl;iuytryguijklknbvbn",
+    },
   ];
+
+  // useEffect(() => {
+  //   AOS.init({
+  //     // Initialization options
+  //   });
+  // }, []);
+
+  const [clickedQuestion, setClickedQuestion] = useState(FAQs.length + 1);
+
+  function togglefaq(index) {
+    if (clickedQuestion === index) {
+      setClickedQuestion(FAQs.length + 1);
+    } else {
+      setClickedQuestion(index);
+    }
+  }
 
   const phoneNumber = "01-09900880";
   return (
@@ -28,14 +67,18 @@ function Support() {
             Hello, How can we help you?
           </h1>
           <button className="bg-gray-50 rounded-[8px] py-4 px-2.5 md:w-[600px] xl:w-[762px] flex items-center text-[#000000] gap-[18px]">
-                {}
-                <span className="px-2 max-lg:px-1.5">
-                    <SearchIcon className="w-[16px] h-[16px] md:w-[24px] md:h-[24px]" />
-                </span>
-                <span className="text-[14px] md:text-[16px] font-bold text-[#000000]">
-                    <input type="text" placeholder="Search for questions" className="outline-0 bg-transparent "/>
-                </span>
-            </button>
+            {}
+            <span className="px-2 max-lg:px-1.5">
+              <SearchIcon className="w-[16px] h-[16px] md:w-[24px] md:h-[24px]" />
+            </span>
+            <span className="text-[14px] md:text-[16px] font-bold text-[#000000]">
+              <input
+                type="text"
+                placeholder="Search for questions"
+                className="outline-0 bg-transparent "
+              />
+            </span>
+          </button>
           <div className="flex flex-col md:flex-row gap-[46px] items-center justify-center">
             <div className="bg-[#F8F8F8] w-[90%] md:w-[159px] h-[120px] rounded-lg text-[12px] flex flex-col items-center justify-center gap-[19px]">
               <img src={call} alt="phone" />
@@ -86,11 +129,15 @@ function Support() {
         <h1 className="font-bold text-[20px] md:text-[32px] text-center">
           Frequently Asked Questions
         </h1>
+
         <div className="bg-[#F8F8F8] w-[300px] md:w-[80%] py-[26px] flex flex-col gap-[16px]">
-          {FAQs.map((faq) => (
-            <div className="bg-white p-3 flex items-center justify-between">
-              <p>{faq}</p>
-              <img src={plus} alt="add icon" />
+          {FAQs.map((faq, index) => (
+            <div className="bg-white p-3 flex flex-col gap-3" key={index}>
+              <div className="flex justify-between" onClick={() => togglefaq(index)}>
+                <p>{faq.Question}</p>
+                <img src={plus} alt="plus" />
+              </div>
+              {clickedQuestion === index && <p data-aos="fade-up">{faq.Answer}</p>}
             </div>
           ))}
         </div>
