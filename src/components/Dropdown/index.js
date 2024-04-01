@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-const Dropdown = ({heading, children}) => {
+const Dropdown = ({ heading, children }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -17,8 +17,11 @@ const Dropdown = ({heading, children}) => {
       </div>
 
       {isOpen && (
-        <div className="origin-top-right absolute left-4 max-sm:-left-44 max-lg:-left-36 py-1.5 pb-3 top-5 w-40 max-sm:w-48 max-lg:w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5" style={{fontFamily: "Nunito Sans",}}>
-            {children}
+        <div
+          className="origin-top-right absolute  left-4 max-sm:-left-44 max-lg:-left-36 py-1.5 pb-3 top-5 w-40 max-sm:w-48 max-lg:w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
+          style={{ zIndex: 1, fontFamily: "Nunito Sans" }}
+        >
+          {children}
         </div>
       )}
     </div>

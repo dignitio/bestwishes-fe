@@ -21,49 +21,66 @@ function Nav() {
       <div className="lg:hidden ">
         <MainNavButton />
       </div>
-      <div className="bg-[red] xl:block col-span-2 lg:hidden">{/* eslint-disable-next-line react/self-closing-comp */}</div>
+      <div className="bg-[red] xl:block col-span-2 lg:hidden">
+        {/* eslint-disable-next-line react/self-closing-comp */}
+      </div>
 
       <div className="hidden lg:flex justify-center py-1.5 px-1 items-center gap-[48px] w-full lg:col-span-7 xl:col-span-5 ">
         <div onClick={() => setOpen(!open)}>
-          <span className="text-[18px]" >Create a Tribute</span>
+          <span className="text-[18px]">Create a Tribute</span>
         </div>
-        <NavLink to={PATH_HOME.root} className={({ isActive }) => `${isActive ? "text-primary" : "text-[#000000]"} xl:text-[18px]`}>
+        <NavLink
+          to={PATH_HOME.root}
+          className={({ isActive }) =>
+            `${isActive ? "text-primary" : "text-[#000000]"} xl:text-[18px]`
+          }
+        >
           <span>Home</span>
         </NavLink>
-        <NavLink to={PATH_HOME.features} className={({ isActive }) => `${isActive ? "text-primary" : "text-[#000000]"} xl:text-[18px]`}>
+        <NavLink
+          to={PATH_HOME.features}
+          className={({ isActive }) =>
+            `${isActive ? "text-primary" : "text-[#000000]"} xl:text-[18px]`
+          }
+        >
           <span>Features</span>
         </NavLink>
-        <NavLink to={PATH_HOME.about} className={({ isActive }) => `${isActive ? "text-primary" : "text-[#000000]"} xl:text-[18px]`}>
+        <NavLink
+          to={PATH_HOME.about}
+          className={({ isActive }) =>
+            `${isActive ? "text-primary" : "text-[#000000]"} xl:text-[18px]`
+          }
+        >
           Why BestWishes.io
         </NavLink>
       </div>
       <div className="flex items-center text-xs gap-[46px] w-fit col-span-3">
         {isLoggedIn ? (
-        <div className=" flex items-center gap-2">
-          <img src={userPix} alt="userPix" className="w-9" />
-          <span
-            className="hover:bg-gray-100 rounded-md"
-            onClick={() => setShowDropDownComponent(!showDropdownComponent)}
-          >
-            <ArrowDown />
-          </span>
-        </div>
-        ) : ( 
-        <div className="hidden lg:flex xl:gap-[46px] gap-[24px] ">
-          <Button
-            type={Button}
-            onClick={() => setIsLoggedIn(true)}
-            className="text-[#FF433C] text-center text-[18px] bg-white border border-[#FF433C] flex items-center rounded-[100px] xl:py-[24px] xl:px-[30px]"
-          >
-            <Link to="/login">Login</Link>
-          </Button>
-          <Button
-            type={Button}
-            className="bg-primary text-white max-sm:ml-6 hover:bg-red-500 rounded-[100px] text-center xl:text-[18px] flex items-center xl:py-[24px] xl:px-[30px]"
-          >
-            <Link to="/register">Create Account</Link>
-          </Button>
-        </div>
+          <div className=" flex items-center gap-2">
+            <img src={userPix} alt="userPix" className="w-9" />
+            <span
+              className="hover:bg-gray-100 rounded-md"
+              onClick={() => setShowDropDownComponent(!showDropdownComponent)}
+            >
+              <ArrowDown />
+            </span>
+          </div>
+        ) : (
+          <div className="hidden lg:flex xl:gap-[46px] gap-[24px] ">
+            <Button
+              type={Button}
+              onClick={() => setIsLoggedIn(true)}
+              className="text-primary text-center text-[18px] bg-white border border-primary flex items-center rounded-[100px] xl:py-[24px] xl:px-[30px]"
+            >
+              <Link to="/login">Login</Link>
+            </Button>
+            <Button
+              type={Button}
+              className="bg-primary text-white max-sm:ml-6 hover:bg-red-500 rounded-[100px] text-center xl:text-[18px] flex items-center xl:py-[24px] xl:px-[30px]"
+            >
+              <Link to="/register">Create Account</Link>
+            </Button>
+          </div>
         )}
       </div>
 

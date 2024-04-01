@@ -39,10 +39,16 @@ function Home() {
         <img className="w-full h-[100px] lg:h-[300px]" src={rectangle} alt="background" />
         <div className="px-5 flex md:flex-col items-center gap-[66px] md:gap-[4px] justify-between md:justify-center relative h-[130px] lg:h-[300px]">
           <div className="absolute top-[-50px] lg:top-[-125px] flex flex-col gap-[17px] md:justify-center md:items-center">
-            <img className="w-[100px] h-[100px] lg:w-[250px] lg:h-[250px] rounded-full" src={tributeImage} alt="profilepic" />
+            <img
+              className="w-[100px] h-[100px] lg:w-[250px] lg:h-[250px] rounded-full"
+              src={tributeImage}
+              alt="profilepic"
+            />
             <div className="font-bold flex flex-col gap-[2px] md:text-center">
               <p className="font-bold text-[18px] lg:text-[40px]">Benson John </p>
-              <p className="font-semibold text-[14px] lg:text-[32px]">May 23rd, 1982 - October 28th, 2022</p>
+              <p className="font-semibold text-[14px] lg:text-[32px]">
+                May 23rd, 1982 - October 28th, 2022
+              </p>
             </div>
           </div>
           <div className="flex md:hidden gap-[10px] text-white absolute right-[20px] top-[24px]">
@@ -176,7 +182,9 @@ function Home() {
                         type="file"
                         id="memoriesUpload"
                         className="cursor-pointer w-4 absolute translate-y-[150%] right-0 pr-[70px] leading-tight focus:outline-none focus:border-blue-500 opacity-0"
-                        onChange={(e) => {console.log(e.target.files)}}
+                        onChange={(e) => {
+                          console.log(e.target.files);
+                        }}
                       />
                     </div>
 
@@ -187,7 +195,7 @@ function Home() {
                     <button
                       type="submit"
                       // onClick={() => handleReset()}
-                      className={`w-full bg-[#FF433C] px-[26px] py-[18px] text-white rounded-[4px] hidden md:block ${!values.fullName || !values.memories || !values.Tribute ? "opacity-[0.2] cursor-not-allowed" : ""}`}
+                      className={`w-full bg-primary px-[26px] py-[18px] text-white rounded-[4px] hidden md:block ${!values.fullName || !values.memories || !values.Tribute ? "opacity-[0.2] cursor-not-allowed" : ""}`}
                       disabled={!values.fullName || !values.memories || !values.Tribute}
                     >
                       Contribute
@@ -209,7 +217,7 @@ function Home() {
                   <button
                     type="submit"
                     // onClick={() => handleReset()}
-                    className={`w-full bg-[#FF433C] px-[26px] py-[18px] text-white rounded-[4px] block md:hidden ${!values.fullName || !values.memories || !values.Tribute ? "opacity-[0.2] cursor-not-allowed" : ""}`}
+                    className={`w-full bg-primary px-[26px] py-[18px] text-white rounded-[4px] block md:hidden ${!values.fullName || !values.memories || !values.Tribute ? "opacity-[0.2] cursor-not-allowed" : ""}`}
                     disabled={!values.fullName || !values.memories || !values.Tribute}
                   >
                     Contribute
@@ -225,7 +233,9 @@ function Home() {
               <h1 className="text-[24px]">Images by Others</h1>
               <div className="grid gap-[24px] gap-x-[24px] grid-cols-2 md:grid-cols-4 xl:grid-cols-4 w-full">
                 {images.map((image) => (
-                  <div className="w-[100px] h-[100px] lg:w-[60px] lg:h-[60px] 2xl:w-[100px] 2xl:h-[100px] rounded-lg bg-[#D9D9D9]">{image}</div>
+                  <div className="w-[100px] h-[100px] lg:w-[60px] lg:h-[60px] 2xl:w-[100px] 2xl:h-[100px] rounded-lg bg-[#D9D9D9]">
+                    {image}
+                  </div>
                 ))}
               </div>
             </div>
@@ -280,7 +290,9 @@ function Home() {
               <h1 className="text-[24px]">Images by Others</h1>
               <div className="grid gap-[24px] grid-cols-2 md:grid-cols-4 xl:grid-cols-4 w-full">
                 {images.map((image) => (
-                   <div className="w-[100px] h-[100px] lg:w-[60px] lg:h-[60px] 2xl:w-[100px] 2xl:h-[100px] rounded-lg bg-[#D9D9D9]">{image}</div>
+                  <div className="w-[100px] h-[100px] lg:w-[60px] lg:h-[60px] 2xl:w-[100px] 2xl:h-[100px] rounded-lg bg-[#D9D9D9]">
+                    {image}
+                  </div>
                 ))}
               </div>
             </div>
@@ -291,7 +303,7 @@ function Home() {
         <WishListModal />
       </Modal>
       <Modal
-        className="w-[100%] md:w-[700px]"
+        className="w-[100%] bg-white md:w-[700px]"
         open={openCreateTribute}
         onClose={() => setOpenCreateTribute(!openCreateTribute)}
       >

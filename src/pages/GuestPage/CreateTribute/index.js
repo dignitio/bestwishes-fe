@@ -3,7 +3,7 @@ import CustomInput from "components/CustonFormInputs/CustomInput";
 import { Formik } from "formik";
 import Button from "components/Button";
 
-function CreateGuestTribute({selectedWishlist}) {
+function CreateGuestTribute({ selectedWishlist }) {
   return (
     <div className="">
       <div className="flex flex-col gap-[20px] md:px-3">
@@ -16,7 +16,10 @@ function CreateGuestTribute({selectedWishlist}) {
           onSubmit={(values) => console.log(values)}
         >
           {({ values, handleSubmit, handleChange }) => (
-            <form onSubmit={handleSubmit} className="flex flex-col gap-[20px] md:p-[30px] md:text-[24px]">
+            <form
+              onSubmit={handleSubmit}
+              className="flex flex-col gap-[20px] md:p-[30px] md:text-[24px]"
+            >
               <CustomInput
                 label="Name"
                 type="text"
