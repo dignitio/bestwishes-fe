@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { PATH_DASHBOARD } from "routes/path";
 import React, { useState } from "react";
 import { Formik } from "formik";
+import CustomInput from "components/CustonFormInputs/CustomInput";
 
 function Security() {
   const [isActive, setIsActive] = useState(false);
@@ -11,8 +12,8 @@ function Security() {
   };
 
   return (
-    <div className="flex flex-col lg:p-[38px] ">
-      <div className="bg-white flex flex-col lg:flex-row lg:p-[16px] lg:gap-[50px] rounded-[16px] justify-center gap-[20px] ">
+    <div className="flex justify-center lg:p-[38px]">
+      <div className="bg-white min-h-[100%] flex flex-col lg:flex-row p-[16px] lg:px-[16px] lg:p-0 lg:gap-[50px] rounded-[16px] justify-center gap-[20px] w-full">
         <div className="flex flex-col lg:flex-row justify-center lg:px-[21px] lg:py-[84px]">
           <div className="flex lg:flex-col flex-row lg:gap-[28px] lg:justify-start justify-between mb-2">
             <Link
@@ -31,7 +32,7 @@ function Security() {
               }`}
               onClick={() => handleLinkClick("bank")}
             >
-              <span>Bank Details</span>
+              <span className="whitespace-nowrap">Bank Details</span>
             </Link>
             <Link
               to={PATH_DASHBOARD.security}
@@ -56,37 +57,37 @@ function Security() {
             >
               {({ values, handleSubmit, handleChange }) => (
                 <form onSubmit={handleSubmit} className="flex flex-col gap-[32px]">
-                  <div>
-                    <p>Old Password</p>
-                    <input
-                      type="password"
-                      name="oldPassword"
-                      value={values.oldPassword}
-                      required
-                      className="w-full mt-1 border border-1 border-[#AFAFAF] rounded-[4px] px-[26px] py-[18px]"
-                      placeholder="enter old password"
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div>
-                    <p>New Password</p>
-                    <input
-                      type="password"
-                      name="newPassword"
-                      value={values.newPassword}
-                      required
-                      className="w-full mt-1 border border-1 border-[#AFAFAF] rounded-[4px] px-[26px] py-[18px]"
-                      placeholder="enter new password"
-                      onChange={handleChange}
-                    />
-                  </div>
+                  <CustomInput
+                    label="Old password"
+                    type="password"
+                    name="oldPassword"
+                    value={values.oldPassword}
+                    required
+                    obscured
+                    readOnly={false}
+                    // className="w-full mt-1 border border-1 border-[#AFAFAF] rounded-[4px] px-[26px] py-[18px]"
+                    placeholder="enter old password"
+                    onChange={handleChange}
+                  />
+                 
+                  <CustomInput
+                    label="New password"
+                    type="password"
+                    name="newPassword"
+                    value={values.newPassword}
+                    required
+                    obscured
+                    readOnly={false}
+                    placeholder="enter new password"
+                    onChange={handleChange}
+                  />
 
                   <button
                     type="submit"
                     className={`w-full bg-[#FF433C] px-[26px] py-[18px] text-white rounded-[4px] ${!values.oldPassword || !values.newPassword ? "opacity-[0.2] cursor-not-allowed" : ""}`}
                     disabled={!values.oldPassword || !values.newPassword}
                   >
-                    Send link
+                    Save
                   </button>
                 </form>
               )}

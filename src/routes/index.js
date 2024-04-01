@@ -5,6 +5,7 @@ import Layout from "layout/DashboardLayout/Layout";
 import MainLayout from "layout/MainLayout";
 import { Suspense, lazy } from "react";
 import { useRoutes } from "react-router-dom";
+import GuestLayout from "layout/GuestpageLayout/TheLayout";
 
 const Loadable = (Component) => (props) => {
   return (
@@ -98,7 +99,11 @@ export default function Router() {
     },
     {
       path: "/",
-      element: <MainLayout />,
+      element: (
+        <GuestGuard>
+          <GuestLayout />
+        </GuestGuard>
+      ),
       children: [
         {
           element: <Home />,
@@ -120,7 +125,9 @@ const Profile = Loadable(lazy(() => import("../pages/Profile")));
 const BankDetails = Loadable(lazy(() => import("../pages/Bank")));
 const Security = Loadable(lazy(() => import("../pages/Security")));
 const Support = Loadable(lazy(() => import("../pages/Support")));
-const Home = Loadable(lazy(() => import("../pages/Home")));
+const Home = Loadable(lazy(() => import("../pages/GuestPage/Home")));
+const About = Loadable(lazy(() => import("../pages/GuestPage/About")));
+const Features = Loadable(lazy(() => import("../pages/GuestPage/Features")));
 const Login = Loadable(lazy(() => import("../pages/Login")));
 const Register = Loadable(lazy(() => import("../pages/Register")));
 const ResetPassword = Loadable(lazy(() => import("../pages/ResetPassword")));

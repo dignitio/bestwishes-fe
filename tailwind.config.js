@@ -6,6 +6,7 @@ module.exports = {
       fontFamily: {
         lexend: ["Lexend", "sans-serif"],
         nunito: ["Nunito", "sans-serif"],
+        dancing: ["Dancing Script", "cursive"],
       },
       colors: {
         primary: "#271F6B",

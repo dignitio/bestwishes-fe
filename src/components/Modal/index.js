@@ -2,7 +2,7 @@ import ReactModal from "react-modal";
 import { ReactComponent as Closeicon } from "assets/icons/close.svg";
 import "./modal.css";
 
-const Modal = ({ open, onClose, customClass, width, children, ...props }) => {
+const Modal = ({ open, onClose, customClass, width, children, isWishList, ...props }) => {
   const modalCustomStyles = {};
   if (width) {
     modalCustomStyles.width = `${width}px`;
