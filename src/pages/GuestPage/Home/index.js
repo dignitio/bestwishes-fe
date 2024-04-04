@@ -161,7 +161,7 @@ function Home() {
               </div>
             ))}
           </div>
-          <div className="bg-white lg:px-[40px] lg:py-[28px] px-[19px] py-[24px] rounded-md flex flex-col gap-[32px] mb-[100px]">
+          <div className="bg-white lg:px-[40px] lg:py-[28px] px-[19px] py-[24px] rounded-md flex flex-col gap-[32px] lg:mb-[100px]">
             <h1 className="text-[24px]">Send a Tribute</h1>
 
             <Formik
