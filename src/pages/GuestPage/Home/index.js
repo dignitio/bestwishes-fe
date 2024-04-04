@@ -209,7 +209,7 @@ function Home() {
                         className="cursor-pointer w-4 absolute translate-y-[150%] right-0 pr-[70px] leading-tight focus:outline-none focus:border-blue-500 opacity-0"
                         onChange={(e) => {
                           setFileUploaded(true);
-                          console.log(e.target.files);
+                          values.memories = e.target.files;
                         }}
                       />
                     </div>
