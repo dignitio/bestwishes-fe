@@ -34,12 +34,22 @@ export const AddItemsSchema = yup.object().shape({
   ),
 });
 
+export const AddItemsSchema2 = yup.object().shape({
+  items: yup.array().of(
+    yup.object().shape({
+      img: yup.mixed().required("Image is required"),
+      itemName: yup.string().required("please enter an item name "),
+      price: yup.number().required("please enter an amount"),
+    }),
+  ),
+});
+
 export const wishlistSchema = yup.object().shape({
-  wishListTitle: yup.string().required("Click here to enter Wishlist title"),
   wishListCategory: yup
     .string()
     .oneOf(["birthdays", "anniversary", "burials", "other"], "Invalid Category")
     .required("Click here to enter type of tribute"),
+  wishListTitle: yup.string().required("Click here to enter Wishlist title"),
   wishListDescription: yup
     .string()
     .max(65, "Must Write a Description")
@@ -54,10 +64,11 @@ export const wishlistSchema = yup.object().shape({
       return true;
     })
     .required("Please upload an Image"),
-  itemName: yup.string().required("Please enter an Item Name"),
-  price: yup
-    .number()
-    .required("Please enter a price")
-    .positive("Price must be a positive number")
-    .typeError("Price must be a number"),
+  items: yup.array().of(
+    yup.object().shape({
+      img: yup.mixed().required("Image is required"),
+      itemName: yup.string().required("please enter an item name "),
+      price: yup.number().required("please enter an amount"),
+    }),
+  ),
 });

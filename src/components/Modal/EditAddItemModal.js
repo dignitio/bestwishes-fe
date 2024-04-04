@@ -1,44 +1,46 @@
+/* eslint-disable object-shorthand */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-
-import { Form, Formik } from "formik";
-import CustomInput from "components/CustonFormInputs/CustomInput";
-import CustomPriceInput from "components/CustomFormInputs/CustomPriceInput";
-import { AddItemsSchema2 } from "Schemas";
+import { AddItemsSchema } from "Schemas";
 import { motion } from "framer-motion";
+import { Form, Formik } from "formik";
+import CustomInput from "components/CustomFormInputs/CustomInput";
+import CustomPriceInput from "components/CustomFormInputs/CustomPriceInput";
+import Button from "components/Button";
 import { ReactComponent as UploadIcon } from "../../assets/icons/picture-upload.svg";
 
-const onSubmit = async (values) => {
-  console.log(values);
-};
 const initialValues = {
   items: [{ img: "", itemName: "", price: "" }],
 };
 
-function AdditemsModal() {
+function AddItemModal({ wishlistLength }) {
+  const onSubmit = (values) => {
+    console.log(values);
+  };
+
   return (
-    <Formik initialValues={initialValues} validationSchema={AddItemsSchema2} onSubmit={onSubmit}>
+    <Formik initialValues={initialValues} validationSchema={AddItemsSchema} onSubmit={onSubmit}>
       {({ values, setFieldValue }) => (
-        <Form style={{ zIndex: 10 }} className=" !z-50 ">
+        <Form style={{ zIndex: 10 }} className="!z-50">
           <div className="flex flex-col gap-4 mb-4">
-            <div className=" max-h-96 overflow-y-auto">
+            <div className="max-h-96 overflow-y-auto">
               {values.items.map((item, index) => (
                 <div key={index} className="w-full py-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                   <fieldset
-                    className={`relative h-[298px] md:max-h-[298px] md: flex flex-col justify-end items-start border-2 border-solid border-[#1E1B1A] rounded-lg  cursor-pointer rounded-5 bg-white mt-1`}
+                    className={`relative h-full max-h-[340px] flex flex-col justify-end items-start border-2 border-solid border-[#1E1B1A] rounded-lg  cursor-pointer rounded-5 bg-white mt-1`}
                   >
                     {item.img ? (
                       <img
                         src={URL.createObjectURL(item.img)}
-                        className=" w-full h-full object-cover "
+                        className="w-full h-full object-cover"
                         alt="Cover pic"
                       />
                     ) : (
-                      <div className="relative w-full h-full ">
+                      <div className="relative w-full h-full">
                         <input
                           id={`items.${index}.img`}
                           type="file"
                           accept="image/*"
-                          className=" opacity-0 w-full h-full z-30 "
+                          className="opacity-0 w-full h-full z-30"
                           onChange={(event) => {
                             const file = event.currentTarget.files[0];
                             setFieldValue(`items.${index}.img`, file);
@@ -54,7 +56,7 @@ function AdditemsModal() {
                       </div>
                     )}
                   </fieldset>
-                  <div className=" flex flex-col gap-2 ">
+                  <div className="flex flex-col gap-2">
                     <CustomInput
                       key={`items.${index}.itemName`}
                       label="Item Name"
@@ -81,11 +83,7 @@ function AdditemsModal() {
                             if (values.items.length > 1) {
                               setFieldValue(`items`, values.items.slice(1));
                             } else {
-                              setFieldValue(`items.0`, {
-                                img: "",
-                                itemName: "",
-                                price: "",
-                              });
+                              setFieldValue(`items.0`, { img: "", itemName: "", price: "" });
                             }
                           }}
                           type="button"
@@ -119,46 +117,33 @@ function AdditemsModal() {
                 </div>
               ))}
             </div>
-            <div className="flex flex-col items-center justify-center md:flex-row md:items-center md:justify-between">
-              <p className="text-primary text-lg font-medium cursor-pointer mb-4 lg:mb-0 lg:mr-4">
-                Generate image with AI
-              </p>
-              <div className="mb-4">
-                {values.items.length >= 10 ? (
-                  <p className="text-red-500">You have reached the maximum limit of 10 items.</p>
-                ) : (
-                  <motion.div
-                    whileHover={{ scale: 0.95 }}
-                    class="bg-white text-primary flex items-center justify-center font-bold text-xl border border-gray-700 hover:cursor-pointer"
-                    onClick={() => {
-                      const newItem = { img: "", itemName: "", price: "" };
-                      setFieldValue(`items.${values.items.length}`, newItem);
-                    }}
-                  >
-                    Add more Items
-                  </motion.div>
-                )}
+            {wishlistLength + values.items.length >= 10 ? (
+              <p className="text-red-500 mt-4">You have reached the maximum limit of 10 items.</p>
+            ) : (
+              <motion.div
+                whileHover={{ scale: 0.95 }}
+                className="bg-white text-primary font-bold text-xl mt-10 border border-gray-700 flex justify-center items-center hover:cursor-pointer"
+                onClick={() => {
+                  const newItem = { img: "", itemName: "", price: "" };
+                  setFieldValue(`items.${values.items.length}`, newItem);
+                }}
+              >
+                Add more Items
+              </motion.div>
+            )}
+            {values.items.length >= 1 && (
+              <div className="flex justify-between">
+                <button className="bg-white h-10 rounded py-0 px-8 text-primary mt-[28px] border border-primary hover:bg-primary hover:text-white">
+                  Save to Draft
+                </button>
+                <Button
+                  type="submit"
+                  className="bg-primary text-white mt-[28px] border border-gray-700"
+                >
+                  Save Item
+                </Button>
               </div>
-            </div>
-
-            <div className=" w-full flex flex-col md:grid md:grid-cols-2 gap-4 ">
-              <motion.button
-                whileHover={{ scale: 0.98 }}
-                className={` py-3 text-primary border border-primary rounded-md md:w-[167px] hover:bg-primary hover:text-white
-                  ${values.itemName && values.price && values.img ? " bg-white" : " bg-white/50 pointer-events-none"}
-                  `}
-              >
-                Draft
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 0.98 }}
-                className={` py-3 text-white rounded-md hover:bg-white hover:text-primary
-                  ${values.itemName && values.price && values.img ? " bg-primary border border-primary" : " bg-primary/50 pointer-events-none"}
-                  `}
-              >
-                Publish Wishlist
-              </motion.button>
-            </div>
+            )}
           </div>
         </Form>
       )}
@@ -166,4 +151,4 @@ function AdditemsModal() {
   );
 }
 
-export default AdditemsModal;
+export default AddItemModal;
