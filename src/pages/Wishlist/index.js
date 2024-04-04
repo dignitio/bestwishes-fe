@@ -28,10 +28,6 @@ import { ReactComponent as LeftArrowIcon } from "../../assets/icons/left.svg";
 import emptyWishlist from "../../assets/images/wishlist-empty-state-image.png";
 import DuplicateWishlist from "./DuplicateWishlist";
 
-const onSubmit = async (values) => {
-  console.log(values);
-};
-
 function Wishlist() {
   const [modeValue, setModeValue] = useState();
   const switchMode = (wishlistID) => {
@@ -66,7 +62,10 @@ function Wishlist() {
           whileHover={{ scale: 0.95 }}
           className="bg-white text-primary px-5 py-3 md:mr-6 md:mb-6 w-full md:w-auto  rounded-md self-center border border-primary outline-none hover:bg-primary hover:text-white"
           type="button"
-          onClick={() => setOpen(!open)}
+          onClick={() => {
+            setOpen(true);
+            setActiveStep(0);
+          }}
         >
           {" "}
           Create Wishlist +
@@ -215,7 +214,12 @@ function Wishlist() {
             items: [{ img: "", itemName: "", price: "" }],
           }}
           validationSchema={wishlistSchema}
-          onSubmit={onSubmit}
+          onSubmit={(values, { resetForm }) => {
+            console.log("Form submitted with values:", values);
+            setOpen(false);
+
+            resetForm();
+          }}
         >
           {({ values, setFieldValue, isValid }) => (
             <Form style={{ zIndex: 10 }} className=" !z-50 ">
@@ -224,16 +228,25 @@ function Wishlist() {
                 <div className=" flex flex-col gap-4 ">
                   <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
                     <fieldset
-                      className={`relative h-[200px] md:h-full flex flex-col justify-end items-start border-2 border-solid border-primary rounded-lg  cursor-pointer rounded-5 bg-white mt-1`}
+                      className={`relative h-[200px] md:h-full md:max-h-[460px] flex flex-col justify-end items-start border-2 border-solid border-primary rounded-lg  cursor-pointer rounded-5 bg-white `}
                     >
                       {values.coverImage ? (
-                        <img
-                          src={URL.createObjectURL(values.coverImage)}
-                          className=" w-full h-full object-cover "
-                          alt="Cover pic"
-                        />
+                        <div className=" relative w-full h-full rounded-lg ">
+                          <button
+                            type="button"
+                            className=" font-bold text-2xl text-red-500 z-30 absolute top-5 right-5 "
+                            onClick={() => setFieldValue("coverImage", null)}
+                          >
+                            X
+                          </button>
+                          <img
+                            src={URL.createObjectURL(values.coverImage)}
+                            className=" w-full h-full object-cover rounded-lg "
+                            alt="Cover pic"
+                          />
+                        </div>
                       ) : (
-                        <div className="relative w-full h-full ">
+                        <div className="relative w-full h-full rounded-lg ">
                           <input
                             id="coverImage"
                             type="file"
@@ -325,14 +338,24 @@ function Wishlist() {
                         className="w-full py-4 grid grid-cols-1 md:grid-cols-2 gap-4"
                       >
                         <fieldset
-                          className={`relative h-[298px] md:max-h-[298px] md: flex flex-col justify-end items-start border-2 border-solid border-[#1E1B1A] rounded-lg  cursor-pointer rounded-5 bg-white mt-1`}
+                          className={`relative h-full max-h-[298px] flex flex-col justify-end items-start border-2 border-solid border-[#1E1B1A] rounded-lg  cursor-pointer rounded-5 bg-white `}
                         >
                           {item.img ? (
-                            <img
-                              src={URL.createObjectURL(item.img)}
-                              className=" w-full h-full object-cover "
-                              alt="Cover pic"
-                            />
+                            <div className="w-full rounded-lg h-full relative ">
+                              <button
+                                type="button"
+                                className=" font-bold text-2xl text-red-500 z-30 absolute top-5 right-5 "
+                                onClick={() => setFieldValue(`items.${index}.img`, null)}
+                              >
+                                X
+                              </button>
+
+                              <img
+                                src={URL.createObjectURL(item.img)}
+                                className=" w-full h-full rounded-lg object-cover "
+                                alt="Cover pic"
+                              />
+                            </div>
                           ) : (
                             <div className="relative w-full h-full ">
                               <input
