@@ -62,7 +62,7 @@ function Home() {
               Donate
             </button>
             <button
-              className="font-[14px] bg-[#FF433C] p-2 rounded-md"
+              className="font-[14px] bg-primary p-2 rounded-md"
               onClick={() => setOpen(!open)}
             >
               Wishlist
@@ -214,6 +214,8 @@ function Home() {
                       />
                     </div>
 
+                    
+
                     {/* <div className="border border-[#8593AD] rounded-md py-[18px] px-[26px] flex">
                       
                     </div> */}
@@ -221,8 +223,8 @@ function Home() {
                     <button
                       type="submit"
                       // onClick={() => handleReset()}
-                      className={`w-full bg-[#FF433C] px-[26px] py-[18px] text-white rounded-[4px] hidden md:block ${!values.fullName || !values.memories || !values.Tribute || fileUploaded === false ? "opacity-[0.2] cursor-not-allowed" : ""}`}
-                      // disabled={!values.fullName || !values.memories || !values.Tribute || fileUploaded === false}
+                      className={`w-full bg-primary px-[26px] py-[18px] text-white rounded-[4px] hidden md:block ${!values.fullName || !values.memories || !values.Tribute ? "opacity-[0.2] cursor-not-allowed" : ""}`}
+                      disabled={!values.fullName || !values.memories || !values.Tribute}
                     >
                       Contribute
                     </button>
@@ -235,7 +237,7 @@ function Home() {
                       value={values.Tribute}
                       required
                       rows="4"
-                      className={` min-h-[90%] md:min-h-[90%] resize-none`}
+                      className={`h-[90%] md:-h-[90%] resize-none`}
                       onChange={handleChange}
                     />
                   </div>
@@ -243,8 +245,8 @@ function Home() {
                   <button
                     type="submit"
                     // onClick={() => handleReset()}
-                    className={`w-full bg-[#FF433C] px-[26px] py-[18px] text-white rounded-[4px] block md:hidden ${!values.fullName || !values.memories || !values.Tribute || fileUploaded === false ? "opacity-[0.2] cursor-not-allowed" : ""}`}
-                    // disabled={!values.fullName || !values.memories || !values.Tribute || fileUploaded === false }
+                    className={`w-full bg-primary px-[26px] py-[18px] text-white rounded-[4px] block md:hidden ${!values.fullName || !values.memories || !values.Tribute ? "opacity-[0.2] cursor-not-allowed" : ""}`}
+                    disabled={!values.fullName || !values.memories || !values.Tribute}
                   >
                     Contribute
                   </button>
@@ -329,7 +331,7 @@ function Home() {
         <WishListModal />
       </Modal>
       <Modal
-        className="w-[100%] md:w-[700px]"
+        className="w-[100%] bg-white md:w-[700px]"
         open={openCreateTribute}
         onClose={() => setOpenCreateTribute(!openCreateTribute)}
       >

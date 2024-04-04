@@ -80,7 +80,7 @@ const MainNavButton = () => {
                 </NavLink>
               </div>
               <div className="flex flex-col items-center gap-4 w-full">
-                <button type={Button} onClick={() => setIsLoggedIn(true)} className="w-full text-[#FF433C] text-center text-[14px] bg-white border border-[#FF433C] flex items-center rounded-md p-3 flex justify-center">
+                <button type={Button} onClick={() => setIsLoggedIn(true)} className="w-full text-primary text-center text-[14px] bg-white border border-primary flex items-center rounded-md p-3 flex justify-center">
                   <Link to="/login">Login</Link>
                 </button>
                 <button className="w-full bg-primary text-white hover:bg-red-500 rounded-md text-center text-[14px] flex items-center p-3 text-center flex justify-center">

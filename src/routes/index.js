@@ -7,10 +7,7 @@ import { Suspense, lazy } from "react";
 import { useRoutes } from "react-router-dom";
 import GuestLayout from "layout/GuestpageLayout/TheLayout";
 
-
 const Loadable = (Component) => (props) => {
- 
-
   return (
     <Suspense fallback={<div className="text-3xl text-slate-400 mt-8 ml-12">Loading...</div>}>
       <Component {...props} />
@@ -29,11 +26,11 @@ export default function Router() {
       ),
       children: [
         {
-          element: <Login/>,
+          element: <Login />,
           path: "login",
         },
         {
-          element: <Register/>,
+          element: <Register />,
           path: "register",
         },
         {
@@ -41,10 +38,9 @@ export default function Router() {
           path: "forgot-password",
         },
         {
-          element: <ResetPassword/>,
+          element: <ResetPassword />,
           path: "reset-password",
         },
-
       ],
     },
     {
@@ -70,6 +66,10 @@ export default function Router() {
         {
           element: <Wishlist />,
           path: "wishlist",
+        },
+        {
+          element: <EditWishlist />,
+          path: "wishlist/:id/edit",
         },
         {
           element: <CreateCard />,
@@ -101,7 +101,7 @@ export default function Router() {
       path: "/",
       element: (
         <GuestGuard>
-          <GuestLayout/>
+          <GuestLayout />
         </GuestGuard>
       ),
       children: [
@@ -109,14 +109,6 @@ export default function Router() {
           element: <Home />,
           index: true,
         },
-        {
-          element: <About />,
-          path: "about"
-        },
-        {
-          element: <Features />,
-          path: "features",
-        }
       ],
     },
   ]);
@@ -125,6 +117,7 @@ export default function Router() {
 const Dashboard = Loadable(lazy(() => import("../pages/Dashboard")));
 const Tribute = Loadable(lazy(() => import("../pages/Tribute")));
 const EditTribute = Loadable(lazy(() => import("../pages/EditTribute")));
+const EditWishlist = Loadable(lazy(() => import("../pages/EditWishlist")));
 const Wishlist = Loadable(lazy(() => import("../pages/Wishlist")));
 const CreateCard = Loadable(lazy(() => import("../pages/CreateCard")));
 const Settings = Loadable(lazy(() => import("../pages/Settings")));

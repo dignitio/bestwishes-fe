@@ -1,12 +1,4 @@
 import React, { useState } from "react";
-
-import {
-  Accordion,
-  AccordionItem,
-  AccordionItemHeading,
-  AccordionItemButton,
-  AccordionItemPanel,
-} from "react-accessible-accordion";
 import plus from "../../assets/images/add.png";
 import call from "../../assets/images/call.svg";
 import sms from "../../assets/images/sms.svg";
@@ -26,11 +18,11 @@ function Support() {
     },
     {
       Question: "What is bestwishes about?",
-      Answer: "sdfghjkl;iuytryguijklknbvbn",
+      Answer: "bnnbjhyuhjiojmkmkmojlijhuvbnb  bhb",
     },
     {
       Question: "What is bestwishes about?",
-      Answer: "sdfghjkl;iuytryguijklknbvbn",
+      Answer: "AAZSDCFVHIIOMJOKLM ,M YTCVUYHJHBGVG",
     },
     {
       Question: "What is bestwishes about?",
@@ -135,7 +127,7 @@ function Support() {
             <div className="bg-white p-3 flex flex-col gap-3" key={index}>
               <div className="flex justify-between" onClick={() => togglefaq(index)}>
                 <p>{faq.Question}</p>
-                <img src={plus} alt="plus" />
+                <img src={plus} alt="plus" className="cursor-pointer" />
               </div>
               {clickedQuestion === index && <p data-aos="fade-up">{faq.Answer}</p>}
             </div>
