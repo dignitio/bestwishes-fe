@@ -7,8 +7,8 @@ import WishItems from "layout/Lists/wishlist";
 import images from "layout/Lists/images";
 import CreateGuestTribute from "pages/GuestPage/CreateTribute";
 import CustomInput from "components/CustonFormInputs/CustomInput";
+import CustomTextArea from "components/CustonFormInputs/CustomTextArea";
 import WishListModal from "../wishlistModal";
-
 import rectangle from "../../../assets/images/rectangle.png";
 import tributeImage from "../../../assets/images/tributeimage.jpeg";
 import wishlistImage from "../../../assets/images/wishlistimage.jpeg";
@@ -18,6 +18,9 @@ function Home() {
   const [open, setOpen] = useState(false);
   const [openCreateTribute, setOpenCreateTribute] = useState(false);
   const [selectedWishlist, setSelectedWishlist] = useState();
+  const [fileUploaded, setFileUploaded] = useState(false);
+  const [expandText, setExpandText] = useState(false);
+  const [selectedContribution, setSelectedContribution] = useState(null);
 
   function handleModal(item) {
     setOpenCreateTribute(!openCreateTribute);
@@ -59,7 +62,7 @@ function Home() {
               Donate
             </button>
             <button
-              className="font-[14px] bg-[#FF433C] p-2 rounded-md"
+              className="font-[14px] bg-primary p-2 rounded-md"
               onClick={() => setOpen(!open)}
             >
               Wishlist
@@ -122,21 +125,43 @@ function Home() {
               <br />
             </p>
           </div>
-          <div className="bg-white lg:px-[40px] lg:py-[28px] px-[19px] py-[24px] rounded-md flex flex-col gap-[32px] h-[800px] overflow-y-scroll">
+          <div className="bg-white lg:px-[40px] lg:py-[28px] px-[19px] py-[24px] rounded-md flex flex-col gap-[32px] h-[700px] overflow-y-auto">
             <h1 className="text-[24px] font-bold">Contributions ({contributions.length})</h1>
-            {contributions.map((contribution) => (
-              <div className="lg:grid grid-cols-12 items-center">
+            {contributions.map((contribution, index) => (
+              <div key={index} className="lg:grid grid-cols-12 items-center">
                 <p className="md:col-span-2 xl:col-span-1 bg-gray-200 mb-3 w-14 h-14 max-sm:w-10 max-sm:h-10 max-lg:w-14 max-lg:h-14 rounded-full flex items-center max-sm:pt-2.5 text-center justify-center font-semibold mr-3 tracking-tighter text-base max-sm:text-sm max-lg:text-lg max-sm:block">
                   {contribution.initial}
                 </p>
                 <div className="md:col-span-10 xl:col-span-11">
                   <h4 className="text-[18px] font-bold">{contribution.fullName}</h4>
-                  <p className="leading-loose text-[16px]">{contribution.description}</p>
+                  {selectedContribution === index ? (
+                    <div className="flex flex-col gap-2">
+                      <p className="leading-loose text-[16px]">{contribution.description}</p>
+                      <div
+                        className="text-[#C2C9D6] cursor-pointer font-bold hover:font-medium hover:scale-80"
+                        onClick={() => setSelectedContribution(null)}
+                      >
+                        Show less
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex flex-col gap-2">
+                      <p className="leading-loose text-[16px] truncate">
+                        {contribution.description}
+                      </p>
+                      <div
+                        className="text-[#C2C9D6] cursor-pointer font-bold hover:font-medium hover:scale-80"
+                        onClick={() => setSelectedContribution(index)}
+                      >
+                        Read more
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
           </div>
-          <div className="bg-white lg:px-[40px] lg:py-[28px] px-[19px] py-[24px] rounded-md flex flex-col gap-[32px]">
+          <div className="bg-white lg:px-[40px] lg:py-[28px] px-[19px] py-[24px] rounded-md flex flex-col gap-[32px] lg:mb-[100px]">
             <h1 className="text-[24px]">Send a Tribute</h1>
 
             <Formik
@@ -183,10 +208,13 @@ function Home() {
                         id="memoriesUpload"
                         className="cursor-pointer w-4 absolute translate-y-[150%] right-0 pr-[70px] leading-tight focus:outline-none focus:border-blue-500 opacity-0"
                         onChange={(e) => {
-                          console.log(e.target.files);
+                          setFileUploaded(true);
+                          values.memories = e.target.files;
                         }}
                       />
                     </div>
+
+                    
 
                     {/* <div className="border border-[#8593AD] rounded-md py-[18px] px-[26px] flex">
                       
@@ -203,13 +231,13 @@ function Home() {
                   </div>
 
                   <div className="md:col-span-6 ">
-                    <CustomInput
+                    <CustomTextArea
                       label="Tribute"
-                      name="tribute"
+                      name="Tribute"
                       value={values.Tribute}
                       required
-                      type="textarea"
-                      placeholder=""
+                      rows="4"
+                      className={`h-[90%] md:-h-[90%] resize-none`}
                       onChange={handleChange}
                     />
                   </div>
@@ -268,7 +296,7 @@ function Home() {
                 </div>
               ))}
             </div>
-            <Button className="text-white font-bold">See more</Button>
+            <Button className="text-white font-bold mt-[30px]">See more</Button>
           </div>
           <div className="bg-white p-3 rounded-md flex flex-col gap-[17px] h-fit">
             <div className="flex flex-col gap-[12px] ">
