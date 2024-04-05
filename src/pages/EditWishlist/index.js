@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Modal from "components/Modal";
 import { motion } from "framer-motion";
-import AddItemModal from "components/Modal/AddItemModal";
+import AddItemModal from "components/Modal/EditAddItemModal";
 import wishListData from "layout/Lists/wishListData";
 import editWishlistdata from "layout/Lists/editWishlistdata";
 import { ReactComponent as LeftArrowIcon } from "../../assets/icons/left.svg";
