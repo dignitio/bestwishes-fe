@@ -19,13 +19,13 @@ code {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #fff; /* Color of the track */
+  background: #E3E2E9; /* Color of the track */
  
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #BFBFBF; /* Color of the handle */
+  background: #271F6B; /* Color of the handle */
 
 
 
@@ -33,5 +33,5 @@ code {
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; /* Color of the handle on hover */
+  background: #4f4a77; /* Color of the handle on hover */
 }

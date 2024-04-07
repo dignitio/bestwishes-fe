@@ -109,6 +109,14 @@ export default function Router() {
           element: <Home />,
           index: true,
         },
+        {
+          element: <Features />,
+          path: "features",
+        },
+        {
+          element: <About />,
+          path: "about",
+        }
       ],
     },
   ]);

@@ -7,12 +7,14 @@ import WishItems from "layout/Lists/wishlist";
 import images from "layout/Lists/images";
 import CreateGuestTribute from "pages/GuestPage/CreateTribute";
 import CustomInput from "components/CustonFormInputs/CustomInput";
-import CustomTextArea from "components/CustonFormInputs/CustomTextArea";
+import CustomTextArea from "components/CustomFormInputs/CustomTextArea";
 import WishListModal from "../wishlistModal";
+import ShareIcon from "../../../assets/icons/send.svg";
 import rectangle from "../../../assets/images/rectangle.png";
 import tributeImage from "../../../assets/images/tributeimage.jpeg";
 import wishlistImage from "../../../assets/images/wishlistimage.jpeg";
 import upload from "../../../assets/images/upload.svg";
+import gallery from "../../../assets/images/gallery.svg";
 
 function Home() {
   const [open, setOpen] = useState(false);
@@ -133,15 +135,21 @@ function Home() {
                   {contribution.initial}
                 </p>
                 <div className="md:col-span-10 xl:col-span-11">
-                  <h4 className="text-[18px] font-bold">{contribution.fullName}</h4>
+                  <div className="flex gap-2">
+                    <h4 className="text-[18px] font-bold">{contribution.fullName}</h4>
+                    <img src={gallery} alt="gallery icon"/>
+                  </div>
                   {selectedContribution === index ? (
                     <div className="flex flex-col gap-2">
                       <p className="leading-loose text-[16px]">{contribution.description}</p>
-                      <div
-                        className="text-[#C2C9D6] cursor-pointer font-bold hover:font-medium hover:scale-80"
-                        onClick={() => setSelectedContribution(null)}
-                      >
-                        Show less
+                      <div className="flex gap-2 items-center">
+                        <div
+                          className="text-[#C2C9D6] cursor-pointer font-bold hover:font-medium hover:scale-80"
+                          onClick={() => setSelectedContribution(null)}
+                        >
+                          Show less
+                        </div>
+                        <img src={ShareIcon} alt="share" />
                       </div>
                     </div>
                   ) : (
@@ -149,11 +157,14 @@ function Home() {
                       <p className="leading-loose text-[16px] truncate">
                         {contribution.description}
                       </p>
-                      <div
-                        className="text-[#C2C9D6] cursor-pointer font-bold hover:font-medium hover:scale-80"
-                        onClick={() => setSelectedContribution(index)}
-                      >
-                        Read more
+                      <div className="flex gap-2 items-center">
+                        <div
+                          className="text-[#C2C9D6] cursor-pointer font-bold hover:font-medium hover:scale-80"
+                          onClick={() => setSelectedContribution(index)}
+                        >
+                          Read more
+                        </div>
+                        <img src={ShareIcon} alt="share" />
                       </div>
                     </div>
                   )}
@@ -187,13 +198,15 @@ function Home() {
                       onChange={handleChange}
                     />
 
-                    <div className="relative flex">
+                    <label htmlFor="memoriesUpload" className="relative flex">
                       <CustomInput
                         label="Upload Memories"
                         name="memories"
                         value={values.memories}
                         className="mb-2"
                         required
+                        id="memoriesUpload"
+                        disabled
                         type="text"
                         placeholder="click here to upload images"
                         onChange={handleChange}
@@ -201,10 +214,12 @@ function Home() {
                       <img
                         src={upload}
                         alt="upload"
-                        className="cursor-pointer absolute translate-y-[170%] right-0 pr-4"
+                        className="cursor-pointer absolute translate-y-[170%] right-0 pr-4 "
                       />
                       <input
                         type="file"
+                        multiple
+                        accept="image/jpeg, image/png, image/svg, image/gif, image/bmp, image/tiff, image/webp"
                         id="memoriesUpload"
                         className="cursor-pointer w-4 absolute translate-y-[150%] right-0 pr-[70px] leading-tight focus:outline-none focus:border-blue-500 opacity-0"
                         onChange={(e) => {
@@ -212,9 +227,7 @@ function Home() {
                           values.memories = e.target.files;
                         }}
                       />
-                    </div>
-
-                    
+                    </label>
 
                     {/* <div className="border border-[#8593AD] rounded-md py-[18px] px-[26px] flex">
                       
