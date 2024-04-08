@@ -11,14 +11,22 @@ import { ReactComponent as LogOutIcon } from "../../assets/icons/login.svg";
 
 function Sidebar() {
   return (
-    <div className="bg-white flex flex-col max-lg:hidden items-center py-4 px-6">
+    <div className="bg-white flex flex-col h-full max-lg:hidden items-center py-4 px-6">
       <div className="w-20 mt-4 mb-16 mr-5">
         <img src={logo} alt="logo" />
       </div>
 
       <div className="text-sm">
         <div className="mb-3">
-          <NavLink to={PATH_DASHBOARD.root} end className={({ isActive }) => isActive ? "flex items-end py-2.5 px-3 bg-gradient-to-r from-gray-200 to-white" : "flex items-end py-2.5 px-3 hover:bg-gradient-to-r from-gray-200 to-white"}>
+          <NavLink
+            to={PATH_DASHBOARD.root}
+            end
+            className={({ isActive }) =>
+              isActive
+                ? "flex items-end py-2.5 px-3 bg-gradient-to-r from-gray-200 to-white"
+                : "flex items-end py-2.5 px-3 hover:bg-gradient-to-r from-gray-200 to-white"
+            }
+          >
             <span className="mr-2">
               <CategoryIcon />
             </span>
@@ -26,7 +34,14 @@ function Sidebar() {
           </NavLink>
         </div>
         <div className="mb-3">
-          <NavLink to={PATH_DASHBOARD.tribute} className={({ isActive }) => isActive ? "flex items-end py-2.5 px-3 bg-gradient-to-r from-gray-200 to-white" : "flex items-end py-2.5 px-3 hover:bg-gradient-to-r from-gray-200 to-white"}>
+          <NavLink
+            to={PATH_DASHBOARD.tribute}
+            className={({ isActive }) =>
+              isActive
+                ? "flex items-end py-2.5 px-3 bg-gradient-to-r from-gray-200 to-white"
+                : "flex items-end py-2.5 px-3 hover:bg-gradient-to-r from-gray-200 to-white"
+            }
+          >
             <span className="mr-2">
               <LayerIcon />
             </span>
@@ -34,7 +49,14 @@ function Sidebar() {
           </NavLink>
         </div>
         <div className="mb-3">
-          <NavLink to={PATH_DASHBOARD.wishlist} className={({ isActive }) => isActive ? "flex items-end py-2.5 px-3 bg-gradient-to-r from-gray-200 to-white" : "flex items-end py-2.5 px-3 hover:bg-gradient-to-r from-gray-200 to-white"}>
+          <NavLink
+            to={PATH_DASHBOARD.wishlist}
+            className={({ isActive }) =>
+              isActive
+                ? "flex items-end py-2.5 px-3 bg-gradient-to-r from-gray-200 to-white"
+                : "flex items-end py-2.5 px-3 hover:bg-gradient-to-r from-gray-200 to-white"
+            }
+          >
             <span className="mr-2">
               <NoteIcon />
             </span>
@@ -42,7 +64,14 @@ function Sidebar() {
           </NavLink>
         </div>
         <div className="mb-3">
-          <NavLink to={PATH_DASHBOARD.createCard} className={({ isActive }) => isActive ? "flex items-end py-2.5 px-3 bg-gradient-to-r from-gray-200 to-white" : "flex items-end py-2.5 px-3 hover:bg-gradient-to-r from-gray-200 to-white"}>
+          <NavLink
+            to={PATH_DASHBOARD.createCard}
+            className={({ isActive }) =>
+              isActive
+                ? "flex items-end py-2.5 px-3 bg-gradient-to-r from-gray-200 to-white"
+                : "flex items-end py-2.5 px-3 hover:bg-gradient-to-r from-gray-200 to-white"
+            }
+          >
             <span className="mr-2">
               <EditIcon />
             </span>
@@ -50,7 +79,14 @@ function Sidebar() {
           </NavLink>
         </div>
         <div className="mb-3">
-          <NavLink to={PATH_DASHBOARD.settings} className={({ isActive }) => isActive ? "flex items-end py-2.5 px-3 bg-gradient-to-r from-gray-200 to-white" : "flex items-end py-2.5 px-3 hover:bg-gradient-to-r from-gray-200 to-white"}>
+          <NavLink
+            to={PATH_DASHBOARD.settings}
+            className={({ isActive }) =>
+              isActive
+                ? "flex items-end py-2.5 px-3 bg-gradient-to-r from-gray-200 to-white"
+                : "flex items-end py-2.5 px-3 hover:bg-gradient-to-r from-gray-200 to-white"
+            }
+          >
             <span className="mr-2">
               <GearIcon />
             </span>
@@ -58,7 +94,14 @@ function Sidebar() {
           </NavLink>
         </div>
         <div className="mb-3">
-          <NavLink to={PATH_DASHBOARD.support} className={({ isActive }) => isActive ? "flex items-end py-2.5 px-3 bg-gradient-to-r from-gray-200 to-white" : "flex items-end py-2.5 px-3 hover:bg-gradient-to-r from-gray-200 to-white"}>
+          <NavLink
+            to={PATH_DASHBOARD.support}
+            className={({ isActive }) =>
+              isActive
+                ? "flex items-end py-2.5 px-3 bg-gradient-to-r from-gray-200 to-white"
+                : "flex items-end py-2.5 px-3 hover:bg-gradient-to-r from-gray-200 to-white"
+            }
+          >
             <span className="mr-2">
               <SupportIcon />
             </span>

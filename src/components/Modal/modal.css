@@ -18,7 +18,7 @@
   animation: Transisition 0.2s ease-in-out;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  z-index: 99999999;
+  z-index: 99999999!important;
 }
 .modal::-webkit-scrollbar {
   display: none;
@@ -44,8 +44,19 @@
     margin-bottom: 0;
     overflow-y: scroll;
     border-bottom: 0;
+    position: relative;
+    bottom: 0;
+    border-radius: 
+    40px 0px 0px 0px;
+  }
+
+  .overlay{
+    justify-content: flex-end;
+    
   }
 }
+
+
 
 .header {
   display: flex;

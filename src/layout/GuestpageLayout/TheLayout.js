@@ -4,9 +4,9 @@ import Nav from "./navigationBar";
 
 function GuestLayout() {
   return (
-    <div className="bg-[#D9D9D9] font-lexend w-[100%]">
-      <Nav/>
-      <main className="w-full h-screen p-3 overflow-hidden">
+    <div className="bg-[#F3F4F6] w-[100%]">
+      <Nav />
+      <main className="w-full pb-20  py-3 ">
         <Outlet />
       </main>
     </div>

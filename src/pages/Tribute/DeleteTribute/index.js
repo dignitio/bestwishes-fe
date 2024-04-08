@@ -1,10 +1,11 @@
 import Button from "components/Button";
 import DeleteDropdown from "components/DeleteDropdown";
 import { useState } from "react";
-import { ReactComponent as TrashIcon } from "../../../assets/icons/trash.svg"
-import { ReactComponent as HideIcon } from "../../../assets/icons/eye-slash.svg"
+import { ReactComponent as TrashIcon } from "../../../assets/icons/trash.svg";
+import { ReactComponent as HideIcon } from "../../../assets/icons/eye-slash.svg";
 
 function DeleteTribute() {
+  
     const [open , setOpen] = useState(false)
     return ( 
         <div className="max-w-lg max-sm:max-w-[23em] mx-auto">
@@ -31,8 +32,19 @@ function DeleteTribute() {
                     No, Cancel
                 </Button>
             </div>
-        </div>
-     );
+            <div className="flex items-center my-1 cursor-pointer hover:bg-gray-100 pl-2">
+              <HideIcon className="w-3 mb-0.5 mr-1" />
+              <p>Hide Tribute</p>
+            </div>
+          </div>
+        </DeleteDropdown>
+
+        <Button type="button" className="h-9 max-lg:h-8 max-sm:h-7">
+          No, Cancel
+        </Button>
+      </div>
+    </div>
+  );
 }
 
 export default DeleteTribute;
