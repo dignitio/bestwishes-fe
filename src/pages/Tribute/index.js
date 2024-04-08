@@ -29,7 +29,7 @@ function TributeContributions() {
                     </div>
                     {contribution.showDeleteIcon && <TrashIcon className={isHovered ? "w-6 h-7 max-md:w-5 max-md:h-6 cursor-pointer" : "w-4 hidden"}/>}
                 </div>
-            ))}
+            ))};
            
         </div>
      );
