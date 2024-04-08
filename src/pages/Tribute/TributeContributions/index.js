@@ -1,17 +1,18 @@
 import { useState } from "react";
 import contributions from "layout/Lists/contributions";
-import { ReactComponent as TrashIcon } from "../../../assets/icons/trash.svg";
+import { ReactComponent as TrashIcon } from "../../../assets/icons/trash.svg"
+
 
 function TributeContributions() {
-  const [isHovered, setIsHovered] = useState(false);
-  const showDeleteIcon = (id) => {
-    setIsHovered(true);
-    contributions[id - 1].showDeleteIcon = true;
-  };
-  const hideDeleteIcon = (id) => {
-    setIsHovered(false);
-    contributions[id - 1].showDeleteIcon = false;
-  };
+    const [isHovered, setIsHovered] = useState(false)
+    const showDeleteIcon = (id) => {
+        setIsHovered(true)
+        contributions[id-1].showDeleteIcon = true
+    }
+    const hideDeleteIcon = (id) => {
+        setIsHovered(false)
+        contributions[id-1].showDeleteIcon = false
+    }
 
     return ( 
         <div className="mb-6 h-[35em] max-lg:h-[30em] overflow-y-sroll max-sm:w-80 max-sm:mx-auto mt-2">
@@ -28,11 +29,9 @@ function TributeContributions() {
                     </div>
                     {contribution.showDeleteIcon && <TrashIcon className={isHovered ? "w-6 h-7 max-md:w-5 max-md:h-6 cursor-pointer" : "w-4 hidden"}/>}
                 </div>
-            ))}
+            ))};
         </div>
-      ))}
-    </div>
-  );
+     );
 }
 
 export default TributeContributions;
