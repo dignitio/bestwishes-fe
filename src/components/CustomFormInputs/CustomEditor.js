@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useField } from "formik";
-import ReactQuill from "react-quill";
+import ReactQuill from 'react-quill';
 import "react-quill/dist/quill.snow.css";
 
 const Myeditor = ({ label, ...props }) => {

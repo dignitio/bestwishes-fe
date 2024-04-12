@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import plus from "../../assets/images/add.png";
-import call from "../../assets/images/call.svg";
-import sms from "../../assets/images/sms.svg";
-import fb from "../../assets/images/facebook.png";
-import instagram from "../../assets/images/instagram.png";
-import tiktok from "../../assets/images/tik_tok.svg";
-import twitter from "../../assets/images/twitter.svg";
-import whatsapp from "../../assets/images/whatsapp.svg";
-import youtube from "../../assets/images/youtube.svg";
-import { ReactComponent as SearchIcon } from "../../assets/icons/search.svg";
+import plus from "assets/images/add.png";
+import call from "assets/images/call.svg";
+import sms from "assets/images/sms.svg";
+import fb from "assets/images/facebook.png";
+import instagram from "assets/images/instagram.png";
+import tiktok from "assets/images/tik_tok.svg";
+import twitter from "assets/images/twitter.svg";
+import whatsapp from "assets/images/whatsapp.svg";
+import youtube from "assets/images/youtube.svg";
+import { ReactComponent as SearchIcon } from "assets/icons/search.svg";
 
 function Support() {
   const FAQs = [

@@ -3,8 +3,8 @@ import { PATH_DASHBOARD } from "routes/path";
 import React, { useState } from "react";
 import CustomInput from "components/CustonFormInputs/CustomInput";
 import { Formik } from "formik";
-import user from "../../assets/icons/edit-profile.svg";
-import exportIcon from "../../assets/icons/Export.svg";
+import user from "assets/icons/edit-profile.svg";
+import exportIcon from "assets/icons/Export.svg";
 
 function Profile() {
   const [isActive, setIsActive] = useState(false);

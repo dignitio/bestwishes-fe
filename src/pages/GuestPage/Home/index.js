@@ -8,13 +8,13 @@ import images from "layout/Lists/images";
 import CreateGuestTribute from "pages/GuestPage/CreateTribute";
 import CustomInput from "components/CustonFormInputs/CustomInput";
 import CustomTextArea from "components/CustomFormInputs/CustomTextArea";
-import WishListModal from "../wishlistModal";
-import ShareIcon from "../../../assets/icons/send.svg";
-import rectangle from "../../../assets/images/rectangle.png";
-import tributeImage from "../../../assets/images/tributeimage.jpeg";
-import wishlistImage from "../../../assets/images/wishlistimage.jpeg";
-import upload from "../../../assets/images/upload.svg";
-import gallery from "../../../assets/images/gallery.svg";
+import WishListModal from 'pages/GuestPage/wishlistModal';
+import ShareIcon from "assets/icons/send.svg";
+import rectangle from "assets/images/rectangle.png";
+import tributeImage from "assets/images/tributeimage.jpeg";
+import wishlistImage from "assets/images/wishlistimage.jpeg";
+import upload from "assets/images/upload.svg";
+import gallery from "assets/images/gallery.svg";
 
 function Home() {
   const [open, setOpen] = useState(false);
@@ -293,7 +293,6 @@ function Home() {
               {WishItems.map((items) => (
                 <div
                   className="bg-[#F0F1F5] rounded-xl cursor-pointer"
-                  onClick={() => handleModal(items)}
                 >
                   <img src={items.image} className="rounded-t-xl" alt="wish" />
                   <div className="flex items-center p-[12px] justify-between">
