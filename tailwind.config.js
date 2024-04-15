@@ -11,9 +11,15 @@ module.exports = {
       },
        colors: 
     {
-      primary: "#FF433C",
+      primary: "#271F6B",
+      errorColor: "#FF433C",
+      removeButton: "#607D8B",
       white: "#fff",
-      OauthButton: "#E8E8E8"
+      OauthButton: "#E8E8E8",
+      Draft: "#1061B1",
+      bgWalletBalanceFigure: "#1061B1",
+      bgWalletBalance: "#465C86",
+      hoverColor: "#271F6B30"
     },
     }
   },

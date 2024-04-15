@@ -36,7 +36,7 @@ const NavMenuButton = () => {
             <div className="max-sm:text-sm max-md:text-lg max-sm:-ml-4 -ml-8">
                 <img src={logo} alt='logo'  className='max-sm:w-16 max-sm:ml-12 max-sm:mb-8 mb-12 max-lg:mx-auto'/>
                 <div className="mb-6">
-                    <NavLink to={PATH_DASHBOARD.root} className={({ isActive }) => isActive ? "flex max-sm:items-end max-lg:items-center py-2.5 px-4 bg-gradient-to-r from-gray-200 to-white" : "flex max-sm:items-end max-lg:items-center py-2.5 px-4 hover:bg-gradient-to-r from-gray-200 to-white"}>
+                    <NavLink to={PATH_DASHBOARD.root} end className={({ isActive }) => isActive ? "flex max-sm:items-end max-lg:items-center py-2.5 px-4 bg-gradient-to-r from-gray-200 to-white" : "flex max-sm:items-end max-lg:items-center py-2.5 px-4 hover:bg-gradient-to-r from-gray-200 to-white"}>
                         <span className="mr-2">
                         <CategoryIcon className='w-6 h-6 max-sm:w-4 max-sm:h-4' />
                         </span>
@@ -52,7 +52,7 @@ const NavMenuButton = () => {
                     </NavLink>
                 </div>
                 <div className="mb-6">
-                    <NavLink to={PATH_DASHBOARD.createCard} className={({ isActive }) => isActive ? "flex max-sm:items-end max-lg:items-center py-2.5 px-4 bg-gradient-to-r from-gray-200 to-white" : "flex max-sm:items-end max-lg:items-center py-2.5 px-4 hover:bg-gradient-to-r from-gray-200 to-white"}>
+                    <NavLink to={PATH_DASHBOARD.wishlist} className={({ isActive }) => isActive ? "flex max-sm:items-end max-lg:items-center py-2.5 px-4 bg-gradient-to-r from-gray-200 to-white" : "flex max-sm:items-end max-lg:items-center py-2.5 px-4 hover:bg-gradient-to-r from-gray-200 to-white"}>
                         <span className='mr-2'>
                         <NoteIcon className='w-6 h-6 max-sm:w-4 max-sm:h-4'/>
                         </span>

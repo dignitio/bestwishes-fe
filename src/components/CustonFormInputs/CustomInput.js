@@ -15,7 +15,7 @@ export default function CustomInput({ label, type, obscured, options, ...props }
         {label}
       </label>
       <div className="relative">
-      {type === "select" ? (
+        {type === "select" ? (
           <select
             id={props.id}
             {...field}
@@ -23,7 +23,6 @@ export default function CustomInput({ label, type, obscured, options, ...props }
             className={` w-full border text-[#8593AD]   ${
               meta.touched && meta.error ? "border-primary" : "border-[#8593AD]"
             }  rounded-md px-[26px] py-[18px] outline-none`}
-           
           >
             {options.map((option) => (
               <option key={option.value} value={option.value}>
@@ -32,16 +31,16 @@ export default function CustomInput({ label, type, obscured, options, ...props }
             ))}
           </select>
         ) : (
-        <input
-          id={props.id}
-          {...field}
-          {...props}
-          type={viewPassword ? "text" : type}
-          className={` w-full border text-[#8593AD]   ${
-            meta.touched && meta.error ? "border-primary" : "border-[#8593AD]"
-          }  rounded-md px-[26px] py-[18px] outline-none`}
-          style={{ appearance: 'none', WebkitAppearance: 'none', MozAppearance: 'none' }}
-        />
+          <input
+            id={props.id}
+            {...field}
+            {...props}
+            type={viewPassword ? "text" : type}
+            className={` w-full border text-[#8593AD] md:text-[14px] text-[12px] ${
+              meta.touched && meta.error ? "border-errorColor" : "border-primary"
+            }  rounded-md px-[26px] py-[18px] outline-none`}
+            style={{ appearance: "none", WebkitAppearance: "none", MozAppearance: "none" }}
+          />
         )}
         {obscured && (
           <div
@@ -59,7 +58,7 @@ export default function CustomInput({ label, type, obscured, options, ...props }
           </div>
         )}
       </div>
-      {meta.touched && meta.error && <div className="text-xs text-primary mt-1">{meta.error}</div>}
+      {meta.touched && meta.error && <div className="text-xs text-errorColor mt-1">{meta.error}</div>}
     </div>
   );
 }

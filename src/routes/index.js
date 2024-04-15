@@ -65,7 +65,7 @@ export default function Router() {
         },
         {
           element: <EditTribute />,
-          path: "tribute/edit",
+          path: "tribute/:id/edit",
         },
         {
           element: <Wishlist />,

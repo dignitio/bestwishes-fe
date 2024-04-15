@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import userDetails from "layout/Lists/userDetails";
 import activities from "layout/Lists/activities";
 // import Button from "components/Button";
+import SwitchButton from "components/Switch";
 import { ReactComponent as XCircleIcon } from "../../assets/icons/Xcircle.svg";
 import { ReactComponent as SubtractIcon } from "../../assets/icons/Subtract.svg";
 import { ReactComponent as SwitchIcon } from "../../assets/icons/switch.svg";
@@ -9,8 +11,8 @@ import { ReactComponent as SendIcon } from "../../assets/icons/send.svg";
 import { ReactComponent as TrashIcon } from "../../assets/icons/trash.svg";
 import { ReactComponent as CircleIcon } from "../../assets/icons/circle.svg";
 
-function Dashboard() {
 
+function Dashboard() {
   return (
     <>
       <div className="pt-8 max-md:pt-6 max-lg:mb-5">
@@ -24,7 +26,7 @@ function Dashboard() {
           </div>
           <div className="flex items-center max-sm:ml-7 max-sm:mt-6 max-sm:mb-2">
             <Link to="settings">
-              <span className="bg-red-500 hover:bg-red-500 text-white rounded-lg px-2 py-3 mr-8 text-base max-lg:px-4 max-md:py-3 max-lg:py-4 max-md:px-3">
+              <span className="bg-errorColor text-white rounded-lg px-2 py-3 mr-8 text-base max-lg:px-4 max-md:py-3 max-lg:py-4 max-md:px-3">
                 Complete profile
               </span>
             </Link>
@@ -63,9 +65,12 @@ function Dashboard() {
                     <div className="flex items-center justify-between max-sm:items-end max-sm:mr-2 mr-3">
                       <div className="text-xl max-md:text-lg flex max-sm:mt-3 max-sm:items-center">
                         <h5 className="mb-1.5">{user.fullName} ||</h5>
-                        <p className="text-sky-600 pl-1.5 max-sm:pl-0.5 max-sm:mb-1">{user.nameLink}</p>
+                        <p className="text-sky-600 pl-3.5 max-sm:pl-0.5 max-sm:mb-1 max-sm:text-base">{user.nameLink}</p>
                       </div>
-                      <SwitchIcon className="mb-1 max-sm:w-7 max-sm:mb-0 max-lg:w-8 max-lg:h-8" />
+                      <div className="mb-2">
+                        <SwitchButton/>
+                      </div>
+                      
                     </div>
                     <div className="text-gray-500 text-base">
                       <p className="">Tribute type: {user.tributeType}</p>

@@ -1,7 +1,11 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable react/jsx-no-comment-textnodes */
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,} from "react-router-dom";
 import Modal from "components/Modal";
 import Dropdown from "components/Dropdown";
+import SwitchButton from "components/Switch";
 import tributeDetails from "layout/Lists/tributeDetails";
 import DeleteTribute from "./DeleteTribute";
 import DuplicateTribute from "./DuplicateTribute";
@@ -18,12 +22,6 @@ import { ReactComponent as CopyIcon } from "../../assets/icons/size.svg"
 
 function Tribute() {
     
-    const [modeValue, setModeValue] = useState()
-    const switchMode = (tributeId) => {
-        tributeDetails[tributeId - 1].publishedValue = !tributeDetails[tributeId - 1].publishedValue
-        setModeValue(prevMode => !prevMode)
-    }
-
     const [deleteModal, setDeleteModal] = useState(false);
     const [duplicateModal, setDuplicateModal] = useState(false);
     const [contributionModal, setContributionModal] = useState(false);
@@ -31,28 +29,27 @@ function Tribute() {
 
   return ( 
     <div className="pt-2">
-        <div className="flex items-center text-base text-gray-500 justify-end my-6 max-md:mt-3 pr-12 max-lg:pr-6 p-6">
+        <div className="flex items-center text-base text-gray-500 justify-end my-5 max-md:mt-3 pr-12 max-lg:pr-6 p-6">
             <FilterIcon />
             <p className="pl-1.5">Filter by: All</p>
         </div>
 
-        <div className="grid-cols-3 max-lg:grid-cols-2 max-w-screen-xl grid max-sm:block mt-9 mx-8 max-lg:mx-0 max-lg:w-full">
+        <div className="2xl:grid-cols-3 xl:grid-cols-2 max-lg:grid-cols-2 md:grid max-sm:block mt-9 mx-8 max-lg:mx-0 max-lg:w-full">
             {tributeDetails.map(tribute => (
-                <div className="bg-white mb-8 py-4 max-md:pt-5 px-4 max-lg:mx-4 mr-12 max-h-68 text-lg rounded-xl" key={tribute.id}>
+                <div className="bg-white mb-8 py-4 max-md:pt-5 px-3 max-lg:mx-4 mr-12 max-h-68 text-lg rounded-xl" key={tribute.id}>
                     <div className="flex items-center justify-between">
                         <p className="">{tribute.fullName} || {tribute.tributeType}</p>
                         {tribute.draft ? <p className="text-slate-400 text-base max-md:text-sm tracking-tight">Draft</p> :
-                            <button onClick={() => switchMode(tribute.id)} className={tribute.publishedValue ? "text-xs bg-green-600 flex justify-end items-center h-4 w-8 rounded-xl" : "text-xs bg-slate-500 flex justify-start h-3.5 w-7 rounded-xl"} >
-                                <p className={tribute.publishedValue ? "text-green-600" : "text-slate-500"}>.</p>
-                                <button type="button" className="toggler--slider">
-                                    <div className={tribute.publishedValue ? "w-3.5 h-3.5 bg-white text-white rounded-3xl" : "w-3.5 h-3.5 bg-white text-white rounded-3xl"}>o</div>
-                                </button>
-                                <p className={tribute.publishedValue ? "text-green-600" : "text-slate-500"}>.</p>
-                            </button>
+                            <div><SwitchButton /></div>
                         }
                     </div>
-                    <div className="bg-gray-300 my-3 rounded-md">
-                        <img src={tribute.photoSRC} alt={tribute.photoAlt} className="w-full object-cover my-3 h-52 rounded-lg"/>
+                    <div className="bg-gray-300 my-3 rounded-md xl:min-w-52 xl:min-h-52">
+                        <Link
+                            to={`/dashboard/tribute/${tribute.id}/edit`}
+                            key={tribute.id}
+                        >
+                            <img src={tribute.photoSRC} alt={tribute.photoAlt} className="w-full object-cover my-3 h-52 xl:min-h-52 xl:min-w-60 rounded-lg"/>
+                        </Link>
                     </div>
                     <div className="flex items-center justify-between">
                         <p>5th Nov. 2023</p>
