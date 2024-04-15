@@ -1,22 +1,22 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { PATH_DASHBOARD, PATH_HOME } from "routes/path";
+import { PATH_HOME } from "routes/path";
 import Button from "components/Button";
 import CreateTribute from "pages/Tribute/CreateTribute";
 import Modal from "components/Modal";
 import logo from "../../assets/images/logo.png";
 import { ReactComponent as HamburgerIcon } from "../../assets/icons/hamburger.svg";
-import { ReactComponent as CategoryIcon } from "../../assets/icons/category.svg";
-import { ReactComponent as LayerIcon } from "../../assets/icons/layer.svg";
-import { ReactComponent as NoteIcon } from "../../assets/icons/note.svg";
-import { ReactComponent as EditIcon } from "../../assets/icons/edit.svg";
-import { ReactComponent as GearIcon } from "../../assets/icons/gear.svg";
-import { ReactComponent as SupportIcon } from "../../assets/icons/like-dislike.svg";
-import { ReactComponent as LogOutIcon } from "../../assets/icons/login.svg";
+// import { ReactComponent as CategoryIcon } from "../../assets/icons/category.svg";
+// import { ReactComponent as LayerIcon } from "../../assets/icons/layer.svg";
+// import { ReactComponent as NoteIcon } from "../../assets/icons/note.svg";
+// import { ReactComponent as EditIcon } from "../../assets/icons/edit.svg";
+// import { ReactComponent as GearIcon } from "../../assets/icons/gear.svg";
+// import { ReactComponent as SupportIcon } from "../../assets/icons/like-dislike.svg";
+// import { ReactComponent as LogOutIcon } from "../../assets/icons/login.svg";
 
 const MainNavButton = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
