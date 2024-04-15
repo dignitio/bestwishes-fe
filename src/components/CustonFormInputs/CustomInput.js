@@ -37,11 +37,7 @@ export default function CustomInput({ label, type, obscured, options, ...props }
             {...props}
             type={viewPassword ? "text" : type}
             className={` w-full border text-[#8593AD] md:text-[14px] text-[12px] ${
-<<<<<<< HEAD
               meta.touched && meta.error ? "border-errorColor" : "border-primary"
-=======
-              meta.touched && meta.error ? "border-primary" : "border-[#8593AD]"
->>>>>>> 10b22ca7dbc3551aaf81568dc349536658fb5b65
             }  rounded-md px-[26px] py-[18px] outline-none`}
             style={{ appearance: "none", WebkitAppearance: "none", MozAppearance: "none" }}
           />

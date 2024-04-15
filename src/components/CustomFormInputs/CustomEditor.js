@@ -13,11 +13,7 @@ const Myeditor = ({ label, ...props }) => {
     <div>
       <label htmlFor={props.name}>{label}</label>
       <ReactQuill
-<<<<<<< HEAD
         className="resize-y h-32  mb-16 "
-=======
-        className=" resize-y h-32 mb-16 "
->>>>>>> 10b22ca7dbc3551aaf81568dc349536658fb5b65
         value={field.value}
         onChange={handleChange}
         {...props}

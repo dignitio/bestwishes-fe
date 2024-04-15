@@ -22,7 +22,6 @@ export const Schema = yup.object().shape({
     .matches(passwordRules, { message: "Please Create a Stronger Password" })
     .required("Please enter a valid password"),
   acceptedTos: yup.boolean().oneOf([true], "Please accept the terms of service"),
-<<<<<<< HEAD
 });
 
 export const AddItemsSchema = yup.object().shape({
@@ -72,21 +71,8 @@ export const wishlistSchema = yup.object().shape({
       price: yup.number().required("please enter an amount"),
     }),
   ),
-=======
->>>>>>> 10b22ca7dbc3551aaf81568dc349536658fb5b65
 });
 
-export const AddItemsSchema = yup.object().shape({
-  items: yup.array().of(
-    yup.object().shape({
-      img: yup.mixed().required("Image is required"),
-      itemName: yup.string().required("please enter an item name "),
-      price: yup.number().required("please enter an amount"),
-    }),
-  ),
-});
-
-<<<<<<< HEAD
 export const tributeSchema = yup.object().shape({
   headerImage: yup
     .mixed()
@@ -133,36 +119,13 @@ export const tributeSchema = yup.object().shape({
       secondOtherImg: yup.mixed(),
       thirdOtherImg: yup.mixed(),
       fourthOtherImg: yup.mixed(),
-=======
-export const AddItemsSchema2 = yup.object().shape({
-  items: yup.array().of(
-    yup.object().shape({
-      img: yup.mixed().required("Image is required"),
-      itemName: yup.string().required("please enter an item name "),
-      price: yup.number().required("please enter an amount"),
->>>>>>> 10b22ca7dbc3551aaf81568dc349536658fb5b65
     }),
   ),
 });
 
-<<<<<<< HEAD
 
 export const editTributeSchema = yup.object().shape({
   headerImage: yup
-=======
-export const wishlistSchema = yup.object().shape({
-  wishListCategory: yup
-    .string()
-    .oneOf(["birthdays", "anniversary", "burials", "other"], "Invalid Category")
-    .required("Click here to enter type of tribute"),
-  wishListTitle: yup.string().required("Click here to enter Wishlist title"),
-  wishListDescription: yup
-    .string()
-    .max(65, "Must Write a Description")
-    .required("Please write a description"),
-  wishListDate: yup.date().nullable().required("Pick a date"),
-  coverImage: yup
->>>>>>> 10b22ca7dbc3551aaf81568dc349536658fb5b65
     .mixed()
     .test("file", "Please upload an Image", (value) => {
       if (!value || !value.type.startsWith("image/")) {
@@ -171,7 +134,6 @@ export const wishlistSchema = yup.object().shape({
       return true;
     })
     .required("Please upload an Image"),
-<<<<<<< HEAD
   tributeType: yup
     .string()
     .oneOf(["anniversary", "birthday", "convocation", "funeral", "naming", "wedding", "other"], "Invalid Category")
@@ -203,13 +165,3 @@ export const wishlistSchema = yup.object().shape({
     }),
   ),
 });
-=======
-  items: yup.array().of(
-    yup.object().shape({
-      img: yup.mixed().required("Image is required"),
-      itemName: yup.string().required("please enter an item name "),
-      price: yup.number().required("please enter an amount"),
-    }),
-  ),
-});
->>>>>>> 10b22ca7dbc3551aaf81568dc349536658fb5b65

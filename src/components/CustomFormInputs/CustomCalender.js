@@ -26,11 +26,7 @@ export default function CustomCalendar({ label, type, value, onChange, ...props 
           {...field}
           {...props}
           wrapperClassName="w-full"
-<<<<<<< HEAD
-          className={` w-full max-w-full md:max-w-[900px] border text-[#1E1B1A]   ${
-=======
-          className={` w-full max-w-full md:max-w-[367px] border text-[#1E1B1A]   ${
->>>>>>> 10b22ca7dbc3551aaf81568dc349536658fb5b65
+                    className={` w-full max-w-full md:max-w-[900px] border text-[#1E1B1A]   ${
             meta.touched && meta.error ? "border-errorColor" : "border-primary"
           }  rounded-md px-[26px] py-[18px] outline-none`}
           onChange={(date) => {
