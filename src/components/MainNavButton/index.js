@@ -17,7 +17,7 @@ import { ReactComponent as HamburgerIcon } from "../../assets/icons/hamburger.sv
 
 const MainNavButton = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
