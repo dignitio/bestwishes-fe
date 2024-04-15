@@ -61,7 +61,7 @@ function Tribute() {
                                 </div>
                                 <div className="flex items-center py-1.5 max-sm:py-1  cursor-pointer hover:bg-gray-100 pl-2 max-sm:pl-3">
                                     <EditIcon className="w-5 max-sm:w-4 max-lg:w-3.5 mb-1 mx-2 max-sm:ml-1 max-sm:mr-2 max-lg:mr-1.5" />
-                                    <Link to="edit">Edit Tribute</Link>
+                                    <Link to={`/dashboard/tribute/${tribute.id}/edit`}>Edit Tribute</Link>
                                 </div>
                                 <div className="flex items-center py-1.5  cursor-pointer hover:bg-gray-100 pl-2 max-sm:pl-3" onClick={() => setContributionModal(true)}>
                                     <EyeIcon className="w-5 max-sm:w-4 max-lg:w-3.5 mb-0.5 mx-2 max-sm:ml-1 max-sm:mr-2 max-lg:mr-1.5" />
