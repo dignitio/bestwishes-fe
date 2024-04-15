@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 
-const Dropdown = ({heading, children}) => {
+const Dropdown = ({ heading, children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -36,7 +36,12 @@ const Dropdown = ({heading, children}) => {
       </div>
 
       {isOpen && (
+<<<<<<< HEAD
         <div className="origin-top-right absolute -left-48 max-lg:-left-44 py-1 top-3 w-48 max-lg:w-44 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5" style={{fontFamily: "Nunito Sans",}}>
+=======
+        
+        <div className="origin-top-right absolute left-4 max-lg:-left-44 py-1 top-3 w-48 max-lg:w-44 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5" style={{fontFamily: "Nunito Sans",}}>
+>>>>>>> 10b22ca7dbc3551aaf81568dc349536658fb5b65
             {children}
         </div>
       )}

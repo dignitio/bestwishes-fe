@@ -25,14 +25,14 @@ function Profile() {
           <div className="flex lg:flex-col flex-row lg:gap-[28px] lg:justify-start justify-between mb-2">
             <Link
               to={PATH_DASHBOARD.profile}
-              className="text-[16px] cursor-pointer lg:px-[47px] lg:py-[15px] text-[#FF433C]"
+              className="text-[16px] cursor-pointer lg:px-[47px] lg:py-[15px] text-primary"
             >
               <span>Profile</span>
             </Link>
             <Link
               to={PATH_DASHBOARD.bank}
               className={`text-[16px] cursor-pointer lg:px-[47px] lg:py-[15px] ${
-                isActive === "bank" ? "text-[#FF433C]" : "text-[#000000]"
+                isActive === "bank" ? "text-primary" : "text-[#000000]"
               }`}
               onClick={() => handleLinkClick("bank")}
             >
@@ -41,7 +41,7 @@ function Profile() {
             <Link
               to={PATH_DASHBOARD.security}
               className={`text-[16px] cursor-pointer lg:px-[47px] lg:py-[15px] ${
-                isActive ? "text-[#FF433C]" : "text-[#000000]"
+                isActive ? "text-primary" : "text-[#000000]"
               }`}
               onClick={() => handleLinkClick("security")}
             >
@@ -118,7 +118,7 @@ function Profile() {
                   <button
                     type="submit"
                     // onClick={() => handleReset()}
-                    className={`w-full bg-[#FF433C] px-[26px] py-[18px] text-white rounded-[4px] ${!values.firstName || !values.lastName || !values.email || !values.phoneNumber ? "opacity-[0.2] cursor-not-allowed" : ""}`}
+                    className={`w-full bg-primary px-[26px] py-[18px] text-white rounded-[4px] ${!values.firstName || !values.lastName || !values.email || !values.phoneNumber ? "opacity-[0.2] cursor-not-allowed" : ""}`}
                     disabled={
                       !values.firstName || !values.lastName || !values.email || !values.phoneNumber
                     }
