@@ -1,8 +1,9 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import ReactModal from "react-modal";
 import { ReactComponent as Closeicon } from "assets/icons/close.svg";
 import "./modal.css";
 
-const Modal = ({ open, onClose, customClass, width, children }) => {
+const Modal = ({ open, onClose, customClass, width, children, isWishList, ...props }) => {
   const modalCustomStyles = {};
   if (width) {
     modalCustomStyles.width = `${width}px`;
@@ -13,16 +14,20 @@ const Modal = ({ open, onClose, customClass, width, children }) => {
       isOpen={!!open}
       onClose={onClose}
       onRequestClose={onClose}
-      className={`modal ${customClass}`}
+      className={`modal !z-50 ${customClass}`}
       overlayClassName={"overlay"}
       style={{
         content: modalCustomStyles,
       }}
+      {...props}
     >
-      <div className="header" onClick={onClose} style={{ cursor: "pointer" }}>
-        <Closeicon className="w-4"/>
+      <div className="header z-50 ">
+        <button type="button" className="w-4 cursor-pointer " onClick={onClose}>
+          <Closeicon className="w-4" />
+        </button>
       </div>
       <div
+        className=" z-50 "
         style={{
           boxSizing: "border-box",
           overflowY: "auto",
