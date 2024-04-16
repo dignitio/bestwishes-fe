@@ -103,11 +103,14 @@ export const tributeSchema = yup.object().shape({
     .string()
     .oneOf(['Yes', 'No'], 'Invalid')
     .required('Please select an option'),
+  wishlistTitle: yup
+    .string()
+    .oneOf(["john-anniversary", "samuel-birthday", "temmy-convocation", "bernard-funeral", "princess-naming", "other"], 'Invalid Category'),
   relationship: yup
     .string()
     .oneOf(["father", "mother", "brother", "sister", "cousin", "other"], "Invalid Category")
     .required("Click here to select your relationship"),
-  musicLink: yup.string().required("Click here to enter your music"),
+  musicLink: yup.string(),
   publicType: yup
     .string()
     .oneOf(['public', 'private'], 'Invalid')
@@ -150,7 +153,7 @@ export const editTributeSchema = yup.object().shape({
     .string()
     .oneOf(["father", "mother", "brother", "sister", "cousin", "other"], "Invalid Category")
     .required("Click here to select your relationship"),
-  musicLink: yup.string().required("Click here to enter your music"),
+  musicLink: yup.string(),
   publicType: yup
     .string()
     .oneOf(['public', 'private'], 'Invalid')

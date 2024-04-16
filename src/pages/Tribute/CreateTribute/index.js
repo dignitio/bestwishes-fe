@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { tributeSchema } from "Schemas";
 import SwitchButton from "components/Switch";
 import CustomSelect from "components/CustomFormInputs/CustomSelect";
-import CustomInput from "components/CustonFormInputs/CustomInput";
+import CustomInput from "components/CustomFormInputs/CustomInput";
 import CustomCalendar from "components/CustomFormInputs/CustomCalender";
 import CustomRadio from "components/CustomFormInputs/CustomRadio";
 import Myeditor from "components/CustomFormInputs/CustomEditor";
@@ -16,6 +16,7 @@ import Button from "components/Button";
 import  uploadPix from "../../../assets/images/gallery.png"
 import { ReactComponent as UploadIcon } from "../../../assets/icons/upload-image.svg"
 import { ReactComponent as MusicIcon } from "../../../assets/icons/music.svg"
+import { ReactComponent as LeftIcon } from "../../../assets/icons/left.svg"
 
 
 function CreateTribute() {
@@ -39,15 +40,16 @@ function CreateTribute() {
                     tributeType: "",
                     tributeTitle: "",
                     fullName: "",
-                    dateOfBirth: null,
-                    dateOfDeath: null,
+                    dateOfBirth: new Date(),
+                    dateOfDeath: new Date(1930, 0, 1),
                     tributeBio: "",
                     receiveCash: true,
                     addWishList: "No",
+                    wishListTitle: "",
                     relationship: "",
                     musicLink: "",
                     publicType: "public",
-                    tributeKey: "",
+                    tributeKey: "BWT-",
                     otherImages: [{ firstOtherImg: "", secondOtherImg: "", thirdOtherImg: "", fourthOtherImg: "",}],
                 }}
                 validationSchema={tributeSchema}
@@ -183,6 +185,7 @@ function CreateTribute() {
                         {/* STEP 2  */}
                         {activeStep === 1 && (
                             <div className="text-lg max-md:pb-8 step-2 max-sm:w-80 max-sm:mx-auto max-sm:h-[480px]">
+                                <div className="absolute top-7 py-2 left-8 bg-indigo-50 px-3 rounded-lg cursor-pointer" onClick={() => setActiveStep(activeStep - 1)}><LeftIcon /></div>
                                 <div className="max-md:pb-6 max-md:-mt-8">
                                     <fieldset className="my-6">
                                         <Myeditor
@@ -204,6 +207,7 @@ function CreateTribute() {
                                                 name="addWishList" 
                                                 value="No" 
                                                 text="No"
+                                                checked={values.addWishList === "No" && true}
                                             />
                                         </div>
                                         <div className="flex items-center">
@@ -211,15 +215,26 @@ function CreateTribute() {
                                                 name="addWishList" 
                                                 value="Yes" 
                                                 text="Yes"
+                                                checked={values.addWishList === "Yes" && true}
                                             />
                                         </div>
                                     </div>
                                     {values.addWishList === "Yes" ? 
                                         <div className="my-6"> 
-                                            <p>Select from wishlist you have created</p>
-                                            <Button type="button" className="border-2 rounded-md px-0 w-96 max-sm:w-full h-16 bg-white mt-1 text-left  text-gray-400 text-base">
-                                                Click here to select
-                                            </Button>
+                                            <div  className="px-0 w-96 max-sm:w-full">
+                                                <CustomSelect 
+                                                    name="wishListTitle" 
+                                                    label="Select from wishlist you have created"
+                                                >
+                                                    <option value="" className="text-gray-400">Click here to select tribute type</option>
+                                                    <option value="john-anniversary">John Doe Anniversary Wishlist</option>
+                                                    <option value="samuel-birthday">Samuel Birthday Wishlist</option>
+                                                    <option value="temmy-convocation">Temmy Convocation Wishlist</option>
+                                                    <option value="bernard-funeral">Bernard Funeral Wishlist</option>
+                                                    <option value="princess-naming">Princess Naming Wishlist</option>
+                                                    <option value="other">Other</option>
+                                                </CustomSelect>
+                                            </div>
                                         </div>
                                         :
                                         <div className="text-white my-5">
@@ -259,6 +274,7 @@ function CreateTribute() {
                         {/* STEP 3  */}
                         {activeStep === 2 && (
                             <div className="text-lg max-md:pb-8 step-3 text-lg max-md:pb-8 step-2 max-sm:w-80 max-sm:mx-auto max-sm:h-[480px] overflow-x-hidden">
+                                <div className="absolute top-7 py-2 left-8 bg-indigo-50 px-3 rounded-lg cursor-pointer" onClick={() => setActiveStep(activeStep - 1)}><LeftIcon /></div>
                                 <div className="max-md:pb-6 max-md:-mt-8">
                                     <div className="flex justify-between max-sm:block gap-10 my-8">
                                         <div className="w-1/2 max-md:w-full">
@@ -283,7 +299,7 @@ function CreateTribute() {
                                                 required
                                                 placeholder="click here to upload music"
                                             />
-                                            <MusicIcon className="cursor-pointer absolute translate-y-[170%] right-6 top-4 w-6 h-6"/>
+                                            <MusicIcon className="cursor-pointer absolute translate-y-[170%] right-6 top-2 w-6 h-6"/>
                                             <input
                                                 type="file"
                                                 id="musicLink"
@@ -295,7 +311,7 @@ function CreateTribute() {
                                         </div>
                                     </div>
                                     <div  className="flex justify-between max-sm:block gap-10 my-8 max-md:mb-0">
-                                        <div>
+                                        <div className="w-1/2">
                                             <p className="mr-3">Would you prefer this Tribute to be</p>
                                             <div className="flex items-center mt-2">
                                                 <div className="mr-4 flex items-center">
@@ -303,6 +319,7 @@ function CreateTribute() {
                                                         name="publicType" 
                                                         value="public" 
                                                         text="a public tribute"
+                                                        checked={values.publicType === "public" && true}
                                                     />
                                                 </div>
                                                 <div className="flex items-center">
@@ -310,18 +327,23 @@ function CreateTribute() {
                                                         name="publicType" 
                                                         value="private" 
                                                         text="a private tribute"
+                                                        checked={values.publicType === "private" && true}
                                                     />
                                                 </div>
                                             </div>
                                         </div>
                                         {values.publicType === "private" ?
-                                            <div className="w-1/2">
-                                                <CustomInput 
-                                                    label="Create a Tribute key" 
-                                                    name="tributeKey" 
-                                                    type="text" 
-                                                    placeholder="Create a Tribute key"
-                                                />
+                                            <div className="w-1/2 relative">
+                                                <div>
+                                                    {/* <p className="md:base absolute top-12 z-10">BWT-</p> */}
+                                                    <CustomInput 
+                                                        label="Create a Tribute Passkey" 
+                                                        name="tributeKey" 
+                                                        type="text" 
+                                                        placeholder="Create a Tribute Passkey"
+                                                        value={values.tributeKey}
+                                                    />
+                                                </div>
                                             </div>
                                             :
                                             <div className="text-white"> - </div>
@@ -531,11 +553,18 @@ function CreateTribute() {
                                         </div>
                                     </div>
 
-                                    <div className=" w-full flex flex-col md:items-end">
+                                    <div className="flex justify-between mt-5 gap-40 max-md:gap-5">
+                                        <button
+                                            type="button"
+                                            className={`w-full self-end py-[11px] md:py-[16px] outline-none border-primary rounded-md flex justify-center items-center text-primary bg-indigo-100
+                                            `}
+                                        >
+                                             Save as draft
+                                        </button>{" "}
                                         <motion.button
                                             type="submit"
                                             whileHover={{ scale: 0.98 }}
-                                            className={` py-3 text-white rounded-md hover:bg-white hover:text-primary md:w-1/2
+                                            className={`w-full self-end py-[11px] md:py-[16px] outline-none rounded-md flex justify-center items-center text-white
                                             ${isValid ? " bg-primary border border-primary" : " bg-primary/50 pointer-events-none"}
                                             ${values.relationship && values.publicType ? " bg-primary" : " bg-primary/50 pointer-events-none"}
                                             `}

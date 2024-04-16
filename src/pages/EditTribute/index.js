@@ -5,9 +5,10 @@ import { useEffect, useState } from "react";
 import { Link, useParams, } from "react-router-dom";
 import { editTributeSchema } from "Schemas";
 import CustomSelect from "components/CustomFormInputs/CustomSelect";
-import CustomInput from "components/CustonFormInputs/CustomInput";
+import CustomInput from "components/CustomFormInputs/CustomInput";
 import CustomCalendar from "components/CustomFormInputs/CustomCalender";
 import CustomRadio from "components/CustomFormInputs/CustomRadio";
+import Myeditor from "components/CustomFormInputs/CustomEditor";
 import { ErrorMessage, Form, Formik } from "formik";
 import tributeDetails from "layout/Lists/tributeDetails";
 import { motion } from "framer-motion";
@@ -39,12 +40,20 @@ function EditTribute() {
             {foundTribute ?  (
             <div>
                 <div className="flex items-center justify-between mb-5 mx-8 text-base max-sm:text-xs max-lg:text-base">
-                    <div className="flex text-sky-600">
+                    <div className="flex text-indigo-700 font-medium">
                         <LeftArrowIcon className="mr-1  w-5 h-5 max-sm:h-3.5 max-sm:w-3.5 max-lg:w-5 max-lg:h-5" />
                         <Link to="/dashboard/tribute">Back to Tribute</Link>
                     </div>
                     <h4 className="font-semibold text-xl max-sm:text-sm max-sm:hidden max-lg:text-base">{foundTribute.tributeTitle}</h4>
-                    <p className="px-3 py-2.5 rounded-lg max-sm:px-2 max-sm:py-1 max-lg:py-2 max-lg:px-6 text-white bg-slate-900">Preview Tribute</p>
+                    <motion.button
+                        whileTap={{ scale: 0.9 }}
+                        whileHover={{ scale: 0.97 }}
+                        className="text-primary px-5 py-1 md:mr-6 w-full md:w-auto  rounded-md self-center border border-primary outline-none hover:bg-primary hover:text-white"
+                        type="button"
+                    >
+                        {" "}
+                        Preview Tribute
+                    </motion.button>
                 </div>
 
                 <div className="flex justify-between mt-8 overflow-none mx-8 max-lg:mx-4 max-lg:block">
@@ -54,8 +63,8 @@ function EditTribute() {
                             tributeType: foundTribute.tributeType,
                             tributeTitle: foundTribute.tributeTitle,
                             fullName: foundTribute.fullName,
-                            dateOfBirth: null,
-                            dateOfDeath: null,
+                            dateOfBirth: foundTribute.dateOfBirth,
+                            dateOfDeath: foundTribute.dateOfDeath,
                             tributeBio: foundTribute.tributeBio,
                             relationship:foundTribute.relationship,
                             musicLink: foundTribute.musicLink,
@@ -143,13 +152,12 @@ function EditTribute() {
                                         )}
                                     </div>
                                     <div className="max-sm:mb-6 text-base">
-                                        <p className="text-lg">Bio</p>
-                                        <textarea 
-                                            value={values.tributeBio}
-                                            // onChange={(e) => handleChange(e)} 
-                                            name='tributeBio'
-                                            className="border border-primary text-gray-600 rounded-md w-full h-60 p-3 mt-2 outline-0 placeholder:text-slate-400 resize-none leading-normal" 
-                                            placeholder="write a bio about yourself"/>
+                                        <Myeditor
+                                                label="Bio"
+                                                name="tributeBio"
+                                                placeholder="write a bio about yourself"
+                                                className="h-96 mb-10 max-md:h-60 mb-16 outline-green-400"
+                                        />
                                     </div>
                                     <div className="flex justify-between max-sm:block gap-10 my-8">
                                         <div className="w-1/2 max-md:w-full">
@@ -195,6 +203,7 @@ function EditTribute() {
                                                         name="publicType" 
                                                         value="public" 
                                                         text="a public tribute"
+                                                        checked={values.publicType === "public" && true}
                                                     />
                                                 </div>
                                                 <div className="flex items-center">
@@ -202,17 +211,18 @@ function EditTribute() {
                                                         name="publicType" 
                                                         value="private" 
                                                         text="a private tribute"
+                                                        checked={values.publicType === "private" && true}
                                                     />
                                                 </div>
                                             </div>
                                         </div>
                                         {values.publicType === "private" ?
-                                            <div className="w-1/2">
+                                            <div className="w-1/2 relative">
                                                 <CustomInput 
-                                                    label="Create a Tribute key" 
+                                                    label="Change Tribute Passkey" 
                                                     name="tributeKey" 
-                                                    type="text" 
-                                                    placeholder="Create a Tribute key"
+                                                    type="text"
+                                                    placeholder="Change Tribute Passkey"
                                                     value={values.tributeKey}
                                                 />
                                             </div>
@@ -428,7 +438,6 @@ function EditTribute() {
                                             type="submit"
                                             whileHover={{ scale: 0.98 }}
                                             className={` py-3 text-white rounded-md hover:bg-white hover:text-primary md:w-1/3
-                                            ${isValid ? " bg-primary border border-primary" : " bg-primary/50 pointer-events-none"}
                                             ${values.relationship && values.publicType ? " bg-primary" : " bg-primary/50 pointer-events-none"}
                                             `}
                                             // 
@@ -504,3 +513,6 @@ function EditTribute() {
 }
 
 export default EditTribute;
+
+
+// ${isValid ? " bg-primary border border-primary" : " bg-primary/50 pointer-events-none"}

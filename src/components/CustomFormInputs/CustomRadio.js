@@ -9,7 +9,7 @@ export default function CustomRadio({ text, ...props }) {
         type="radio"
         {...field}
         {...props}
-        className="mr-1 mb-1 w-4 h-4 text-blue-700"
+        className="mr-1 mb-1 w-4 h-4 accent-indigo-900"
       />
       <label htmlFor={props.id} className="text-lg">{text}</label>
       {meta.touched && meta.error && (

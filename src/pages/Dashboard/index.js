@@ -11,30 +11,34 @@ import { ReactComponent as SendIcon } from "../../assets/icons/send.svg";
 import { ReactComponent as TrashIcon } from "../../assets/icons/trash.svg";
 import { ReactComponent as CircleIcon } from "../../assets/icons/circle.svg";
 
-
 function Dashboard() {
+
+  const [ show, setShow ] = useState(true)
+
   return (
     <>
       <div className="pt-8 max-md:pt-6 max-lg:mb-5">
-        <div className="outline outline-1 outline-red-400 rounded-md flex max-sm:block justify-between bg-red-100 mx-8 max-sm:mx-4 max-md:py-3 py-5 px-6 max-sm:px-2 max-sm:py-3.5">
-          <div className="flex items-center max-sm:items-start">
-            <SubtractIcon className="max-sm:w-7 max-sm:mt-1 max-sm:h-7 max-md:w-8 max-md:h-7 max-lg:w-8 max-lg:h-8" />
-            <p className="pl-3 max-sm:pl-2 pt-1 max-md:pt-0.5 text-base max-md:text-base max-lg:text-lg max-lg:w-96">
-              Please finalise your profile verification to be eligible to receive gifts from
-              well-wishers
-            </p>
-          </div>
-          <div className="flex items-center max-sm:ml-7 max-sm:mt-6 max-sm:mb-2">
-            <Link to="settings">
-              <span className="bg-errorColor text-white rounded-lg px-2 py-3 mr-8 text-base max-lg:px-4 max-md:py-3 max-lg:py-4 max-md:px-3">
-                Complete profile
+        {show &&
+          <div className="outline outline-1 outline-red-400 rounded-md flex max-sm:block justify-between bg-red-50 mx-8 max-sm:mx-4 max-md:py-3 py-5 px-6 max-sm:px-2 max-sm:py-3.5">
+              <div className="flex items-center max-sm:items-start">
+                <SubtractIcon className="max-sm:w-7 max-sm:mt-1 max-sm:h-7 max-md:w-8 max-md:h-7 max-lg:w-8 max-lg:h-8" />
+                <p className="pl-3 max-sm:pl-2 pt-1 max-md:pt-0.5 text-base max-md:text-base max-lg:text-lg max-lg:w-96">
+                  Please finalise your profile verification to be eligible to receive gifts from
+                  well-wishers
+                </p>
+              </div>
+            <div className="flex items-center max-sm:ml-7 max-sm:mt-6 max-sm:mb-2">
+              <Link to="settings">
+                <span className="bg-errorColor text-white rounded-lg px-2 py-3 mr-8 text-base max-lg:px-4 max-md:py-3 max-lg:py-4 max-md:px-3">
+                  Complete profile
+                </span>
+              </Link>
+              <span>
+                <XCircleIcon onClick={() => setShow(false)} className="max-lg:w-8 max-lg:h-7 max-md:w-6 max-md:h-6 max-sm:ml-16 max-sm:-mt-1 cursor-pointer"/>
               </span>
-            </Link>
-            <span>
-              <XCircleIcon className="max-lg:w-8 max-lg:h-7 max-md:w-6 max-md:h-6 max-sm:ml-16 max-sm:-mt-1"/>
-            </span>
+            </div>
           </div>
-        </div>
+        }
 
         <div className="flex justify-between mt-7 mx-8 max-sm:mx-4 max-sm:block max-lg:grid max-lg:grid-cols-2 max-lg:gap-y-7 max-lg:gap-x-6">
           <div className="bg-white py-5 px-5 w-1/3 max-lg:w-full rounded-md">
