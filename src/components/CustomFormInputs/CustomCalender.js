@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import ReactDatePicker from "react-datepicker";
 import { ReactComponent as CalendarLogo } from "../../assets/icons/calendar.svg";
 import "react-datepicker/dist/react-datepicker.css";
+import "./calendar.css";
 
 export default function CustomCalendar({ label, type, value, onChange, ...props }) {
   const { setFieldValue } = useFormikContext();
@@ -15,7 +16,7 @@ export default function CustomCalendar({ label, type, value, onChange, ...props 
 
   return (
     <div className="flex flex-col gap-2 w-full">
-      <label htmlFor={props.id} className="text-[#1E1B1A] font-medium text-[18px] mb-2">
+      <label htmlFor={props.id} className="text-[#1E1B1A] text-sm md:text-base font-medium text-[18px]">
         {label}
       </label>
       <motion.div whileHover={{ scale: 0.98 }} className="relative w-full">
@@ -26,7 +27,7 @@ export default function CustomCalendar({ label, type, value, onChange, ...props 
           {...field}
           {...props}
           wrapperClassName="w-full"
-          className={` w-full max-w-full md:max-w-[367px] border text-[#1E1B1A]   ${
+                    className={` w-full max-w-full md:max-w-[900px] border text-[#1E1B1A]   ${
             meta.touched && meta.error ? "border-errorColor" : "border-primary"
           }  rounded-md px-[26px] py-[18px] outline-none`}
           onChange={(date) => {
