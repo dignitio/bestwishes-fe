@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import plus from "../../assets/images/add.png";
-import call from "../../assets/images/call.svg";
-import sms from "../../assets/images/sms.svg";
-import fb from "../../assets/images/facebook.png";
-import instagram from "../../assets/images/instagram.png";
-import tiktok from "../../assets/images/tik_tok.svg";
-import twitter from "../../assets/images/twitter.svg";
-import whatsapp from "../../assets/images/whatsapp.svg";
-import youtube from "../../assets/images/youtube.svg";
-import { ReactComponent as SearchIcon } from "../../assets/icons/search.svg";
+import plus from "assets/images/add.png";
+import call from "assets/images/call.svg";
+import sms from "assets/images/sms.svg";
+import fb from "assets/images/facebook.png";
+import instagram from "assets/images/instagram.png";
+import tiktok from "assets/images/tik_tok.svg";
+import twitter from "assets/images/twitter.svg";
+import whatsapp from "assets/images/whatsapp.svg";
+import youtube from "assets/images/youtube.svg";
+import { ReactComponent as SearchIcon } from "assets/icons/search.svg";
 
 function Support() {
   const FAQs = [
@@ -126,10 +126,10 @@ function Support() {
           {FAQs.map((faq, index) => (
             <div className="bg-white p-3 flex flex-col gap-3" key={index}>
               <div className="flex justify-between" onClick={() => togglefaq(index)}>
-                <p>{faq.Question}</p>
+                <h1 className="text-[20px] font-medium text-black">{faq.Question}</h1>
                 <img src={plus} alt="plus" className="cursor-pointer" />
               </div>
-              {clickedQuestion === index && <p data-aos="fade-up">{faq.Answer}</p>}
+              {clickedQuestion === index && <p data-aos="fade-up" className="font-normal text-[#00000090] text-[16px]">{faq.Answer}</p>}
             </div>
           ))}
         </div>

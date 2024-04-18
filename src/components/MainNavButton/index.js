@@ -41,7 +41,7 @@ const MainNavButton = () => {
       </button>
 
       {isMenuOpen && (
-        <div className="fixed h-screen left-0 p-8 pt-20 top-0 max-sm:w-60 w-96 bg-white rounded-sm shadow-lg overflow-hidden z-10">
+        <div className="fixed h-screen left-0 p-8 pt-20 top-0 max-sm:w-60 w-96 bg-white rounded-sm shadow-lg overflow-scroll z-10">
           <Closeicon className="w-4 absolute text-2xl z-20 max-sm:text-base top-[24px] right-[24px]" onClick={toggleMenu}/>
           <div className="flex flex-col gap-[48px]">
             <img src={logo} alt="logo" className="max-sm:w-16 max-sm:ml-12 max-lg:mx-auto" />
