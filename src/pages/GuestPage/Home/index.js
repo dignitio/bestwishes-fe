@@ -8,8 +8,8 @@ import images from "layout/Lists/images";
 import CreateGuestTribute from "pages/GuestPage/CreateTribute";
 import CustomInput from "components/CustonFormInputs/CustomInput";
 import CustomTextArea from "components/CustomFormInputs/CustomTextArea";
-import WishListModal from 'pages/GuestPage/wishlistModal';
-import ShareIcon from "assets/icons/send.svg";
+import WishListModal from "pages/GuestPage/wishlistModal";
+import ShareIcon from "assets/icons/shareIcon.svg";
 import rectangle from "assets/images/rectangle.png";
 import tributeImage from "assets/images/tributeimage.jpeg";
 import wishlistImage from "assets/images/wishlistimage.jpeg";
@@ -135,10 +135,33 @@ function Home() {
                   {contribution.initial}
                 </p>
                 <div className="md:col-span-10 xl:col-span-11">
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 items-center">
                     <h4 className="text-[18px] font-bold">{contribution.fullName}</h4>
-                    <img src={gallery} alt="gallery icon"/>
+                    <div className="relative bottom-3">
+                      <div className="w-[20px] h-[20px] rounded-sm overflow-hidden absolute border border-[black] origin-center rotate-45">
+                        <img
+                          src={tributeImage}
+                          alt="gallery icon"
+                          className="w-full h-full object-fit z-0 border-2 border-red"
+                        />
+                      </div>
+                      <div className="w-[20px] h-[20px] rounded-sm overflow-hidden absolute border border-[red] origin-center rotate-12 ">
+                        <img
+                          src={wishlistImage}
+                          alt="gallery icon"
+                          className="w-full h-full object-fit z-1 border-2 border-[black]"
+                        />
+                      </div>
+                      <div className="w-[20px] h-[20px] rounded-sm overflow-hidden absolute  origin-center -rotate-12 ">
+                        <img
+                          src={rectangle}
+                          alt="gallery icon"
+                          className="w-full h-full object-fit z-2 border-2 border-[black]"
+                        />
+                      </div>
+                    </div>
                   </div>
+
                   {selectedContribution === index ? (
                     <div className="flex flex-col gap-2">
                       <p className="leading-loose text-[16px]">{contribution.description}</p>
@@ -198,12 +221,12 @@ function Home() {
                       onChange={handleChange}
                     />
 
-                    <label htmlFor="memoriesUpload" className="relative flex">
+                    <label htmlFor="memoriesUpload" className="relative flex cursor-pointer">
                       <CustomInput
                         label="Upload Memories"
                         name="memories"
                         value={values.memories}
-                        className="mb-2"
+                        className="mb-2 cursor-pointer"
                         required
                         id="memoriesUpload"
                         disabled
@@ -221,14 +244,14 @@ function Home() {
                         multiple
                         accept="image/jpeg, image/png, image/svg, image/gif, image/bmp, image/tiff, image/webp"
                         id="memoriesUpload"
-                        className="cursor-pointer w-4 absolute translate-y-[150%] right-0 pr-[70px] leading-tight focus:outline-none focus:border-blue-500 opacity-0"
+                        className="cursor-pointer absolute w-full top-10 opacity-0 pr-[70px] leading-tight focus:outline-none focus:border-blue-500 "
                         onChange={(e) => {
                           setFileUploaded(true);
                           values.memories = e.target.files;
                         }}
                       />
                     </label>
-
+                  
                     {/* <div className="border border-[#8593AD] rounded-md py-[18px] px-[26px] flex">
                       
                     </div> */}
@@ -291,9 +314,7 @@ function Home() {
             </div>
             <div className="grid grid-cols-2 gap-[28px]">
               {WishItems.map((items) => (
-                <div
-                  className="bg-[#F0F1F5] rounded-xl cursor-pointer"
-                >
+                <div className="bg-[#F0F1F5] rounded-xl cursor-pointer">
                   <img src={items.image} className="rounded-t-xl" alt="wish" />
                   <div className="flex items-center p-[12px] justify-between">
                     <div className="flex flex-col gap-[7px]">
