@@ -6,7 +6,7 @@ import contributions from "layout/Lists/contributions";
 import WishItems from "layout/Lists/wishlist";
 import images from "layout/Lists/images";
 import CreateGuestTribute from "pages/GuestPage/CreateTribute";
-import CustomInput from "components/CustonFormInputs/CustomInput";
+import CustomInput from "components/CustomFormInputs/CustomInput";
 import CustomTextArea from "components/CustomFormInputs/CustomTextArea";
 import WishListModal from "pages/GuestPage/wishlistModal";
 import ShareIcon from "assets/icons/shareIcon.svg";
@@ -15,8 +15,10 @@ import tributeImage from "assets/images/tributeimage.jpeg";
 import wishlistImage from "assets/images/wishlistimage.jpeg";
 import upload from "assets/images/upload.svg";
 import gallery from "assets/images/gallery.svg";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
+  const navigate = useNavigate()
   const [open, setOpen] = useState(false);
   const [openCreateTribute, setOpenCreateTribute] = useState(false);
   const [selectedWishlist, setSelectedWishlist] = useState();
@@ -138,27 +140,21 @@ function Home() {
                   <div className="flex gap-2 items-center">
                     <h4 className="text-[18px] font-bold">{contribution.fullName}</h4>
                     <div className="relative bottom-3">
-                      <div className="w-[20px] h-[20px] rounded-sm overflow-hidden absolute border border-[black] origin-center rotate-45">
+                      <div className="w-[20px] h-[20px] rounded-sm overflow-hidden border-solid border-[0.5] border-[white] absolute rotate-45">
                         <img
                           src={tributeImage}
                           alt="gallery icon"
-                          className="w-full h-full object-fit z-0 border-2 border-red"
+                          className="w-full h-full object-fit z-0 "
                         />
                       </div>
-                      <div className="w-[20px] h-[20px] rounded-sm overflow-hidden absolute border border-[red] origin-center rotate-12 ">
+                      <div className="w-[20px] h-[20px] rounded-sm overflow-hidden border-solid border-[0.5] border-[white] absolute rotate-35">
                         <img
                           src={wishlistImage}
                           alt="gallery icon"
-                          className="w-full h-full object-fit z-1 border-2 border-[black]"
+                          className="w-full h-full object-fit z-1 "
                         />
                       </div>
-                      <div className="w-[20px] h-[20px] rounded-sm overflow-hidden absolute  origin-center -rotate-12 ">
-                        <img
-                          src={rectangle}
-                          alt="gallery icon"
-                          className="w-full h-full object-fit z-2 border-2 border-[black]"
-                        />
-                      </div>
+                     
                     </div>
                   </div>
 
@@ -172,7 +168,7 @@ function Home() {
                         >
                           Show less
                         </div>
-                        <img src={ShareIcon} alt="share" />
+                        <img src={ShareIcon} alt="share"  className="cursor-pointer hover:scale-80"/>
                       </div>
                     </div>
                   ) : (
@@ -187,7 +183,7 @@ function Home() {
                         >
                           Read more
                         </div>
-                        <img src={ShareIcon} alt="share" />
+                        <img src={ShareIcon} alt="share" className="cursor-pointer hover:scale-80" />
                       </div>
                     </div>
                   )}
@@ -314,7 +310,7 @@ function Home() {
             </div>
             <div className="grid grid-cols-2 gap-[28px]">
               {WishItems.map((items) => (
-                <div className="bg-[#F0F1F5] rounded-xl cursor-pointer">
+                <div className="bg-[#F0F1F5] rounded-xl cursor-pointer" onClick={()=>navigate("/wishlist")}>
                   <img src={items.image} className="rounded-t-xl" alt="wish" />
                   <div className="flex items-center p-[12px] justify-between">
                     <div className="flex flex-col gap-[7px]">
@@ -329,7 +325,7 @@ function Home() {
                 </div>
               ))}
             </div>
-            <Button className="text-white font-bold mt-[30px]">See more</Button>
+            <Button className="text-white font-bold mt-[30px]"  onClick={()=>navigate("/wishlist")}>See more</Button>
           </div>
           <div className="bg-white p-3 rounded-md flex flex-col gap-[17px] h-fit">
             <div className="flex flex-col gap-[12px] ">
