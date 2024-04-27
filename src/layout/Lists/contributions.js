@@ -2,6 +2,7 @@ const contributions = [
     {
         id: 1,
         initial: "WO",
+        image: 6,
         fullName: "Wale Ojo",
         read: false,
         showDeleteIcon: false,
@@ -10,6 +11,7 @@ const contributions = [
     {
         id: 2,
         initial: "BP",
+        image: 4,
         fullName: "Bimpe Promise",
         read: true,
         showDeleteIcon: false,
@@ -18,6 +20,7 @@ const contributions = [
     {
         id: 3,
         initial: "IN",
+        image: 3,
         fullName: "Ifeoluwa Nancy",
         read: false,
         showDeleteIcon: false,
@@ -26,6 +29,7 @@ const contributions = [
     {
         id: 4,
         initial: "BN",
+        image: 2,
         fullName: "Benson Nancy",
         read: true,
         showDeleteIcon: false,
@@ -34,6 +38,7 @@ const contributions = [
     {
         id: 5,
         initial: "BP",
+        image: 6,
         fullName: "Bimpe Promise",
         read: true,
         showDeleteIcon: false,
@@ -42,6 +47,7 @@ const contributions = [
     {
         id: 6,
         initial: "IN",
+        image: 3, 
         fullName: "Ifeoluwa Nancy",
         read: true,
         showDeleteIcon: false,
@@ -50,6 +56,7 @@ const contributions = [
     {
         id: 7,
         initial: "BN",
+        image: 1,
         fullName: "Benson Nancy",
         read: true,
         showDeleteIcon: false,
@@ -58,6 +65,7 @@ const contributions = [
     {
         id: 3,
         initial: "IN",
+        image: 2,
         fullName: "Ifeoluwa Nancy",
         read: false,
         showDeleteIcon: false,
@@ -66,6 +74,7 @@ const contributions = [
     {
         id: 4,
         initial: "BN",
+        image: 3,
         fullName: "Benson Nancy",
         read: true,
         showDeleteIcon: false,
@@ -74,6 +83,7 @@ const contributions = [
     {
         id: 5,
         initial: "BP",
+        image: 1,
         fullName: "Bimpe Promise",
         read: true,
         showDeleteIcon: false,
@@ -82,6 +92,7 @@ const contributions = [
     {
         id: 6,
         initial: "IN",
+        image: 5,
         fullName: "Ifeoluwa Nancy",
         read: true,
         showDeleteIcon: false,
@@ -90,6 +101,7 @@ const contributions = [
     {
         id: 7,
         initial: "BN",
+        image: 6,
         fullName: "Benson Nancy",
         read: true,
         showDeleteIcon: false,

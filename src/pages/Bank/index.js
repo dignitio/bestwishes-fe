@@ -102,8 +102,8 @@ function BankDetails() {
 
                   <button
                     type="submit"
-                    className={`w-full bg-primary px-[26px] py-[18px] text-white rounded-[4px] ${!values.accountNumber || !values.accountName || !values.selectedBank ? "opacity-[0.2] cursor-not-allowed" : ""}`}
-                    disabled={!values.accountNumber || !values.accountName || !values.selectedBank}
+                    className={`w-full bg-primary px-[26px] py-[18px] text-white rounded-[4px] ${!values.accountNumber  || !values.selectedBank ? "opacity-[0.2] cursor-not-allowed" : ""}`}
+                    disabled={!values.accountNumber || !values.selectedBank}
                   >
                     Save
                   </button>

@@ -50,7 +50,7 @@ function Support() {
   const phoneNumber = "01-09900880";
   return (
     <div className=" lg:p-[38px] ">
-      <div className="bg-white rounded-[16px] flex flex-col items-center justify-center gap-[48px] p-[40px] ">
+      <div className="bg-white rounded-[16px] flex flex-col items-center justify-center gap-[48px] md:p-[40px] p-[20px] ">
         <div className="flex flex-col gap-[27px]">
           <h1 className="font-bold text-[20px] md:text-[32px] text-center">
             Hello, How can we help you?
@@ -122,7 +122,7 @@ function Support() {
           Frequently Asked Questions
         </h1>
 
-        <div className="bg-primary w-[300px] md:w-[80%] p-[26px] flex flex-col gap-[16px] shadow-lg">
+        <div className="bg-primary w-[100%] md:w-[80%] md:p-[26px] p-[18px] flex flex-col gap-[16px] shadow-lg">
           {FAQs.map((faq, index) => (
             <div className=" p-3 flex flex-col gap-3 bg-[#f8f8f8] rounded-lg cursor-pointer" key={index}>
               <div className={`flex justify-between items-center transition-all duration-500 ease-in-out ${clickedQuestion === index ? "min-h-[40px]" : "min-h-[30px]"}`} onClick={() => togglefaq(index)}>
