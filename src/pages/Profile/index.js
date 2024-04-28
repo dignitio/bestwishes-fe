@@ -5,8 +5,8 @@ import CustomInput from "components/CustomFormInputs/CustomInput";
 import { Formik } from "formik";
 import user from "assets/icons/edit-profile.svg";
 import exportIcon from "assets/icons/Export.svg";
-import { Schema } from "Schemas";
-import close from "assets/icons/close copy.svg"
+import { ProfileSchema } from "Schemas";
+import close from "assets/icons/close copy.svg";
 
 function Profile() {
   const [isActive, setIsActive] = useState(false);
@@ -67,14 +67,14 @@ function Profile() {
                 lastName: "",
                 email: "",
                 phoneNumber: "",
-                profileImage: null,
+                // profileImage: null,
               }}
-              validationSchema={Schema}
+              validationSchema={ProfileSchema}
               onSubmit={(values) => {
                 console.log(values);
               }}
             >
-              {({ values, handleSubmit, setFieldValue, handleChange }) => (
+              {({ values, handleSubmit, setFieldValue, handleChange, isSubmitting }) => (
                 <form onSubmit={handleSubmit} className="text-[18px] flex flex-col gap-[32px]">
                   <div className="relative flex justify-center items-center bg-[#636363] w-[100px] h-[100px] rounded-[100px]">
                     {values.profileImage ? (
@@ -84,7 +84,7 @@ function Profile() {
                           className=" font-bold w-[18px] z-50 absolute top-3 right-4 "
                           onClick={() => setFieldValue("profileImage", null)}
                         >
-                        <img src={close} alt="close-icon" className="w-full"/>
+                          <img src={close} alt="close-icon" className="w-full" />
                         </button>
                         <img
                           src={URL.createObjectURL(values.profileImage)}
@@ -105,8 +105,7 @@ function Profile() {
                           className="relative z-2 opacity-0 w-[78px] h-[78px] rounded-[78px]"
                           onChange={(e) => {
                             const file = e.target.files[0];
-                            setFieldValue("profileImage", file)
-                           
+                            setFieldValue("profileImage", file);
                           }}
                         />
                       </div>
@@ -145,14 +144,13 @@ function Profile() {
                     name="phoneNumber"
                     value={values.phoneNumber}
                     required
-                    type="tel"
+                    type="text"
                     placeholder=""
                     onChange={handleChange}
                   />
 
                   <button
                     type="submit"
-                    // onClick={() => handleReset()}
                     className={`w-full bg-primary px-[26px] py-[18px] text-white rounded-[4px] ${!values.firstName || !values.lastName || !values.email || !values.phoneNumber || !values.profileImage ? "opacity-[0.2] cursor-not-allowed" : ""}`}
                     disabled={
                       !values.firstName ||
