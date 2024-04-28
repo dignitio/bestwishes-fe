@@ -78,18 +78,42 @@ const MainNavButton = () => {
               </div>
             </div>
 
-            <div className="flex flex-col justify-center items-center gap-[13px] w-full">
+            {isLoggedIn ? (
               <div
-                onClick={() => setIsLoggedIn(true)}
+                onClick={() => setIsLoggedIn(false)}
                 className="w-full text-primary text-center text-[16px] font-semibold flex justify-center"
               >
-                <Link to="/login" className="transition ease-in-out delay-150 hover:-translate-y-1 duration-300 hover:scale-125">Login</Link>
+                <Link
+                  to="/"
+                  className="transition ease-in-out delay-150 hover:-translate-y-1 duration-300 hover:scale-125"
+                >
+                  Logout
+                </Link>
               </div>
-              <span className="text-black text-[12px]">or</span>
-              <div className="w-full text-primary text-center text-[16px]  font-semibold flex justify-center">
-                <Link to="/register" className="transition ease-in-out delay-150 hover:-translate-y-1 duration-300 hover:scale-125">Create Account</Link>
+            ) : (
+              <div className="flex flex-col justify-center items-center gap-[13px] w-full">
+                <div
+                  onClick={() => setIsLoggedIn(true)}
+                  className="w-full text-primary text-center text-[16px] font-semibold flex justify-center"
+                >
+                  <Link
+                    to="/login"
+                    className="transition ease-in-out delay-150 hover:-translate-y-1 duration-300 hover:scale-125"
+                  >
+                    Login
+                  </Link>
+                </div>
+                <span className="text-black text-[12px]">or</span>
+                <div className="w-full text-primary text-center text-[16px]  font-semibold flex justify-center">
+                  <Link
+                    to="/register"
+                    className="transition ease-in-out delay-150 hover:-translate-y-1 duration-300 hover:scale-125"
+                  >
+                    Create Account
+                  </Link>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       )}

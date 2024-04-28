@@ -3,20 +3,26 @@ import { Formik } from "formik";
 import Modal from "components/Modal";
 import Button from "components/Button";
 import contributions from "layout/Lists/contributions";
-import WishItems from "layout/Lists/wishlist";
 import images from "layout/Lists/images";
+import WishItems from "layout/Lists/wishlist";
 import CreateGuestTribute from "pages/GuestPage/CreateTribute";
-import CustomInput from "components/CustonFormInputs/CustomInput";
+import CustomInput from "components/CustomFormInputs/CustomInput";
 import CustomTextArea from "components/CustomFormInputs/CustomTextArea";
 import WishListModal from "pages/GuestPage/wishlistModal";
 import ShareIcon from "assets/icons/shareIcon.svg";
 import rectangle from "assets/images/rectangle.png";
 import tributeImage from "assets/images/tributeimage.jpeg";
 import wishlistImage from "assets/images/wishlistimage.jpeg";
+import dog1 from "assets/Rectangle 6.png";
+import dog2 from "assets/Rectangle 8.png";
+import dog3 from "assets/Rectangle 9.png";
 import upload from "assets/images/upload.svg";
+import girl from "assets/girl3.webp";
 import gallery from "assets/images/gallery.svg";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [openCreateTribute, setOpenCreateTribute] = useState(false);
   const [selectedWishlist, setSelectedWishlist] = useState();
@@ -28,6 +34,33 @@ function Home() {
     setOpenCreateTribute(!openCreateTribute);
     setSelectedWishlist(item);
   }
+
+  const uploadedPictures = [
+    {
+      image: dog1,
+      angle: "rotate-0",
+    },
+    {
+      image: dog2,
+      angle: "rotate-12",
+    },
+    {
+      image: dog3,
+      angle: "rotate-45",
+    },
+    {
+      image: girl,
+      angle: "-rotate-12",
+    },
+    {
+      image: dog3,
+      angle: "rotate-45",
+    },
+    {
+      image: girl,
+      angle: "-rotate-12",
+    },
+  ];
 
   function handleDonate() {
     setOpenCreateTribute(!openCreateTribute);
@@ -58,16 +91,16 @@ function Home() {
           </div>
           <div className="flex md:hidden gap-[10px] text-white absolute right-[20px] top-[24px]">
             <button
-              className="font-[14px] bg-[black] p-2 drop-shadow-md rounded-md cursor-pointer"
+              className="font-[14px] bg-primary p-2 px-[24px] rounded-md"
+              onClick={() => navigate("/wishlist")}
+            >
+              Wishlist
+            </button>
+            <button
+              className="font-[14px] p-2 px-[24px] text-primary font-medium bg-indigo-100 outline-none border-primary rounded-md cursor-pointer"
               onClick={() => handleDonate()}
             >
               Donate
-            </button>
-            <button
-              className="font-[14px] bg-primary p-2 rounded-md"
-              onClick={() => setOpen(!open)}
-            >
-              Wishlist
             </button>
           </div>
         </div>
@@ -135,30 +168,34 @@ function Home() {
                   {contribution.initial}
                 </p>
                 <div className="md:col-span-10 xl:col-span-11">
-                  <div className="flex gap-2 items-center">
+                  <div className="flex gap-3 items-center">
                     <h4 className="text-[18px] font-bold">{contribution.fullName}</h4>
-                    <div className="relative bottom-3">
-                      <div className="w-[20px] h-[20px] rounded-sm overflow-hidden absolute border border-[black] origin-center rotate-45">
-                        <img
-                          src={tributeImage}
-                          alt="gallery icon"
-                          className="w-full h-full object-fit z-0 border-2 border-red"
-                        />
-                      </div>
-                      <div className="w-[20px] h-[20px] rounded-sm overflow-hidden absolute border border-[red] origin-center rotate-12 ">
-                        <img
-                          src={wishlistImage}
-                          alt="gallery icon"
-                          className="w-full h-full object-fit z-1 border-2 border-[black]"
-                        />
-                      </div>
-                      <div className="w-[20px] h-[20px] rounded-sm overflow-hidden absolute  origin-center -rotate-12 ">
-                        <img
-                          src={rectangle}
-                          alt="gallery icon"
-                          className="w-full h-full object-fit z-2 border-2 border-[black]"
-                        />
-                      </div>
+                    <div className="relative bottom-3" key={index}>
+                      {contribution.image < 4
+                        ? uploadedPictures.slice(0, contribution.image).map(({ image, angle }) => (
+                            <div
+                              className={`w-[20px] h-[20px] rounded-sm overflow-hidden border-solid border-[0.5] border-[white] absolute origin-center ${angle}`}
+                              key={index}
+                            >
+                              <img
+                                src={image}
+                                alt="gallery icon"
+                                className="absolute w-full h-full object-fit z-0"
+                              />
+                            </div>
+                          ))
+                        : uploadedPictures.slice(0, 4).map(({ image, angle }) => (
+                            <div
+                              className={`w-[20px] h-[20px] rounded-sm overflow-hidden border-solid border-[0.5] border-[white] absolute origin-center ${angle}`}
+                              key={index}
+                            >
+                              <img
+                                src={image}
+                                alt="gallery icon"
+                                className="absolute w-full h-full object-fit z-0"
+                              />
+                            </div>
+                          ))}
                     </div>
                   </div>
 
@@ -172,7 +209,11 @@ function Home() {
                         >
                           Show less
                         </div>
-                        <img src={ShareIcon} alt="share" />
+                        <img
+                          src={ShareIcon}
+                          alt="share"
+                          className="cursor-pointer w-[22px] hover:w-[18px]"
+                        />
                       </div>
                     </div>
                   ) : (
@@ -187,7 +228,11 @@ function Home() {
                         >
                           Read more
                         </div>
-                        <img src={ShareIcon} alt="share" />
+                        <img
+                          src={ShareIcon}
+                          alt="share"
+                          className="cursor-pointer w-[22px] hover:w-[18px]"
+                        />
                       </div>
                     </div>
                   )}
@@ -251,7 +296,7 @@ function Home() {
                         }}
                       />
                     </label>
-                  
+
                     {/* <div className="border border-[#8593AD] rounded-md py-[18px] px-[26px] flex">
                       
                     </div> */}
@@ -314,7 +359,10 @@ function Home() {
             </div>
             <div className="grid grid-cols-2 gap-[28px]">
               {WishItems.map((items) => (
-                <div className="bg-[#F0F1F5] rounded-xl cursor-pointer">
+                <div
+                  className="bg-[#F0F1F5] rounded-xl cursor-pointer"
+                  onClick={() => navigate("/wishlist")}
+                >
                   <img src={items.image} className="rounded-t-xl" alt="wish" />
                   <div className="flex items-center p-[12px] justify-between">
                     <div className="flex flex-col gap-[7px]">
@@ -329,7 +377,12 @@ function Home() {
                 </div>
               ))}
             </div>
-            <Button className="text-white font-bold mt-[30px]">See more</Button>
+            <Button
+              className="text-white font-bold mt-[30px]"
+              onClick={() => navigate("/wishlist")}
+            >
+              See more
+            </Button>
           </div>
           <div className="bg-white p-3 rounded-md flex flex-col gap-[17px] h-fit">
             <div className="flex flex-col gap-[12px] ">

@@ -24,6 +24,14 @@ export const Schema = yup.object().shape({
   acceptedTos: yup.boolean().oneOf([true], "Please accept the terms of service"),
 });
 
+export const ProfileSchema = yup.object().shape({
+  firstName: yup.string().required('First Name is required'),
+  lastName: yup.string().required('Last Name is required'),
+  email: yup.string().email('Invalid email').required('Email is required'),
+  phoneNumber: yup.string().required('Phone Number is required'),
+  profileImage: yup.mixed().required('Profile Image is required'),
+});
+
 export const AddItemsSchema = yup.object().shape({
   items: yup.array().of(
     yup.object().shape({

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { PATH_DASHBOARD } from "routes/path";
 import React, { useState } from "react";
 import { Field, Formik } from "formik";
-import CustomInput from "components/CustonFormInputs/CustomInput";
+import CustomInput from "components/CustomFormInputs/CustomInput";
 
 function BankDetails() {
   const [isActive, setIsActive] = useState(false);
@@ -102,8 +102,8 @@ function BankDetails() {
 
                   <button
                     type="submit"
-                    className={`w-full bg-primary px-[26px] py-[18px] text-white rounded-[4px] ${!values.accountNumber || !values.accountName || !values.selectedBank ? "opacity-[0.2] cursor-not-allowed" : ""}`}
-                    disabled={!values.accountNumber || !values.accountName || !values.selectedBank}
+                    className={`w-full bg-primary px-[26px] py-[18px] text-white rounded-[4px] ${!values.accountNumber  || !values.selectedBank ? "opacity-[0.2] cursor-not-allowed" : ""}`}
+                    disabled={!values.accountNumber || !values.selectedBank}
                   >
                     Save
                   </button>
