@@ -3,7 +3,7 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 import { useEffect, useState } from "react";
 import Modal from "components/Modal";
-import { ErrorMessage, Form, Formik } from "formik";
+import { Form, Formik } from "formik";
 import { motion } from "framer-motion";
 import { wishlistSchema } from "Schemas";
 import CustomSelect from "components/CustomFormInputs/CustomSelect";
@@ -217,7 +217,6 @@ function Wishlist() {
           onSubmit={(values, { resetForm }) => {
             console.log("Form submitted with values:", values);
             setOpen(false);
-
             resetForm();
           }}
         >

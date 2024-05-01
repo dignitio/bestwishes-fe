@@ -111,6 +111,20 @@ export default function Router() {
         },
       ],
     },
+    {
+      path: "/guest-wishlist",
+      element: (
+        <GuestGuard>
+          <GuestLayout />
+        </GuestGuard>
+      ),
+      children: [
+        {
+          element: <GuestWishlist />,
+          index: true,
+        },
+      ],
+    },
   ]);
 }
 
@@ -129,5 +143,6 @@ const Home = Loadable(lazy(() => import("../pages/GuestPage/Home")));
 const About = Loadable(lazy(() => import("../pages/GuestPage/About")));
 const Features = Loadable(lazy(() => import("../pages/GuestPage/Features")));
 const Login = Loadable(lazy(() => import("../pages/Login")));
+const GuestWishlist = Loadable(lazy(() => import("../pages/GuestWishlist")));
 const Register = Loadable(lazy(() => import("../pages/Register")));
 const ResetPassword = Loadable(lazy(() => import("../pages/ResetPassword")));

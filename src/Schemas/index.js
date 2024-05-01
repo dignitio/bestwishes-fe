@@ -44,6 +44,19 @@ export const AddItemsSchema2 = yup.object().shape({
   ),
 });
 
+export const guestWishlist = yup.object().shape({
+  items: yup.array().of(
+    yup.object().shape({
+      guestName: yup.string().required("please enter your name"),
+      guestMail: yup
+        .string()
+        .email("Please enter a valid email")
+        .required("Please enter a valid email"),
+      guestAmount: yup.number().required("please enter an amount"),
+    }),
+  ),
+});
+
 export const wishlistSchema = yup.object().shape({
   wishListCategory: yup
     .string()
