@@ -16,8 +16,8 @@ export default function CustomPriceInput({ label, ...props }) {
   };
 
   return (
-    <div className="flex flex-col gap-2 w-full">
-      <label className="text-[#1E1B1A] font-medium text-[18px] mb-2" htmlFor={props.id}>
+    <div className="flex flex-col w-full">
+      <label className="text-[#1E1B1A] font-medium text-[18px] mb-1" htmlFor={props.id}>
         {label}
       </label>
       <motion.div whileHover={{ scale: 0.98 }} className="relative">
