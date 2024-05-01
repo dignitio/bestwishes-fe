@@ -159,23 +159,23 @@ function CreateTribute() {
                                         </div>
                                         )}
                                     </div>
-                                    <div>
-                                    <Button
-                                        onClick={() => setActiveStep(activeStep + 1)}
-                                        type="button"
-                                        className={`w-full self-end py-[24px] md:py-[30px] outline-none rounded-md flex justify-center items-center text-white
-                                        ${
-                                        values.headerImage &&
-                                        values.tributeType &&
-                                        values.tributeTitle &&
-                                        values.fullName &&
-                                        values.dateOfBirth
-                                            ? "bg-primary"
-                                            : "bg-primary/50 pointer-events-none "
-                                            }
-                                        `}
-                                    >
-                                        Next
+                                    <div className="flex justify-end">
+                                        <Button
+                                            onClick={() => setActiveStep(activeStep + 1)}
+                                            type="button"
+                                            className={`w-2/5 py-[24px] md:py-[30px] outline-none rounded-md flex justify-center items-center text-white
+                                            ${
+                                            values.headerImage &&
+                                            values.tributeType &&
+                                            values.tributeTitle &&
+                                            values.fullName &&
+                                            values.dateOfBirth
+                                                ? "bg-primary"
+                                                : "bg-primary/50 pointer-events-none "
+                                                }
+                                            `}
+                                        >
+                                            Next
                                         </Button>{" "}
                                     </div>
                                 </div>
@@ -299,7 +299,7 @@ function CreateTribute() {
                                                 required
                                                 placeholder="click here to upload music"
                                             />
-                                            <MusicIcon className="cursor-pointer absolute translate-y-[170%] right-6 top-2 w-6 h-6"/>
+                                            <MusicIcon className="cursor-pointer absolute translate-y-[170%] right-6 max-md:top-0 top-2 w-6 h-6"/>
                                             <input
                                                 type="file"
                                                 id="musicLink"
@@ -311,7 +311,7 @@ function CreateTribute() {
                                         </div>
                                     </div>
                                     <div  className="flex justify-between max-sm:block gap-10 my-8 max-md:mb-0">
-                                        <div className="w-1/2">
+                                        <div className="md:w-1/2">
                                             <p className="mr-3">Would you prefer this Tribute to be</p>
                                             <div className="flex items-center mt-2">
                                                 <div className="mr-4 flex items-center">
@@ -333,7 +333,7 @@ function CreateTribute() {
                                             </div>
                                         </div>
                                         {values.publicType === "private" ?
-                                            <div className="w-1/2 relative">
+                                            <div className="md:w-1/2 relative max-md:my-4">
                                                 <div>
                                                     {/* <p className="md:base absolute top-12 z-10">BWT-</p> */}
                                                     <CustomInput 
