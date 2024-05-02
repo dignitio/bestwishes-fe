@@ -61,7 +61,7 @@ export default function Router() {
         },
         {
           element: <EditTribute />,
-          path: "tribute/edit",
+          path: "tribute/:id/edit",
         },
         {
           element: <Wishlist />,
@@ -109,6 +109,14 @@ export default function Router() {
           element: <Home />,
           index: true,
         },
+        {
+          element: <Features />,
+          path: "features",
+        },
+        {
+          element: <About />,
+          path: "about",
+        }
       ],
     },
     {

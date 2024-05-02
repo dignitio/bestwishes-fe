@@ -24,6 +24,14 @@ export const Schema = yup.object().shape({
   acceptedTos: yup.boolean().oneOf([true], "Please accept the terms of service"),
 });
 
+export const ProfileSchema = yup.object().shape({
+  firstName: yup.string().required('First Name is required'),
+  lastName: yup.string().required('Last Name is required'),
+  email: yup.string().email('Invalid email').required('Email is required'),
+  phoneNumber: yup.string().required('Phone Number is required'),
+  profileImage: yup.mixed().required('Profile Image is required'),
+});
+
 export const AddItemsSchema = yup.object().shape({
   items: yup.array().of(
     yup.object().shape({
@@ -82,6 +90,102 @@ export const wishlistSchema = yup.object().shape({
       img: yup.mixed().required("Image is required"),
       itemName: yup.string().required("please enter an item name "),
       price: yup.number().required("please enter an amount"),
+    }),
+  ),
+});
+
+export const tributeSchema = yup.object().shape({
+  headerImage: yup
+    .mixed()
+    .test("file", "Please upload an Image", (value) => {
+      if (!value || !value.type.startsWith("image/")) {
+        return false;
+      }
+      return true;
+    })
+    .required("Please upload an Image"),
+  tributeType: yup
+    .string()
+    .oneOf(["anniversary", "birthday", "convocation", "funeral", "naming", "wedding", "other"], "Invalid Category")
+    .required("Click here to enter type of tribute"),
+  tributeTitle: yup.string().required("Click here to enter Tribute title"),
+  fullName: yup.string().required("Click here to enter your name"),
+  dateOfBirth: yup.date().nullable().required("Pick a birth date"),
+  dateOfDeath: yup.date().nullable(),
+  tributeBio: yup
+    .string()
+    .max(65, "Must Write a Description")
+    .required("Please write a description"),
+  receiveCash: yup
+    .boolean()
+    .oneOf([true, false], "Invalid")
+    .required('Please select an option'),
+  addWishList: yup
+    .string()
+    .oneOf(['Yes', 'No'], 'Invalid')
+    .required('Please select an option'),
+  wishlistTitle: yup
+    .string()
+    .oneOf(["john-anniversary", "samuel-birthday", "temmy-convocation", "bernard-funeral", "princess-naming", "other"], 'Invalid Category'),
+  relationship: yup
+    .string()
+    .oneOf(["father", "mother", "brother", "sister", "cousin", "other"], "Invalid Category")
+    .required("Click here to select your relationship"),
+  musicLink: yup.string(),
+  publicType: yup
+    .string()
+    .oneOf(['public', 'private'], 'Invalid')
+    .required('Please select an option'),
+  tributeKey: yup.string(),
+  otherImages: yup.array().of(
+    yup.object().shape({
+      firstOtherImg: yup.mixed().required("Image is required"),
+      secondOtherImg: yup.mixed(),
+      thirdOtherImg: yup.mixed(),
+      fourthOtherImg: yup.mixed(),
+    }),
+  ),
+});
+
+
+export const editTributeSchema = yup.object().shape({
+  headerImage: yup
+    .mixed()
+    .test("file", "Please upload an Image", (value) => {
+      if (!value || !value.type.startsWith("image/")) {
+        return false;
+      }
+      return true;
+    })
+    .required("Please upload an Image"),
+  tributeType: yup
+    .string()
+    .oneOf(["anniversary", "birthday", "convocation", "funeral", "naming", "wedding", "other"], "Invalid Category")
+    .required("Click here to enter type of tribute"),
+  tributeTitle: yup.string().required("Click here to enter Tribute title"),
+  fullName: yup.string().required("Click here to enter your name"),
+  dateOfBirth: yup.date().nullable().required("Pick a birth date"),
+  dateOfDeath: yup.date().nullable().required("Pick a death date"),
+  tributeBio: yup
+    .string()
+    .max(65, "Must Write a Description")
+    .required("Please write a description"),
+  relationship: yup
+    .string()
+    .oneOf(["father", "mother", "brother", "sister", "cousin", "other"], "Invalid Category")
+    .required("Click here to select your relationship"),
+  musicLink: yup.string(),
+  publicType: yup
+    .string()
+    .oneOf(['public', 'private'], 'Invalid')
+    .required('Please select an option'),
+  tributeKey: yup.string(),
+  otherImages: yup.array().of(
+    yup.object().shape({
+      firstOtherImg: yup.mixed().required("Image is required"),
+      secondOtherImg: yup.mixed().required("Image is required"),
+      thirdOtherImg: yup.mixed().required("Image is required"),
+      fourthOtherImg: yup.mixed().required("Image is required"),
     }),
   ),
 });

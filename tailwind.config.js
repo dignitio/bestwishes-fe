@@ -17,8 +17,9 @@ module.exports = {
         Draft: "#1061B1",
         bgWalletBalanceFigure: "#1061B1",
         bgWalletBalance: "#465C86",
+        hoverColor: "#271F6B30"
       },
-    },
   },
   plugins: [],
+}
 };

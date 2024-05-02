@@ -11,3 +11,27 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+ 
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #E3E2E9; /* Color of the track */
+ 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #271F6B; /* Color of the handle */
+
+
+
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #4b40a0; /* Color of the handle on hover */
+}

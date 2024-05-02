@@ -98,7 +98,7 @@ function Nav() {
               My profile
             </NavLink>
           </div>
-          <Button className=" text-red-500 flex gap-x-4 items-center  font-bold ">
+          <Button className=" text-primary flex gap-x-4 items-center font-bold ">
             <span>Logout</span>
           </Button>
         </div>

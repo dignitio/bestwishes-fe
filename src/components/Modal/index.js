@@ -22,8 +22,8 @@ const Modal = ({ open, onClose, customClass, width, children, isWishList, ...pro
       {...props}
     >
       <div className="header z-50 ">
-        <button type="button" className="w-4 cursor-pointer " onClick={onClose}>
-          <Closeicon className="w-4" />
+        <button type="button" className="w-4 cursor-pointer mr-2" onClick={onClose}>
+          <Closeicon className="w-5 mt-2" />
         </button>
       </div>
       <div

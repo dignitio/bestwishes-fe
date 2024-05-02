@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { PATH_DASHBOARD } from "routes/path";
 import React, { useState } from "react";
 import { Formik } from "formik";
-import CustomInput from "components/CustonFormInputs/CustomInput";
+import CustomInput from "components/CustomFormInputs/CustomInput";
 
 function Security() {
   const [isActive, setIsActive] = useState(false);
@@ -19,7 +19,7 @@ function Security() {
             <Link
               to={PATH_DASHBOARD.profile}
               className={`text-[16px] cursor-pointer lg:px-[47px] lg:py-[15px] ${
-                isActive === "profile" ? "text-[#FF433C]" : "text-[#000000]"
+                isActive === "profile" ? "text-primary" : "text-[#000000]"
               }`}
               onClick={() => handleLinkClick("profile")}
             >
@@ -28,7 +28,7 @@ function Security() {
             <Link
               to={PATH_DASHBOARD.bank}
               className={`text-[16px] cursor-pointer lg:px-[47px] lg:py-[15px] ${
-                isActive === "bank" ? "text-[#FF433C]" : "text-[#000000]"
+                isActive === "bank" ? "text-primary" : "text-[#000000]"
               }`}
               onClick={() => handleLinkClick("bank")}
             >
@@ -36,7 +36,7 @@ function Security() {
             </Link>
             <Link
               to={PATH_DASHBOARD.security}
-              className="text-[16px] cursor-pointer lg:px-[47px] lg:py-[15px] text-[#FF433C]"
+              className="text-[16px] cursor-pointer lg:px-[47px] lg:py-[15px] text-primary"
             >
               <span>Security</span>
             </Link>
@@ -84,7 +84,7 @@ function Security() {
 
                   <button
                     type="submit"
-                    className={`w-full bg-[#FF433C] px-[26px] py-[18px] text-white rounded-[4px] ${!values.oldPassword || !values.newPassword ? "opacity-[0.2] cursor-not-allowed" : ""}`}
+                    className={`w-full bg-primary px-[26px] py-[18px] text-white rounded-[4px] ${!values.oldPassword || !values.newPassword ? "opacity-[0.2] cursor-not-allowed" : ""}`}
                     disabled={!values.oldPassword || !values.newPassword}
                   >
                     Save

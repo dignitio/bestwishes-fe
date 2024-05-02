@@ -23,8 +23,8 @@ function Sidebar() {
             end
             className={({ isActive }) =>
               isActive
-                ? "flex items-end py-2.5 px-3 bg-gradient-to-r from-gray-200 to-white"
-                : "flex items-end py-2.5 px-3 hover:bg-gradient-to-r from-gray-200 to-white"
+                ? "flex items-end py-2.5 px-3 bg-gradient-to-r from-indigo-100 to-white"
+                : "flex items-end py-2.5 px-3 hover:bg-gradient-to-r from-indigo-100 to-white"
             }
           >
             <span className="mr-2">
@@ -38,8 +38,8 @@ function Sidebar() {
             to={PATH_DASHBOARD.tribute}
             className={({ isActive }) =>
               isActive
-                ? "flex items-end py-2.5 px-3 bg-gradient-to-r from-gray-200 to-white"
-                : "flex items-end py-2.5 px-3 hover:bg-gradient-to-r from-gray-200 to-white"
+                ? "flex items-end py-2.5 px-3 bg-gradient-to-r from-indigo-100 to-white"
+                : "flex items-end py-2.5 px-3 hover:bg-gradient-to-r from-indigo-100 to-white"
             }
           >
             <span className="mr-2">
@@ -53,8 +53,8 @@ function Sidebar() {
             to={PATH_DASHBOARD.wishlist}
             className={({ isActive }) =>
               isActive
-                ? "flex items-end py-2.5 px-3 bg-gradient-to-r from-gray-200 to-white"
-                : "flex items-end py-2.5 px-3 hover:bg-gradient-to-r from-gray-200 to-white"
+                ? "flex items-end py-2.5 px-3 bg-gradient-to-r from-indigo-100 to-white"
+                : "flex items-end py-2.5 px-3 hover:bg-gradient-to-r from-indigo-100 to-white"
             }
           >
             <span className="mr-2">
@@ -68,8 +68,8 @@ function Sidebar() {
             to={PATH_DASHBOARD.createCard}
             className={({ isActive }) =>
               isActive
-                ? "flex items-end py-2.5 px-3 bg-gradient-to-r from-gray-200 to-white"
-                : "flex items-end py-2.5 px-3 hover:bg-gradient-to-r from-gray-200 to-white"
+                ? "flex items-end py-2.5 px-3 bg-gradient-to-r from-indigo-100 to-white"
+                : "flex items-end py-2.5 px-3 hover:bg-gradient-to-r from-indigo-100 to-white"
             }
           >
             <span className="mr-2">
@@ -83,8 +83,8 @@ function Sidebar() {
             to={PATH_DASHBOARD.settings}
             className={({ isActive }) =>
               isActive
-                ? "flex items-end py-2.5 px-3 bg-gradient-to-r from-gray-200 to-white"
-                : "flex items-end py-2.5 px-3 hover:bg-gradient-to-r from-gray-200 to-white"
+                ? "flex items-end py-2.5 px-3 bg-gradient-to-r from-indigo-100 to-white"
+                : "flex items-end py-2.5 px-3 hover:bg-gradient-to-r from-indigo-100 to-white"
             }
           >
             <span className="mr-2">
@@ -98,8 +98,8 @@ function Sidebar() {
             to={PATH_DASHBOARD.support}
             className={({ isActive }) =>
               isActive
-                ? "flex items-end py-2.5 px-3 bg-gradient-to-r from-gray-200 to-white"
-                : "flex items-end py-2.5 px-3 hover:bg-gradient-to-r from-gray-200 to-white"
+                ? "flex items-end py-2.5 px-3 bg-gradient-to-r from-indigo-100 to-white"
+                : "flex items-end py-2.5 px-3 hover:bg-gradient-to-r from-indigo-100 to-white"
             }
           >
             <span className="mr-2">
@@ -109,7 +109,7 @@ function Sidebar() {
           </NavLink>
         </div>
         <div className="mb-3">
-          <button className="flex cursor-pointer py-2.5 px-3 hover:bg-gradient-to-r from-gray-200 to-white pr-24">
+          <button className="flex cursor-pointer py-2.5 px-3 hover:bg-gradient-to-r from-indigo-100 to-white pr-24">
             <span className="mr-2">
               <LogOutIcon />
             </span>

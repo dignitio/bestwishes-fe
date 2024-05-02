@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { PATH_DASHBOARD } from "routes/path";
 import React, { useState } from "react";
 import { Field, Formik } from "formik";
-import CustomInput from "components/CustonFormInputs/CustomInput";
+import CustomInput from "components/CustomFormInputs/CustomInput";
 
 function BankDetails() {
   const [isActive, setIsActive] = useState(false);
@@ -44,20 +44,20 @@ function BankDetails() {
         <div className="flex lg:flex-col flex-row lg:gap-[28px] lg:justify-start justify-between mb-2">
             <Link
               to={PATH_DASHBOARD.profile}
-              className={`text-[16px] cursor-pointer lg:px-[47px] lg:py-[15px] ${isActive === "profile" ? "text-[#FF433C]" : "text-[#000000]"}`}
+              className={`text-[16px] cursor-pointer lg:px-[47px] lg:py-[15px] ${isActive === "profile" ? "text-primary" : "text-[#000000]"}`}
               onClick={() => handleLinkClick("profile")}
             >
               <span>Profile</span>
             </Link>
             <Link
               to={PATH_DASHBOARD.bank}
-              className="text-[16px] cursor-pointer lg:px-[47px] lg:py-[15px] text-[#FF433C]"
+              className="text-[16px] cursor-pointer lg:px-[47px] lg:py-[15px] text-primary"
             >
               <span className="whitespace-nowrap">Bank Details</span>
             </Link>
             <Link
               to={PATH_DASHBOARD.security}
-              className={`text-[16px] cursor-pointer lg:px-[47px] lg:py-[15px] ${isActive === "security" ? "text-[#FF433C]" : "text-[#000000]"}`}
+              className={`text-[16px] cursor-pointer lg:px-[47px] lg:py-[15px] ${isActive === "security" ? "text-primary" : "text-[#000000]"}`}
               onClick={() => handleLinkClick("security")}
             >
               <span>Security</span>
@@ -102,8 +102,8 @@ function BankDetails() {
 
                   <button
                     type="submit"
-                    className={`w-full bg-[#FF433C] px-[26px] py-[18px] text-white rounded-[4px] ${!values.accountNumber || !values.accountName || !values.selectedBank ? "opacity-[0.2] cursor-not-allowed" : ""}`}
-                    disabled={!values.accountNumber || !values.accountName || !values.selectedBank}
+                    className={`w-full bg-primary px-[26px] py-[18px] text-white rounded-[4px] ${!values.accountNumber  || !values.selectedBank ? "opacity-[0.2] cursor-not-allowed" : ""}`}
+                    disabled={!values.accountNumber || !values.selectedBank}
                   >
                     Save
                   </button>

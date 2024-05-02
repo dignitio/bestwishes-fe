@@ -3,26 +3,64 @@ import { Formik } from "formik";
 import Modal from "components/Modal";
 import Button from "components/Button";
 import contributions from "layout/Lists/contributions";
-import WishItems from "layout/Lists/wishlist";
 import images from "layout/Lists/images";
+import WishItems from "layout/Lists/wishlist";
 import CreateGuestTribute from "pages/GuestPage/CreateTribute";
-import CustomInput from "components/CustonFormInputs/CustomInput";
-import WishListModal from "../wishlistModal";
-
-import rectangle from "../../../assets/images/rectangle.png";
-import tributeImage from "../../../assets/images/tributeimage.jpeg";
-import wishlistImage from "../../../assets/images/wishlistimage.jpeg";
-import upload from "../../../assets/images/upload.svg";
+import CustomInput from "components/CustomFormInputs/CustomInput";
+import CustomTextArea from "components/CustomFormInputs/CustomTextArea";
+import WishListModal from "pages/GuestPage/wishlistModal";
+import ShareIcon from "assets/icons/shareIcon.svg";
+import rectangle from "assets/images/rectangle.png";
+import tributeImage from "assets/images/tributeimage.jpeg";
+import wishlistImage from "assets/images/wishlistimage.jpeg";
+import dog1 from "assets/Rectangle 6.png";
+import dog2 from "assets/Rectangle 8.png";
+import dog3 from "assets/Rectangle 9.png";
+import upload from "assets/images/upload.svg";
+import girl from "assets/girl3.webp";
+import gallery from "assets/images/gallery.svg";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [openCreateTribute, setOpenCreateTribute] = useState(false);
   const [selectedWishlist, setSelectedWishlist] = useState();
+  const [fileUploaded, setFileUploaded] = useState(false);
+  const [expandText, setExpandText] = useState(false);
+  const [selectedContribution, setSelectedContribution] = useState(null);
 
   function handleModal(item) {
     setOpenCreateTribute(!openCreateTribute);
     setSelectedWishlist(item);
   }
+
+  const uploadedPictures = [
+    {
+      image: dog1,
+      angle: "rotate-0",
+    },
+    {
+      image: dog2,
+      angle: "rotate-12",
+    },
+    {
+      image: dog3,
+      angle: "rotate-45",
+    },
+    {
+      image: girl,
+      angle: "-rotate-12",
+    },
+    {
+      image: dog3,
+      angle: "rotate-45",
+    },
+    {
+      image: girl,
+      angle: "-rotate-12",
+    },
+  ];
 
   function handleDonate() {
     setOpenCreateTribute(!openCreateTribute);
@@ -53,16 +91,16 @@ function Home() {
           </div>
           <div className="flex md:hidden gap-[10px] text-white absolute right-[20px] top-[24px]">
             <button
-              className="font-[14px] bg-[black] p-2 drop-shadow-md rounded-md cursor-pointer"
+              className="font-[14px] bg-primary p-2 px-[24px] rounded-md"
+              onClick={() => navigate("/wishlist")}
+            >
+              Wishlist
+            </button>
+            <button
+              className="font-[14px] p-2 px-[24px] text-primary font-medium bg-indigo-100 outline-none border-primary rounded-md cursor-pointer"
               onClick={() => handleDonate()}
             >
               Donate
-            </button>
-            <button
-              className="font-[14px] bg-[#FF433C] p-2 rounded-md"
-              onClick={() => setOpen(!open)}
-            >
-              Wishlist
             </button>
           </div>
         </div>
@@ -122,21 +160,87 @@ function Home() {
               <br />
             </p>
           </div>
-          <div className="bg-white lg:px-[40px] lg:py-[28px] px-[19px] py-[24px] rounded-md flex flex-col gap-[32px] h-[800px] overflow-y-scroll">
+          <div className="bg-white lg:px-[40px] lg:py-[28px] px-[19px] py-[24px] rounded-md flex flex-col gap-[32px] h-[700px] overflow-y-auto">
             <h1 className="text-[24px] font-bold">Contributions ({contributions.length})</h1>
-            {contributions.map((contribution) => (
-              <div className="lg:grid grid-cols-12 items-center">
+            {contributions.map((contribution, index) => (
+              <div key={index} className="lg:grid grid-cols-12 items-center">
                 <p className="md:col-span-2 xl:col-span-1 bg-gray-200 mb-3 w-14 h-14 max-sm:w-10 max-sm:h-10 max-lg:w-14 max-lg:h-14 rounded-full flex items-center max-sm:pt-2.5 text-center justify-center font-semibold mr-3 tracking-tighter text-base max-sm:text-sm max-lg:text-lg max-sm:block">
                   {contribution.initial}
                 </p>
                 <div className="md:col-span-10 xl:col-span-11">
-                  <h4 className="text-[18px] font-bold">{contribution.fullName}</h4>
-                  <p className="leading-loose text-[16px]">{contribution.description}</p>
+                  <div className="flex gap-3 items-center">
+                    <h4 className="text-[18px] font-bold">{contribution.fullName}</h4>
+                    <div className="relative bottom-3" key={index}>
+                      {contribution.image < 4
+                        ? uploadedPictures.slice(0, contribution.image).map(({ image, angle }) => (
+                            <div
+                              className={`w-[20px] h-[20px] rounded-sm overflow-hidden border-solid border-[0.5] border-[white] absolute origin-center ${angle}`}
+                              key={index}
+                            >
+                              <img
+                                src={image}
+                                alt="gallery icon"
+                                className="absolute w-full h-full object-fit z-0"
+                              />
+                            </div>
+                          ))
+                        : uploadedPictures.slice(0, 4).map(({ image, angle }) => (
+                            <div
+                              className={`w-[20px] h-[20px] rounded-sm overflow-hidden border-solid border-[0.5] border-[white] absolute origin-center ${angle}`}
+                              key={index}
+                            >
+                              <img
+                                src={image}
+                                alt="gallery icon"
+                                className="absolute w-full h-full object-fit z-0"
+                              />
+                            </div>
+                          ))}
+                    </div>
+                  </div>
+
+                  {selectedContribution === index ? (
+                    <div className="flex flex-col gap-2">
+                      <p className="leading-loose text-[16px]">{contribution.description}</p>
+                      <div className="flex gap-2 items-center">
+                        <div
+                          className="text-[#C2C9D6] cursor-pointer font-bold hover:font-medium hover:scale-80"
+                          onClick={() => setSelectedContribution(null)}
+                        >
+                          Show less
+                        </div>
+                        <img
+                          src={ShareIcon}
+                          alt="share"
+                          className="cursor-pointer w-[22px] hover:w-[18px]"
+                        />
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex flex-col gap-2">
+                      <p className="leading-loose text-[16px] truncate">
+                        {contribution.description}
+                      </p>
+                      <div className="flex gap-2 items-center">
+                        <div
+                          className="text-[#C2C9D6] cursor-pointer font-bold hover:font-medium hover:scale-80"
+                          onClick={() => setSelectedContribution(index)}
+                        >
+                          Read more
+                        </div>
+                        <img
+                          src={ShareIcon}
+                          alt="share"
+                          className="cursor-pointer w-[22px] hover:w-[18px]"
+                        />
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
           </div>
-          <div className="bg-white lg:px-[40px] lg:py-[28px] px-[19px] py-[24px] rounded-md flex flex-col gap-[32px]">
+          <div className="bg-white lg:px-[40px] lg:py-[28px] px-[19px] py-[24px] rounded-md flex flex-col gap-[32px] lg:mb-[100px]">
             <h1 className="text-[24px]">Send a Tribute</h1>
 
             <Formik
@@ -162,13 +266,15 @@ function Home() {
                       onChange={handleChange}
                     />
 
-                    <div className="relative flex">
+                    <label htmlFor="memoriesUpload" className="relative flex cursor-pointer">
                       <CustomInput
                         label="Upload Memories"
                         name="memories"
                         value={values.memories}
-                        className="mb-2"
+                        className="mb-2 cursor-pointer"
                         required
+                        id="memoriesUpload"
+                        disabled
                         type="text"
                         placeholder="click here to upload images"
                         onChange={handleChange}
@@ -176,17 +282,20 @@ function Home() {
                       <img
                         src={upload}
                         alt="upload"
-                        className="cursor-pointer absolute translate-y-[170%] right-0 pr-4"
+                        className="cursor-pointer absolute translate-y-[170%] right-0 pr-4 "
                       />
                       <input
                         type="file"
+                        multiple
+                        accept="image/jpeg, image/png, image/svg, image/gif, image/bmp, image/tiff, image/webp"
                         id="memoriesUpload"
-                        className="cursor-pointer w-4 absolute translate-y-[150%] right-0 pr-[70px] leading-tight focus:outline-none focus:border-blue-500 opacity-0"
+                        className="cursor-pointer absolute w-full top-10 opacity-0 pr-[70px] leading-tight focus:outline-none focus:border-blue-500 "
                         onChange={(e) => {
-                          console.log(e.target.files);
+                          setFileUploaded(true);
+                          values.memories = e.target.files;
                         }}
                       />
-                    </div>
+                    </label>
 
                     {/* <div className="border border-[#8593AD] rounded-md py-[18px] px-[26px] flex">
                       
@@ -203,13 +312,13 @@ function Home() {
                   </div>
 
                   <div className="md:col-span-6 ">
-                    <CustomInput
+                    <CustomTextArea
                       label="Tribute"
-                      name="tribute"
+                      name="Tribute"
                       value={values.Tribute}
                       required
-                      type="textarea"
-                      placeholder=""
+                      rows="4"
+                      className={`h-[90%] md:-h-[90%] resize-none`}
                       onChange={handleChange}
                     />
                   </div>
@@ -252,7 +361,7 @@ function Home() {
               {WishItems.map((items) => (
                 <div
                   className="bg-[#F0F1F5] rounded-xl cursor-pointer"
-                  onClick={() => handleModal(items)}
+                  onClick={() => navigate("/wishlist")}
                 >
                   <img src={items.image} className="rounded-t-xl" alt="wish" />
                   <div className="flex items-center p-[12px] justify-between">
@@ -268,7 +377,12 @@ function Home() {
                 </div>
               ))}
             </div>
-            <Button className="text-white font-bold">See more</Button>
+            <Button
+              className="text-white font-bold mt-[30px]"
+              onClick={() => navigate("/wishlist")}
+            >
+              See more
+            </Button>
           </div>
           <div className="bg-white p-3 rounded-md flex flex-col gap-[17px] h-fit">
             <div className="flex flex-col gap-[12px] ">

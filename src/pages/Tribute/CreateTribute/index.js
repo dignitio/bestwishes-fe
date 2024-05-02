@@ -1,345 +1,587 @@
-import { useState } from "react";
+/* eslint-disable jsx-a11y/control-has-associated-label */
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable react/jsx-no-comment-textnodes */
+import { useState, useEffect } from "react";
+import { tributeSchema } from "Schemas";
+import SwitchButton from "components/Switch";
+import CustomSelect from "components/CustomFormInputs/CustomSelect";
+import CustomInput from "components/CustomFormInputs/CustomInput";
+import CustomCalendar from "components/CustomFormInputs/CustomCalender";
+import CustomRadio from "components/CustomFormInputs/CustomRadio";
+import Myeditor from "components/CustomFormInputs/CustomEditor";
+import { ErrorMessage, Form, Formik } from "formik";
+import { motion } from "framer-motion";
+import 'react-quill/dist/quill.snow.css';
 import Button from "components/Button";
-import uploadPix from "../../../assets/images/gallery.png";
-import { ReactComponent as UploadIcon } from "../../../assets/icons/upload-image.svg";
-import { ReactComponent as SwitchIcon } from "../../../assets/icons/switch.svg";
-import { ReactComponent as MusicIcon } from "../../../assets/icons/music.svg";
+import  uploadPix from "../../../assets/images/gallery.png"
+import { ReactComponent as UploadIcon } from "../../../assets/icons/upload-image.svg"
+import { ReactComponent as MusicIcon } from "../../../assets/icons/music.svg"
+import { ReactComponent as LeftIcon } from "../../../assets/icons/left.svg"
+
 
 function CreateTribute() {
-  const [formData, setFormData] = useState({
-    headerImage: "",
-    tributeType: "",
-    tributeTitle: "",
-    fullName: "",
-    dateOfBirth: "",
-    dateOfDeath: "",
-    tributeBio: "",
-    receiveCash: true,
-    addWishList: "No",
-    relationship: "",
-    musicLink: "",
-    publicType: "public",
-    tributeKey: "",
-    otherImages: [],
-  });
-  const [formError, setFormError] = useState(false);
 
-  const openSecondPage = () => {
-    if (formData.tributeTitle && formData.fullName && formData.tributeType) {
-      document.getElementById("first-page").classList.add("hidden");
-      document.getElementById("second-page").classList.remove("hidden");
-      document.getElementById("third-page").classList.add("hidden");
-      setFormError(false);
-    } else if (!formData.tributeType) {
-      document.getElementById("first-form-error").innerText = "Choose the tribute type";
-      setFormError(true);
-    } else if (!formData.tributeTitle) {
-      document.getElementById("first-form-error").innerText = "Enter the title of the tribute";
-      setFormError(true);
-    } else if (!formData.fullName) {
-      document.getElementById("first-form-error").innerText = "Enter your name";
-      setFormError(true);
-    }
-  };
+    const [activeStep, setActiveStep] = useState(0);
+    const [open, setOpen] = useState(false);
+    const [birthCalendarId, setBirthCalenderId] = useState(null);
+    const [deathCalendarId, setDeathCalenderId] = useState(null);
+    const [ musicFile, setMusicFile ] = useState(null)
+    useEffect(() => {
+        setBirthCalenderId("dateOfBirth");
+        setDeathCalenderId("dateOfDeath");
+    }, []);
 
-  const openThirdPage = () => {
-    if (formData.tributeBio) {
-      document.getElementById("first-page").classList.add("hidden");
-      document.getElementById("second-page").classList.add("hidden");
-      document.getElementById("third-page").classList.remove("hidden");
-    } else if (!formData.tributeBio) {
-      document.getElementById("second-form-error").innerText = "Please enter a short bio";
-      setFormError(true);
-    }
-  };
 
-  const handleChange = (e) => {
-    const { name, value, checked, type } = e.target;
-    setFormData((prev) => {
-      return {
-        ...prev,
-        [name]: type === "checkbox" ? checked : value,
-      };
-    });
-  };
-
-  return (
-    <div className="max-sm:w-80 max-sm:mx-auto">
-      {/* // First Page********* */}
-      <div className="text-xs max-sm:text-sm max-lg:text-base tracking-tight" id="first-page">
-        <div className="bg-gray-200 rounded-full -mt-4 mb-8 w-16 h-16 flex items-center justify-center mx-auto">
-          <img src={uploadPix} alt="upload-pix" className="w-9" />
-          <UploadIcon className="absolute w-3.5" />
-        </div>
-        <p
-          id="first-form-error"
-          className={
-            formError
-              ? "text-red-500 text-center text-sm font-semibold absolute top-5 left-0 right-0"
-              : "hidden"
-          }
-        >
-          .
-        </p>
-        <div className="flex justify-between my-8 max-sm:my-6 placeholder:italic max-sm:block">
-          <div className="max-sm:mb-5">
-            <p>Type of Tribute</p>
-            <select
-              name="tributeType"
-              value={formData.tributeType}
-              onChange={handleChange}
-              className="border rounded-md w-64 py-2 max-sm:py-2.5 px-2 mt-0.5 outline-0 placeholder:tracking-tighter text-xs max-sm:text-sm max-lg:text-base text-gray-600 max-sm:w-full"
-            >
-              <option value="" className="text-gray-400">
-                Click here to select tribute type
-              </option>
-              <option value="anniversary">Anniversary</option>
-              <option value="birthday">Birthday</option>
-              <option value="convocation">Convocation</option>
-              <option value="funeral">Funeral</option>
-              <option value="naming">Naming</option>
-              <option value="wedding">Wedding</option>
-            </select>
-          </div>
-          <div>
-            <p>Title of Tribute</p>
-            <input
-              type="text"
-              value={formData.tributeTitle}
-              onChange={(e) => handleChange(e)}
-              name="tributeTitle"
-              placeholder="Click to enter title of tribute"
-              className="border text-gray-600 rounded-md w-64 py-1.5 max-sm:py-2.5 px-2 mt-0.5 outline-0 placeholder:tracking-tighter placeholder:text-sm placeholder:text-gray-400  max-sm:w-full"
-            />
-          </div>
-        </div>
-        <div className="my-8 max-sm:my-5">
-          <p>Full Name</p>
-          <input
-            type="text"
-            value={formData.fullName}
-            onChange={(e) => handleChange(e)}
-            name="fullName"
-            placeholder="Click to enter to enter full name"
-            className="border text-gray-600 rounded-md w-full py-2 max-sm:py-2.5 px-2 mt-0.5 outline-0 placeholder:tracking-tighter placeholder:text-sm placeholder:text-gray-400 text-sm"
-          />
-        </div>
-        <div className="flex justify-between my-8 max-sm:my-6 max-sm:block">
-          <div>
-            <p>Date of Birth</p>
-            <input
-              type="date"
-              value={formData.dateOfBirth}
-              onChange={(e) => handleChange(e)}
-              name="dateOfBirth"
-              className="border text-gray-600 rounded-md w-60 py-2 max-sm:py-2.5 px-2 mt-0.5 outline-0 max-sm:w-full"
-            />
-          </div>
-          <div className="max-sm:mt-6">
-            <p>
-              Date of Death <span className="text-xs text-primary">(funeral only)</span>
-            </p>
-            <input
-              type="date"
-              value={formData.dateOfDeath}
-              onChange={(e) => handleChange(e)}
-              name="dateOfDeath"
-              className="border text-gray-600 rounded-md w-60 py-2 max-sm:py-2.5 px-2 mt-0.5 outline-0 max-sm:w-full"
-            />
-          </div>
-        </div>
-        <div className="flex justify-end">
-          <Button
-            type="button"
-            className="h-6 w-24 rounded-[2px] text-white text-sm max-sm:w-full"
-            onClick={openSecondPage}
-          >
-            Next
-          </Button>
-        </div>
-      </div>
-
-      {/* // ************Second Page*** */}
-      <div className="text-xs max-sm:text-sm tracking-tight hidden -mt-6" id="second-page">
+    return (
         <div>
-          <p
-            id="second-form-error"
-            className={formError ? "text-red-500 text-center text-xs font-semibold" : "hidden"}
-          >
-            .
-          </p>
-          <p>Bio</p>
-          <textarea
-            value={formData.tributeBio}
-            onChange={(e) => handleChange(e)}
-            name="tributeBio"
-            className="border text-gray-600 rounded-md w-full h-48 p-3 mt-0.5 outline-0 placeholder:tracking-tighter placeholder:text-sm placeholder:text-slate-400 resize-none text-sm"
-            placeholder="write a bio about yourself"
-          />
-        </div>
-        <div className="flex my-4 items-center">
-          <p className="mr-3">Want to receive cash gift?</p>
-          <SwitchIcon className="w-5" />
-        </div>
-        <div className="flex items-center">
-          <p>Want to add wishlist to your tribute?</p>
-          <div className="mx-4 flex items-center">
-            <input
-              type="radio"
-              checked={formData.addWishList === "No"}
-              value="No"
-              onChange={(e) => handleChange(e)}
-              name="addWishList"
-              className="w-2.5 mb-0.5 mr-0.5"
-            />
-            <span>No</span>
-          </div>
-          <div className="flex items-center">
-            <input
-              type="radio"
-              value="Yes"
-              name="addWishList"
-              checked={formData.addWishList === "Yes"}
-              onChange={(e) => handleChange(e)}
-              className="w-2.5 mb-0.5 mr-0.5"
-            />
-            <span>Yes</span>
-          </div>
-        </div>
-        {formData.addWishList === "Yes" ? (
-          <div className="my-4">
-            <p>Select from wishlist you have created</p>
-            <Button
-              type="button"
-              className="border rounded-md px-0 w-64 h-8 bg-white mt-1 text-left tracking-tighter text-gray-400 text-xs max-sm:text-sm"
-            >
-              Click here to select
-            </Button>
-          </div>
-        ) : (
-          <div className="text-white my-5">-</div>
-        )}
-        <div className="flex justify-between mt-5">
-          <Button
-            type="button"
-            className="h-6 max-sm:h-7 bg-sky-700 tracking-tighter px-0 rounded-[2px] text-white text-xs max-sm:text-sm"
-          >
-            save & continue later
-          </Button>
-          <Button
-            type="button"
-            className="h-6 max-sm:h-7 w-24 rounded-[2px] text-white text-xs max-sm:text-sm"
-            onClick={openThirdPage}
-          >
-            Next
-          </Button>
-        </div>
-      </div>
+            <Formik
+                initialValues={{
+                    headerImage: null,
+                    tributeType: "",
+                    tributeTitle: "",
+                    fullName: "",
+                    dateOfBirth: new Date(),
+                    dateOfDeath: new Date(1930, 0, 1),
+                    tributeBio: "",
+                    receiveCash: true,
+                    addWishList: "No",
+                    wishListTitle: "",
+                    relationship: "",
+                    musicLink: "",
+                    publicType: "public",
+                    tributeKey: "BWT-",
+                    otherImages: [{ firstOtherImg: "", secondOtherImg: "", thirdOtherImg: "", fourthOtherImg: "",}],
+                }}
+                validationSchema={tributeSchema}
+                onSubmit={(values, { resetForm }) => {
+                    console.log("Form submitted with values:", values);
+                    setOpen(false);
 
-      {/* ********Third Page */}
-      <div className="text-xs max-sm:text-sm tracking-tight hidden -mt-6" id="third-page">
-        <div className="flex justify-between max-sm:block">
-          <div className="max-sm:mb-5">
-            <p>Please descibe your relationship</p>
-            <select
-              name="relationship"
-              value={formData.relationship}
-              onChange={handleChange}
-              className="border text-gray-600 rounded-md w-60 py-2 max-sm:py-2.5 px-2 mt-0.5 outline-0 placeholder:tracking-tighter text-xs max-sm:text-sm max-sm:w-full"
+                    resetForm();
+                }}
             >
-              <option value="">please select</option>
-              <option value="father">Father</option>
-              <option value="mother">Mother</option>
-              <option value="brother">Brother</option>
-              <option value="sister">Sister</option>
-              <option value="cousin">Cousin</option>
-            </select>
-          </div>
-          <div>
-            <p>Add music to your tribute</p>
-            <div className="flex items-center text-gray-200 w-60 pr-2 max-sm:w-full">
-              <input
-                type="text"
-                value={formData.musicLink}
-                onChange={(e) => handleChange(e)}
-                name="musicLink"
-                placeholder="Add music link"
-                className="border text-gray-600 rounded-md w-60 py-1.5 max-sm:py-2.5 px-2 mt-0.5 outline-0 placeholder:tracking-tighter placeholder:text-sm placeholder:text-gray-400 text-xs max-sm:text-sm max-sm:w-full"
-              />
-              <MusicIcon className="w-3 -ml-6" />
-            </div>
-          </div>
+                {({ values, setFieldValue, isValid}) => (
+                    <Form style={{ zIndex: 10 }}>
+                        {/* STEP 1  */}
+                        {activeStep === 0 && (
+                            <div className="text-lg step-1 max-sm:w-80 max-sm:mx-auto max-sm:h-[480px]">
+                                <div className="max-md:pb-6">
+                                    <fieldset
+                                        className="relative h-[150px] w-[150px] flex justify-center mt-0  mx-auto cursor-pointer bg-white"
+                                        >
+                                        {values.headerImage ? (
+                                            <div className=" relative w-full h-full">
+                                                <button
+                                                    type="button"
+                                                    className=" font-bold text-xl text-red-500 z-30 absolute top-5 right-5 "
+                                                    onClick={() => setFieldValue("headerImage", null)}
+                                                >
+                                                    X
+                                                </button>
+                                                <img
+                                                    src={URL.createObjectURL(values.headerImage)}
+                                                    className=" w-full h-full object-cover rounded-full"
+                                                    alt="Header pic"
+                                                />
+                                            </div>
+                                        ) : (
+                                            <div className="relative -mt-4 bg-gray-200 rounded-full w-28 h-28">
+                                                <input
+                                                    id="headerImage"
+                                                    type="file"
+                                                    accept="image/*"
+                                                    className=" opacity-0 w-full h-full z-30 "
+                                                    onChange={(e) => setFieldValue("headerImage", e.target.files[0])}
+                                                />
+                                                <label
+                                                    htmlFor="headerImage"
+                                                    className="absolute bottom-0 -left-4 right-0 top-0 ml-4 flex justify-center items-center"
+                                                >
+                                                    <UploadIcon className="absolute w-6 h-6 cursor-pointer"/>
+                                                    <img src={uploadPix} alt="kkk" className="w-24 cursor-pointer"/>
+                                                </label>
+                                            </div>
+                                        )}
+                                        {/* Display image preview if headerImage has a value */}
+                                    </fieldset>
+                                    <div className="block md:grid md:grid-cols-2 md:justify-between my-6 max-sm:my-4 placeholder:italic gap-10">
+                                        <CustomSelect 
+                                            name="tributeType" 
+                                            label="Type of Tribute"
+                                        >
+                                            <option value="" className="text-gray-400">Click here to select tribute type</option>
+                                            <option value="anniversary">Anniversary</option>
+                                            <option value="birthday">Birthday</option>
+                                            <option value="convocation">Convocation</option>
+                                            <option value="funeral">Funeral</option>
+                                            <option value="naming">Naming</option>
+                                            <option value="wedding">Wedding</option>
+                                            <option value="other">Other</option>
+                                        </CustomSelect>
+                                        <div className={`max-sm:mt-4`}>
+                                            <CustomInput 
+                                                label="Title of Tribute" 
+                                                name="tributeTitle" 
+                                                type="text" 
+                                                placeholder="Click to enter title of tribute"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="my-8 max-sm:my-4">
+                                        <CustomInput 
+                                            label="Full Name" 
+                                            name="fullName" 
+                                            type="text" 
+                                            placeholder="Click to enter full name"
+                                        />
+                                    </div>
+                                    <div className="block md:grid md:grid-cols-2 my-8 max-sm:my-4 placeholder:italic gap-10">
+                                        { birthCalendarId && (
+                                        <CustomCalendar 
+                                             label="Date of Birth"
+                                             name="dateOfBirth"
+                                             value={values.dateOfBirth} // Pass the value from Formik
+                                             onChange={(date) => setFieldValue("dateOfBirth", date)} // Pass the onChange handler from Formik
+                                             id={birthCalendarId}
+                                             placeholder="Select date"
+                                        />
+                                        )}
+                                        { values.tributeType === "funeral" && deathCalendarId && (
+                                        <div className={`max-sm:mt-4`}>
+                                            <CustomCalendar 
+                                                label="Date of Death"
+                                                name="dateOfDeath"
+                                                value={values.dateOfDeath} // Pass the value from Formik
+                                                onChange={(date) => setFieldValue("dateOfDeath", date)} // Pass the onChange handler from Formik
+                                                id={deathCalendarId}
+                                                placeholder="Select date"
+                                            />
+                                        </div>
+                                        )}
+                                    </div>
+                                    <div>
+                                    <Button
+                                        onClick={() => setActiveStep(activeStep + 1)}
+                                        type="button"
+                                        className={`w-full self-end py-[24px] md:py-[30px] outline-none rounded-md flex justify-center items-center text-white
+                                        ${
+                                        values.headerImage &&
+                                        values.tributeType &&
+                                        values.tributeTitle &&
+                                        values.fullName &&
+                                        values.dateOfBirth
+                                            ? "bg-primary"
+                                            : "bg-primary/50 pointer-events-none "
+                                            }
+                                        `}
+                                    >
+                                        Next
+                                        </Button>{" "}
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* STEP 2  */}
+                        {activeStep === 1 && (
+                            <div className="text-lg max-md:pb-8 step-2 max-sm:w-80 max-sm:mx-auto max-sm:h-[480px]">
+                                <div className="absolute top-7 py-2 left-8 bg-indigo-50 px-3 rounded-lg cursor-pointer" onClick={() => setActiveStep(activeStep - 1)}><LeftIcon /></div>
+                                <div className="max-md:pb-6 max-md:-mt-8">
+                                    <fieldset className="my-6">
+                                        <Myeditor
+                                            label="Bio"
+                                            name="tributeBio"
+                                            placeholder="write a bio about yourself"
+                                            className="h-80 mb-10 max-md:h-60 mb-16 outline-green-400"
+                                            
+                                        />
+                                    </fieldset>
+                                    <div className="flex my-6 items-center">
+                                        <p className="mr-5 mb-0.5">Want to receive cash gift?</p>
+                                        <SwitchButton className="w-10"/>
+                                    </div>
+                                    <div className="flex items-center max-md:text-base">
+                                        <p>Want to add wishlist to your tribute?</p>
+                                        <div className="mx-4 flex items-center">
+                                        <CustomRadio
+                                                name="addWishList" 
+                                                value="No" 
+                                                text="No"
+                                                checked={values.addWishList === "No" && true}
+                                            />
+                                        </div>
+                                        <div className="flex items-center">
+                                            <CustomRadio
+                                                name="addWishList" 
+                                                value="Yes" 
+                                                text="Yes"
+                                                checked={values.addWishList === "Yes" && true}
+                                            />
+                                        </div>
+                                    </div>
+                                    {values.addWishList === "Yes" ? 
+                                        <div className="my-6"> 
+                                            <div  className="px-0 w-96 max-sm:w-full">
+                                                <CustomSelect 
+                                                    name="wishListTitle" 
+                                                    label="Select from wishlist you have created"
+                                                >
+                                                    <option value="" className="text-gray-400">Click here to select tribute type</option>
+                                                    <option value="john-anniversary">John Doe Anniversary Wishlist</option>
+                                                    <option value="samuel-birthday">Samuel Birthday Wishlist</option>
+                                                    <option value="temmy-convocation">Temmy Convocation Wishlist</option>
+                                                    <option value="bernard-funeral">Bernard Funeral Wishlist</option>
+                                                    <option value="princess-naming">Princess Naming Wishlist</option>
+                                                    <option value="other">Other</option>
+                                                </CustomSelect>
+                                            </div>
+                                        </div>
+                                        :
+                                        <div className="text-white my-5">
+                                            -
+                                        </div>
+                                    }
+                                    <div className="flex justify-between mt-5 gap-40 max-md:gap-5">
+                                        <button
+                                            type="button"
+                                            className={`w-full self-end py-[11px] md:py-[16px] outline-none border-primary rounded-md flex justify-center items-center text-primary bg-indigo-100
+                                            `}
+                                        >
+                                             Save as draft
+                                        </button>{" "}
+                                        <Button
+                                            onClick={() => setActiveStep(activeStep + 1)}
+                                            type="button"
+                                            className={`w-full self-end py-[24px] md:py-[30px] outline-none rounded-md flex justify-center items-center text-white
+                                            ${
+                                            //  values.tributeBio &&
+                                            // values.tributeType &&
+                                            // values.tributeTitle &&
+                                            // values.fullName &&
+                                            values.dateOfBirth
+                                                ? "bg-primary"
+                                                : "bg-primary/50 pointer-events-none "
+                                                }
+                                            `}
+                                        >
+                                            Next
+                                        </Button>{" "}
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* STEP 3  */}
+                        {activeStep === 2 && (
+                            <div className="text-lg max-md:pb-8 step-3 text-lg max-md:pb-8 step-2 max-sm:w-80 max-sm:mx-auto max-sm:h-[480px] overflow-x-hidden">
+                                <div className="absolute top-7 py-2 left-8 bg-indigo-50 px-3 rounded-lg cursor-pointer" onClick={() => setActiveStep(activeStep - 1)}><LeftIcon /></div>
+                                <div className="max-md:pb-6 max-md:-mt-8">
+                                    <div className="flex justify-between max-sm:block gap-10 my-8">
+                                        <div className="w-1/2 max-md:w-full">
+                                            <CustomSelect 
+                                                name="relationship" 
+                                                label="Please descibe your relationship"
+                                            >
+                                                <option value="" className="text-gray-400">Click here to select relationship</option>
+                                                <option value="father">Father</option>
+                                                <option value="mother">Mother</option>
+                                                <option value="brother">Brother</option>
+                                                <option value="sister">Sister</option>
+                                                <option value="cousin">Cousin</option>
+                                                <option value="other">Other</option>
+                                            </CustomSelect>
+                                        </div>
+                                        <div className="relative flex w-1/2 max-md:w-full max-md:mt-4">
+                                            <CustomInput
+                                                label="Add music to your tribute"
+                                                name="musicLink"
+                                                value={values.musicLink !== "" ? values.musicLink : musicFile}
+                                                required
+                                                placeholder="click here to upload music"
+                                            />
+                                            <MusicIcon className="cursor-pointer absolute translate-y-[170%] right-6 top-2 w-6 h-6"/>
+                                            <input
+                                                type="file"
+                                                id="musicLink"
+                                                className="cursor-pointer absolute translate-y-[200%] -right-52 leading-tight focus:outline-none focus:border-blue-500 opacity-0"
+                                                onChange={(e) => {
+                                                setMusicFile(e.target.files[0].name);
+                                                }}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div  className="flex justify-between max-sm:block gap-10 my-8 max-md:mb-0">
+                                        <div className="w-1/2">
+                                            <p className="mr-3">Would you prefer this Tribute to be</p>
+                                            <div className="flex items-center mt-2">
+                                                <div className="mr-4 flex items-center">
+                                                    <CustomRadio
+                                                        name="publicType" 
+                                                        value="public" 
+                                                        text="a public tribute"
+                                                        checked={values.publicType === "public" && true}
+                                                    />
+                                                </div>
+                                                <div className="flex items-center">
+                                                    <CustomRadio
+                                                        name="publicType" 
+                                                        value="private" 
+                                                        text="a private tribute"
+                                                        checked={values.publicType === "private" && true}
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {values.publicType === "private" ?
+                                            <div className="w-1/2 relative">
+                                                <div>
+                                                    {/* <p className="md:base absolute top-12 z-10">BWT-</p> */}
+                                                    <CustomInput 
+                                                        label="Create a Tribute Passkey" 
+                                                        name="tributeKey" 
+                                                        type="text" 
+                                                        placeholder="Create a Tribute Passkey"
+                                                        value={values.tributeKey}
+                                                    />
+                                                </div>
+                                            </div>
+                                            :
+                                            <div className="text-white"> - </div>
+                                        }
+                                    </div>
+                                    <div className="my-8 max-md:mt-0">
+                                        <div>
+                                            <p className="mr-3 max-md:mb-6">Add More pictures</p>
+                                        </div>
+                                        <div>
+                                            <div className="flex max-md:grid max-md:grid-cols-3 max-md:gap-x-3 max-md:gap-y-12">
+                                                {/* picture 1 */}
+                                                {values.otherImages.map((item, index) => (
+                                                    <div
+                                                        key={index}
+                                                        className="mr-3 pb-2"
+                                                    >
+                                                        <fieldset
+                                                            className={`h-full rounded-lg rounded-5 bg-white max-md:w h20 max-md:h-14 flex items-center bg-slate-100 rounded-sm mr-3 cursor-pointer`}
+                                                        >
+                                                            {item.firstOtherImg ? (
+                                                            <div className="w-full rounded-lg h-full relative pt-3">
+                                                                <button
+                                                                type="button"
+                                                                className=" font-bold text-lg text-red-500 z-30 absolute top-4 left-20 "
+                                                                onClick={() => setFieldValue(`otherImages.${index}.firstOtherImg`, null)}
+                                                                >
+                                                                X
+                                                                </button>
+
+                                                                <img
+                                                                src={URL.createObjectURL(item.firstOtherImg)}
+                                                                className="w-24 h-24 object-cover"
+                                                                alt="Cover pic"
+                                                                />
+                                                            </div>
+                                                            ) : (
+                                                            <div className="relative flex w-24 h-24 bg-gray-200 mt-3">
+                                                                <input
+                                                                id={`otherImages.${index}.firstOtherImg`}
+                                                                type="file"
+                                                                accept="image/*"
+                                                                className="opacity-0 w-full h-full z-30 cursor-pointer"
+                                                                onChange={(event) => {
+                                                                    const file = event.currentTarget.files[0];
+                                                                    setFieldValue(`otherImages.${index}.firstOtherImg`, file);
+                                                                }}
+                                                                />
+                                                                <label
+                                                                htmlFor={`otherImages.${index}.firstOtherImg`}
+                                                                className="cursor-pointer absolute top-8 left-8"
+                                                                >
+                                                                    <p className="ml-2 text-xl">+</p>
+                                                                </label>
+                                                            </div>
+                                                            )}
+                                                        </fieldset>
+                                                    </div>
+                                                ))}
+                                                {/* picture 2 */}
+                                                {values.otherImages.map((item, index) => (
+                                                    <div
+                                                        key={index}
+                                                        className="mr-3 pb-2"
+                                                    >
+                                                        <fieldset
+                                                            className={`h-full rounded-lg rounded-5 bg-white max-md:w h20 max-md:h-14 flex items-center bg-slate-100 rounded-sm mr-3 cursor-pointer`}
+                                                        >
+                                                            {item.secondOtherImg ? (
+                                                            <div className="w-full rounded-lg h-full relative pt-3">
+                                                                <button
+                                                                type="button"
+                                                                className=" font-bold text-lg text-red-500 z-30 absolute top-4 left-20 "
+                                                                onClick={() => setFieldValue(`otherImages.${index}.secondOtherImg`, null)}
+                                                                >
+                                                                X
+                                                                </button>
+
+                                                                <img
+                                                                src={URL.createObjectURL(item.secondOtherImg)}
+                                                                className="w-24 h-24 object-cover"
+                                                                alt="second Cover pic"
+                                                                />
+                                                            </div>
+                                                            ) : (
+                                                            <div className="relative flex w-24 h-24 bg-gray-200 mt-3">
+                                                                <input
+                                                                id={`otherImages.${index}.secondOtherImg`}
+                                                                type="file"
+                                                                accept="image/*"
+                                                                className="opacity-0 w-full h-full z-30 cursor-pointer"
+                                                                onChange={(event) => {
+                                                                    const file = event.currentTarget.files[0];
+                                                                    setFieldValue(`otherImages.${index}.secondOtherImg`, file);
+                                                                }}
+                                                                />
+                                                                <label
+                                                                htmlFor={`otherImages.${index}.secondOtherImg`}
+                                                                className="cursor-pointer absolute top-8 left-8"
+                                                                >
+                                                                    <p className="ml-2 text-xl">+</p>
+                                                                </label>
+                                                            </div>
+                                                            )}
+                                                        </fieldset>
+                                                    </div>
+                                                ))}
+                                                   {/* picture 3 */}
+                                                   {values.otherImages.map((item, index) => (
+                                                    <div
+                                                        key={index}
+                                                        className="mr-3 pb-2"
+                                                    >
+                                                        <fieldset
+                                                            className={`h-full rounded-lg rounded-5 bg-white max-md:w h20 max-md:h-14 flex items-center bg-slate-100 rounded-sm mr-3 cursor-pointer`}
+                                                        >
+                                                            {item.thirdOtherImg ? (
+                                                            <div className="w-full rounded-lg h-full relative pt-3">
+                                                                <button
+                                                                type="button"
+                                                                className=" font-bold text-lg text-red-500 z-30 absolute top-4 left-20 "
+                                                                onClick={() => setFieldValue(`otherImages.${index}.thirdOtherImg`, null)}
+                                                                >
+                                                                X
+                                                                </button>
+
+                                                                <img
+                                                                src={URL.createObjectURL(item.thirdOtherImg)}
+                                                                className="w-24 h-24 object-cover"
+                                                                alt="second Cover pic"
+                                                                />
+                                                            </div>
+                                                            ) : (
+                                                            <div className="relative flex w-24 h-24 bg-gray-200 mt-3">
+                                                                <input
+                                                                id={`otherImages.${index}.thirdOtherImg`}
+                                                                type="file"
+                                                                accept="image/*"
+                                                                className="opacity-0 w-full h-full z-30 cursor-pointer"
+                                                                onChange={(event) => {
+                                                                    const file = event.currentTarget.files[0];
+                                                                    setFieldValue(`otherImages.${index}.thirdOtherImg`, file);
+                                                                }}
+                                                                />
+                                                                <label
+                                                                htmlFor={`otherImages.${index}.thirdOtherImg`}
+                                                                className="cursor-pointer absolute top-8 left-8"
+                                                                >
+                                                                    <p className="ml-2 text-xl">+</p>
+                                                                </label>
+                                                            </div>
+                                                            )}
+                                                        </fieldset>
+                                                    </div>
+                                                ))}
+                                                   {/* picture 4 */}
+                                                   {values.otherImages.map((item, index) => (
+                                                    <div
+                                                        key={index}
+                                                        className="mr-3 pb-2"
+                                                    >
+                                                        <fieldset
+                                                            className={`h-full rounded-lg rounded-5 bg-white max-md:w h20 max-md:h-14 flex items-center bg-slate-100 rounded-sm mr-3 cursor-pointer`}
+                                                        >
+                                                            {item.fourthOtherImg ? (
+                                                            <div className="w-full rounded-lg h-full relative pt-3">
+                                                                <button
+                                                                type="button"
+                                                                className=" font-bold text-lg text-red-500 z-30 absolute top-4 left-20 "
+                                                                onClick={() => setFieldValue(`otherImages.${index}.fourthOtherImg`, null)}
+                                                                >
+                                                                X
+                                                                </button>
+
+                                                                <img
+                                                                src={URL.createObjectURL(item.fourthOtherImg)}
+                                                                className="w-24 h-24 object-cover"
+                                                                alt="second Cover pic"
+                                                                />
+                                                            </div>
+                                                            ) : (
+                                                            <div className="relative flex w-24 h-24 bg-gray-200 mt-3">
+                                                                <input
+                                                                id={`otherImages.${index}.fourthOtherImg`}
+                                                                type="file"
+                                                                accept="image/*"
+                                                                className="opacity-0 w-full h-full z-30 cursor-pointer"
+                                                                onChange={(event) => {
+                                                                    const file = event.currentTarget.files[0];
+                                                                    setFieldValue(`otherImages.${index}.fourthOtherImg`, file);
+                                                                }}
+                                                                />
+                                                                <label
+                                                                htmlFor={`otherImages.${index}.fourthOtherImg`}
+                                                                className="cursor-pointer absolute top-8 left-8"
+                                                                >
+                                                                    <p className="ml-2 text-xl">+</p>
+                                                                </label>
+                                                            </div>
+                                                            )}
+                                                        </fieldset>
+                                                    </div>
+                                                ))}
+
+                                            </div>
+                                            <p className="mr-3 text-sm text-sky-500 max-md:mt-8">First image will be set as header and Image size should be more than 2MB</p>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex justify-between mt-5 gap-40 max-md:gap-5">
+                                        <button
+                                            type="button"
+                                            className={`w-full self-end py-[11px] md:py-[16px] outline-none border-primary rounded-md flex justify-center items-center text-primary bg-indigo-100
+                                            `}
+                                        >
+                                             Save as draft
+                                        </button>{" "}
+                                        <motion.button
+                                            type="submit"
+                                            whileHover={{ scale: 0.98 }}
+                                            className={`w-full self-end py-[11px] md:py-[16px] outline-none rounded-md flex justify-center items-center text-white
+                                            ${isValid ? " bg-primary border border-primary" : " bg-primary/50 pointer-events-none"}
+                                            ${values.relationship && values.publicType ? " bg-primary" : " bg-primary/50 pointer-events-none"}
+                                            `}
+                                            // 
+                                        >
+                                            Publish Tribute
+                                        </motion.button>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                    </Form>
+                )}
+            </Formik>
         </div>
-        <div className="my-7 flex justify-between max-sm:block">
-          <div>
-            <p className="mr-3">Would you prefer this Tribute to be</p>
-            <div className="flex items-center mt-3 tracking-tighter">
-              <div className="mr-4 flex items-center">
-                <input
-                  type="radio"
-                  value="public"
-                  name="publicType"
-                  checked={formData.publicType === "public"}
-                  onChange={(e) => handleChange(e)}
-                  className="w-2.5 mb-0.5 mr-0.5"
-                />
-                <span>a public tribute</span>
-              </div>
-              <div className="flex items-center">
-                <input
-                  type="radio"
-                  value="private"
-                  name="publicType"
-                  checked={formData.publicType === "private"}
-                  onChange={(e) => handleChange(e)}
-                  className="w-2.5 mb-0.5 mr-0.5"
-                />
-                <span>a private tribute</span>
-              </div>
-            </div>
-          </div>
-          {formData.publicType === "private" ? (
-            <div className="max-sm:mt-3">
-              <p>Tribute key</p>
-              <input
-                type="text"
-                value={formData.tributeKey}
-                onChange={(e) => handleChange(e)}
-                name="tributeKey"
-                placeholder="Create a tribute key"
-                className="border text-gray-600 rounded-md w-60 py-2 max-sm:py-2.5 px-2 mt-0.5 outline-0 placeholder:tracking-tighter placeholder:text-xs placeholder:text-gray-400 max-sm:w-full"
-              />
-            </div>
-          ) : (
-            <div className="text-white"> - </div>
-          )}
-        </div>
-        <div>
-          <p className="mr-3">Add More pictures</p>
-          <div>
-            <div className="flex">
-              {Array(6).fill(
-                <div className="w-11 h-11 flex wrap items-center justify-center bg-slate-100 rounded-sm mr-3 my-2">
-                  +
-                </div>,
-              )}
-            </div>
-            <p className="mr-3 text-xs text-sky-500">
-              First image will be set as header and Image size should be more than 2MB
-            </p>
-          </div>
-        </div>
-        <div className="flex justify-end mt-16">
-          <Button
-            type="button"
-            className="h-6 w-24 rounded-[2px] text-white text-xs max-sm:text-sm max-sm:w-full max-sm:h-7"
-          >
-            Publish
-          </Button>
-        </div>
-      </div>
-    </div>
-  );
+    )
+
 }
 
 export default CreateTribute;
