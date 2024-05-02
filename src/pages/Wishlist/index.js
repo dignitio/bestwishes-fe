@@ -10,6 +10,7 @@ import CustomSelect from "components/CustomFormInputs/CustomSelect";
 import CustomInput from "components/CustomFormInputs/CustomInput";
 import CustomCalendar from "components/CustomFormInputs/CustomCalender";
 import Myeditor from "components/CustomFormInputs/CustomEditor";
+import SwitchButton from "components/Switch";
 import wishListData from "layout/Lists/wishListData";
 import Button from "components/Button";
 import { Link, useNavigate } from "react-router-dom";
@@ -24,7 +25,8 @@ import { ReactComponent as SendIcon } from "../../assets/icons/wishlist-send.svg
 import { ReactComponent as ShareIcon } from "../../assets/icons/link.svg";
 import { ReactComponent as DuplicateIcon } from "../../assets/icons/simcard-2.svg";
 import { ReactComponent as CopyIcon } from "../../assets/icons/size.svg";
-import { ReactComponent as LeftArrowIcon } from "../../assets/icons/left.svg";
+import { ReactComponent as LeftIcon } from "../../assets/icons/left.svg";
+import { ReactComponent as CircleIcon } from "../../assets/icons/remove-icon.svg";
 import emptyWishlist from "../../assets/images/wishlist-empty-state-image.png";
 import DuplicateWishlist from "./DuplicateWishlist";
 
@@ -105,34 +107,8 @@ function Wishlist() {
                   {wishlist.draft ? (
                     <p className="text-slate-400 text-xs tracking-tight">Draft</p>
                   ) : (
-                    <div
-                      className={
-                        wishlist.publishedValue
-                          ? "text-xs bg-green-600 flex justify-end items-center h-3.5 w-7 rounded-xl"
-                          : "text-xs bg-slate-500 flex justify-start h-3.5 w-7 rounded-xl"
-                      }
-                      onClick={(e) => {
-                        e.preventDefault();
-                      }}
-                    >
-                      <p className={wishlist.publishedValue ? "text-green-600" : "text-slate-500"}>
-                        .
-                      </p>
-                      <button
-                        type="button"
-                        className="toggler--slider"
-                        onClick={() => switchMode(wishlist.id)}
-                      >
-                        <div
-                          className={
-                            wishlist.publishedValue
-                              ? "w-3 h-3 bg-white text-white rounded-3xl"
-                              : "w-3 h-3 bg-white text-white rounded-3xl"
-                          }
-                        >
-                          o
-                        </div>
-                      </button>
+                    <div>
+                      <SwitchButton />
                     </div>
                   )}
                 </div>
@@ -236,7 +212,7 @@ function Wishlist() {
                             className=" font-bold text-2xl text-red-500 z-30 absolute top-5 right-5 "
                             onClick={() => setFieldValue("coverImage", null)}
                           >
-                            X
+                            <CircleIcon />
                           </button>
                           <img
                             src={URL.createObjectURL(values.coverImage)}
@@ -326,10 +302,12 @@ function Wishlist() {
               {/* Step 2 */}
               {activeStep === 1 && (
                 <div className="flex flex-col gap-4 mb-4">
-                  <LeftArrowIcon
-                    className=" absolute z-20 top-4 left-6 cursor-pointer"
+                  <div
+                    className="absolute top-7 py-2 left-8 bg-indigo-50 px-3 rounded-lg cursor-pointer"
                     onClick={() => setActiveStep(0)}
-                  />
+                  >
+                    <LeftIcon />
+                  </div>
                   <div className=" max-h-96 overflow-y-auto">
                     {values.items.map((item, index) => (
                       <div
@@ -346,7 +324,7 @@ function Wishlist() {
                                 className=" font-bold text-2xl text-red-500 z-30 absolute top-5 right-5 "
                                 onClick={() => setFieldValue(`items.${index}.img`, null)}
                               >
-                                X
+                                <CircleIcon />
                               </button>
 
                               <img
@@ -470,7 +448,6 @@ function Wishlist() {
                       )}
                     </div>
                   </div>
-
                   <div className=" w-full flex flex-col md:grid md:grid-cols-2 gap-4 ">
                     <motion.button
                       type="button"

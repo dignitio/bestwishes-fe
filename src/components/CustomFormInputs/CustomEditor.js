@@ -2,7 +2,7 @@ import React from "react";
 import { useField } from "formik";
 import { motion } from "framer-motion";
 import "react-quill/dist/quill.snow.css";
-import "./editor.css"
+import "./editor.css";
 import ReactQuill from "react-quill/lib";
 
 const Myeditor = ({ label, ...props }) => {
@@ -16,7 +16,7 @@ const Myeditor = ({ label, ...props }) => {
       <label htmlFor={props.name}>{label}</label>
       <motion.div whileHover={{ scale: 0.996 }} className="relative">
         <ReactQuill
-          className="resize-y h-32  mb-16"
+          className="resize-y h-32 mb-11 mt-2"
           value={field.value}
           onChange={handleChange}
           {...props}
