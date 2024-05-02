@@ -86,7 +86,7 @@ function GuestWishlist() {
       </div>
       <Modal style={{ zIndex: 99 }} width={550} open={open} onClose={() => setOpen(!open)}>
         <div>
-          <div className=" flex justify-center items-center text-xl font-semibold pb-10">
+          <div className=" flex justify-center items-center text-lg font-semibold pb-10">
             <span>
               {wishListData
                 .filter((wishlist) => wishlist.id === foundWishlist.id)
