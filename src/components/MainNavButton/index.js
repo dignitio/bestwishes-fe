@@ -15,7 +15,7 @@ import { ReactComponent as HamburgerIcon } from "../../assets/icons/hamburger.sv
 // import { ReactComponent as SupportIcon } from "../../assets/icons/like-dislike.svg";
 // import { ReactComponent as LogOutIcon } from "../../assets/icons/login.svg";
 
-const MainNavButton = () => {
+const MainNavButton = (play, setPlay) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 

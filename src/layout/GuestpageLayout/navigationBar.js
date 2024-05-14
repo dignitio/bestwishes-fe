@@ -6,6 +6,8 @@ import Button from "components/Button";
 import Modal from "components/Modal";
 import CreateTribute from "pages/Tribute/CreateTribute";
 import NavMenuButton from "components/NavMenuButton";
+import playIcon from "assets/icons/play.png"
+import muteIcon from "assets/icons/mute.png"
 import userPix from "../../assets/images/userPix.png";
 import { ReactComponent as BellIcon } from "../../assets/icons/bell.svg";
 import { ReactComponent as ArrowDown } from "../../assets/icons/downArrow.svg";
@@ -15,14 +17,24 @@ function Nav() {
   const [open, setOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showDropdownComponent, setShowDropDownComponent] = useState(false);
+  const [play, setPlay] = useState(false)
+  
 
   return (
     <div className="bg-white grid grid-cols-10 justify-between items-center px-3 py-[20px] w-[100%] xl:gap-[153px] gap-[100px] font-lexend">
       <div className="lg:hidden ">
         <MainNavButton />
       </div>
-      <div className="bg-[red] xl:block col-span-2 lg:hidden">
-        {/* eslint-disable-next-line react/self-closing-comp */}
+      <div className="hidden col-span-2 md:flex justify-center">
+       <div className="cursor-pointer p-1" onClick={()=>setPlay(!play)}>
+        {play ? (
+
+          <img src={playIcon} alt="play" className=""/>
+        ):(
+          <img src={muteIcon} alt="mute" className=""/>
+
+        )}
+       </div>
       </div>
 
       <div className="hidden lg:flex justify-center py-1.5 px-1 items-center gap-[48px] w-full lg:col-span-7 xl:col-span-5 ">
