@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { PATH_DASHBOARD } from "routes/path";
 import React, { useState } from "react";
 import { Formik } from "formik";
-import CustomInput from "components/CustonFormInputs/CustomInput";
+import CustomInput from "components/CustomFormInputs/CustomInput";
 
 function Security() {
   const [isActive, setIsActive] = useState(false);

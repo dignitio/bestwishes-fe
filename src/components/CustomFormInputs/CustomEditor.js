@@ -1,9 +1,9 @@
 import React from "react";
 import { useField } from "formik";
-import ReactQuill from "react-quill";
 import { motion } from "framer-motion";
 import "react-quill/dist/quill.snow.css";
 import "./editor.css"
+import ReactQuill from "react-quill/lib";
 
 const Myeditor = ({ label, ...props }) => {
   const [field, meta, helpers] = useField(props.name);
