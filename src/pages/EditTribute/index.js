@@ -39,9 +39,9 @@ function EditTribute() {
         <div className="pt-8 mb-8">
             {foundTribute ?  (
             <div>
-                <div className="flex items-center justify-between mb-5 mx-8 text-base max-sm:text-xs max-lg:text-base">
-                    <div className="flex text-indigo-700 font-medium">
-                        <LeftArrowIcon className="mr-1  w-5 h-5 max-sm:h-3.5 max-sm:w-3.5 max-lg:w-5 max-lg:h-5" />
+                <div className="md:flex items-center justify-between mb-5 mx-8 text-base max-lg:text-base">
+                    <div className="flex text-indigo-700 font-medium max-md:mb-4">
+                        <LeftArrowIcon className="mr-1  w-5 h-5 max-sm:w-3.5 max-lg:w-5 max-lg:h-5" />
                         <Link to="/dashboard/tribute">Back to Tribute</Link>
                     </div>
                     <h4 className="font-semibold text-xl max-sm:text-sm max-sm:hidden max-lg:text-base">{foundTribute.tributeTitle}</h4>
@@ -156,7 +156,7 @@ function EditTribute() {
                                                 label="Bio"
                                                 name="tributeBio"
                                                 placeholder="write a bio about yourself"
-                                                className="h-96 mb-10 max-md:h-60 mb-16 outline-green-400"
+                                                className="h-96 mb-10 max-md:h-60 mb-16 outline-green-400 max-md:h-[400px] max-md:mb-24"
                                         />
                                     </div>
                                     <div className="flex justify-between max-sm:block gap-10 my-8">
@@ -183,7 +183,7 @@ function EditTribute() {
                                                 required
                                                 placeholder="click here to upload music"
                                             />
-                                            <MusicIcon className="cursor-pointer absolute translate-y-[170%] right-6 top-4 w-6 h-6"/>
+                                            <MusicIcon className="cursor-pointer absolute translate-y-[170%] right-6 max-md:top-0 top-4 w-6 h-6"/>
                                             <input
                                                 type="file"
                                                 id="musicLink"
@@ -217,7 +217,7 @@ function EditTribute() {
                                             </div>
                                         </div>
                                         {values.publicType === "private" ?
-                                            <div className="w-1/2 relative">
+                                            <div className="md:w-1/2 relative max-md:my-4">
                                                 <CustomInput 
                                                     label="Change Tribute Passkey" 
                                                     name="tributeKey" 
@@ -506,7 +506,7 @@ function EditTribute() {
             )
         :   
             (
-                <h2>Wishlist not Found</h2>
+                <h2>Tribute not Found</h2>
             )}
         </div>
      );
