@@ -35,6 +35,18 @@ import wreath from "assets/images/wreath.png";
 import heart from "assets/images/heart.png";
 import flower from "assets/images/flower.png";
 import candle from "assets/images/candle.png";
+import emailIcon from "assets/images/email-icon.png"
+
+import {
+  FacebookShareButton,
+  FacebookIcon,
+  TwitterShareButton,
+  TwitterIcon,
+  WhatsappShareButton,
+  WhatsappIcon,
+  InstapaperShareButton,
+  InstapaperIcon,
+} from "react-share";
 
 function Home() {
   const navigate = useNavigate();
@@ -52,6 +64,8 @@ function Home() {
   const [selections, setSelections] = useState([]);
   const [contributions, setContributions] = useState([]);
   const [selectedContribution, setSelectedContribution] = useState(null);
+  const shareUrl = "https://yourwebsite.com";
+  const title = "Check out this amazing website!";
 
   const handleSelection = (type) => {
     setIsActive(type);
@@ -207,29 +221,7 @@ function Home() {
     },
   ];
 
-  const inviteSM = [
-    {
-      icon: fbIcon,
-      info: "facebook",
-    },
-    {
-      icon: IGIcon,
-      info: " instagram",
-    },
-    {
-      icon: smsIcon,
-      info: "email",
-    },
-    {
-      icon: twitter,
-      info: "twitter",
-    },
-    {
-      icon: whatsappIcon,
-      info: "whatsapp",
-    },
-  ];
-
+ 
   const getIconByType = (type) => {
     const foundInFuneral = funeral.find((item) => item.type === type);
     if (foundInFuneral) return foundInFuneral.icon;
@@ -243,6 +235,15 @@ function Home() {
   const getRotation = (index) => {
     const rotations = [-10, -5, 0, 5, 10]; // Example rotation angles
     return rotations[index % rotations.length];
+  };
+
+  const handleInvite = () => {
+    const emailSubject = encodeURIComponent("Invitation to ...");
+    const emailBody = encodeURIComponent("Hello!\n\nWe would like to invite you to ...");
+
+    const mailtoLink = `mailto:?subject=${emailSubject}&body=${emailBody}`;
+
+    window.location.href = mailtoLink;
   };
 
   return (
@@ -357,11 +358,13 @@ function Home() {
               <br />
             </p>
           </div>
-          <div className={`bg-white lg:px-[40px] lg:py-[28px] px-[19px] py-[24px] rounded-md flex flex-col gap-[32px] ${contributions.length === 0 ? "h-[400px]" : "h-[700px]"} overflow-y-auto`}>
+          <div
+            className={`bg-white lg:px-[40px] lg:py-[28px] px-[19px] py-[24px] rounded-md flex flex-col gap-[32px] ${contributions.length === 0 ? "h-[400px]" : "h-[700px]"} overflow-y-auto`}
+          >
             <h1 className="text-[24px] font-bold">Contributions ({contributions.length})</h1>
             {contributions.length === 0 ? (
               <div className="h-full flex justify-center items-center text-primary text-center text-[18px] md:text-[24px]">
-              <p>No contributions yet. Be the first to contribute!</p>
+                <p>No contributions yet. Be the first to contribute!</p>
               </div>
             ) : (
               contributions.map((contribution, contributionIndex) => (
@@ -675,18 +678,31 @@ function Home() {
           <div className="bg-white py-[39px] px-[29px] rounded-md ">
             <div className="flex flex-col gap-[20px] ">
               <h1 className="text-[24px]">Invite Family and Friends</h1>
-              <Button className="w-[100%] text-white font-[500] text-[18px] mx-auto p-2 flex gap-[20px] items-center justify-center">
-                Invite Now
-              </Button>
+              <button
+                className="w-[100% ] bg-primary text-white font-[500] text-[18px] h-10 rounded-md py-0 px-8 flex gap-[20px] items-center justify-center"
+                onClick={handleInvite}
+              >
+                <img alt="email" src={emailIcon} className="w-[30px]"/>
+                Invite via E-mail
+              </button>
             </div>
           </div>
           <div className=" bg-indigo-100 p-3 flex gap-[20px] items-center justify-center">
             <p className="font-[500] text-[18px]">Share on: </p>
-            {inviteSM.map((sm) => (
-              <div className="cursor-pointer">
-                <img className="w-8 h-8" src={sm.icon} alt="social-media-icon" />
-              </div>
-            ))}
+            <div className=" flex gap-2">
+              <FacebookShareButton url={shareUrl} quote={title}>
+                <FacebookIcon size={32} round />
+              </FacebookShareButton>
+              <TwitterShareButton url={shareUrl} title={title}>
+                <TwitterIcon size={32} round />
+              </TwitterShareButton>
+              {/* <InstapaperShareButton url={shareUrl} title={title}>
+                <InstapaperIcon size={32} round />
+              </InstapaperShareButton> */}
+              <WhatsappShareButton url={shareUrl} title={title} separator=":: ">
+                <WhatsappIcon size={32} round />
+              </WhatsappShareButton>
+            </div>
           </div>
         </div>
       </div>
