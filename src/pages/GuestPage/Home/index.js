@@ -23,8 +23,18 @@ import uploadIcon from "assets/icons/upload.png";
 import { useNavigate } from "react-router-dom";
 import Dragdrop from "components/dragdrop";
 import googleIcon from "assets/icons/googleicon.png";
-import fbIcon from "assets/icons/facebookIcon.png";
+import fbIcon from "assets/images/facebook.png";
 import write from "assets/icons/edit.svg";
+import eyeIcon from "assets/icons/eye.svg";
+import smsIcon from "assets/images/sms.svg";
+import whatsappIcon from "assets/images/whatsapp.svg";
+import twitter from "assets/images/twitter.svg";
+import IGIcon from "assets/images/instagram.png";
+import note from "assets/images/writing.png";
+import wreath from "assets/images/wreath.png";
+import heart from "assets/images/heart.png";
+import flower from "assets/images/flower.png";
+import candle from "assets/images/candle.png";
 
 function Home() {
   const navigate = useNavigate();
@@ -148,6 +158,53 @@ function Home() {
   const age = BirthDeathDate[0].Dyear - BirthDeathDate[0].Byear;
 
   const Upload = <input type="file" id="fileUpload" />;
+  const [isFuneral, setIsFuneral] = useState(true);
+  const [isOthers, setIsOthers] = useState(false);
+  const [isActive, setIsActive] = useState("");
+
+  const funeral = [
+    { icon: candle, writeup: "Light a Candle", type: "candle" },
+    { icon: wreath, writeup: "Lay a Wreath", type: "wreath" },
+    { icon: note, writeup: "Leave a Note", type: "note" },
+  ];
+  const others = [
+    { icon: flower, writeup: "Leave a Flower", type: "flower"  },
+    {
+      icon: heart,
+      writeup: "Leave a Heart",
+      type: "heart"
+    },
+    {
+      icon: note,
+      writeup: "Leave a Note",
+      type: "note"
+    },
+  ];
+
+  const inviteSM = [
+    {
+      icon: fbIcon,
+      info: "facebook",
+    },
+    {
+      icon: IGIcon,
+      info: " instagram",
+    },
+    {
+      icon: smsIcon,
+      info: "email",
+    },
+    {
+      icon: twitter,
+      info: "twitter",
+    },
+    {
+      icon: whatsappIcon,
+      info: "whatsapp",
+    },
+  ];
+
+
   return (
     <div className="font-nunito">
       <div
@@ -344,7 +401,25 @@ function Home() {
             className="bg-white lg:px-[40px] lg:py-[28px] px-[19px] py-[24px] rounded-md flex flex-col gap-[32px] lg:mb-[100px]"
             ref={componentRef}
           >
-            <h1 className="text-[24px]">Send a Tribute</h1>
+            <div className="flex">
+              <h1 className="text-[24px]">Send a Tribute</h1>
+              <div
+                onClick={() => {
+                  setIsFuneral(true);
+                  setIsOthers(false);
+                }}
+              >
+                F
+              </div>
+              <div
+                onClick={() => {
+                  setIsOthers(true);
+                  setIsFuneral(false);
+                }}
+              >
+                O
+              </div>
+            </div>
 
             <Formik
               initialValues={{ fullName: "", email: "", Tribute: "", TributeImages: [] }}
@@ -354,27 +429,55 @@ function Home() {
             >
               {({ values, handleSubmit, handleChange, setFieldValue }) => (
                 <form onSubmit={handleSubmit} className="text-[18px] flex flex-col gap-[32px]">
-                  <CustomInput
-                    label="Full Name"
-                    name="fullName"
-                    value={values.fullName}
-                    required
-                    type="text"
-                    className="mb-2 md:grid md:col-span-6"
-                    placeholder=""
-                    onChange={handleChange}
-                  />
-                  <CustomInput
-                    label="Email"
-                    name="email"
-                    value={values.email}
-                    type="text"
-                    className="mb-2 md:grid md:col-span-6"
-                    placeholder=""
-                    onChange={handleChange}
-                  />
+                  <div className="md:flex gap-[32px]">
+                    <CustomInput
+                      label="Full Name"
+                      name="fullName"
+                      value={values.fullName}
+                      required
+                      type="text"
+                      className="mb-2 md:grid md:col-span-6"
+                      placeholder=""
+                      onChange={handleChange}
+                    />
+                    <CustomInput
+                      label="Email"
+                      name="email"
+                      value={values.email}
+                      type="text"
+                      className="mb-2 md:grid md:col-span-6"
+                      placeholder=""
+                      onChange={handleChange}
+                    />
+                  </div>
 
-                  <div>
+                  <div className="flex flex-col gap-[25px]">
+                    <div>
+                      {isFuneral && (
+                        <div className="flex gap-[20px]">
+                          {funeral.map((funeralItem) => (
+                            <div key={funeralItem.type} className={`flex flex-col items-center gap-[15px] cursor-pointer justify-center p-4 ${isActive === funeralItem.type ? "bg-indigo-100" : ""}`} onClick={()=> setIsActive(funeralItem.type)}>
+                              <img
+                                src={funeralItem.icon}
+                                alt={funeralItem.icon}
+                                className="w-[50px] h-[50px]"
+                              />
+                              <p>{funeralItem.writeup}</p>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                      {isOthers && (
+                        <div className="flex gap-[20px] ">
+                          {others.map((item) => (
+                            <div key={item.type} className={`flex flex-col items-center gap-[15px] cursor-pointer justify-center p-4 ${isActive === item.type ? "bg-indigo-100" : ""}`} onClick={()=>setIsActive(item.type)}>
+                              <img src={item.icon} alt={item.icon} className="w-[50px] h-[50px]"  />
+                              <p className="text-[14px]">{item.writeup}</p>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                     <CustomTextArea
                       label="Tribute"
                       name="Tribute"
@@ -423,7 +526,7 @@ function Home() {
                   <button
                     type="submit"
                     // onClick={() => handleReset()}
-                    className={`w-full bg-primary px-[26px] py-[18px] text-white rounded-[4px] ${!values.fullName || !values.Tribute || values.TributeImages.length === 0 ? "opacity-[0.2] cursor-not-allowed" : ""}`}
+                    className={`w-[45%] bg-primary m-auto px-[26px] py-[18px] text-white rounded-[4px] ${!values.fullName || !values.Tribute || values.TributeImages.length === 0 ? "opacity-[0.2] cursor-not-allowed" : ""}`}
                     disabled={
                       !values.fullName || !values.Tribute || values.TributeImages.length === 0
                     }
@@ -437,17 +540,18 @@ function Home() {
         </div>
         <div className="lg:col-span-4 flex flex-col gap-[32px]">
           <div className="bg-white py-[39px] px-[29px] rounded-md ">
-            <div className="mx-auto flex flex-col justify-center gap-[10px] w-[100%]">
-              <h1 className="text-[24px]">Images by Others</h1>
-              <div className="grid gap-[24px] gap-x-[24px] grid-cols-2 md:grid-cols-4 xl:grid-cols-4 w-full">
-                {images.map((image) => (
-                  <div className="w-[100px] h-[100px] lg:w-[60px] lg:h-[60px] 2xl:w-[100px] 2xl:h-[100px] rounded-lg bg-[#D9D9D9]">
-                    {image}
-                  </div>
-                ))}
+            <div className="mx-auto flex flex-col gap-[10px] w-[100%]">
+              <h1 className="text-[24px]">Image Gallery</h1>
+              <div className="w-full h-full m-auto flex justify-center items-center overflow-hidden rounded-md">
+                <img
+                  className="w-[300px] h-[300px] object-cover transition-opacity duration-500 ease-in-out"
+                  src={uploadedPictures[currentIndex].image}
+                  alt="slide"
+                />
               </div>
             </div>
           </div>
+
           <div className="bg-white p-[30px] rounded-md flex flex-col items-center gap-4">
             <div className="flex flex-col ">
               <img src={wishlistImage} className="rounded-lg" alt="pic" />
@@ -483,6 +587,15 @@ function Home() {
               See more
             </Button>
           </div>
+
+          {/* tribute views */}
+          <div className="bg-white p-3 rounded-md flex flex-col gap-[17px] h-fit">
+            <div className="flex gap-[10px] items-center">
+              <img src={eyeIcon} alt="view-icon" className="w-7" />
+              <p className="font-bold text-[25px]">2000 Views</p>
+            </div>
+          </div>
+
           <div className="bg-white p-3 rounded-md flex flex-col gap-[17px] h-fit">
             <div className="flex flex-col gap-[12px] ">
               <h1 className="text-[24px]">Gifts</h1>
@@ -499,17 +612,32 @@ function Home() {
             </Button>
           </div>
           <div className="bg-white py-[39px] px-[29px] rounded-md ">
-            <div className="mx-auto flex flex-col gap-[10px]">
+            <div className="mx-auto flex flex-col justify-center gap-[10px] w-[100%]">
               <h1 className="text-[24px]">Images by Others</h1>
-              <div className="w-[80%] m-auto flex justify-center items-center">
-                <img
-                  className="w-full transition-opacity duration-500 ease-in-out"
-                  // style={{ transform: `translateX(-${currentIndex}%)` }}
-                  src={uploadedPictures[currentIndex].image}
-                  alt="slde"
-                />
+              <div className="grid gap-[24px] gap-x-[24px] grid-cols-2 md:grid-cols-4 xl:grid-cols-4 w-full">
+                {images.map((image) => (
+                  <div className="w-[100px] h-[100px] lg:w-[60px] lg:h-[60px] 2xl:w-[100px] 2xl:h-[100px] rounded-lg bg-[#D9D9D9]">
+                    {image}
+                  </div>
+                ))}
               </div>
             </div>
+          </div>
+          <div className="bg-white py-[39px] px-[29px] rounded-md ">
+            <div className="flex flex-col gap-[20px] ">
+              <h1 className="text-[24px]">Invite Family and Friends</h1>
+              <Button className="w-[100%] text-white font-[500] text-[18px] mx-auto p-2 flex gap-[20px] items-center justify-center">
+                Invite Now
+              </Button>
+            </div>
+          </div>
+          <div className=" bg-indigo-100 p-3 flex gap-[20px] items-center justify-center">
+            <p className="font-[500] text-[18px]">Share on: </p>
+            {inviteSM.map((sm) => (
+              <div className="cursor-pointer">
+                <img className="w-8 h-8" src={sm.icon} alt="social-media-icon" />
+              </div>
+            ))}
           </div>
         </div>
       </div>

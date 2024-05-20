@@ -25,8 +25,8 @@ function Nav() {
       <div className="lg:hidden ">
         <MainNavButton />
       </div>
-      <div className="hidden col-span-2 md:flex justify-center">
-       <div className="cursor-pointer p-1" onClick={()=>setPlay(!play)}>
+      <div className="md:col-span-2 col-span-3 flex justify-end md:justify-center">
+       <div className="cursor-pointer p-1 w-[50px]" onClick={()=>setPlay(!play)}>
         {play ? (
 
           <img src={playIcon} alt="play" className=""/>
