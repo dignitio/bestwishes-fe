@@ -6,8 +6,8 @@ import Button from "components/Button";
 import Modal from "components/Modal";
 import CreateTribute from "pages/Tribute/CreateTribute";
 import NavMenuButton from "components/NavMenuButton";
-import playIcon from "assets/icons/play.png"
-import muteIcon from "assets/icons/mute.png"
+import playIcon from "assets/icons/play.png";
+import muteIcon from "assets/icons/mute.png";
 import userPix from "../../assets/images/userPix.png";
 import { ReactComponent as BellIcon } from "../../assets/icons/bell.svg";
 import { ReactComponent as ArrowDown } from "../../assets/icons/downArrow.svg";
@@ -17,34 +17,33 @@ function Nav() {
   const [open, setOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showDropdownComponent, setShowDropDownComponent] = useState(false);
-  const [play, setPlay] = useState(false)
-  
+  const [play, setPlay] = useState(false);
 
   return (
-    <div className="bg-white grid grid-cols-10 justify-between items-center px-3 py-[20px] w-[100%] xl:gap-[153px] gap-[100px] font-lexend">
-      <div className="lg:hidden ">
-        <MainNavButton />
+    <div className="bg-white flex justify-between items-center px-3 py-[20px] w-[100%] font-lexend">
+      <div className="flex justify-between items-center w-[100%] lg:w-[50px]">
+        <div className="lg:hidden ">
+          <MainNavButton />
+        </div>
+        <div className="flex ">
+          <div className="cursor-pointer p-1 w-[50px]" onClick={() => setPlay(!play)}>
+            {play ? (
+              <img src={playIcon} alt="play" className="" />
+            ) : (
+              <img src={muteIcon} alt="mute" className="" />
+            )}
+          </div>
+        </div>
       </div>
-      <div className="md:col-span-2 col-span-3 flex justify-end md:justify-center">
-       <div className="cursor-pointer p-1 w-[50px]" onClick={()=>setPlay(!play)}>
-        {play ? (
 
-          <img src={playIcon} alt="play" className=""/>
-        ):(
-          <img src={muteIcon} alt="mute" className=""/>
-
-        )}
-       </div>
-      </div>
-
-      <div className="hidden lg:flex justify-center py-1.5 px-1 items-center gap-[48px] w-full lg:col-span-7 xl:col-span-5 ">
+      <div className="hidden lg:flex justify-center py-1.5 px-1 items-center gap-[48px] w-full ">
         <div onClick={() => setOpen(!open)}>
-          <span className="text-[18px]">Create a Tribute</span>
+          <span className="text-[15px]">Create a Tribute</span>
         </div>
         <NavLink
           to={PATH_HOME.root}
           className={({ isActive }) =>
-            `${isActive ? "text-primary" : "text-[#000000]"} xl:text-[18px]`
+            `${isActive ? "text-primary" : "text-[#000000]"} xl:text-[15px]`
           }
         >
           <span>Home</span>
@@ -52,7 +51,7 @@ function Nav() {
         <NavLink
           to={PATH_HOME.features}
           className={({ isActive }) =>
-            `${isActive ? "text-primary" : "text-[#000000]"} xl:text-[18px]`
+            `${isActive ? "text-primary" : "text-[#000000]"} xl:text-[15px]`
           }
         >
           <span>Features</span>
@@ -60,7 +59,7 @@ function Nav() {
         <NavLink
           to={PATH_HOME.about}
           className={({ isActive }) =>
-            `${isActive ? "text-primary" : "text-[#000000]"} xl:text-[18px]`
+            `${isActive ? "text-primary" : "text-[#000000]"} xl:text-[15px]`
           }
         >
           Why BestWishes.io
@@ -82,13 +81,13 @@ function Nav() {
             <Button
               type={Button}
               onClick={() => setIsLoggedIn(true)}
-              className="text-primary text-center text-[18px] bg-white border border-primary flex items-center rounded-[100px] xl:py-[24px] xl:px-[30px]"
+              className="text-primary text-center text-[15px] bg-white border border-primary flex items-center rounded-[100px] xl:py-[24px] xl:px-[30px]"
             >
               <Link to="/login">Login</Link>
             </Button>
             <Button
               type={Button}
-              className="bg-primary text-white max-sm:ml-6 hover:bg-red-500 rounded-[100px] text-center xl:text-[18px] flex items-center xl:py-[24px] xl:px-[30px]"
+              className="bg-primary text-white max-sm:ml-6 hover:bg-red-500 rounded-[100px] text-center xl:text-[15px] flex items-center xl:py-[24px] xl:px-[30px]"
             >
               <Link to="/register">Create Account</Link>
             </Button>

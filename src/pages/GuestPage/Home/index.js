@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Formik } from "formik";
 import Modal from "components/Modal";
 import Button from "components/Button";
-import contributions from "layout/Lists/contributions";
+// import contributions from "layout/Lists/contributions";
 import images from "layout/Lists/images";
 import WishItems from "layout/Lists/wishlist";
 import CreateGuestTribute from "pages/GuestPage/CreateTribute";
@@ -43,10 +43,39 @@ function Home() {
   const [selectedWishlist, setSelectedWishlist] = useState();
   const [fileUploaded, setFileUploaded] = useState(false);
   const [expandText, setExpandText] = useState(false);
-  const [selectedContribution, setSelectedContribution] = useState(null);
   const componentRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [Droppedimages, setDroppedImages] = useState([]);
+  const [isFuneral, setIsFuneral] = useState(true);
+  const [isOthers, setIsOthers] = useState(false);
+  const [isActive, setIsActive] = useState(null);
+  const [selections, setSelections] = useState([]);
+  const [contributions, setContributions] = useState([]);
+  const [selectedContribution, setSelectedContribution] = useState(null);
+
+  const handleSelection = (type) => {
+    setIsActive(type);
+  };
+
+  const handleFormSubmit = (values, resetForm) => {
+    const newContribution = {
+      type: isActive,
+      fullName: values.fullName,
+      email: values.email,
+      description: values.Tribute,
+      images: values.TributeImages,
+      initial: values.fullName.charAt(0).toUpperCase(), // Assuming you want initials from the fullName
+    };
+
+    setContributions((prevContributions) => {
+      const updatedSelections = [...prevContributions, newContribution];
+      console.log(updatedSelections); // Log the updated state
+      return updatedSelections;
+    });
+
+    resetForm();
+    setIsActive(null);
+  };
 
   const scrollToComponent = () => {
     componentRef.current.scrollIntoView({ behavior: "smooth" });
@@ -152,15 +181,12 @@ function Home() {
     return person.Dyear - person.Byear;
   });
 
-  console.log(ages); // Output: [40]
+  // console.log(ages); // Output: [40]
 
   // If you want to access the age of the first person in the array
   const age = BirthDeathDate[0].Dyear - BirthDeathDate[0].Byear;
 
   const Upload = <input type="file" id="fileUpload" />;
-  const [isFuneral, setIsFuneral] = useState(true);
-  const [isOthers, setIsOthers] = useState(false);
-  const [isActive, setIsActive] = useState("");
 
   const funeral = [
     { icon: candle, writeup: "Light a Candle", type: "candle" },
@@ -168,16 +194,16 @@ function Home() {
     { icon: note, writeup: "Leave a Note", type: "note" },
   ];
   const others = [
-    { icon: flower, writeup: "Leave a Flower", type: "flower"  },
+    { icon: flower, writeup: "Leave a Flower", type: "flower" },
     {
       icon: heart,
       writeup: "Leave a Heart",
-      type: "heart"
+      type: "heart",
     },
     {
       icon: note,
       writeup: "Leave a Note",
-      type: "note"
+      type: "note",
     },
   ];
 
@@ -204,6 +230,20 @@ function Home() {
     },
   ];
 
+  const getIconByType = (type) => {
+    const foundInFuneral = funeral.find((item) => item.type === type);
+    if (foundInFuneral) return foundInFuneral.icon;
+
+    const foundInOthers = others.find((item) => item.type === type);
+    if (foundInOthers) return foundInOthers.icon;
+
+    return null; // Default case if no icon is found
+  };
+
+  const getRotation = (index) => {
+    const rotations = [-10, -5, 0, 5, 10]; // Example rotation angles
+    return rotations[index % rotations.length];
+  };
 
   return (
     <div className="font-nunito">
@@ -227,8 +267,8 @@ function Home() {
             />
             <div className=" flex flex-col gap-[4px] md:text-center">
               <p className="font-bold text-[18px] lg:text-[40px]">Benson John </p>
-              {BirthDeathDate.map((person, index) => (
-                <div key={index} className="flex flex-col gap-[2px]">
+              {BirthDeathDate.map((person, DobIndex) => (
+                <div className="flex flex-col gap-[2px]" key={DobIndex}>
                   <p className="text-[16px] lg:text-[32px] font-semibold lg:font-bold ">
                     {`${person.Bdate}, ${person.Byear}`} - {`${person.Ddate}, ${person.Dyear}`}
                   </p>
@@ -317,85 +357,88 @@ function Home() {
               <br />
             </p>
           </div>
-          <div className="bg-white lg:px-[40px] lg:py-[28px] px-[19px] py-[24px] rounded-md flex flex-col gap-[32px] h-[700px] overflow-y-auto">
+          <div className={`bg-white lg:px-[40px] lg:py-[28px] px-[19px] py-[24px] rounded-md flex flex-col gap-[32px] ${contributions.length === 0 ? "h-[400px]" : "h-[700px]"} overflow-y-auto`}>
             <h1 className="text-[24px] font-bold">Contributions ({contributions.length})</h1>
-            {contributions.map((contribution, index) => (
-              <div key={index} className="lg:grid grid-cols-12 items-center">
-                <p className="md:col-span-2 xl:col-span-1 bg-gray-200 mb-3 w-14 h-14 max-sm:w-10 max-sm:h-10 max-lg:w-14 max-lg:h-14 rounded-full flex items-center max-sm:pt-2.5 text-center justify-center font-semibold mr-3 tracking-tighter text-base max-sm:text-sm max-lg:text-lg max-sm:block">
-                  {contribution.initial}
-                </p>
-                <div className="md:col-span-10 xl:col-span-11">
-                  <div className="flex gap-3 items-center">
-                    <h4 className="text-[18px] font-bold">{contribution.fullName}</h4>
-                    <div className="relative bottom-3" key={index}>
-                      {contribution.image < 4
-                        ? uploadedPictures.slice(0, contribution.image).map(({ image, angle }) => (
-                            <div
-                              className={`w-[20px] h-[20px] rounded-sm cursor-pointer overflow-hidden border-solid border-[0.5] border-[white] absolute origin-center ${angle}`}
-                              key={index}
-                            >
-                              <img
-                                src={image}
-                                alt="gallery icon"
-                                className="absolute w-full h-full object-fit z-0"
-                              />
-                            </div>
-                          ))
-                        : uploadedPictures.slice(0, 4).map(({ image, angle }) => (
-                            <div
-                              className={`w-[20px] h-[20px] rounded-sm cursor-pointer overflow-hidden border-solid border-[0.5] border-[white] absolute origin-center ${angle}`}
-                              key={index}
-                            >
-                              <img
-                                src={image}
-                                alt="gallery icon"
-                                className="absolute w-full h-full object-fit z-0"
-                              />
-                            </div>
-                          ))}
-                    </div>
-                  </div>
-
-                  {selectedContribution === index ? (
-                    <div className="flex flex-col gap-2">
-                      <p className="leading-loose text-[16px]">{contribution.description}</p>
-                      <div className="flex gap-2 items-center">
-                        <div
-                          className="text-[#C2C9D6] cursor-pointer font-bold hover:font-medium hover:scale-80"
-                          onClick={() => setSelectedContribution(null)}
-                        >
-                          Show less
-                        </div>
-                        <img
-                          src={ShareIcon}
-                          alt="share"
-                          className="cursor-pointer w-[22px] hover:w-[18px]"
-                        />
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="flex flex-col gap-2">
-                      <p className="leading-loose text-[16px] truncate">
-                        {contribution.description}
-                      </p>
-                      <div className="flex gap-2 items-center">
-                        <div
-                          className="text-[#C2C9D6] cursor-pointer font-bold hover:font-medium hover:scale-80"
-                          onClick={() => setSelectedContribution(index)}
-                        >
-                          Read more
-                        </div>
-                        <img
-                          src={ShareIcon}
-                          alt="share"
-                          className="cursor-pointer w-[22px] hover:w-[18px]"
-                        />
-                      </div>
-                    </div>
-                  )}
-                </div>
+            {contributions.length === 0 ? (
+              <div className="h-full flex justify-center items-center text-primary text-center text-[18px] md:text-[24px]">
+              <p>No contributions yet. Be the first to contribute!</p>
               </div>
-            ))}
+            ) : (
+              contributions.map((contribution, contributionIndex) => (
+                <div key={contributionIndex} className="md:grid grid-cols-12 items-center">
+                  <div className="md:col-span-2 mb-3 w-[50px] md:w-[70px] lg:w-[100px] flex items-center max-sm:pt-2.5 text-center justify-center font-semibold mr-3 tracking-tighter text-base max-sm:text-sm max-lg:text-lg max-sm:block">
+                    <img
+                      className="w-full h-full"
+                      src={getIconByType(contribution.type)}
+                      alt="icon"
+                    />
+                  </div>
+                  <div className="md:col-span-10 flex flex-col gap-[7px]">
+                    <div className="flex gap-2 items-center">
+                      <h4 className="text-[18px] font-bold">{contribution.fullName}</h4>
+                      <div className="relative image-stack bottom-3">
+                        {contribution.images.slice(0, 4).map((image, index) => (
+                          <div
+                            key={index}
+                            style={{
+                              transform: `rotate(${getRotation(index)}deg)`,
+                              top: `${index * 2}px`,
+                              left: `${index * 2}px`,
+                              zIndex: index,
+                            }}
+                            className="w-[20px] h-[20px] rounded-sm cursor-pointer overflow-hidden border-solid border-[0.5] border-[white] absolute origin-center"
+                          >
+                            <img
+                              src={URL.createObjectURL(image)}
+                              alt="gallery icon"
+                              className="absolute w-full h-full object-cover z-0"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {selectedContribution === contributionIndex ? (
+                      <div className="flex flex-col gap-2">
+                        <p className="leading-loose text-[16px]">{contribution.description}</p>
+                        <div className="flex gap-2 items-center">
+                          <div
+                            className="text-[#C2C9D6] cursor-pointer font-bold hover:font-medium hover:scale-80"
+                            onClick={() => setSelectedContribution(null)}
+                          >
+                            Show less
+                          </div>
+                          <img
+                            src={ShareIcon}
+                            alt="share"
+                            className="cursor-pointer w-[22px] hover:w-[18px]"
+                          />
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="flex flex-col gap-2">
+                        <p className="leading-loose text-[16px] truncate">
+                          {contribution.description}
+                        </p>
+                        <div className="flex gap-2 items-center">
+                          <div
+                            className="text-[#C2C9D6] cursor-pointer font-bold hover:font-medium hover:scale-80"
+                            onClick={() => setSelectedContribution(contributionIndex)}
+                          >
+                            Read more
+                          </div>
+                          <img
+                            src={ShareIcon}
+                            alt="share"
+                            className="cursor-pointer w-[22px] hover:w-[18px]"
+                          />
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))
+            )}
           </div>
           <div
             className="bg-white lg:px-[40px] lg:py-[28px] px-[19px] py-[24px] rounded-md flex flex-col gap-[32px] lg:mb-[100px]"
@@ -423,9 +466,7 @@ function Home() {
 
             <Formik
               initialValues={{ fullName: "", email: "", Tribute: "", TributeImages: [] }}
-              onSubmit={(values) => {
-                console.log(values);
-              }}
+              onSubmit={(values, { resetForm }) => handleFormSubmit(values, resetForm)}
             >
               {({ values, handleSubmit, handleChange, setFieldValue }) => (
                 <form onSubmit={handleSubmit} className="text-[18px] flex flex-col gap-[32px]">
@@ -456,7 +497,11 @@ function Home() {
                       {isFuneral && (
                         <div className="flex gap-[20px]">
                           {funeral.map((funeralItem) => (
-                            <div key={funeralItem.type} className={`flex flex-col items-center gap-[15px] cursor-pointer justify-center p-4 ${isActive === funeralItem.type ? "bg-indigo-100" : ""}`} onClick={()=> setIsActive(funeralItem.type)}>
+                            <div
+                              key={funeralItem.type}
+                              className={`flex flex-col items-center gap-[15px] cursor-pointer justify-center p-4 ${isActive === funeralItem.type ? "bg-indigo-100" : ""}`}
+                              onClick={() => handleSelection(funeralItem.type)}
+                            >
                               <img
                                 src={funeralItem.icon}
                                 alt={funeralItem.icon}
@@ -470,8 +515,12 @@ function Home() {
                       {isOthers && (
                         <div className="flex gap-[20px] ">
                           {others.map((item) => (
-                            <div key={item.type} className={`flex flex-col items-center gap-[15px] cursor-pointer justify-center p-4 ${isActive === item.type ? "bg-indigo-100" : ""}`} onClick={()=>setIsActive(item.type)}>
-                              <img src={item.icon} alt={item.icon} className="w-[50px] h-[50px]"  />
+                            <div
+                              key={item.type}
+                              className={`flex flex-col items-center gap-[15px] cursor-pointer justify-center p-4 ${isActive === item.type ? "bg-indigo-100" : ""}`}
+                              onClick={() => handleSelection(item.type)}
+                            >
+                              <img src={item.icon} alt={item.icon} className="w-[50px] h-[50px]" />
                               <p className="text-[14px]">{item.writeup}</p>
                             </div>
                           ))}
