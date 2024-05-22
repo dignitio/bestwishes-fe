@@ -37,9 +37,9 @@ const Dragdrop = ({images, setImages}) => {
   
     // All dropped files are images, add them to the state
     setImages([...images, ...files])
-    console.log("Updated images:", images);
+    // console.log("Updated images:", images);
   };
-  console.log(images)
+  // console.log(images)
 
   
   const handleBrowseClick = () => {
