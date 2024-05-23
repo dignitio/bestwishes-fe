@@ -30,7 +30,7 @@ export default function CustomPriceInput({ label, ...props }) {
           onChange={handleChange}
           className={`w-full border text-[#1E1B1A]  ${
             meta.touched && meta.error ? "border-errorColor" : "border-primary"
-          } rounded-md px-[26px] py-[18px] outline-none`}
+          } rounded-md px-4 py-4 outline-none`}
           style={{ appearance: "none", WebkitAppearance: "none", MozAppearance: "none" }}
         />
       </motion.div>
