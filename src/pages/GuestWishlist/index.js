@@ -7,6 +7,7 @@ import { Form, Formik } from "formik";
 import { guestWishlist } from "Schemas";
 import CustomInput from "components/CustomFormInputs/CustomInput";
 import CustomPriceInput from "components/CustomFormInputs/CustomPriceInput";
+import NotificationBanner from "components/NotificationBanner";
 
 function GuestWishlist() {
   const foundWishlist = wishListData.find((wishlist) => wishlist.id);
@@ -15,13 +16,18 @@ function GuestWishlist() {
 
   return (
     <div className="w-full">
-      <div className="bg-primary p-6 w-full text-white text-center font-nunito text-[24px] font-light">
-        Like this Wishlist? Set up your own - It's absolutely free
+      <div className=" py-4  lg:py-6 lg:px-12">
+        <NotificationBanner
+          text="Like this Wishlist? Set up your own - It's absolutely free "
+          cta="Create Wishlist"
+          mode="purple"
+          ctaLink="/register"
+        />
       </div>
       <div>
         {foundWishlist ? (
           <div className="w-full">
-            <div className="bg-white h-full w-auto p-4 m-4 lg:m-20 lg:p-10 overflow-hidden flex flex-col items-start border rounded-lg">
+            <div className="bg-white h-full w-auto p-4 m-8 lg:mx-20 lg:p-10 overflow-hidden flex flex-col items-start border rounded-lg">
               <div className=" relative ">
                 <img
                   src={foundWishlist.photoSrc}
@@ -29,7 +35,7 @@ function GuestWishlist() {
                   className="w-screen relative h-[300px] object-cover object-center border rounded-md"
                 />
                 {/* Counter Timer */}
-                <div className=" rounded-full z-50 p-4 border border-solid border-red-500 text-white text-xs text-center absolute left-5  bottom-4 ">
+                <div className=" rounded-full font-nunito z-50 p-4 border border-solid border-red-500 text-white text-xs text-center absolute left-5  bottom-4 ">
                   <p>239 Days</p>
                   <br />
                   <p>to go</p>
