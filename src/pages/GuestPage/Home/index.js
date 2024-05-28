@@ -5,7 +5,7 @@ import Button from "components/Button";
 // import contributions from "layout/Lists/contributions";
 import images from "layout/Lists/images";
 import WishItems from "layout/Lists/wishlist";
-import CreateGuestTribute from "pages/GuestPage/CreateTribute";
+import ImageModal from "pages/GuestPage/Image-modal";
 import CustomInput from "components/CustomFormInputs/CustomInput";
 import CustomTextArea from "components/CustomFormInputs/CustomTextArea";
 import WishListModal from "pages/GuestPage/wishlistModal";
@@ -23,7 +23,7 @@ import uploadIcon from "assets/icons/upload.png";
 import { useNavigate } from "react-router-dom";
 import Dragdrop from "components/dragdrop";
 import googleIcon from "assets/icons/googleicon.png";
-import fbIcon from "assets/images/facebook.png";
+import fbIcon from "assets/icons/facebookIcon.png";
 import write from "assets/icons/edit.svg";
 import eyeIcon from "assets/icons/eye.svg";
 import smsIcon from "assets/images/sms.svg";
@@ -35,7 +35,8 @@ import wreath from "assets/images/wreath.png";
 import heart from "assets/images/heart.png";
 import flower from "assets/images/flower.png";
 import candle from "assets/images/candle.png";
-import emailIcon from "assets/images/email-icon.png"
+import emailIcon from "assets/images/email-icon.png";
+import downloadIcon from "assets/icons/download.png"
 
 import {
   FacebookShareButton,
@@ -52,6 +53,7 @@ function Home() {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [openCreateTribute, setOpenCreateTribute] = useState(false);
+  const [openImageGallery, setOpenImageGallery] = useState(false);
   const [selectedWishlist, setSelectedWishlist] = useState();
   const [fileUploaded, setFileUploaded] = useState(false);
   const [expandText, setExpandText] = useState(false);
@@ -95,8 +97,8 @@ function Home() {
     componentRef.current.scrollIntoView({ behavior: "smooth" });
   };
 
-  function handleModal() {
-    setOpenCreateTribute(!openCreateTribute);
+  function handleImageModal() {
+    setOpenImageGallery(!openImageGallery);
     // setSelectedWishlist(item);
   }
 
@@ -112,6 +114,82 @@ function Home() {
     {
       image: dog1,
       angle: "rotate-0",
+    },
+    {
+      image: dog2,
+      angle: "rotate-12",
+    },
+    {
+      image: dog3,
+      angle: "rotate-45",
+    },
+    {
+      image: girl,
+      angle: "-rotate-12",
+    },
+    {
+      image: dog3,
+      angle: "rotate-45",
+    },
+    {
+      image: girl,
+      angle: "-rotate-12",
+    },
+    {
+      image: dog2,
+      angle: "rotate-12",
+    },
+    {
+      image: dog3,
+      angle: "rotate-45",
+    },
+    {
+      image: girl,
+      angle: "-rotate-12",
+    },
+    {
+      image: dog3,
+      angle: "rotate-45",
+    },
+    {
+      image: girl,
+      angle: "-rotate-12",
+    },
+    {
+      image: dog3,
+      angle: "rotate-45",
+    },
+    {
+      image: girl,
+      angle: "-rotate-12",
+    },
+    {
+      image: dog2,
+      angle: "rotate-12",
+    },
+    {
+      image: dog3,
+      angle: "rotate-45",
+    },
+    {
+      image: girl,
+      angle: "-rotate-12",
+    },
+    {
+      image: dog3,
+      angle: "rotate-45",
+    },
+    {
+      image: girl,
+      angle: "-rotate-12",
+    },
+    {
+      image: dog3,
+      angle: "rotate-45",
+    },
+    {
+      image: girl,
+      angle: "-rotate-12",
     },
     {
       image: dog2,
@@ -473,7 +551,7 @@ function Home() {
             >
               {({ values, handleSubmit, handleChange, setFieldValue }) => (
                 <form onSubmit={handleSubmit} className="text-[18px] flex flex-col gap-[32px]">
-                  <div className="md:flex gap-[32px]">
+                  <div className="flex flex-col md:flex-row gap-[20px] md:gap-[32px]">
                     <CustomInput
                       label="Full Name"
                       name="fullName"
@@ -498,33 +576,33 @@ function Home() {
                   <div className="flex flex-col gap-[25px]">
                     <div>
                       {isFuneral && (
-                        <div className="flex gap-[20px]">
+                        <div className="flex gap-[10px] md:gap-[20px]">
                           {funeral.map((funeralItem) => (
                             <div
                               key={funeralItem.type}
-                              className={`flex flex-col items-center gap-[15px] cursor-pointer justify-center p-4 ${isActive === funeralItem.type ? "bg-indigo-100" : ""}`}
+                              className={`flex flex-col items-center gap-[5px] md:gap-[15px] cursor-pointer justify-center md:p-4 ${isActive === funeralItem.type ? "bg-indigo-100" : ""}`}
                               onClick={() => handleSelection(funeralItem.type)}
                             >
                               <img
                                 src={funeralItem.icon}
                                 alt={funeralItem.icon}
-                                className="w-[50px] h-[50px]"
+                                className="w-[40px] h-[40px] md:w-[50px] md:h-[50px]"
                               />
-                              <p>{funeralItem.writeup}</p>
+                              <p className="text-[13px] text-center">{funeralItem.writeup}</p>
                             </div>
                           ))}
                         </div>
                       )}
                       {isOthers && (
-                        <div className="flex gap-[20px] ">
+                        <div className="flex gap-[10px] md:gap-[20px]">
                           {others.map((item) => (
                             <div
                               key={item.type}
-                              className={`flex flex-col items-center gap-[15px] cursor-pointer justify-center p-4 ${isActive === item.type ? "bg-indigo-100" : ""}`}
+                              className={`flex flex-col items-center gap-[5px] md:gap-[15px] cursor-pointer justify-center p-4 ${isActive === item.type ? "bg-indigo-100" : ""}`}
                               onClick={() => handleSelection(item.type)}
                             >
-                              <img src={item.icon} alt={item.icon} className="w-[50px] h-[50px]" />
-                              <p className="text-[14px]">{item.writeup}</p>
+                              <img src={item.icon} alt={item.icon} className="w-[40px] h-[40px] md:w-[50px] md:h-[50px]" />
+                              <p className="text-[13px] text-center">{item.writeup}</p>
                             </div>
                           ))}
                         </div>
@@ -592,8 +670,8 @@ function Home() {
         </div>
         <div className="lg:col-span-4 flex flex-col gap-[32px]">
           <div className="bg-white py-[39px] px-[29px] rounded-md ">
-            <div className="mx-auto flex flex-col gap-[10px] w-[100%]">
-              <h1 className="text-[24px]">Image Gallery</h1>
+            <div className="mx-auto flex flex-col gap-[20px] w-[100%]">
+              <h1 className="text-[24px]">Benson&apos;s Images</h1>
               <div className="w-full h-full m-auto flex justify-center items-center overflow-hidden rounded-md">
                 <img
                   className="w-[300px] h-[300px] object-cover transition-opacity duration-500 ease-in-out"
@@ -601,6 +679,13 @@ function Home() {
                   alt="slide"
                 />
               </div>
+              <Button
+              onClick={()=>handleImageModal()}
+              className="text-white font-bold"
+              
+            >
+              View all Images
+            </Button>
             </div>
           </div>
 
@@ -643,8 +728,8 @@ function Home() {
           {/* tribute views */}
           <div className="bg-white p-3 rounded-md flex flex-col gap-[17px] h-fit">
             <div className="flex gap-[10px] items-center">
-              <img src={eyeIcon} alt="view-icon" className="w-7" />
-              <p className="font-bold text-[25px]">2000 Views</p>
+              <img src={eyeIcon} alt="view-icon" className="w-5" />
+              <p className="font-bold text-[16px]">2000 Views</p>
             </div>
           </div>
 
@@ -673,6 +758,10 @@ function Home() {
                   </div>
                 ))}
               </div>
+              <Button
+              className="text-white font-bold mt-[30px]">
+             View all Images
+            </Button>
             </div>
           </div>
           <div className="bg-white py-[39px] px-[29px] rounded-md ">
@@ -687,9 +776,9 @@ function Home() {
               </button>
             </div>
           </div>
-          <div className=" bg-indigo-100 p-3 flex gap-[20px] items-center justify-center">
+          <div className=" bg-indigo-100 p-3 flex gap-[20px] items-center justify-center mb-[100px]">
             <p className="font-[500] text-[18px]">Share on: </p>
-            <div className=" flex gap-2">
+            <div className=" flex gap-2 items-center">
               <FacebookShareButton url={shareUrl} quote={title}>
                 <FacebookIcon size={32} round />
               </FacebookShareButton>
@@ -702,6 +791,9 @@ function Home() {
               <WhatsappShareButton url={shareUrl} title={title} separator=":: ">
                 <WhatsappIcon size={32} round />
               </WhatsappShareButton>
+              <div className="">
+                <img src={downloadIcon} className=" " alt="download-icon"/>
+              </div>
             </div>
           </div>
         </div>
@@ -712,10 +804,10 @@ function Home() {
       </Modal>
       <Modal
         className="w-[100%] bg-white md:w-[700px]"
-        open={openCreateTribute}
-        onClose={() => setOpenCreateTribute(!openCreateTribute)}
+        open={openImageGallery}
+        onClose={() => setOpenImageGallery(!openImageGallery)}
       >
-        <CreateGuestTribute selectedWishlist={selectedWishlist} />
+        <ImageModal uploadedPictures={uploadedPictures} />
       </Modal>
     </div>
   );

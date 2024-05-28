@@ -1,17 +1,12 @@
-import { useState } from "react";
-import CustomInput from "components/CustonFormInputs/CustomInput";
-import { Formik } from "formik";
-import Button from "components/Button";
-
-function CreateGuestTribute({ selectedWishlist }) {
+function ImageModal({ uploadedPictures }) {
   return (
-    <div className="">
-      <div className="flex flex-col gap-[20px] md:px-3">
+    <div className="flex flex-col gap-[20px]">
+      {/* <div className="flex flex-col gap-[20px] md:px-3">
         <p className="text-[14px] md:text-[24px] text-justify leading-5">
           You are about to make contribution for Olakunle’s{" "}
           <span className="text-[#3684F7] leading-5">{selectedWishlist?.name}</span>
-        </p>
-        <Formik
+        </p> */}
+      {/* <Formik
           initialValues={{ name: "", email: "", amount: "" }}
           onSubmit={(values) => console.log(values)}
         >
@@ -54,10 +49,20 @@ function CreateGuestTribute({ selectedWishlist }) {
               </button>
             </form>
           )}
-        </Formik>
+        </Formik> */}
+      {/* </div> */}
+
+      <h1 className="text-[24px] font-bold">Benson&apos;s Images</h1>
+
+      <div className="flex flex-wrap h-[561px] gap-[30px] justify-center relative overflow-y-scroll mb-[50px]">
+        {uploadedPictures.map((items) => (
+          <div className="w-[180px] h-[150px] object-cover">
+            <img src={items.image} alt="item" className="w-full h-full" />
+          </div>
+        ))}
       </div>
     </div>
   );
 }
 
-export default CreateGuestTribute;
+export default ImageModal;
