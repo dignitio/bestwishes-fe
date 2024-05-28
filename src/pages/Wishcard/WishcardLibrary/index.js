@@ -12,7 +12,7 @@ function WishcardLibrary() {
             </div>
             <div className="w-11/12 rounded-xl bg-white text-lg mt-8 px-8 py-4 md:px-12 lg:px-24 lg:py-12 xl:grid-cols-3 lg:grid-cols-2 md:grid grid-cols-2 gap-x-28 lg:gap-y-24 max-md:block">
                 {wishCardLibrary.map(wishcard => (
-                    <div className="my-2 rounded-md h-84 max-md:my-8 max-md:mb-16 md:h-96">
+                    <div className="rounded-md h-84 max-md:my-8 max-md:mb-16 md:h-96">
                         <Link
                             to={`/dashboard/wishcardLibrary/${wishcard.id}/edit`}
                             key={wishcard.id}
