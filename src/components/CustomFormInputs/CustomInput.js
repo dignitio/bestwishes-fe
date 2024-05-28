@@ -30,7 +30,7 @@ export default function CustomInput({ label, type, obscured, numeric, ...props }
           {...field}
           {...props}
           type={inputType}
-          className={` text-sm placeholder:text-sm md:text-base w-full border  text-[#1E1B1A]   ${
+          className={` text-sm placeholder:text-sm md:text-base w-full border text-[#000000]   ${
             meta.touched && meta.error ? "border-errorColor" : "border-primary"
           }  rounded-md px-[20px] py-[14px] md:px-[26px] md:py-[18px] outline-none `}
           style={{ appearance: "none", WebkitAppearance: "none", MozAppearance: "none" }}

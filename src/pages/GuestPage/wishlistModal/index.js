@@ -11,7 +11,9 @@ function WishListModal() {
 
   return (
     <div className="bg-white p-3 rounded-md overflow-scroll h-[561px]">
-      <div className="flex flex-col ">
+images
+
+      {/* <div className="flex flex-col ">
         <img src={wishlistImage} className="rounded-lg" alt="pic" />
         <div className="translate-y-[-180%] p-3">
           <p className="text-[24px] font-bold">John Wishlist</p>
@@ -35,7 +37,7 @@ function WishListModal() {
       </div>
       <Modal className="w-[100%] md:w-[700px]" open={open} onClose={() => setOpen(!open)}>
         <CreateGuestTribute />
-      </Modal>
+      </Modal> */}
     </div>
   );
 }
