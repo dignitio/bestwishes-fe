@@ -791,8 +791,8 @@ function Home() {
               <WhatsappShareButton url={shareUrl} title={title} separator=":: ">
                 <WhatsappIcon size={32} round />
               </WhatsappShareButton>
-              <div className="">
-                <img src={downloadIcon} className=" " alt="download-icon"/>
+              <div className="cursor-pointer">
+                <img src={downloadIcon} className="cursor-pointer" alt="download-icon"/>
               </div>
             </div>
           </div>

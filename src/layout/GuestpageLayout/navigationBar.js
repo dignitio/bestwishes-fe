@@ -41,8 +41,8 @@ function Nav() {
         </div>
 
         <div className="hidden lg:flex justify-center items-center gap-[48px]">
-          <div onClick={() => setOpen(!open)}>
-            <span className="text-[18px] ">Create a Tribute</span>
+          <div onClick={() => setOpen(!open)} className="cursor-pointer">
+            <span className="text-[18px] cursor-pointer">Create a Tribute</span>
           </div>
           <NavLink
             to={PATH_HOME.root}
