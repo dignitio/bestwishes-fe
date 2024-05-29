@@ -192,19 +192,51 @@ export const editTributeSchema = yup.object().shape({
 
 
 export const editWishcardLibrarySchema = yup.object().shape({
-
   textWording: yup.string(),
   fontFamily: yup
     .string()
-    .oneOf(["sans", "serif", "san-serif", "cursive", "nunito", "other"], "Invalid Category"),
+    .oneOf(["sans", "sans-serif", "cursive", "fantasy", "monospace", "unset"], "Invalid Category"),
   fontWeight: yup
     .string()
     .oneOf(["normal", "medium", "bold"], "Invalid Category"),
   textSize: yup
-    .string()
-    .oneOf(["8", "9", "10", "11", "12", "14", "16", "18", "20", "22", "24", "26", "28", "36", "48", "72"], "Invalid Category"),
+    .number()
+    .oneOf([8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72], "Invalid Category"),
   letterSpacing: yup
-    .string()
-    .oneOf(["8", "9", "10", "11", "12", "14", "16", "18", "20", "22", "24", "26", "28", "36", "48", "72"], "Invalid Category"),
-
+    .number()
+    .oneOf([2, 4, 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24], "Invalid Category"),
+  textColorPicked: yup.string(),
+  centerImage: yup
+    .mixed()
+    .test("file", "Please upload an Image", (value) => {
+      if (!value || !value.type.startsWith("image/")) {
+        return false;
+      }
+      return true;
+    }),
+  imageWidth: yup
+    .number()
+    .min(200)
+    .max(400),
+  imageHeight: yup
+    .number()
+    .min(200)
+    .max(400),
+  backgroundChoosedImage: yup
+    .mixed()
+    .test("file", "Please upload an Image", (value) => {
+      if (!value || !value.type.startsWith("image/")) {
+        return false;
+      }
+      return true;
+    }),
+  backgroundUploadedImage: yup
+    .mixed()
+    .test("file", "Please upload an Image", (value) => {
+      if (!value || !value.type.startsWith("image/")) {
+        return false;
+      }
+      return true;
+    }),
+  backgroundColor: yup.string()
 });
