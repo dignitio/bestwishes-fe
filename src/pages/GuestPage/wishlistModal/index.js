@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Modal from "components/Modal";
 import WishItems from "layout/Lists/wishlist";
-import CreateGuestTribute from "pages/GuestPage/CreateTribute";
+import CreateGuestTribute from "pages/GuestPage/Image-modal";
 import wishlistImage from "../../../assets/images/wishlistimage.jpeg";
 
 

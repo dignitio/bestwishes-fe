@@ -94,7 +94,7 @@ const MainNavButton = (play, setPlay) => {
               <div className="flex flex-col justify-center items-center gap-[13px] w-full">
                 <div
                   onClick={() => setIsLoggedIn(true)}
-                  className="w-full text-primary text-center text-[16px] font-semibold flex justify-center"
+                  className="w-full text-primary bg-red-400 text-center text-[16px] font-semibold flex justify-center"
                 >
                   <Link
                     to="/login"
