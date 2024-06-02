@@ -60,7 +60,7 @@ const NavMenuButton = () => {
                     </NavLink>
                 </div>
                 <div className="mb-6">
-                    <NavLink to={PATH_DASHBOARD.createCard} className={({ isActive }) => isActive ? "flex max-sm:items-end max-lg:items-center py-2.5 px-4 bg-gradient-to-r from-indigo-100 to-white" : "flex max-sm:items-end max-lg:items-center py-2.5 px-4 hover:bg-gradient-to-r from-indigo-100 to-white"}>
+                    <NavLink to={PATH_DASHBOARD.wishcard} className={({ isActive }) => isActive ? "flex max-sm:items-end max-lg:items-center py-2.5 px-4 bg-gradient-to-r from-indigo-100 to-white" : "flex max-sm:items-end max-lg:items-center py-2.5 px-4 hover:bg-gradient-to-r from-indigo-100 to-white"}>
                         <span className='mr-2'>
                         <EditIcon className='w-6 h-6 max-sm:w-4 max-sm:h-4'/>
                         </span>

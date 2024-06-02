@@ -2,7 +2,6 @@ import AuthGuard from "guards/AuthGuard";
 import GuestGuard from "guards/GuestGuard";
 import AuthLayout from "layout/AuthLayout/Layout";
 import Layout from "layout/DashboardLayout/Layout";
-import MainLayout from "layout/MainLayout";
 import { Suspense, lazy } from "react";
 import { useRoutes } from "react-router-dom";
 import GuestLayout from "layout/GuestpageLayout/TheLayout";
@@ -72,8 +71,16 @@ export default function Router() {
           path: "wishlist/:id/edit",
         },
         {
-          element: <CreateCard />,
-          path: "create-card",
+          element: <Wishcard />,
+          path: "wishcard",
+        },
+        {
+          element: <WishcardLibrary />,
+          path: "wishcardLibrary",
+        },
+        {
+          element: <EditWishcardLibrary />,
+          path: "wishcardLibrary/:id/edit",
         },
         {
           element: <Settings />,
@@ -140,8 +147,10 @@ const Dashboard = Loadable(lazy(() => import("../pages/Dashboard")));
 const Tribute = Loadable(lazy(() => import("../pages/Tribute")));
 const EditTribute = Loadable(lazy(() => import("../pages/EditTribute")));
 const EditWishlist = Loadable(lazy(() => import("../pages/EditWishlist")));
+const EditWishcardLibrary = Loadable(lazy(() => import("../pages/Wishcard/EditWishcardLibrary")));
 const Wishlist = Loadable(lazy(() => import("../pages/Wishlist")));
-const CreateCard = Loadable(lazy(() => import("../pages/CreateCard")));
+const Wishcard = Loadable(lazy(() => import("../pages/Wishcard")));
+const WishcardLibrary = Loadable(lazy(() => import("../pages/Wishcard/WishcardLibrary")));
 const Settings = Loadable(lazy(() => import("../pages/Settings")));
 const Profile = Loadable(lazy(() => import("../pages/Profile")));
 const BankDetails = Loadable(lazy(() => import("../pages/Bank")));

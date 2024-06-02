@@ -272,111 +272,108 @@ function CreateTribute() {
               </div>
             )}
 
-            {/* STEP 3  */}
-            {activeStep === 2 && (
-              <div className="text-lg max-md:pb-8 step-3 text-lg max-md:pb-8 step-2 max-sm:w-80 max-sm:mx-auto max-sm:h-[480px] overflow-x-hidden">
-                <div
-                  className="absolute top-7 py-2 left-8 bg-indigo-50 px-3 rounded-lg cursor-pointer"
-                  onClick={() => setActiveStep(activeStep - 1)}
-                >
-                  <LeftIcon />
-                </div>
-                <div className="max-md:pb-6 max-md:-mt-8">
-                  <div className="flex justify-between max-sm:block gap-10 my-8">
-                    <div className="w-1/2 max-md:w-full">
-                      <CustomSelect name="relationship" label="Please descibe your relationship">
-                        <option value="" className="text-gray-400">
-                          Click here to select relationship
-                        </option>
-                        <option value="father">Father</option>
-                        <option value="mother">Mother</option>
-                        <option value="brother">Brother</option>
-                        <option value="sister">Sister</option>
-                        <option value="cousin">Cousin</option>
-                        <option value="other">Other</option>
-                      </CustomSelect>
-                    </div>
-                    <div className="relative flex w-1/2 max-md:w-full max-md:mt-4">
-                      <CustomInput
-                        label="Add music to your tribute"
-                        name="musicLink"
-                        value={values.musicLink !== "" ? values.musicLink : musicFile}
-                        required
-                        placeholder="click here to upload music"
-                      />
-                      <MusicIcon className="cursor-pointer absolute translate-y-[170%] right-6 top-2 w-6 h-6" />
-                      <input
-                        type="file"
-                        id="musicLink"
-                        className="cursor-pointer absolute translate-y-[200%] -right-52 leading-tight focus:outline-none focus:border-blue-500 opacity-0"
-                        onChange={(e) => {
-                          setMusicFile(e.target.files[0].name);
-                        }}
-                      />
-                    </div>
-                  </div>
-                  <div className="flex justify-between max-sm:block gap-10 my-8 max-md:mb-0">
-                    <div className="w-1/2">
-                      <p className="mr-3">Would you prefer this Tribute to be</p>
-                      <div className="flex items-center mt-2">
-                        <div className="mr-4 flex items-center">
-                          <CustomRadio
-                            name="publicType"
-                            value="public"
-                            text="a public tribute"
-                            checked={values.publicType === "public" && true}
-                          />
-                        </div>
-                        <div className="flex items-center">
-                          <CustomRadio
-                            name="publicType"
-                            value="private"
-                            text="a private tribute"
-                            checked={values.publicType === "private" && true}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    {values.publicType === "private" ? (
-                      <div className="w-1/2 relative">
-                        <div>
-                          {/* <p className="md:base absolute top-12 z-10">BWT-</p> */}
-                          <CustomInput
-                            label="Create a Tribute Passkey"
-                            name="tributeKey"
-                            type="text"
-                            placeholder="Create a Tribute Passkey"
-                            value={values.tributeKey}
-                          />
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="text-white"> - </div>
-                    )}
-                  </div>
-                  <div className="my-8 max-md:mt-0">
-                    <div>
-                      <p className="mr-3 max-md:mb-6">Add More pictures</p>
-                    </div>
-                    <div>
-                      <div className="flex max-md:grid max-md:grid-cols-3 max-md:gap-x-3 max-md:gap-y-12">
-                        {/* picture 1 */}
-                        {values.otherImages.map((item, index) => (
-                          <div key={index} className="mr-3 pb-2">
-                            <fieldset
-                              className={`h-full rounded-lg rounded-5 bg-white max-md:w h20 max-md:h-14 flex items-center bg-slate-100 rounded-sm mr-3 cursor-pointer`}
-                            >
-                              {item.firstOtherImg ? (
-                                <div className="w-full rounded-lg h-full relative pt-3">
-                                  <button
-                                    type="button"
-                                    className=" font-bold text-lg text-red-500 z-30 absolute top-4 left-20 "
-                                    onClick={() =>
-                                      setFieldValue(`otherImages.${index}.firstOtherImg`, null)
-                                    }
-                                  >
-                                    X
-                                  </button>
+                        {/* STEP 3  */}
+                        {activeStep === 2 && (
+                            <div className="text-lg  step-3  max-md:pb-8 step-2 max-sm:w-80 max-sm:mx-auto max-sm:h-[480px] overflow-x-hidden">
+                                <div className="absolute top-7 py-2 left-8 bg-indigo-50 px-3 rounded-lg cursor-pointer" onClick={() => setActiveStep(activeStep - 1)}><LeftIcon /></div>
+                                <div className="max-md:pb-6 max-md:-mt-8">
+                                    <div className="flex justify-between max-sm:block gap-10 my-8">
+                                        <div className="w-1/2 max-md:w-full">
+                                            <CustomSelect 
+                                                name="relationship" 
+                                                label="Please descibe your relationship"
+                                            >
+                                                <option value="" className="text-gray-400">Click here to select relationship</option>
+                                                <option value="father">Father</option>
+                                                <option value="mother">Mother</option>
+                                                <option value="brother">Brother</option>
+                                                <option value="sister">Sister</option>
+                                                <option value="cousin">Cousin</option>
+                                                <option value="other">Other</option>
+                                            </CustomSelect>
+                                        </div>
+                                        <div className="relative flex w-1/2 max-md:w-full max-md:mt-4">
+                                            <CustomInput
+                                                label="Add music to your tribute"
+                                                name="musicLink"
+                                                value={values.musicLink !== "" ? values.musicLink : musicFile}
+                                                required
+                                                placeholder="click here to upload music"
+                                            />
+                                            <MusicIcon className="cursor-pointer absolute translate-y-[170%] right-6 top-2 w-6 h-6"/>
+                                            <input
+                                                type="file"
+                                                id="musicLink"
+                                                className="cursor-pointer absolute translate-y-[200%] -right-52 leading-tight focus:outline-none focus:border-blue-500 opacity-0"
+                                                onChange={(e) => {
+                                                setMusicFile(e.target.files[0].name);
+                                                }}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div  className="flex justify-between max-sm:block gap-10 my-8 max-md:mb-0">
+                                        <div className="w-1/2">
+                                            <p className="mr-3">Would you prefer this Tribute to be</p>
+                                            <div className="flex items-center mt-2">
+                                                <div className="mr-4 flex items-center">
+                                                    <CustomRadio
+                                                        name="publicType" 
+                                                        value="public" 
+                                                        text="a public tribute"
+                                                        checked={values.publicType === "public" && true}
+                                                    />
+                                                </div>
+                                                <div className="flex items-center">
+                                                    <CustomRadio
+                                                        name="publicType" 
+                                                        value="private" 
+                                                        text="a private tribute"
+                                                        checked={values.publicType === "private" && true}
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {values.publicType === "private" ?
+                                            <div className="w-1/2 relative">
+                                                <div>
+                                                    {/* <p className="md:base absolute top-12 z-10">BWT-</p> */}
+                                                    <CustomInput 
+                                                        label="Create a Tribute Passkey" 
+                                                        name="tributeKey" 
+                                                        type="text" 
+                                                        placeholder="Create a Tribute Passkey"
+                                                        value={values.tributeKey}
+                                                    />
+                                                </div>
+                                            </div>
+                                            :
+                                            <div className="text-white"> - </div>
+                                        }
+                                    </div>
+                                    <div className="my-8 max-md:mt-0">
+                                        <div>
+                                            <p className="mr-3 max-md:mb-6">Add More pictures</p>
+                                        </div>
+                                        <div>
+                                            <div className="flex max-md:grid max-md:grid-cols-3 max-md:gap-x-3 max-md:gap-y-12">
+                                                {/* picture 1 */}
+                                                {values.otherImages.map((item, index) => (
+                                                    <div
+                                                        key={index}
+                                                        className="mr-3 pb-2"
+                                                    >
+                                                        <fieldset
+                                                            className={`h-full rounded-lg rounded-5 bg-white max-md:w h20 max-md:h-14 flex items-center bg-slate-100 rounded-sm mr-3 cursor-pointer`}
+                                                        >
+                                                            {item.firstOtherImg ? (
+                                                            <div className="w-full rounded-lg h-full relative pt-3">
+                                                                <button
+                                                                type="button"
+                                                                className=" font-bold text-lg text-red-500 z-30 absolute top-4 left-20 "
+                                                                onClick={() => setFieldValue(`otherImages.${index}.firstOtherImg`, null)}
+                                                                >
+                                                                X
+                                                                </button>
 
                                   <img
                                     src={URL.createObjectURL(item.firstOtherImg)}

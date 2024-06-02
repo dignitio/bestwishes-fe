@@ -65,7 +65,7 @@ function Sidebar() {
         </div>
         <div className="mb-3">
           <NavLink
-            to={PATH_DASHBOARD.createCard}
+            to={PATH_DASHBOARD.wishcard}
             className={({ isActive }) =>
               isActive
                 ? "flex items-end py-2.5 px-3 bg-gradient-to-r from-indigo-100 to-white"
