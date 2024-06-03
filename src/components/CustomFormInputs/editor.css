@@ -4,7 +4,8 @@
 }
 
 .ql-container {
-    /* outline: 1px solid #271F6B; */
+    outline: 1px solid #271F6B;
+    border: #271F6B;
     border: none;
     border-bottom-left-radius: 7px;
     border-bottom-right-radius: 7px;
@@ -14,5 +15,5 @@
     border-top-left-radius: 7px;
     border-top-right-radius: 7px;
     padding: 7em;
-    /* outline: 1px solid #271F6B; */
+    outline: 1px solid #271F6B;
 }

@@ -18,10 +18,7 @@ export default function CustomInput({ label, type, obscured, numeric, ...props }
   };
   return (
     <div className="flex flex-col w-full">
-      <label
-        className=" text-sm md:text-base text-[#1E1B1A]  font-medium text-[18px] mb-1.5"
-        htmlFor={props.id}
-      >
+      <label className="text-sm md:text-base text-[#1E1B1A] font-medium mb-1.5" htmlFor={props.id}>
         {label}
       </label>
       <motion.div whileHover={{ scale: 0.98 }} className="relative">
@@ -30,9 +27,9 @@ export default function CustomInput({ label, type, obscured, numeric, ...props }
           {...field}
           {...props}
           type={inputType}
-          className={` text-sm placeholder:text-sm md:text-base w-full border text-[#000000]   ${
+          className={`text-sm md:text-base w-full  border text-[#000000] placeholder:text-sm md:placeholder:text-base focus:border-primary focus:ring-1 focus:ring-primary ${
             meta.touched && meta.error ? "border-errorColor" : "border-primary"
-          }  rounded-md px-[20px] py-[14px] md:px-[26px] md:py-[18px] outline-none `}
+          } rounded-md px-4 py-4    outline-none`}
           style={{ appearance: "none", WebkitAppearance: "none", MozAppearance: "none" }}
         />
         {obscured && (
