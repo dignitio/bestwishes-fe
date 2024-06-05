@@ -13,14 +13,16 @@ function Dashboard() {
   return (
     <>
       <div className="pt-8 max-md:pt-6 max-lg:mb-5">
-        <NotificationBanner
-          text="Please finalise your profile verification to be eligible to receive gifts from
+        <div className="py-4  lg:py-6 lg:px-12">
+          <NotificationBanner
+            text="Please finalise your profile verification to be eligible to receive gifts from
               well-wishers"
-          cta="Complete profile"
-          mode="red"
-          ctaLink="settings"
-          icon={<SubtractIcon />}
-        />
+            cta="Complete profile"
+            mode="red"
+            ctaLink="settings"
+            icon={<SubtractIcon />}
+          />
+        </div>
         <div className="flex justify-between mt-7 mx-8 max-sm:mx-4 max-sm:block max-lg:grid max-lg:grid-cols-2 max-lg:gap-y-7 max-lg:gap-x-6">
           <div className="bg-white py-5 px-5 w-1/3 max-lg:w-full rounded-md">
             <p className="text-lg pb-1.5 text-sky-700">Total Tributes</p>

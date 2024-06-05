@@ -28,6 +28,9 @@ function GuestWishlist() {
         {foundWishlist ? (
           <div className="w-full">
             <div className="bg-white h-full w-auto p-4 m-8 lg:mx-20 lg:p-10 overflow-hidden flex flex-col items-start border rounded-lg">
+              <div className=" font-nunito text-xl font-medium flex justify-center items-center w-full pb-6 md:text-3xl">
+                {foundWishlist.Title}
+              </div>
               <div className=" relative ">
                 <img
                   src={foundWishlist.photoSrc}
