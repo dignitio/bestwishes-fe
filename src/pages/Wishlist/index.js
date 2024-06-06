@@ -16,6 +16,7 @@ import Button from "components/Button";
 import { Link, useNavigate } from "react-router-dom";
 import Dropdown from "components/Dropdown";
 import CustomPriceInput from "components/CustomFormInputs/CustomPriceInput";
+import shareComponent from "layout/Lists/shareComponent";
 import DeleteWishlist from "./DeleteWishlist";
 import { ReactComponent as UploadIcon } from "../../assets/icons/picture-upload.svg";
 import { ReactComponent as VerticalDot } from "../../assets/icons/wishlist-vertical-dots.svg";
@@ -39,6 +40,8 @@ function Wishlist() {
   const [open, setOpen] = useState(false);
   const [calendarId, setCalenderId] = useState(null);
   const [activeStep, setActiveStep] = useState(0);
+  const [activeSend, setActiveSend] = useState(false);
+  const [activeSendStep, setActiveSendStep] = useState(0);
   const [deleteModal, setDeleteModal] = useState(false);
   const [duplicateModal, setDuplicateModal] = useState(false);
   const navigate = useNavigate();
@@ -120,7 +123,12 @@ function Wishlist() {
                       navigate();
                     }}
                   >
-                    <SendIcon className=" cursor-pointer" />
+                    <SendIcon
+                      onClick={() => {
+                        setActiveSend(true);
+                      }}
+                      className=" cursor-pointer"
+                    />
                   </button>
                   <button
                     type="button"
@@ -178,6 +186,28 @@ function Wishlist() {
       </Modal>
       <Modal width={500} open={duplicateModal} onClose={() => setDuplicateModal(!duplicateModal)}>
         <DuplicateWishlist />
+      </Modal>
+      <Modal width={500} open={activeSend} onClose={() => setActiveSend(!activeSend)}>
+        {activeSendStep === 0 && (
+          <div className=" flex flex-col">
+            <span className=" text-lg">Share</span>
+            <div className=" flex gap-4 mt-5 pr-6 pb-1 overflow-auto overflow-y-hidden cursor-pointer">
+              {shareComponent.map((share) => (
+                <div className="" key={share.id}>
+                  <div className="flex flex-col gap-2 justify-center items-center">
+                    <share.icon className=" cursor-pointer" />
+                    <span>{share.name}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className=" py-4">
+              <div className="bg-white text-primary px-5 py-3  md:mb-6 w-full md:w-auto  rounded-md self-center !border !border-primary outline-none hover:bg-primary hover:text-white">
+                A
+              </div>
+            </div>
+          </div>
+        )}
       </Modal>
       <Modal style={{ zIndex: 99 }} width={850} open={open} onClose={() => setOpen(!open)}>
         <Formik
