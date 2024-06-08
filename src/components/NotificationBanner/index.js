@@ -9,7 +9,7 @@ export default function NotificationBanner({ text, cta, ctaLink, icon, mode }) {
     red: {
       outline: "outline-red-400",
       background: "bg-red-50",
-      button: "bg-red-500 hover:bg-red-600 text-white",
+      button: "bg-red-500 outline-none hover:text-red-600 hover:bg-white text-white",
     },
     green: {
       outline: "outline-green-400",
@@ -35,14 +35,14 @@ export default function NotificationBanner({ text, cta, ctaLink, icon, mode }) {
         >
           <div className="flex items-center sm:items-start">
             <div className="w-7 mt-1 h-7 md:w-8 md:h-7 lg:w-8 lg:h-8">{icon}</div>
-            <p className=" sm:pl-2 pt-1 font-nunito md:pt-0.5 text-base md:text-base md:font-normal lg:text-xl lg:pl-4 ">
+            <p className=" sm:pl-2 pt-1 font-nunito text-base md:text-base md:font-normal lg:text-xl lg:pl-4 ">
               {text}
             </p>
           </div>
-          <div className="flex items-center sm:ml-7 max-sm:mt-6 max-sm:mb-2">
+          <div className="flex items-center">
             <Link to={ctaLink} replace>
               <span
-                className={`rounded-lg px-2 py-3 font-nunito mr-8 text-base lg:px-4 md:py-3 lg:py-3 md:px-3 ${currentStyles.button}`}
+                className={`rounded-lg px-2 py-3 font-nunito lg:mr-8 text-base lg:px-4 md:py-2 lg:py-3 md:px-3 ${currentStyles.button}`}
               >
                 {cta}
               </span>
