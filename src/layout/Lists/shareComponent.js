@@ -16,31 +16,37 @@ const shareComponent = [
     id: 2,
     name: "Instagram",
     icon: InstagramIcon,
+    link: "https://www.instagram.com/accounts/login/?hl=en",
   },
   {
     id: 3,
     name: "Telegram",
     icon: TelegramIcon,
+    link: "https://web.telegram.org/a/",
   },
   {
     id: 4,
     name: "Whatsapp",
     icon: WhatsappIcon,
+    link: "https://web.whatsapp.com/",
   },
   {
     id: 5,
     name: "Linkedin",
     icon: LinkedinIcon,
+    link: "https://www.linkedin.com/",
   },
   {
     id: 6,
     name: "Facebook",
     icon: FacebookIcon,
+    link: "https://web.facebook.com/",
   },
   {
     id: 7,
     name: "Twitter",
     icon: TwitterIcon,
+    link: "https://x.com/i/flow/login",
   },
 ];
 
