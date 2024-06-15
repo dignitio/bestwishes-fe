@@ -21,23 +21,42 @@ import { ReactComponent as JustifyTextAlign } from "../../../assets/icons/textal
 function EditWishcardLibrary() {
 
     const { id } = useParams();
-    const [activeStep, setActiveStep] = useState(1);
+    const [activeStep, setActiveStep] = useState(0);
     const [activeText, setActiveText] = useState(2);
     const [activeCard, setActiveCard] = useState("front");
     const [open, setOpen] = useState(false);
     const [previewModal, setPreviewModal] = useState(false);
+    const [showColorPicker, setShowColorPicker] = useState(false);
 
     const [ chosedBgColor, setChosedBgColor ] = useState("#ffffff")
-    const [ chosedTextColor, setChosedTextColor ] = useState("#000000")
+    const [ chosedTextColor, setChosedTextColor ] = useState("#ffffff")
     const [ selectedTextTransform, setSelectedTextTransform ] = useState("center")
     const [ selectedTextAlign, setSelectedTextAlign] = useState("uppercase")
 
+    const [selectedValue, setSelectedValue] = useState('headTextWording');
+    const [words, setWords] = useState({
+        headTextWording: '',
+        titleTextWording: '',
+        footerTextWording: '',
+    });
     const handleBgColorChange = (color) => setChosedBgColor(color);
     const handleTextColorChange = (color) => setChosedTextColor(color);
 
+    const handleInputChange = (event) => {
+        setWords({
+          ...words,
+          [selectedValue]: event.target.value
+        });
+      };
+    
+      const handleSelectChange = (event) => {
+        setSelectedValue(event.target.value);
+      };
+    
+
     return ( 
         <div className="pt-4 mb-8">
-            <div className="flex justify-between">
+            <div className="flex  justify-between">
                 <div className="flex items-center text-indigo-700 font-medium max-md:mb-4 mt-6 ml-8">
                     <LeftArrowIcon className="mr-1 w-5 h-5 max-sm:w-3.5 max-lg:w-5 max-lg:h-5" />
                     <Link to="/dashboard/wishcard" className="text-lg">Back to Card</Link>
@@ -65,7 +84,6 @@ function EditWishcardLibrary() {
                 <div>
                     <Formik
                         initialValues={{
-                            textWording: "",
                             fontFamily: "",
                             fontWeight: "",
                             textSize: "",
@@ -88,7 +106,7 @@ function EditWishcardLibrary() {
                          {({ values, setFieldValue, isValid, }) => (
                             <div>
                                 {activeCard === "front" &&
-                                    <div className="flex justify-between mt-8 overflow-none mx-8 max-lg:mx-4 max-lg:block"  style={{backgroundImage: `url(${values.backgroundUploadedImage.name})`}}>
+                                    <div className="flex  justify-between mt-8 overflow-none mx-8 max-lg:mx-4 max-lg:block"  style={{backgroundImage: `url(${values.backgroundUploadedImage.name})`}}>
                                         <div className="px-6 flex justify-center items-center h-[780px] rounded-xl w-11/12 mr-4 text-center" style={{backgroundColor: chosedBgColor}}>
                                             <div>
                                                 <div>
@@ -114,33 +132,34 @@ function EditWishcardLibrary() {
                                                     </div>
                                                     {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
                                                     <h2 className={activeText === 0 ? "mt-4 bg-[#F9F9F905] p-3" : "cursor-pointer my-4"} 
-                                                        onClick={() => setActiveText(0)}
+                                                        onClick={() => setSelectedValue("headTextWording")}
                                                         style={
                                                           activeText === 0 ?  { color: chosedTextColor, fontSize: `${values.textSize}px`, letterSpacing: `${values.letterSpacing}px`, 
                                                                fontFamily: `${values.fontFamily}`, fontWeight: `${values.fontWeight}`, textTransform: selectedTextTransform, textAlign: selectedTextAlign }
                                                                : {alignItems: "left"}}
                                                     >
-                                                        {activeText === 0 && values.textWording ? values.textWording : "Heading"}
+                                                        {words.headTextWording ? words.headTextWording : "Heading"}
                                                     </h2>
                                                      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
                                                     <p className={activeText === 1 ? "mt-1  bg-[#F9F9F905] p-3" : "my-3 cursor-pointer"}
-                                                     onClick={() => setActiveText(1)}
+                                                     onClick={() => setSelectedValue("titleTextWording")}
                                                          style={
                                                             activeText === 1 ?  { color: chosedTextColor, fontSize: `${values.textSize}px`, letterSpacing: `${values.letterSpacing}px`, 
                                                                  fontFamily: `${values.fontFamily}`, fontWeight: `${values.fontWeight}`, textTransform: selectedTextTransform, textAlign: selectedTextAlign }
                                                                  : {alignItems: "left"}}
                                                     >
-                                                        {activeText === 1 && values.textWording ? values.textWording : "NAME"}
+                                                        {words.titleTextWording ? words.titleTextWording : "desc"}
                                                     </p>
                                                      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
                                                     <p className={activeText === 2 ? "mt-1 cursor-pointer bg-[#F9F9F905] p-3" : "my-3 cursor-pointer"}
-                                                     onClick={() => setActiveText(2)}
+                                                     onClick={() => setSelectedValue("footerTextWording")}
                                                          style={
                                                             activeText === 2 ?  { color: chosedTextColor, fontSize: `${values.textSize}px`, letterSpacing: `${values.letterSpacing}px`, 
                                                                  fontFamily: `${values.fontFamily}`, fontWeight: `${values.fontWeight}`, textTransform: selectedTextTransform, textAlign: selectedTextAlign }
                                                                  : {alignItems: "left"}}
+
                                                     >
-                                                        {activeText === 2 && values.textWording ? values.textWording : "short description"}
+                                                        {words.footerTextWording ? words.footerTextWording : "foot"}
                                                     </p>
                                                 </div>
                                             </div>
@@ -148,7 +167,7 @@ function EditWishcardLibrary() {
                                         
                                         <div className="w-3/12 h-full max-sm:block bg-white rounded-xl lg:ml-2 lg:mr-8 px-4 py-4">
                                             <button className="w-full rounded-md flex justify-between mt-1 mb-5 border ">
-                                                <button className={`py-4 w-1/3 cursor-pointer hover:bg-indigo-100 ${activeStep === 0 ? "bg-indigo-200" : ""}`}  onClick={() => setActiveStep(0)}>AI</button>
+                                                <button className={`py-4 w-1/3 cursor-pointer hover:bg-indigo-100 ${activeStep === 0 ? "bg-indigo-200" : ""}`}  onClick={() => setActiveStep(0)}>Tt</button>
                                                 <button className={`py-4 w-1/3 cursor-pointer hover:bg-indigo-100 ${activeStep === 1 ? "bg-indigo-200" : ""}`} onClick={() => setActiveStep(1)}>Image</button>
                                                 <button className={`py-4 w-1/3 cursor-pointer hover:bg-indigo-100 ${activeStep === 2 ? "bg-indigo-200" : ""}`} onClick={() => setActiveStep(2)}>BG</button>
                                             </button>
@@ -163,7 +182,8 @@ function EditWishcardLibrary() {
                                                                     name="textWording" 
                                                                     type="text"
                                                                     placeholder="Your text here"
-                                                                    value={values.textWording}
+                                                                    value={words[selectedValue]} 
+                                                                    onChange={handleInputChange} 
                                                                     className="md:py-48 py-40"
                                                                 />
                                                             </div>
@@ -263,7 +283,21 @@ function EditWishcardLibrary() {
                                                             <div className="my-5">
                                                                 <p>Color Picker</p>
                                                                 <div className="w-full rounded-xs mt-2">
-                                                                    <ColorPicker onColorChange={handleTextColorChange}/>
+                                                                    <div 
+                                                                        className="flex items-center cursor-pointer"
+                                                                        onClick={() => setShowColorPicker(!showColorPicker)}
+                                                                    >
+                                                                        <div 
+                                                                         style={{ backgroundColor: chosedTextColor && chosedTextColor || "greenyellow" }}
+                                                                        className="w-6 h-6 outline outline-gray-100"
+                                                                        >.</div>
+                                                                        <span className="ml-2 mt-1">Select Color</span>
+                                                                    </div>
+                                                                    {showColorPicker && (
+                                                                        <div className="mt-2">
+                                                                            <ColorPicker onColorChange={handleTextColorChange} />
+                                                                        </div>
+                                                                    )}
                                                                 </div>
                                                             </div>
                                                             <div className="my-16 flex justify-between px-2">
@@ -330,13 +364,43 @@ function EditWishcardLibrary() {
                                                             <div className="my-5">
                                                                 <p>Color Picker</p>
                                                                 <div className="w-full rounded-xs mt-2">
-                                                                    <ColorPicker onColorChange={handleBgColorChange} />
+                                                                    <div 
+                                                                        className="flex items-center cursor-pointer"
+                                                                        onClick={() => setShowColorPicker(!showColorPicker)}
+                                                                    >
+                                                                        <div 
+                                                                         style={{ backgroundColor: chosedTextColor && chosedTextColor || "greenyellow" }}
+                                                                        className="w-6 h-6 outline outline-gray-100"
+                                                                        >.</div>
+                                                                        <span className="ml-2 mt-1">Select Color</span>
+                                                                    </div>
+                                                                    {showColorPicker && (
+                                                                        <div className="mt-2">
+                                                                            <ColorPicker onColorChange={handleTextColorChange} />
+                                                                        </div>
+                                                                    )}
                                                                 </div>
                                                             </div>
                                                             <div>
                                                                 <div>
                                                                     <p>Available Images:</p>
-                                                                    <div className="grid grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-3 mt-3 mr-3">
+                                                                    <div className="flex flex-wrap gap-x-5 gap-y-3 mt-3">
+                                                                        <div className="w-20 h-20 rounded-lg bg-indigo-100">.</div>
+                                                                        <div className="w-20 h-20 rounded-lg bg-indigo-100">.</div>
+                                                                        <div className="w-20 h-20 rounded-lg bg-indigo-100">.</div>
+                                                                        <div className="w-20 h-20 rounded-lg bg-indigo-100">.</div>
+                                                                        <div className="w-20 h-20 rounded-lg bg-indigo-100">.</div>
+                                                                        <div className="w-20 h-20 rounded-lg bg-indigo-100">.</div>
+                                                                        <div className="w-20 h-20 rounded-lg bg-indigo-100">.</div>
+                                                                        <div className="w-20 h-20 rounded-lg bg-indigo-100">.</div>
+                                                                        <div className="w-20 h-20 rounded-lg bg-indigo-100">.</div>
+                                                                        <div className="w-20 h-20 rounded-lg bg-indigo-100">.</div>
+                                                                        <div className="w-20 h-20 rounded-lg bg-indigo-100">.</div>
+                                                                        <div className="w-20 h-20 rounded-lg bg-indigo-100">.</div>
+                                                                        <div className="w-20 h-20 rounded-lg bg-indigo-100">.</div>
+                                                                        <div className="w-20 h-20 rounded-lg bg-indigo-100">.</div>
+                                                                        <div className="w-20 h-20 rounded-lg bg-indigo-100">.</div>
+                                                                        <div className="w-20 h-20 rounded-lg bg-indigo-100">.</div>
                                                                         <div className="w-20 h-20 rounded-lg bg-indigo-100">.</div>
                                                                         <div className="w-20 h-20 rounded-lg bg-indigo-100">.</div>
                                                                         <div className="w-20 h-20 rounded-lg bg-indigo-100">.</div>
