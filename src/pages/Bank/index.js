@@ -3,6 +3,7 @@ import { PATH_DASHBOARD } from "routes/path";
 import React, { useState } from "react";
 import { Field, Formik } from "formik";
 import CustomInput from "components/CustomFormInputs/CustomInput";
+import CustomSelect from "components/CustomFormInputs/CustomSelect";
 
 function BankDetails() {
   const [isActive, setIsActive] = useState(false);
@@ -39,9 +40,9 @@ function BankDetails() {
 
   return (
     <div className="flex justify-center lg:p-[38px] ">
-    <div className="bg-white flex flex-col lg:flex-row p-[16px] lg:px-[16px] lg:p-0 lg:gap-[50px] rounded-[16px] justify-center gap-[20px] w-full">
-      <div className="flex flex-col lg:flex-row justify-center lg:px-[21px] lg:py-[84px]">
-        <div className="flex lg:flex-col flex-row lg:gap-[28px] lg:justify-start justify-between mb-2">
+      <div className="bg-white flex flex-col lg:flex-row p-[16px] lg:px-[16px] lg:p-0 lg:gap-[50px] rounded-[16px] justify-center gap-[20px] w-full">
+        <div className="flex flex-col lg:flex-row justify-center lg:px-[21px] lg:py-[84px]">
+          <div className="flex lg:flex-col flex-row lg:gap-[28px] lg:justify-start justify-between mb-2">
             <Link
               to={PATH_DASHBOARD.profile}
               className={`text-[16px] cursor-pointer lg:px-[47px] lg:py-[15px] ${isActive === "profile" ? "text-primary" : "text-[#000000]"}`}
@@ -80,16 +81,20 @@ function BankDetails() {
             >
               {({ values, handleSubmit, handleChange }) => (
                 <form onSubmit={handleSubmit} className="text-[18px] flex flex-col gap-[32px]">
-                  <CustomInput
+                  <CustomSelect
                     label="Select Bank"
                     name="selectedBank"
                     value={values.selectedBank}
                     required
-                    type="select"
-                    options={banks.map((bank) => ({ value: bank.name, label: bank.name, key: bank.id }))}
-                    onChange={handleChange}
-                  />
-                
+                    onchange={handleChange}
+                  >
+                    {banks.map((bank) => (
+                      <option value={bank.name}>
+                        {bank.name}
+                      </option>
+                    ))}
+                  </CustomSelect>
+
                   <CustomInput
                     label="Account Number"
                     type="text"
@@ -102,7 +107,7 @@ function BankDetails() {
 
                   <button
                     type="submit"
-                    className={`w-full bg-primary px-[26px] py-[18px] text-white rounded-[4px] ${!values.accountNumber  || !values.selectedBank ? "opacity-[0.2] cursor-not-allowed" : ""}`}
+                    className={`w-full bg-primary px-[26px] py-[18px] text-white rounded-[4px] ${!values.accountNumber || !values.selectedBank ? "opacity-[0.2] cursor-not-allowed" : ""}`}
                     disabled={!values.accountNumber || !values.selectedBank}
                   >
                     Save

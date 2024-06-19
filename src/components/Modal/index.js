@@ -29,6 +29,9 @@ const Modal = ({ open, onClose, customClass, width, children, isWishList, ...pro
       <div
         className=" z-50 px-6 pb-6 box-border overflow-y-auto "
         style={{
+          boxSizing: "border-box",
+          overflowY: "auto",
+          padding: "0 24px 0 24px",
           fontFamily: "Nunito Sans",
         }}
       >
