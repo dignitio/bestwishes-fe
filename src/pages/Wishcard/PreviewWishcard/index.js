@@ -22,7 +22,7 @@ function PreviewWishcard() {
                     </div>
                     {/* <div>
                         <h2 className="text-4xl italic font-serif pt-2.5">Congrats!</h2>
-                        <p className="font-sans font-semibold py-1.5">JEFFREY + SANDRA</p>
+             3           <p className="font-sans font-semibold py-1.5">JEFFREY + SANDRA</p>
                         <p className="w-40 mx-auto leading-tight text-xs">AND BEST WISHES FOR MORE HAPPINESS TOGETHER</p>
                     </div> */}
                 </div>
