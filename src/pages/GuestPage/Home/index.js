@@ -576,7 +576,7 @@ function Home() {
                   <div className="flex flex-col gap-[25px]">
                     <div>
                       {isFuneral && (
-                        <div className="flex gap-[10px] md:gap-[20px]">
+                        <div className="flex gap-[15px] md:gap-[20px]">
                           {funeral.map((funeralItem) => (
                             <div
                               key={funeralItem.type}
@@ -594,7 +594,7 @@ function Home() {
                         </div>
                       )}
                       {isOthers && (
-                        <div className="flex gap-[10px] md:gap-[20px]">
+                        <div className="flex gap-[15px] md:gap-[20px]">
                           {others.map((item) => (
                             <div
                               key={item.type}
@@ -626,11 +626,11 @@ function Home() {
                       setImages={(files) => setFieldValue("TributeImages", files)}
                     />
                     <div className="flex flex-col md:flex-row gap-[15px]  md:justify-center">
-                      <button className="cursor-pointer flex gap-[5px] md:gap-[10px] border border-2-black text-[12px] md:text-[16px] font-semibold p-[10px] md:p-[15px] rounded-md hover:bg-black hover:text-white">
+                      <button className="cursor-pointer flex justify-center gap-[5px] md:gap-[10px] border border-2-black text-[12px] md:text-[16px] font-semibold p-[10px] md:p-[15px] rounded-md hover:bg-black hover:text-white">
                         <img src={googleIcon} className="w-[20px]" alt="google-icon" />
                         <p>Add from Google Photos</p>
                       </button>
-                      <button className="cursor-pointer flex gap-[5px] md:gap-[10px] bg-[#039BE5] text-white text-[12px] md:text-[16px] font-semibold p-[10px] md:p-[15px] rounded-md hover:border border-2-[#039BE5]">
+                      <button className="cursor-pointer flex justify-center gap-[5px] md:gap-[10px] bg-[#039BE5] text-white text-[12px] md:text-[16px] font-semibold p-[10px] md:p-[15px] rounded-md hover:border border-2-[#039BE5]">
                         <img src={fbIcon} className="w-[20px]" alt="fb-icon" />
                         <p>Add from Facebook</p>
                       </button>
@@ -656,7 +656,7 @@ function Home() {
                   <button
                     type="submit"
                     // onClick={() => handleReset()}
-                    className={`w-[45%] bg-primary m-auto px-[26px] py-[18px] text-white rounded-[4px] ${!values.fullName || !values.Tribute || values.TributeImages.length === 0 ? "opacity-[0.2] cursor-not-allowed" : ""}`}
+                    className={`w-[45%] bg-primary m-auto px-[26px] py-[18px] text-white text-center rounded-[4px] ${!values.fullName || !values.Tribute || values.TributeImages.length === 0 ? "opacity-[0.2] cursor-not-allowed" : ""}`}
                     disabled={
                       !values.fullName || !values.Tribute || values.TributeImages.length === 0
                     }
@@ -766,12 +766,12 @@ function Home() {
           </div>
           <div className="bg-white py-[39px] px-[29px] rounded-md ">
             <div className="flex flex-col gap-[20px] ">
-              <h1 className="text-[24px]">Invite Family and Friends</h1>
+              <h1 className="text-[20px] md:text-[24px]">Invite Family and Friends</h1>
               <button
-                className="w-[100% ] bg-primary text-white font-[500] text-[18px] h-10 rounded-md py-0 px-8 flex gap-[20px] items-center justify-center"
+                className="w-[100% ] bg-primary text-white font-[500] text-[18px] h-10 rounded-md py-0 px-8 flex gap-[6px] md:gap-[20px] items-center justify-center"
                 onClick={handleInvite}
               >
-                <img alt="email" src={emailIcon} className="w-[30px]"/>
+                <img alt="email" src={emailIcon} className="w-[25px] md:w-[30px]"/>
                 Invite via E-mail
               </button>
             </div>

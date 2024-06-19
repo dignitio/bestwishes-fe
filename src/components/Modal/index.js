@@ -31,7 +31,7 @@ const Modal = ({ open, onClose, customClass, width, children, isWishList, ...pro
         style={{
           boxSizing: "border-box",
           overflowY: "auto",
-          padding: "24px",
+          padding: "0 24px 0 24px",
           fontFamily: "Nunito Sans",
         }}
       >
