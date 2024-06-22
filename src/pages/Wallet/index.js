@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import wallet from "assets/icons/wallet-black.svg";
 import CustomInput from "components/CustomFormInputs/CustomInput";
@@ -86,6 +86,7 @@ export default function Wallet() {
   ]);
 
   const [clickedTransaction, setClickedTransaction] = useState(transactionDetails.length + 1);
+  const [savedAccounts, setSavedAccounts] = useState([]);
 
   function toggletransaction(index) {
     if (clickedTransaction === index) {
@@ -95,6 +96,20 @@ export default function Wallet() {
     }
   }
 
+  const getInitial = (name) => {
+    return name.charAt(0).toUpperCase();
+  };
+
+  const getRandomColor = () => {
+    const letters = "0123456789ABCDEF";
+    let color = "#";
+    for (let i = 0; i < 6; i += 1) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  };
+
+  console.log(savedAccounts);
 
   return (
     <div className="flex flex-col xl:flex-row gap-[40px] p-[40px]">
@@ -122,6 +137,7 @@ export default function Wallet() {
 
         <div className="bg-white w-full p-[32px] flex flex-col gap-[32px] rounded-lg">
           <h1 className="font-[600] text-[20px]">Withdrawal Information</h1>
+
           <Formik
             initialValues={{
               amount: "",
@@ -130,11 +146,52 @@ export default function Wallet() {
               accountNumber: "",
               wishlist: "",
               securityPin: "",
+              description: "",
+              saveAccount: false,
             }}
-            onSubmit={(values) => console.log(values)}
+            onSubmit={(values) => {
+              console.log(values);
+              if (values.saveAccount) {
+                setSavedAccounts((prev) => [
+                  ...prev,
+                  {
+                    accountName: values.accountName,
+                    bankName: values.bankName,
+                    accountNumber: values.accountNumber,
+                  },
+                ]);
+              }
+              setOpenSuccessPage(true); // Assuming you want to handle success page here
+            }}
           >
-            {({ values, handleSubmit, handleChange }) => (
+            {({ values, handleSubmit, handleChange, setFieldValue, resetForm }) => (
               <form onSubmit={handleSubmit} className="flex flex-col gap-[32px]">
+                {savedAccounts.length > 0 && (
+                  <div className="flex flex-col ">
+                    <p className="text-sm md:text-base text-[#1E1B1A] font-[700] mb-1.5 underline">Saved Accounts</p>
+                    <div className="flex gap-[15px] w-[100%] overflow-x-scroll savedAccounts">
+                      {savedAccounts.map((account, index) => (
+                        <div
+                          className="flex flex-col gap-[5px] items-center cursor-pointer"
+                          key={index}
+                          onClick={() => {
+                            setFieldValue("accountName", account.accountName);
+                            setFieldValue("bankName", account.bankName);
+                            setFieldValue("accountNumber", account.accountNumber);
+                          }}
+                        >
+                          <div
+                            className="flex items-center justify-center rounded-full w-[30px] h-[30px] p-[10px] text-white font-bold"
+                            style={{ backgroundColor: getRandomColor() }}
+                          >
+                            <p className="text-[16px]">{getInitial(account.accountName)}</p>
+                          </div>
+                          <p className="truncate w-full">{account.accountName}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
                 <CustomInput
                   label="Enter amount to withdraw"
                   type="text"
@@ -142,6 +199,7 @@ export default function Wallet() {
                   value={values.amount}
                   onchange={handleChange}
                 />
+
                 <div className="flex flex-col gap-[10px]">
                   <CustomInput
                     label="Account Name"
@@ -162,6 +220,9 @@ export default function Wallet() {
                   onchange={handleChange}
                   // {banks.map((bank) => ({ value: bank.name, label: bank.name, key: bank.id }))}
                 >
+                  <option value="" className="">
+                    click here to select
+                  </option>
                   {banks.map((bank) => (
                     <option value={bank.name}>{bank.name}</option>
                   ))}
@@ -175,7 +236,12 @@ export default function Wallet() {
                     onchange={handleChange}
                     placeholder="click here to enter"
                   />
-                  <CustomCheckbox name="saveAccount" text="save account for future use" id="" />
+                  <CustomCheckbox
+                    name="saveAccount"
+                    text="save account for future use"
+                    accent="text-primary"
+                    id=""
+                  />
                 </div>
                 <CustomSelect
                   label="Wishlist"
@@ -183,13 +249,22 @@ export default function Wallet() {
                   value={values.wishlist}
                   onchange={handleChange}
                 >
-                  <option value="" className="text-red-300">
+                  <option value="" className="">
                     click here to select
                   </option>
                   <option value="option1">Option 1</option>
                   <option value="option2">Option 2</option>
                   <option value="option3">Option 3</option>
                 </CustomSelect>
+
+                <CustomInput
+                  label="Description"
+                  type="text"
+                  name="description"
+                  value={values.description}
+                  onchange={handleChange}
+                  placeholder="click here to enter"
+                />
 
                 <CustomInput
                   label="Security Pin"
@@ -203,15 +278,24 @@ export default function Wallet() {
                   <motion.button
                     whileTap={{ scale: 0.9 }}
                     whileHover={{ scale: 0.987 }}
-                    className="bg-white text-primary w-full md:w-[50%] h-[46px] md:h-full rounded  px-8 self-center border border-primary outline-none hover:bg-primary hover:text-white"
+                    className="bg-white text-primary w-full md:w-[50%] h-[46px] md:h-full rounded px-8 self-center border border-primary outline-none hover:bg-[#E0E7FF] hover:border-[#E0E7FF] hover:text-primary"
                     type="button"
+                    onClick={() => resetForm()}
                   >
                     Cancel
                   </motion.button>
                   <Button
-                    className="text-white w-full md:w-[50%] h-[46px] md:h-full"
+                    className={`text-white w-full md:w-[50%] h-[46px] md:h-full  ${!values.amount || !values.accountName || !values.bankName || !values.accountNumber || !values.wishlist || !values.securityPin || !values.description ? "opacity-[0.2] cursor-not-allowed" : ""}`}
                     type="submit"
-                    onClick={()=>setOpenSuccessPage(!openSuccessPage)}
+                    disabled={
+                      !values.amount ||
+                      !values.accountName ||
+                      !values.bankName ||
+                      !values.accountNumber ||
+                      !values.wishlist ||
+                      !values.securityPin ||
+                      !values.description
+                    }
                   >
                     Withdraw
                   </Button>
@@ -275,22 +359,22 @@ export default function Wallet() {
                     className="flex flex-wrap justify-between gap-x-[20px] gap-y-[30px] text-[#00000090] text-[16px] p-[10px]"
                   >
                     <div className="flex gap-[10px]">
-                      <h1 className="font-[600] text-[20px]">TransactionID:</h1>
-                      <p className="text-[18px] font-[400] text-[#C2C9D6]">TXN1234567890</p>
+                      <h1 className="font-[600] text-[#818489]">TransactionID:</h1>
+                      <p className=" font-[400] text-[#C2C9D6]">TXN1234567890</p>
                     </div>
                     <div className="flex gap-[10px]">
-                      <h1 className="font-[600] text-[20px]">Description:</h1>
-                      <p className="text-[18px] font-[400] text-[#C2C9D6]">
+                      <h1 className="font-[600] text-[#818489]">Description:</h1>
+                      <p className=" font-[400] text-[#C2C9D6]">
                         Happy Birthday dear, God bless you!
                       </p>
                     </div>
                     <div className="flex gap-[10px]">
-                      <h1 className="font-[600] text-[20px]">Sender&apos;s Name:</h1>
-                      <p className="text-[18px] font-[400] text-[#C2C9D6]">Isiekwene Chisom</p>
+                      <h1 className="font-[600] text-[#818489]">Source:</h1>
+                      <p className=" font-[400] text-[#C2C9D6]">The wishlist</p>
                     </div>
                     <div className="flex gap-[10px]">
-                      <h1 className="font-[600] text-[20px]">Recipient&apos;s Name:</h1>
-                      <p className="text-[18px] font-[400] text-[#C2C9D6]">Isiekwene Chisom</p>
+                      <h1 className="font-[600] text-[#818489]">Recipient&apos;s Name:</h1>
+                      <p className=" font-[400] text-[#C2C9D6]">Isiekwene Chisom</p>
                     </div>
                   </div>
                 )}
@@ -303,8 +387,13 @@ export default function Wallet() {
         </Button>
       </div>
 
-      <Modal width={524} height={350} open={openSuccessPage} onClose={() => setOpenSuccessPage(!openSuccessPage)}>
-        <SuccessPage onClose={() => setOpenSuccessPage(!openSuccessPage)}/>
+      <Modal
+        width={524}
+        height={350}
+        open={openSuccessPage}
+        onClose={() => setOpenSuccessPage(!openSuccessPage)}
+      >
+        <SuccessPage onClose={() => setOpenSuccessPage(!openSuccessPage)} />
       </Modal>
     </div>
   );

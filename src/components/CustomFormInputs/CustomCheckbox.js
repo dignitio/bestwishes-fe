@@ -9,12 +9,14 @@ export default function CustomCheckbox({ text, accent, ...props }) {
     <div className="flex flex-col gap-2">
       <label htmlFor={props.id} className="checkbox flex gap-1 items-center text-sm">
         <input
-          id={props.id} // Set the id attribute for the input field
+          id={props.id} 
           {...field}
           {...props}
-          className={`${
-            meta.touched && meta.error ? "border-errorColor" : "border-gray-300"
-          } border  border focus:border-blue-500 focus:ring-blue-200 rounded-md p-2 outline-none`}
+          className={`
+            ${meta.touched && meta.error ? "border-errorColor" : "border-gray-300"}
+            border focus:border-blue-500 focus:ring-blue-200 rounded-md p-2 outline-none
+            ${field.checked ? accent : ""}
+          `}
           type="checkbox"
         />
         {text}
