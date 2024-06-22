@@ -192,18 +192,6 @@ export const editTributeSchema = yup.object().shape({
 
 
 export const editWishcardLibrarySchema = yup.object().shape({
-  fontFamily: yup
-    .string()
-    .oneOf(["sans", "sans-serif", "cursive", "fantasy", "monospace", "unset"], "Invalid Category"),
-  fontWeight: yup
-    .string()
-    .oneOf(["normal", "medium", "bold"], "Invalid Category"),
-  textSize: yup
-    .number()
-    .oneOf([8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72], "Invalid Category"),
-  letterSpacing: yup
-    .number()
-    .oneOf([2, 4, 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24], "Invalid Category"),
   centerImage: yup
     .mixed()
     .test("file", "Please upload an Image", (value) => {
@@ -212,14 +200,6 @@ export const editWishcardLibrarySchema = yup.object().shape({
       }
       return true;
     }),
-  imageWidth: yup
-    .number()
-    .min(200)
-    .max(400),
-  imageHeight: yup
-    .number()
-    .min(200)
-    .max(400),
   backgroundChoosedImage: yup
     .mixed()
     .test("file", "Please upload an Image", (value) => {
@@ -228,13 +208,4 @@ export const editWishcardLibrarySchema = yup.object().shape({
       }
       return true;
     }),
-  backgroundUploadedImage: yup
-    .mixed()
-    .test("file", "Please upload an Image", (value) => {
-      if (!value || !value.type.startsWith("image/")) {
-        return false;
-      }
-      return true;
-    }),
-  backgroundColor: yup.string()
 });
