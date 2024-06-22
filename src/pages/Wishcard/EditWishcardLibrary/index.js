@@ -16,44 +16,120 @@ import { ReactComponent as LeftTextAlign } from "../../../assets/icons/textalign
 import { ReactComponent as RightTextAlign } from "../../../assets/icons/textalign-right.svg"
 import { ReactComponent as CenterTextAlign } from "../../../assets/icons/textalign-center.svg"
 import { ReactComponent as JustifyTextAlign } from "../../../assets/icons/textalign-justifycenter.svg"
-
+import profilePix from "../../../assets/images/profile2.jpeg"
 
 function EditWishcardLibrary() {
 
     const { id } = useParams();
     const [activeStep, setActiveStep] = useState(0);
-    const [activeText, setActiveText] = useState(2);
     const [activeCard, setActiveCard] = useState("front");
     const [open, setOpen] = useState(false);
     const [previewModal, setPreviewModal] = useState(false);
     const [showColorPicker, setShowColorPicker] = useState(false);
+    const [selectedValue, setSelectedValue] = useState('titleTextWording');
 
     const [ chosedBgColor, setChosedBgColor ] = useState("#ffffff")
-    const [ chosedTextColor, setChosedTextColor ] = useState("#ffffff")
-    const [ selectedTextTransform, setSelectedTextTransform ] = useState("center")
-    const [ selectedTextAlign, setSelectedTextAlign] = useState("uppercase")
 
-    const [selectedValue, setSelectedValue] = useState('headTextWording');
     const [words, setWords] = useState({
-        headTextWording: '',
-        titleTextWording: '',
-        footerTextWording: '',
-    });
+      headTextWording: { 
+        text: 'Congrats!', 
+        fontFamily: 'cursive',
+        fontWeight: '',
+        textSize: '36',
+        letterSpacing: '-2',
+        textColor: '#000000',
+        textTransform: 'capitalize',
+        textAlign: "center",
+    },
+      titleTextWording: { 
+        text: 'IFEOLUWA + UNKNOWN', 
+        fontFamily: 'sans',
+        fontWeight: '700',
+        textSize: '20',
+        letterSpacing: '2',
+        textColor: '#000000',
+        textTransform: 'uppercase',
+        textAlign: "center",
+    },
+      footerTextWording: { 
+        text: 'AND BEST WISHES FOR MUCH HAPPINESS TOGETHER.', 
+        fontFamily: 'sans-serif',
+        fontWeight: '',
+        textSize: '16',
+        letterSpacing: '',
+        textColor: '#000000',
+        textTransform: 'uppercase',
+        textAlign: "center",
+    }});
+
+    const [imageProperty, setImageProperty] = useState({
+        imageWidth: 0,
+        imageHeight: 0,
+    })
+    const [bgImage, setBgImage] = useState(null);
+
+    const handleImageUpload = (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onload = () => {
+        setBgImage(reader.result);
+        };
+        reader.readAsDataURL(file);
+    };
+
     const handleBgColorChange = (color) => setChosedBgColor(color);
-    const handleTextColorChange = (color) => setChosedTextColor(color);
-
+  
     const handleInputChange = (event) => {
-        setWords({
-          ...words,
-          [selectedValue]: event.target.value
-        });
-      };
-    
-      const handleSelectChange = (event) => {
-        setSelectedValue(event.target.value);
-      };
-    
+        const { name, value } = event.target;
+        setWords(prevWords => ({
+          ...prevWords,
+          [selectedValue]: {
+            ...prevWords[selectedValue],
+            [name]: value
+          }
+        }));
+    };
 
+    const handleTextColorChange = (color) => {
+        setWords(prevWords => ({
+          ...prevWords,
+          [selectedValue]: {
+            ...prevWords[selectedValue],
+            textColor: color
+          }
+        }))
+        console.log(color)
+        console.log(selectedValue);
+    };
+
+    const handleCaseChange = (caseName) => {
+        setWords(prevWords => ({
+          ...prevWords,
+          [selectedValue]: {
+            ...prevWords[selectedValue],
+            textTransform: caseName
+          }
+        }));
+    };
+
+    const handleAlignChange = (alignName) => {
+        setWords(prevWords => ({
+          ...prevWords,
+          [selectedValue]: {
+            ...prevWords[selectedValue],
+            textAlign: alignName
+          }
+        }));
+    };
+
+    const handleImageSize = (event) => {
+        const {name, value} = event.target
+        setImageProperty(prevProperty => ({
+          ...prevProperty,
+          [name]: value
+        }));
+    };
+  
     return ( 
         <div className="pt-4 mb-8">
             <div className="flex  justify-between">
@@ -62,8 +138,8 @@ function EditWishcardLibrary() {
                     <Link to="/dashboard/wishcard" className="text-lg">Back to Card</Link>
                 </div>
                 <div className="rounded-md flex w-60 justify-between mt-6 bg-indigo-200">
-                    <button className={`py-3 w-1/2 cursor-pointer hover:bg-indigo-300 rounded-l-md ${activeCard === "front" ? "bg-primary text-white rounded-l-md" : ""}`}  onClick={() => setActiveCard("front")}>front</button>
-                    <button className={`py-3 w-1/2 cursor-pointer hover:bg-indigo-300 rounded-r-md ${activeCard === "back" ?"bg-primary text-white rounded-r-md" : ""}`} onClick={() => setActiveCard("back")}>back</button>
+                    <button className={`py-3 w-1/2 cursor-pointer hover:text-white hover:bg-indigo-900 rounded-l-md ${activeCard === "front" ? "bg-primary text-white rounded-l-md" : ""}`}  onClick={() => setActiveCard("front")}>front</button>
+                    <button className={`py-3 w-1/2 cursor-pointer hover:text-white hover:bg-indigo-900 rounded-r-md ${activeCard === "back" ?"bg-primary text-white rounded-r-md" : ""}`} onClick={() => setActiveCard("back")}>back</button>
                 </div>
                 <div className="mr-32 mt-2">
                     <motion.button
@@ -84,11 +160,6 @@ function EditWishcardLibrary() {
                 <div>
                     <Formik
                         initialValues={{
-                            fontFamily: "",
-                            fontWeight: "",
-                            textSize: "",
-                            letterSpacing: "",
-                            textColorPicked: "",
                             centerImage: "",
                             imageWidth: 0,
                             imageHeight: 0,
@@ -103,11 +174,11 @@ function EditWishcardLibrary() {
                             resetForm();
                         }}
                     >
-                         {({ values, setFieldValue, isValid, }) => (
+                        {({ values, setFieldValue, isValid, }) => (
                             <div>
                                 {activeCard === "front" &&
                                     <div className="flex  justify-between mt-8 overflow-none mx-8 max-lg:mx-4 max-lg:block"  style={{backgroundImage: `url(${values.backgroundUploadedImage.name})`}}>
-                                        <div className="px-6 flex justify-center items-center h-[780px] rounded-xl w-11/12 mr-4 text-center" style={{backgroundColor: chosedBgColor}}>
+                                        <div className="px-6 flex justify-center items-center h-[780px] rounded-xl w-11/12 mr-4 text-center" style={{backgroundColor: chosedBgColor, backgroundSize: 'cover', backgroundImage: `url(${bgImage})`, backgroundPosition: 'center',}}>
                                             <div>
                                                 <div>
                                                     <div>
@@ -115,51 +186,47 @@ function EditWishcardLibrary() {
                                                             className={`relative h-[400px] w-[400px] flex justify-center mt-0  mx-auto cursor-pointer`}
                                                         >
                                                             {values.centerImage ? (
-                                                                <div className="bg-indigo-50 flex justify-center items-center rounded-full relative w-full h-full">
+                                                                <div className={`bg-indigo-50 flex justify-center items-center rounded-full relative w-full h-full`}>
                                                                     <img
                                                                         src={URL.createObjectURL(values.centerImage)}
-                                                                        className={`w-[${values.imageWidth}px] h-[${values.imageHeight}px] object-cover shadow-xl rounded-full`}
+                                                                        className={`w-80 h-80 w-[${imageProperty.imageWidth}px] h-[${imageProperty.imageHeight}px] object-cover shadow-xl rounded-full`}
                                                                         alt="Center pic"
                                                                     />
                                                                 </div>
                                                             ) : (
                                                                 <div className="relative w-full rounded-full">
-                                                                    <div className="w-full h-full bg-indigo-50 rounded-full pt-36 text-primary">Upload an image </div>
+                                                                    <div className="flex justify-center items-center w-full h-full bg-indigo-50 rounded-full text-primary"><img src={profilePix} alt="mm" className="opacity-80 w-10/12 rounded-full"/></div>
                                                                 </div>
                                                             )}
                                                 
                                                         </fieldset>
                                                     </div>
                                                     {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
-                                                    <h2 className={activeText === 0 ? "mt-4 bg-[#F9F9F905] p-3" : "cursor-pointer my-4"} 
-                                                        onClick={() => setSelectedValue("headTextWording")}
-                                                        style={
-                                                          activeText === 0 ?  { color: chosedTextColor, fontSize: `${values.textSize}px`, letterSpacing: `${values.letterSpacing}px`, 
-                                                               fontFamily: `${values.fontFamily}`, fontWeight: `${values.fontWeight}`, textTransform: selectedTextTransform, textAlign: selectedTextAlign }
-                                                               : {alignItems: "left"}}
+                                                    <h2 onClick={() => setSelectedValue("headTextWording")}
+                                                        style={{ color: words.headTextWording.textColor, fontSize: `${words.headTextWording.textSize}px`, letterSpacing: `${words.headTextWording.letterSpacing}px`, 
+                                                            fontFamily: `${words.headTextWording.fontFamily}`, fontWeight: `${words.headTextWording.fontWeight}`, textTransform: words.headTextWording.textTransform, textAlign: words.headTextWording.textAlign }
+                                                        }
+                                                        className={`mt-6 ${selectedValue === "headTextWording" ? "py-2 bg-[#271F6B09]" : " cursor-pointer"}`}
                                                     >
-                                                        {words.headTextWording ? words.headTextWording : "Heading"}
+                                                        {words.headTextWording.text ? words.headTextWording.text : "Heading"}
                                                     </h2>
-                                                     {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
-                                                    <p className={activeText === 1 ? "mt-1  bg-[#F9F9F905] p-3" : "my-3 cursor-pointer"}
-                                                     onClick={() => setSelectedValue("titleTextWording")}
-                                                         style={
-                                                            activeText === 1 ?  { color: chosedTextColor, fontSize: `${values.textSize}px`, letterSpacing: `${values.letterSpacing}px`, 
-                                                                 fontFamily: `${values.fontFamily}`, fontWeight: `${values.fontWeight}`, textTransform: selectedTextTransform, textAlign: selectedTextAlign }
-                                                                 : {alignItems: "left"}}
+                                                    {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+                                                    <p  onClick={() => setSelectedValue("titleTextWording")}
+                                                        style={{ color: words.titleTextWording.textColor, fontSize: `${words.titleTextWording.textSize}px`, letterSpacing: `${words.titleTextWording.letterSpacing}px`, 
+                                                                fontFamily: `${words.titleTextWording.fontFamily}`, fontWeight: `${words.titleTextWording.fontWeight}`, textTransform: words.titleTextWording.textTransform, textAlign: words.titleTextWording.textAlign }
+                                                        }
+                                                        className={`mt-4 ${selectedValue === "titleTextWording" ? "py-2 bg-[#271F6B09]" : " cursor-pointer"}`}
                                                     >
-                                                        {words.titleTextWording ? words.titleTextWording : "desc"}
+                                                        {words.titleTextWording.text ? words.titleTextWording.text : "Description"}
                                                     </p>
-                                                     {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
-                                                    <p className={activeText === 2 ? "mt-1 cursor-pointer bg-[#F9F9F905] p-3" : "my-3 cursor-pointer"}
-                                                     onClick={() => setSelectedValue("footerTextWording")}
-                                                         style={
-                                                            activeText === 2 ?  { color: chosedTextColor, fontSize: `${values.textSize}px`, letterSpacing: `${values.letterSpacing}px`, 
-                                                                 fontFamily: `${values.fontFamily}`, fontWeight: `${values.fontWeight}`, textTransform: selectedTextTransform, textAlign: selectedTextAlign }
-                                                                 : {alignItems: "left"}}
-
+                                                    {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+                                                    <p  onClick={() => setSelectedValue("footerTextWording")}
+                                                        style={{ color: words.footerTextWording.textColor, fontSize: `${words.footerTextWording.textSize}px`, letterSpacing: `${words.footerTextWording.letterSpacing}px`, 
+                                                                fontFamily: `${words.footerTextWording.fontFamily}`, fontWeight: `${words.footerTextWording.fontWeight}`, textTransform: words.footerTextWording.textTransform, textAlign: words.footerTextWording.textAlign }
+                                                        }
+                                                        className={`my-4 mx-auto leading-5 ${selectedValue === "footerTextWording" ? "px-2 py-2 bg-[#271F6B09]" : " cursor-pointer"}`}
                                                     >
-                                                        {words.footerTextWording ? words.footerTextWording : "foot"}
+                                                        {words.footerTextWording.text ? words.footerTextWording.text : "footer"}
                                                     </p>
                                                 </div>
                                             </div>
@@ -179,10 +246,10 @@ function EditWishcardLibrary() {
                                                             <div className="h-">
                                                                 <CustomInput 
                                                                     label="Text Box" 
-                                                                    name="textWording" 
+                                                                    name="text" 
                                                                     type="text"
                                                                     placeholder="Your text here"
-                                                                    value={words[selectedValue]} 
+                                                                    value={words[selectedValue].text} 
                                                                     onChange={handleInputChange} 
                                                                     className="md:py-48 py-40"
                                                                 />
@@ -192,7 +259,8 @@ function EditWishcardLibrary() {
                                                                     <CustomSelect 
                                                                         name="fontFamily" 
                                                                         label="Font Picker"
-                                                                        value={values.fontFamily}
+                                                                        value={words[selectedValue].fontFamily}
+                                                                        onChange={handleInputChange}
                                                                     >
                                                                         <option value="sans">Sans</option>
                                                                         <option value="sans-serif">San-Serif</option>
@@ -206,7 +274,8 @@ function EditWishcardLibrary() {
                                                                     <CustomSelect 
                                                                         name="fontWeight" 
                                                                         label="Font Weight"
-                                                                        value={values.fontWeight}
+                                                                        value={words[selectedValue].fontWeight}
+                                                                        onChange={handleInputChange}
                                                                     >
                                                                         <option value="normal">Normal</option>
                                                                         <option value="medium">Medium</option>
@@ -219,7 +288,8 @@ function EditWishcardLibrary() {
                                                                     <CustomSelect 
                                                                         name="textSize" 
                                                                         label="Text Size"
-                                                                        value={values.textSize}
+                                                                        value={words[selectedValue].textSize}
+                                                                        onChange={handleInputChange}
                                                                     >
                                                                         <option value={8}>8</option>
                                                                         <option value={9}>9</option>
@@ -243,7 +313,8 @@ function EditWishcardLibrary() {
                                                                     <CustomSelect 
                                                                         name="letterSpacing" 
                                                                         label="Letter Spacing"
-                                                                        value={values.letterSpacing}
+                                                                        value={words[selectedValue].letterSpacing}
+                                                                        onChange={handleInputChange}
                                                                     >
                                                                         <option value={2}>2</option>
                                                                         <option value={4}>4</option>
@@ -265,18 +336,18 @@ function EditWishcardLibrary() {
                                                                 <div>
                                                                     <p>Letter Casing</p>
                                                                     <div className="grid grid-cols-3 gap-2 text-base mt-2 cursor-pointer">
-                                                                        <button onClick={() => setSelectedTextTransform("uppercase")} > <p className="hover:bg-indigo-50 p-1">AA</p></button>
-                                                                        <button onClick={() => setSelectedTextTransform("capitalize")} > <p className="hover:bg-indigo-50 p-1">Aa</p></button>
-                                                                        <button onClick={() => setSelectedTextTransform("lowercase")} ><p className="hover:bg-indigo-50 p-1">aa</p></button>
+                                                                        <button onClick={() => handleCaseChange("uppercase")} > <p className="hover:bg-indigo-100 p-1">AA</p></button>
+                                                                        <button onClick={() => handleCaseChange("capitalize")} > <p className="hover:bg-indigo-50 p-1">Aa</p></button>
+                                                                        <button onClick={() => handleCaseChange("lowercase")} ><p className="hover:bg-indigo-50 p-1">aa</p></button>
                                                                     </div>
                                                                 </div>
                                                                 <div>
                                                                     <p>Alignment</p>
                                                                     <div className="grid grid-cols-4 gap-2 text-base mt-2 cursor-pointer">
-                                                                        <button onClick={() => setSelectedTextAlign("left")} ><LeftTextAlign className="w-5 h-5 m-1 hover:bg-indigo-50"/></button>
-                                                                        <button onClick={() =>setSelectedTextAlign("center")} ><CenterTextAlign className="w-5 h-5 m-1 hover:bg-indigo-50"/></button>
-                                                                        <button onClick={() =>setSelectedTextAlign("right")}><RightTextAlign className="w-5 h-5 m-1 hover:bg-indigo-50"/></button>
-                                                                        <button onClick={() =>setSelectedTextAlign("justify")}><JustifyTextAlign className="w-5 h-5 m-1 hover:bg-indigo-50"/></button>
+                                                                        <button onClick={() => handleAlignChange('left')} ><LeftTextAlign className="w-5 h-5 m-1 hover:bg-indigo-50"/></button>
+                                                                        <button onClick={() => handleAlignChange("center")} ><CenterTextAlign className="w-5 h-5 m-1 hover:bg-indigo-50"/></button>
+                                                                        <button onClick={() => handleAlignChange("right")}><RightTextAlign className="w-5 h-5 m-1 hover:bg-indigo-50"/></button>
+                                                                        <button onClick={() => handleAlignChange("justify")}><JustifyTextAlign className="w-5 h-5 m-1 hover:bg-indigo-50"/></button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -288,14 +359,17 @@ function EditWishcardLibrary() {
                                                                         onClick={() => setShowColorPicker(!showColorPicker)}
                                                                     >
                                                                         <div 
-                                                                         style={{ backgroundColor: chosedTextColor && chosedTextColor || "greenyellow" }}
+                                                                        style={{ backgroundColor: chosedBgColor && chosedBgColor || "greenyellow" }}
                                                                         className="w-6 h-6 outline outline-gray-100"
                                                                         >.</div>
                                                                         <span className="ml-2 mt-1">Select Color</span>
                                                                     </div>
                                                                     {showColorPicker && (
                                                                         <div className="mt-2">
-                                                                            <ColorPicker onColorChange={handleTextColorChange} />
+                                                                            <ColorPicker 
+                                                                            name="textColor"
+                                                                            onColorChange={handleTextColorChange}
+                                                                             />
                                                                         </div>
                                                                     )}
                                                                 </div>
@@ -314,14 +388,14 @@ function EditWishcardLibrary() {
                                                             <div className="my-4">
                                                                 <div className="relative">
                                                                     <CustomInput 
-                                                                        label="Upload your image" 
+                                                                        label={values.centerImage ? "Change your image" : "Upload an image"} 
                                                                         name="centermage" 
                                                                         type="text"
                                                                         placeholder="Click here to upload an image"
                                                                         value={values.centerImage.name}
                                                                         className="md:py-48 py-40"
                                                                     />
-                                                                     <input
+                                                                    <input
                                                                         id="centerImage"
                                                                         type="file"
                                                                         accept="image/*"
@@ -330,14 +404,15 @@ function EditWishcardLibrary() {
                                                                     />
                                                                 </div>
                                                             </div>
-                                                            <div className="grid grid-cols-2 gap-4 my-6">
+                                                                <div className="grid grid-cols-2 gap-4 my-6">
                                                                     <div className="">
                                                                         <CustomInput 
                                                                             name="imageWidth" 
                                                                             label="Image Width"
                                                                             type="string"
-                                                                            value={values.imageWidth}
+                                                                            value={imageProperty.imageWidth}
                                                                             placeholder="400"
+                                                                            onChange={handleImageSize}
                                                                         />
                                                                     </div>
                                                                     <div>
@@ -345,9 +420,23 @@ function EditWishcardLibrary() {
                                                                             name="imageHeight" 
                                                                             label="Image Height"
                                                                             type="string"
-                                                                            value={values.imageHeight}
+                                                                            value={imageProperty.imageHeight}
                                                                             placeholder="400"
+                                                                            onChange={handleImageSize}
                                                                         />
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div className="max-h-[300px] overflow-y-scroll mt-5">
+                                                                    <p>Available Textures:</p>
+                                                                    <div className="flex cursor-pointer flex-wrap gap-x-5 text-indigo-100 gap-y-3 mt-3">
+                                                                        <div className="w-20 h-20 rounded-lg bg-indigo-100">.</div>
+                                                                        <div className="w-20 h-20 rounded-lg bg-indigo-100">.</div>
+                                                                        <div className="w-20 h-20 rounded-lg bg-indigo-100">.</div>
+                                                                        <div className="w-20 h-20 rounded-lg bg-indigo-100">.</div>
+                                                                        <div className="w-20 h-20 rounded-lg bg-indigo-100">.</div>
+                                                                        <div className="w-20 h-20 rounded-lg bg-indigo-100">.</div>
+                                                                        <div className="w-20 h-20 rounded-lg bg-indigo-100">.</div>
                                                                     </div>
                                                                 </div>
                                                                 <div className="my-12 flex justify-between px-2">
@@ -369,22 +458,22 @@ function EditWishcardLibrary() {
                                                                         onClick={() => setShowColorPicker(!showColorPicker)}
                                                                     >
                                                                         <div 
-                                                                         style={{ backgroundColor: chosedTextColor && chosedTextColor || "greenyellow" }}
+                                                                        style={{ backgroundColor: chosedBgColor && chosedBgColor || "greenyellow" }}
                                                                         className="w-6 h-6 outline outline-gray-100"
                                                                         >.</div>
                                                                         <span className="ml-2 mt-1">Select Color</span>
                                                                     </div>
                                                                     {showColorPicker && (
                                                                         <div className="mt-2">
-                                                                            <ColorPicker onColorChange={handleTextColorChange} />
+                                                                            <ColorPicker onColorChange={handleBgColorChange} />
                                                                         </div>
                                                                     )}
                                                                 </div>
                                                             </div>
                                                             <div>
-                                                                <div>
+                                                                <div className="mt-4 max-h-[400px]  overflow-y-scroll">
                                                                     <p>Available Images:</p>
-                                                                    <div className="flex flex-wrap gap-x-5 gap-y-3 mt-3">
+                                                                    <div className="flex flex-wrap text-indigo-100 gap-x-5 gap-y-3 mt-3">
                                                                         <div className="w-20 h-20 rounded-lg bg-indigo-100">.</div>
                                                                         <div className="w-20 h-20 rounded-lg bg-indigo-100">.</div>
                                                                         <div className="w-20 h-20 rounded-lg bg-indigo-100">.</div>
@@ -407,6 +496,21 @@ function EditWishcardLibrary() {
                                                                         <div className="w-20 h-20 rounded-lg bg-indigo-100">.</div>
                                                                     </div>
                                                                 </div>
+                                                                <div className="my-4">
+                                                                <div className="relative">
+                                                                    <CustomInput 
+                                                                        label={values.centerImage ? "Change your image" : "Upload an image"} 
+                                                                        name="centermage" 
+                                                                        type="text"
+                                                                        placeholder="Click here to upload an image"
+                                                                        value={values.centerImage.name}
+                                                                        className="md:py-48 py-40"
+                                                                    />
+                                                                    <div className="absolute top-14 opacity-0">
+                                                                        <input type="file" accept="image/*" onChange={handleImageUpload} />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                             </div>
                                                             <div className="my-12 flex justify-between px-2">
                                                                 <div className="bg-indigo-200 -ml-2 mr-2 px-8 py-3.5 rounded-md">Save</div>
