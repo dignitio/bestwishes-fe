@@ -200,12 +200,4 @@ export const editWishcardLibrarySchema = yup.object().shape({
       }
       return true;
     }),
-  backgroundChoosedImage: yup
-    .mixed()
-    .test("file", "Please upload an Image", (value) => {
-      if (!value || !value.type.startsWith("image/")) {
-        return false;
-      }
-      return true;
-    }),
 });

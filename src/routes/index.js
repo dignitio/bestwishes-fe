@@ -2,6 +2,7 @@ import AuthGuard from "guards/AuthGuard";
 import GuestGuard from "guards/GuestGuard";
 import AuthLayout from "layout/AuthLayout/Layout";
 import Layout from "layout/DashboardLayout/Layout";
+import AdminLayout from "layout/AdminLayout/Layout";
 import { Suspense, lazy } from "react";
 import { useRoutes } from "react-router-dom";
 import GuestLayout from "layout/GuestpageLayout/TheLayout";
@@ -144,6 +145,44 @@ export default function Router() {
         },
       ],
     },
+    {
+      path: "/admin",
+      element: (
+        <AuthGuard>
+          <AdminLayout />
+        </AuthGuard>
+      ),
+      children: [
+        {
+          element: <AdminDashboard />,
+          index: true,
+        },
+        {
+          element: <AdminTribute />,
+          path: "tribute",
+        },
+        {
+          element: <AdminUsers />,
+          path: "users",
+        },
+        {
+          element: <AdminWishcard />,
+          path: "wishcard",
+        },
+        {
+          element: <AdminWishlist />,
+          path: "wishlist",
+        },
+        {
+          element: <AdminTransactions />,
+          path: "transactions",
+        },
+        {
+          element: <AdminSettings/>,
+          path: "settings",
+        },
+      ],
+    },
   ]);
 }
 
@@ -168,3 +207,10 @@ const Login = Loadable(lazy(() => import("../pages/Login")));
 const GuestWishlist = Loadable(lazy(() => import("../pages/GuestWishlist")));
 const Register = Loadable(lazy(() => import("../pages/Register")));
 const ResetPassword = Loadable(lazy(() => import("../pages/ResetPassword")));
+const AdminDashboard = Loadable(lazy(() => import("../pages/admin/AdminDashboard")));
+const AdminTribute = Loadable(lazy(() => import("../pages/admin/AdminTribute")));
+const AdminUsers = Loadable(lazy(() => import("../pages/admin/AdminUsers")));
+const AdminWishcard = Loadable(lazy(() => import("../pages/admin/AdminWishcard")));
+const AdminWishlist = Loadable(lazy(() => import("../pages/admin/AdminWishlist")));
+const AdminTransactions = Loadable(lazy(() => import("../pages/admin/AdminTransactions")));
+const AdminSettings = Loadable(lazy(() => import("../pages/admin/AdminSettings")));
