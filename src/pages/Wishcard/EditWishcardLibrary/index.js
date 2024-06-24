@@ -602,7 +602,7 @@ function EditWishcardLibrary() {
                             resetForm();
                         }}
                     >
-                        {({ values, setFieldValue, isValid, }) => (
+                        {({ values, }) => (
                             <div>
                                 {activeCard === "back" &&
                                     <div className="flex justify-between mt-8 overflow-none mx-8 max-lg:mx-4 max-lg:block">
