@@ -16,6 +16,7 @@ export const PATH_AUTH = {
 export const PATH_DASHBOARD = {
   root: ROOTS_DASHBOARD,
   tribute: path(ROOTS_DASHBOARD, "/tribute"),
+  wallet: path(ROOTS_DASHBOARD, "/wallet"),
   wishlist: path(ROOTS_DASHBOARD, "/wishlist"),
   wishcard: path(ROOTS_DASHBOARD, "/wishcard"),
   wishcardLibrary: path(ROOTS_DASHBOARD, "/wishcard/library"),

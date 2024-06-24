@@ -3,7 +3,7 @@ import plus from "assets/icons/add.svg";
 import minus from "assets/icons/minus-3108.svg";
 import call from "assets/images/call.svg";
 import sms from "assets/images/sms.svg";
-import fb from "assets/images/facebook.png";
+import fb from "assets/icons/facebookIcon.png";
 import instagram from "assets/images/instagram.png";
 import tiktok from "assets/images/tik_tok.svg";
 import twitter from "assets/images/twitter.svg";

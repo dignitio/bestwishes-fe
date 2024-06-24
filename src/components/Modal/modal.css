@@ -57,14 +57,14 @@
 }
 
 
-
-.header {
+/* converted to tailwind */
+/* .header {
   display: flex;
   justify-content: flex-end;
   width: 100%;
   cursor: pointer;
   padding: 12px 24px;
-}
+} */
 
 @keyframes Transisition {
   from {

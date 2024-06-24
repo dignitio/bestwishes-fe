@@ -20,9 +20,9 @@ export default function CustomInput({ label, type, obscured, options, ...props }
             id={props.id}
             {...field}
             {...props}
-            className={` w-full border text-[#8593AD]   ${
+            className={`w-full border text-[#8593AD] ${
               meta.touched && meta.error ? "border-primary" : "border-[#8593AD]"
-            }  rounded-md px-[26px] py-[18px] outline-none`}
+            } rounded-md px-4 py-2 md:px-[26px] md:py-[18px] outline-none`}
           >
             {options.map((option) => (
               <option key={option.value} value={option.value}>
@@ -36,9 +36,9 @@ export default function CustomInput({ label, type, obscured, options, ...props }
             {...field}
             {...props}
             type={viewPassword ? "text" : type}
-            className={` w-full border text-[#8593AD] md:text-[14px] text-[12px] ${
+            className={`w-full border text-[#8593AD] text-[14px] md:text-[16px] ${
               meta.touched && meta.error ? "border-errorColor" : "border-primary"
-            }  rounded-md px-[26px] py-[18px] outline-none`}
+            } rounded-md px-4 py-2 md:px-[26px] md:py-[18px] outline-none`}
             style={{ appearance: "none", WebkitAppearance: "none", MozAppearance: "none" }}
           />
         )}
@@ -58,7 +58,9 @@ export default function CustomInput({ label, type, obscured, options, ...props }
           </div>
         )}
       </div>
-      {meta.touched && meta.error && <div className="text-xs text-errorColor mt-1">{meta.error}</div>}
+      {meta.touched && meta.error && (
+        <div className="text-xs text-errorColor mt-1">{meta.error}</div>
+      )}
     </div>
   );
 }
