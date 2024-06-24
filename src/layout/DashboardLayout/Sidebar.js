@@ -4,7 +4,7 @@ import logo from "../../assets/images/logo.png";
 import { ReactComponent as CategoryIcon } from "../../assets/icons/category.svg";
 import { ReactComponent as LayerIcon } from "../../assets/icons/layer.svg";
 import { ReactComponent as NoteIcon } from "../../assets/icons/note.svg";
-import { ReactComponent as EditIcon } from "../../assets/icons/edit.svg";
+import { ReactComponent as EditIcon } from "../../assets/icons/card.svg";
 import { ReactComponent as GearIcon } from "../../assets/icons/gear.svg";
 import { ReactComponent as SupportIcon } from "../../assets/icons/like-dislike.svg";
 import { ReactComponent as LogOutIcon } from "../../assets/icons/login.svg";
@@ -73,7 +73,7 @@ function Sidebar() {
             }
           >
             <span className="mr-2">
-              <EditIcon />
+              <EditIcon className="w-5" />
             </span>
             <span className="tracking-tight">Wish Card</span>
           </NavLink>

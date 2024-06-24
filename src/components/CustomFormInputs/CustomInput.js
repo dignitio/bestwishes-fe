@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { ReactComponent as Eye } from "../../assets/icons/eye.svg";
 import { ReactComponent as EyeSlash } from "../../assets/icons/eye-slash.svg";
 
-export default function CustomInput({ label, type, obscured, numeric, ...props }) {
+export default function CustomInput({ label, type, maxLength, obscured, numeric, ...props }) {
   const [field, meta] = useField(props);
   const [viewPassword, setViewPassword] = React.useState(false);
   let inputType = type;
@@ -30,6 +30,7 @@ export default function CustomInput({ label, type, obscured, numeric, ...props }
           {...field}
           {...props}
           type={inputType}
+          maxLength={maxLength}
           className={` text-sm placeholder:text-sm md:text-base w-full border text-[#000000]   ${
             meta.touched && meta.error ? "border-errorColor" : "border-primary"
           }  rounded-md px-[20px] py-[14px] md:px-[26px] md:py-[18px] outline-none `}
