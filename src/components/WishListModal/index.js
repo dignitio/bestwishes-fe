@@ -228,9 +228,9 @@ function WishlistModal({ open, onClose }) {
                                 }
                               }}
                               type="button"
-                              className="text-primary self-start mt-2"
+                              className="bg-removeButton text-white mt-[15px] h-10 rounded py-2 px-8 border"
                             >
-                              Remove All Items
+                              Remove Item
                             </motion.button>
                           )}
                       </div>
@@ -242,7 +242,7 @@ function WishlistModal({ open, onClose }) {
                     whileHover={{ scale: 0.95 }}
                     whileTap={{ scale: 0.8 }}
                     type="button"
-                    className=" outline-none w-full py-[24px] md:py-[30px] rounded-md flex justify-center items-center border-primary text-primary border-[1px] border-solid bg-white"
+                    className=" outline-none w-full py-[24px] md:py-[20px] rounded-md flex justify-center items-center border-primary text-primary border-[1px] border-solid bg-white"
                     onClick={() =>
                       setFieldValue(`items.${values.items.length}`, {
                         img: "",
