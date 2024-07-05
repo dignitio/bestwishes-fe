@@ -20,8 +20,7 @@ import { ReactComponent as DuplicateIcon } from "../../assets/icons/simcard-2.sv
 import { ReactComponent as CopyIcon } from "../../assets/icons/size.svg"
 
 
-function Tribute() {
-    
+function Tribute() {  
     const [deleteModal, setDeleteModal] = useState(false);
     const [duplicateModal, setDuplicateModal] = useState(false);
     const [contributionModal, setContributionModal] = useState(false);

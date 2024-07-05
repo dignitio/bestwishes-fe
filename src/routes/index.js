@@ -60,6 +60,10 @@ export default function Router() {
           path: "tribute",
         },
         {
+          element: <Wallet />,
+          path: "wallet",
+        },
+        {
           element: <EditTribute />,
           path: "tribute/:id/edit",
         },
@@ -184,6 +188,7 @@ export default function Router() {
 
 const Dashboard = Loadable(lazy(() => import("../pages/Dashboard")));
 const Tribute = Loadable(lazy(() => import("../pages/Tribute")));
+const Wallet = Loadable(lazy(() => import("../pages/Wallet")));
 const EditTribute = Loadable(lazy(() => import("../pages/EditTribute")));
 const EditWishlist = Loadable(lazy(() => import("../pages/EditWishlist")));
 const EditWishcardLibrary = Loadable(lazy(() => import("../pages/Wishcard/EditWishcardLibrary")));

@@ -37,9 +37,9 @@ const Dragdrop = ({images, setImages}) => {
   
     // All dropped files are images, add them to the state
     setImages([...images, ...files])
-    console.log("Updated images:", images);
+    // console.log("Updated images:", images);
   };
-  console.log(images)
+  // console.log(images)
 
   
   const handleBrowseClick = () => {
@@ -57,18 +57,19 @@ const Dragdrop = ({images, setImages}) => {
   
   return (
     <div
-      className={`flex justify-center items-center border-dashed border  ${
+      className={`flex justify-center items-center border-dashed border cursor-pointer  ${
         isDragOver ? "border-[#4CAF50]" : "border-[#E5E7EB]"
       } p-10 w-full bg-[#FAFAFB] rounded-[8px] flex-col gap-[5px]`}
       onDragEnter={handleDragEnter}
       onDragLeave={handleDragLeave}
       onDragOver={handleDragOver}
       onDrop={handleDrop}
+      onClick={handleBrowseClick}
      
     >
       <p className="font-[500] text-[12px] md:text-[16px] text-[#1F2937] whitespace-nowrap">
         {isDragOver ? "Drop your files here" : "Drag your files here or "}
-        {!isDragOver && <span className="text-primary font-semibold cursor-pointer hover:underline "  onClick={handleBrowseClick}>browse</span>}
+        {!isDragOver && <span className="text-primary font-bold cursor-pointer hover:underline "  onClick={handleBrowseClick}>Browse</span>}
       </p>
       <p className="font-[400] text-[12px] md:text-[14px] text-[#9CA3AF] whitespace-nowrap">Maximum size: 10MB</p>
       {/* Invisible file input */}
