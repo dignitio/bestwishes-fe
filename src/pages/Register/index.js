@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Schema } from "Schemas";
 import React from "react";
 import CustomInput from "components/CustomFormInputs/CustomInput";
+import CustomSelect from "components/CustomFormInputs/CustomSelect";
 import CustomCheckbox from "components/CustomFormInputs/CustomCheckbox";
 import OauthButton from "components/Button/OauthButton";
 import { ReactComponent as FacebookLogo } from "../../assets/icons/facebook.svg";
@@ -21,7 +22,17 @@ function Register() {
         Create Your Account
       </span>
       <Formik
-        initialValues={{ firstName: "", lastName: "", email: "", password: "", acceptedTos: false }}
+        initialValues={{
+          firstName: "",
+          lastName: "",
+          email: "",
+          password: "",
+          acceptedTos: false,
+          securityQuestion: "",
+          securityQuestionAnswer: "",
+          securityQuestion2: "",
+          securityQuestion2Answer: "",
+        }}
         validationSchema={Schema}
         onSubmit={onSubmit}
       >
@@ -40,6 +51,29 @@ function Register() {
               placeholder="Enter your Lastname"
             />
             <CustomInput label="E-mail" name="email" type="email" placeholder="Enter your E-mail" />
+
+            <CustomSelect
+              label="Security Questions"
+              name="securityQuestion"
+              placeholder="Click here to select Security Question"
+            >
+              <option value="">Click here to select a Security Question</option>
+              <option value="What is your mother's maiden name?">
+                What is your mother&apos;s maiden name?
+              </option>
+              <option value="What was your childhood nickname?">
+                What was your childhood nickname?
+              </option>
+              <option value="What is your oldest sibling's middle name?">
+                What is your oldest sibling&apos;s middle name?
+              </option>
+            </CustomSelect>
+            <CustomInput
+              label="Security Question Answer"
+              name="securityQuestionAnswer"
+              type="text"
+              placeholder="Enter Security Question Answer"
+            />
             <CustomInput
               label="Password"
               name="password"
