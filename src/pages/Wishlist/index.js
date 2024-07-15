@@ -44,6 +44,16 @@ function Wishlist() {
     setIsModalOpen(false);
   };
 
+  // const handleDropdownClick = (e) => {
+  //   e.preventDefault();
+  //   setDropdownOpen((prev) => !prev);
+  // };
+
+  // const handleDropdownItemClick = (action) => {
+  //   setDropdownOpen(false);
+  //   action();
+  // };
+
   return (
     <div className=" flex flex-col w-full justify-between p-6">
       <div className=" w-full flex flex-col md:flex-row justify-between ">
@@ -129,6 +139,7 @@ function Wishlist() {
                     }}
                     className="w-4 h-full bg-none"
                   >
+                    
                     <Dropdown
                       heading={
                         <VerticalDot

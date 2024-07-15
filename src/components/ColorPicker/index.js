@@ -10,8 +10,8 @@ const ColorPicker = ({onColorChange}) => {
         onColorChange(newColor.hex)
     }
     return (
-        <div style={{width: "400px", height: "400px", cursor: "pointer",}}>
-            <SketchPicker color={color} onChange={handleChange} width='330px'/>
+        <div style={{ height: "330px", cursor: "pointer",}} className='w-full'>
+            <SketchPicker color={color} onChange={handleChange} width='' className='w-11/12'/>
         </div>
     )
 }

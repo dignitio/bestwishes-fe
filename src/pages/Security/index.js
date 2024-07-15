@@ -48,7 +48,7 @@ function Security() {
         {/* eslint-disable-next-line react/self-closing-comp */}
         <div className="hidden lg:block outline outline-1 outline-[#C1D8E6] w-full lg:w-[0.1px] lg:h-[820px] h-[0.1px]"></div>
         {/* eslint-disable-next-line react/self-closing-comp */}
-        <div className="lg:p-[84px]">
+        <div className="lg:p-[84px] flex flex-col gap-[50px]">
           <div className="lg:w-[577px] w-[100%] flex flex-col gap-[32px]">
             <h1 className="text-[18px] font-bold">Change Password</h1>
             <Formik
@@ -88,6 +88,63 @@ function Security() {
                     disabled={!values.oldPassword || !values.newPassword}
                   >
                     Save
+                  </button>
+                </form>
+              )}
+            </Formik>
+          </div>
+
+          <div className="lg:w-[577px] w-[100%] flex flex-col gap-[32px]">
+            <h1 className="text-[18px] font-bold">Change Security Pin</h1>
+            <Formik
+              initialValues={{ password: "", otp: "", newPin : "" }}
+              onSubmit={(values) => console.log(values)}
+            >
+              {({ values, handleSubmit, handleChange }) => (
+                <form onSubmit={handleSubmit} className="flex flex-col gap-[32px]">
+                  <CustomInput
+                    label="Password"
+                    type="password"
+                    name="password"
+                    value={values.password}
+                    required
+                    obscured
+                    readOnly={false}
+                    // className="w-full mt-1 border border-1 border-[#AFAFAF] rounded-[4px] px-[26px] py-[18px]"
+                    placeholder="enter your password"
+                    onChange={handleChange}
+                  />
+                 
+                  <CustomInput
+                    label="OTP"
+                    type="password"
+                    name="otp"
+                    value={values.otp}
+                    required
+                    obscured
+                    readOnly={false}
+                    placeholder="enter the otp sent to your mail"
+                    onChange={handleChange}
+                  />
+
+<CustomInput
+                    label="Security Pin"
+                    type="password"
+                    name="newPin"
+                    value={values.newPin}
+                    required
+                    obscured
+                    readOnly={false}
+                    placeholder="enter your new pin"
+                    onChange={handleChange}
+                  />
+
+                  <button
+                    type="submit"
+                    className={`w-full bg-primary px-[26px] py-[18px] text-white rounded-[4px] ${!values.password || !values.otp || !values.newPin ? "opacity-[0.2] cursor-not-allowed" : ""}`}
+                    disabled={!values.password || !values.otp || !values.newPin}
+                  >
+                    Cange Pin
                   </button>
                 </form>
               )}

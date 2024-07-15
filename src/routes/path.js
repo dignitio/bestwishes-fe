@@ -1,5 +1,6 @@
 const ROOTS_AUTH = "/auth";
 const ROOTS_DASHBOARD = "/dashboard";
+const ROOTS_ADMIN = "/admin";
 const ROOTS_HOME = "/";
 
 function path(root, sublink) {
@@ -15,6 +16,7 @@ export const PATH_AUTH = {
 export const PATH_DASHBOARD = {
   root: ROOTS_DASHBOARD,
   tribute: path(ROOTS_DASHBOARD, "/tribute"),
+  wallet: path(ROOTS_DASHBOARD, "/wallet"),
   wishlist: path(ROOTS_DASHBOARD, "/wishlist"),
   wishcard: path(ROOTS_DASHBOARD, "/wishcard"),
   wishcardLibrary: path(ROOTS_DASHBOARD, "/wishcard/library"),
@@ -25,6 +27,15 @@ export const PATH_DASHBOARD = {
   security: path(ROOTS_DASHBOARD, "/security"),
 };
 
+export const PATH_ADMIN = {
+  root: ROOTS_ADMIN,
+  tribute: path(ROOTS_ADMIN, "/tribute"),
+  users: path(ROOTS_ADMIN, "/users"),
+  wishcard: path(ROOTS_ADMIN, "/wishcard"),
+  wishlist: path(ROOTS_ADMIN, "/wishlist"),
+  transactions: path(ROOTS_ADMIN, "/transactions"),
+  settings: path(ROOTS_ADMIN, "/settings"),
+};
 
 export const PATH_AFTER_LOGIN = PATH_DASHBOARD.root;
 
