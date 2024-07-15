@@ -3,6 +3,7 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { Tooltip as ReactTooltip } from "react-tooltip";
 import Modal from "components/Modal";
 import { ErrorMessage, Form, Formik } from "formik";
 import { motion } from "framer-motion";
@@ -15,7 +16,10 @@ import { ReactComponent as LeftArrowIcon } from "../../../assets/icons/left.svg"
 import { ReactComponent as LeftTextAlign } from "../../../assets/icons/textalign-left.svg"
 import { ReactComponent as RightTextAlign } from "../../../assets/icons/textalign-right.svg"
 import { ReactComponent as CenterTextAlign } from "../../../assets/icons/textalign-center.svg"
+import { ReactComponent as ColorPalette } from "../../../assets/icons/color-palette.svg"
 import { ReactComponent as JustifyTextAlign } from "../../../assets/icons/textalign-justifycenter.svg"
+import { ReactComponent as ImageUpload } from "../../../assets/icons/image-upload.svg"
+import { ReactComponent as ImageIcon } from "../../../assets/icons/picture.svg"
 import profilePix from "../../../assets/images/profile2.jpeg"
 
 function EditWishcardLibrary() {
@@ -39,7 +43,7 @@ function EditWishcardLibrary() {
             fontWeight: '',
             textSize: '36',
             letterSpacing: '-2',
-            textColor: '#000000',
+            textColor: '#000',
             textTransform: 'capitalize',
             textAlign: "center",
         },
@@ -47,9 +51,9 @@ function EditWishcardLibrary() {
             text: 'Congratulations', 
             fontFamily: 'cursive',
             fontWeight: '',
-            textSize: '52',
+            textSize: '50',
             letterSpacing: '-2',
-            textColor: '#ffffff',
+            textColor: '#f1f1f1',
             textTransform: 'capitalize',
             textAlign: "center",
         },
@@ -59,7 +63,7 @@ function EditWishcardLibrary() {
             fontWeight: '700',
             textSize: '20',
             letterSpacing: '2',
-            textColor: '#000000',
+            textColor: '',
             textTransform: 'uppercase',
             textAlign: "center",
         },
@@ -69,7 +73,7 @@ function EditWishcardLibrary() {
             fontWeight: '',
             textSize: '22',
             letterSpacing: '0',
-            textColor: '#ffffff',
+            textColor: '#f1f1f1',
             textTransform: 'lowercase',
             textAlign: "center",
         },
@@ -174,16 +178,16 @@ function EditWishcardLibrary() {
   
     return ( 
         <div className="pt-4 mb-8">
-            <div className="flex  justify-between">
+            <div className="flex items-center justify-between">
                 <div className="flex items-center text-indigo-700 font-medium max-md:mb-4 mt-6 ml-8">
                     <LeftArrowIcon className="mr-1 w-5 h-5 max-sm:w-3.5 max-lg:w-5 max-lg:h-5" />
-                    <Link to="/dashboard/wishcard" className="text-lg">Back to Card</Link>
+                    <Link to="/dashboard/wishcard" className="text-sm xl:text-lg max-md:hidden">Back to Card</Link>
                 </div>
-                <div className="rounded-md flex w-60 justify-between mt-6 bg-indigo-200">
+                <div className="rounded-md flex w-36 xl:w-60 justify-between mt-6 bg-indigo-200">
                     <button className={`py-3 w-1/2 cursor-pointer hover:text-white hover:bg-indigo-900 rounded-l-md ${activeCard === "front" ? "bg-primary text-white rounded-l-md" : ""}`}  onClick={() => setActiveCard("front")}>front</button>
                     <button className={`py-3 w-1/2 cursor-pointer hover:text-white hover:bg-indigo-900 rounded-r-md ${activeCard === "back" ?"bg-primary text-white rounded-r-md" : ""}`} onClick={() => setActiveCard("back")}>back</button>
                 </div>
-                <div className="mr-32 mt-2">
+                <div className="mr-4 xl:mr-32 mt-4 xl:mt-2">
                     <motion.button
                         whileTap={{ scale: 0.9 }}
                         whileHover={{ scale: 0.987 }}
@@ -215,19 +219,19 @@ function EditWishcardLibrary() {
                         {({ values, setFieldValue, isValid, }) => (
                             <div>
                                 {activeCard === "front" &&
-                                    <div className="flex  justify-between mt-8 overflow-none mx-8 max-lg:mx-4 max-lg:block">
-                                        <div className="px-6 flex justify-center items-center h-[780px] rounded-xl w-11/12 mr-4 text-center" style={{ background: chosedBgColor, backgroundSize: 'cover', backgroundPosition: 'cover'}}>
+                                    <div className="flex  justify-between mt-8 overflow-none xl:mx-8 max-lg:mx-4 max-lg:block">
+                                        <div className="px-6 flex justify-center items-center h-[780px] rounded-xl xl:w-11/12 mr-4 text-center" style={{ background: chosedBgColor, backgroundSize: 'cover', backgroundPosition: 'cover'}}>
                                             <div>
                                                 <div>
                                                     <div>
                                                         <fieldset
-                                                            className={`relative h-[400px] w-[400px] flex justify-center mt-0  mx-auto cursor-pointer`}
+                                                            className={`relative h-[300px] xl:h-[400px] xl:w-[400px] flex justify-center mt-0  mx-auto cursor-pointer`}
                                                         >
                                                             {values.centerImage ? (
                                                                 <div className={`bg-indigo-50 flex justify-center items-center rounded-full relative w-full h-full`}>
                                                                     <img
                                                                         src={URL.createObjectURL(values.centerImage)}
-                                                                        className={`w-80 h-80 w-[${imageProperty.imageWidth}px] h-[${imageProperty.imageHeight}px] object-cover shadow-xl rounded-full`}
+                                                                        className={`xl:w-80 xl:h-80 w-[${imageProperty.imageWidth}px] h-[${imageProperty.imageHeight}px] object-cover shadow-xl rounded-full`}
                                                                         alt="Center pic"
                                                                     />
                                                                 </div>
@@ -270,7 +274,7 @@ function EditWishcardLibrary() {
                                             </div>
                                         </div>
                                         
-                                        <div className="w-3/12 h-full max-sm:block bg-white rounded-xl lg:ml-2 lg:mr-8 px-4 py-4">
+                                        <div className="mt-4 xl:mt-0 xl:w-3/12 h-full max-sm:block bg-white rounded-xl lg:ml-2 lg:mr-8 px-4 py-4">
                                             <button className="w-full rounded-md flex justify-between mt-1 mb-5 border ">
                                                 <button className={`py-4 w-1/3 cursor-pointer hover:bg-indigo-100 ${activeStep === 0 ? "bg-indigo-200" : ""}`}  onClick={() => setActiveStep(0)}>Tt</button>
                                                 <button className={`py-4 w-1/3 cursor-pointer hover:bg-indigo-100 ${activeStep === 1 ? "bg-indigo-200" : ""}`} onClick={() => setActiveStep(1)}>Image</button>
@@ -397,10 +401,12 @@ function EditWishcardLibrary() {
                                                                         className="flex items-center cursor-pointer"
                                                                         onClick={() => setShowColorPicker(!showColorPicker)}
                                                                     >
-                                                                        <div 
-                                                                        
-                                                                        className="w-6 h-6 outline bg-[#f0f0f0] outline-gray-100"
-                                                                        >.</div>
+                                                                        <div  
+                                                                        className="w-6 h-6 outline outline-gray-100"
+                                                                        style={{ color: words[selectedValue].textColor,}}
+                                                                        >
+                                                                            <ColorPalette />
+                                                                        </div>
                                                                         <span className="ml-2 mt-1">Select Color</span>
                                                                     </div>
                                                                     {showColorPicker && (
@@ -429,16 +435,16 @@ function EditWishcardLibrary() {
                                                                     <CustomInput 
                                                                         label={values.centerImage ? "Change your image" : "Upload an image"} 
                                                                         name="centerImage" 
-                                                                        type="text"
+                                                                        type="select"
                                                                         placeholder="Click here to upload an image"
                                                                         value={values.centerImage.name}
-                                                                        className="md:py-48 py-40"
+                                                                        className="md:py-48 py-40 h-40"
                                                                     />
                                                                     <input
                                                                         id="centerImage"
                                                                         type="file"
                                                                         accept="image/*"
-                                                                        className=" opacity-0 absolute top-0 w-full py-10 cursor-pointer h-full z-30 "
+                                                                        className=" opacity-0 absolute top-0 w-full py-40 h-40 cursor-pointer h-full z-30 "
                                                                         onChange={(e) => setFieldValue("centerImage", e.target.files[0])}
                                                                     />
                                                                 </div>
@@ -489,17 +495,33 @@ function EditWishcardLibrary() {
                                                     <Form>
                                                     {activeStep === 2 &&
                                                         <div className="background-pallete">
-                                                            <div className="flex justify-between mx-4 cursor-pointer border">
-                                                                <div className={`py-2 text-center ${activeBgTab === 'color' ? 'bg-blue-100' : ''}`} onClick={() => handleTabClick('color')}>
-                                                                Choose Color
+                                                            <div className="flex justify-between mx-auto cursor-pointer border">
+                                                                <div className={`py-2 w-1/3 justify-center flex text-center ${activeBgTab === 'color' ? 'bg-blue-100' : ''}`} onClick={() => handleTabClick('color')} data-tooltip-id="my-tooltip-1">
+                                                                <ColorPalette />
+                                                                <ReactTooltip
+                                                                    id="my-tooltip-1"
+                                                                    place="top"
+                                                                    content="Color"
+                                                                />
                                                                 </div>
-                                                                <div className={`py-2 text-center ${activeBgTab === 'texture' ? 'bg-blue-100' : ''}`} onClick={() => handleTabClick('texture')}>
-                                                                Available Image
+                                                                <div className={`py-2 w-1/3 justify-center flex  text-center ${activeBgTab === 'texture' ? 'bg-blue-100' : ''}`} onClick={() => handleTabClick('texture')} data-tooltip-id="my-tooltip-2">
+                                                                <ImageIcon />
+                                                                <ReactTooltip
+                                                                    id="my-tooltip-2"
+                                                                    place="top"
+                                                                    content="Choose Image"
+                                                                />
                                                                 </div>
-                                                                <div className={`py-2 text-center ${activeBgTab === 'image' ? 'bg-blue-100' : ''}`} onClick={() => handleTabClick('image')}>
-                                                                Upload Image
+                                                                <div className={`py-2 w-1/3 justify-center flex  text-center ${activeBgTab === 'image' ? 'bg-blue-100' : ''}`} onClick={() => handleTabClick('image')} data-tooltip-id="my-tooltip-3">
+                                                                <ImageUpload />
+                                                                <ReactTooltip
+                                                                    id="my-tooltip-3"
+                                                                    place="top"
+                                                                    content="Upload Image"
+                                                                />
                                                                 </div>
                                                             </div>
+                                                            
                                                             {
                                                                 activeBgTab === 'color' && (
                                                                 <div className="my-5">
@@ -559,7 +581,7 @@ function EditWishcardLibrary() {
                                                                         <CustomInput 
                                                                             label={imageProperty.bgImage ? "Change your image" : "Upload an image"} 
                                                                             name="centermage" 
-                                                                            type="text"
+                                                                            type="select"
                                                                             placeholder="Click here to upload an image"
                                                                             value={imageProperty.bgImage}
                                                                             className="md:py-48 py-40"
@@ -606,7 +628,7 @@ function EditWishcardLibrary() {
                             <div>
                                 {activeCard === "back" &&
                                     <div className="flex justify-between mt-8 overflow-none mx-8 max-lg:mx-4 max-lg:block">
-                                        <div className="bg-white px-6 flex justify-center items-center h-[780px] rounded-xl w-11/12 mr-4 text-center" style={{ background: backChosedBgColor, backgroundSize: 'cover', backgroundPosition: 'cover'}}>
+                                        <div className="bg-white px-6 flex justify-center items-center h-[780px] rounded-xl xl:w-11/12 mr-4 text-center" style={{ background: backChosedBgColor, backgroundSize: 'cover', backgroundPosition: 'cover'}}>
                                             <div>
                                                 <div>
                                                     {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
@@ -631,7 +653,7 @@ function EditWishcardLibrary() {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="w-3/12 h-full max-sm:block bg-white rounded-xl lg:ml-2 lg:mr-8 px-4 py-4">
+                                        <div className="xl:mt-0 mt-4 xl:w-3/12 h-full max-sm:block bg-white rounded-xl lg:ml-2 lg:mr-8 px-4 py-4">
                                             <button className="w-full rounded-md flex justify-between mt-1 mb-5 border ">
                                                 <button className={`py-4 w-2/3 cursor-pointer hover:bg-indigo-100 ${activeStep === 0 ? "bg-indigo-200" : ""}`}  onClick={() => setActiveStep(0)}>Tt</button>
                                                 <button className={`py-4 w-2/3 cursor-pointer hover:bg-indigo-100 ${activeStep === 2 ? "bg-indigo-200" : ""}`} onClick={() => setActiveStep(2)}>BG</button>
@@ -757,10 +779,12 @@ function EditWishcardLibrary() {
                                                                         className="flex items-center cursor-pointer"
                                                                         onClick={() => setShowColorPicker(!showColorPicker)}
                                                                     >
-                                                                        <div 
-                                                                        
-                                                                        className="w-6 h-6 outline bg-[#f0f0f0] outline-gray-100"
-                                                                        >.</div>
+                                                                        <div  
+                                                                        className="w-6 h-6 outline outline-gray-100"
+                                                                        style={{ color: words[selectedValue].textColor,}}
+                                                                        >
+                                                                            <ColorPalette />
+                                                                        </div>
                                                                         <span className="ml-2 mt-1">Select Color</span>
                                                                     </div>
                                                                     {showColorPicker && (
@@ -785,14 +809,29 @@ function EditWishcardLibrary() {
                                                     {activeStep === 2 &&
                                                         <div className="background-pallete">
                                                             <div className="flex justify-between mx-4 cursor-pointer border">
-                                                                <div className={`py-2 text-center ${activeBgTab === 'color' ? 'bg-blue-100' : ''}`} onClick={() => handleTabClick('color')}>
-                                                                Choose Color
+                                                            <div className={`py-2 w-1/3 justify-center flex text-center ${activeBgTab === 'color' ? 'bg-blue-100' : ''}`} onClick={() => handleTabClick('color')} data-tooltip-id="my-tooltip-1">
+                                                                <ColorPalette />
+                                                                <ReactTooltip
+                                                                    id="my-tooltip-1"
+                                                                    place="top"
+                                                                    content="Color"
+                                                                />
                                                                 </div>
-                                                                <div className={`py-2 text-center ${activeBgTab === 'texture' ? 'bg-blue-100' : ''}`} onClick={() => handleTabClick('texture')}>
-                                                                Available Image
+                                                                <div className={`py-2 w-1/3 justify-center flex  text-center ${activeBgTab === 'texture' ? 'bg-blue-100' : ''}`} onClick={() => handleTabClick('texture')} data-tooltip-id="my-tooltip-2">
+                                                                <ImageIcon />
+                                                                <ReactTooltip
+                                                                    id="my-tooltip-2"
+                                                                    place="top"
+                                                                    content="Choose Image"
+                                                                />
                                                                 </div>
-                                                                <div className={`py-2 text-center ${activeBgTab === 'image' ? 'bg-blue-100' : ''}`} onClick={() => handleTabClick('image')}>
-                                                                Upload Image
+                                                                <div className={`py-2 w-1/3 justify-center flex  text-center ${activeBgTab === 'image' ? 'bg-blue-100' : ''}`} onClick={() => handleTabClick('image')} data-tooltip-id="my-tooltip-3">
+                                                                <ImageUpload />
+                                                                <ReactTooltip
+                                                                    id="my-tooltip-3"
+                                                                    place="top"
+                                                                    content="Upload Image"
+                                                                />
                                                                 </div>
                                                             </div>
                                                             {

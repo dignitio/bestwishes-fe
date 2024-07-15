@@ -1,22 +1,31 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useTable, useSortBy, usePagination } from 'react-table';
-import { ReactComponent as SearchIcon } from "../../assets/icons/search.svg"
-import { ReactComponent as MenuIcon } from "../../assets/icons/horizontal-menu.svg"
-import { ReactComponent as FilterIcon } from "../../assets/icons/fillter2.svg"
-import { ReactComponent as LeftIcon } from "../../assets/icons/arrow-left.svg"
-import { ReactComponent as RightIcon } from "../../assets/icons/arrow-right.svg"
+/* eslint-disable */
 
-const TableComponent = ({ columns, data, title, linkTitle, linkURL }) => {
+import { useState, useMemo } from 'react';
+import { useTable, useSortBy, usePagination } from 'react-table';
+import { ReactComponent as SearchIcon } from "../../assets/icons/search.svg";
+import { ReactComponent as MenuIcon } from "../../assets/icons/horizontal-menu.svg";
+import { ReactComponent as FilterIcon } from "../../assets/icons/fillter2.svg";
+import { ReactComponent as LeftIcon } from "../../assets/icons/arrow-left.svg";
+import { ReactComponent as RightIcon } from "../../assets/icons/arrow-right.svg";
+
+const TableComponent = ({ columns, data, title, actions }) => {
   const [tableData, setTableData] = useState(data);
   const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
+  const [filterStatus, setFilterStatus] = useState("");
 
-  const handleStatusChange = (index, newStatus) => {
-    const newData = [...tableData];
-    newData[index].status = newStatus;
-    setTableData(newData);
+  const handleActionClick = (index, action) => {
+    action.onClick(index, tableData, setTableData);
     setOpenDropdownIndex(null);
   };
+
+  const handleFilterChange = (e) => {
+    setFilterStatus(e.target.value);
+  };
+
+  const filteredData = useMemo(() => {
+    if (!filterStatus) return tableData;
+    return tableData.filter(row => row.status.toLowerCase().includes(filterStatus.toLowerCase()));
+  }, [tableData, filterStatus]);
 
   const {
     getTableProps,
@@ -36,7 +45,7 @@ const TableComponent = ({ columns, data, title, linkTitle, linkURL }) => {
   } = useTable(
     {
       columns,
-      data: tableData,
+      data: filteredData,
       initialState: { pageIndex: 0 },
     },
     useSortBy,
@@ -49,7 +58,7 @@ const TableComponent = ({ columns, data, title, linkTitle, linkURL }) => {
     const startPage = Math.max(0, pageIndex - Math.floor(totalPagesToShow / 2));
     const endPage = Math.min(pageCount, startPage + totalPagesToShow);
 
-    for (let i = startPage; i < endPage; i+=1) {
+    for (let i = startPage; i < endPage; i += 1) {
       pages.push(
         <button
           key={i}
@@ -71,32 +80,34 @@ const TableComponent = ({ columns, data, title, linkTitle, linkURL }) => {
   return (
     <>
       <div className="bg-white rounded-2xl border pb-5">
-        <div className="pl-5 pr-8 mt-4">
+        <div className="pl-5 pr-8">
           <div className='flex justify-between items-center'>
-            <h2 className="text-xl my-8 pl-6 font-semibold">{title}</h2>
+            <h2 className="text-xl my-8 pl-3 font-semibold">{title}</h2>
             <div className="flex">
               <button className="border border-gray-200 max-sm:hidden bg-gray-50 rounded-md h-9 px-3 flex items-center w-72">
-                  {}
-                  <span className="pr-1.5">
-                      <SearchIcon className="max-lg:w-3 max-lg:h-3" />
-                  </span>
-                  <span className="w-full">
-                      <input type="text" placeholder="Search wishcard" className="outline-0 bg-transparent text-sm placeholder:text-black h-20 w-full"/>
-                  </span>
-              </button>
-              <button className="border border-gray-200 max-sm:hidden bg-gray-50 rounded-md py-4 h-9 px-3 flex items-center w-36 ml-5">
                 {}
-                  <span className="w-full">
-                      <input type="text" placeholder="Active tributes" className="outline-0 bg-transparent text-sm placeholder:text-black h-20 w-full"/>
-                  </span>
-                  <span className="">
-                      <FilterIcon className="max-lg:w-3 max-lg:h-3" />
-                  </span>
+                <span className="pr-1.5">
+                  <SearchIcon className="max-lg:w-3 max-lg:h-3" />
+                </span>
+                <span className="w-full">
+                  <input type="text" placeholder="Search wishcard" className="outline-0 bg-transparent text-sm placeholder:text-black h-20 w-full" />
+                </span>
               </button>
+              <div className="border border-gray-200 max-sm:hidden bg-gray-50 rounded-md py-4 h-9 px-3 flex items-center w-36 ml-5">
+                <span className="w-full">
+                  <input
+                    type="text"
+                    placeholder="Active tributes"
+                    className="outline-0 bg-transparent text-sm placeholder:text-black h-20 w-full"
+                    value={filterStatus}
+                    onChange={handleFilterChange}
+                  />
+                </span>
+                <span>
+                  <FilterIcon className="max-lg:w-3 max-lg:h-3" />
+                </span>
+              </div>
             </div>
-          </div>
-          <div className="text-primaryColor underline tracking-tight hover:opacity-40 text-[16px]">
-            <Link to={`${linkURL}`}>{linkTitle}</Link>
           </div>
         </div>
         <table {...getTableProps()} className="w-full ">
@@ -106,7 +117,7 @@ const TableComponent = ({ columns, data, title, linkTitle, linkURL }) => {
                 {headerGroup.headers.map(column => (
                   <th
                     {...column.getHeaderProps(column.getSortByToggleProps())}
-                    className="font-semibold text-center text-lg pb-2 px-1"
+                    className="font-semibold text-left text-lg pb-2 px-10"
                   >
                     {column.render('Header')}
                   </th>
@@ -122,41 +133,43 @@ const TableComponent = ({ columns, data, title, linkTitle, linkURL }) => {
                   {row.cells.map(cell => (
                     <td
                       {...cell.getCellProps()}
-                      className="py-4 border-b text-center px-10 relative"
+                      className="py-3 border-b text-left px-10 relative"
                     >
-                      {cell.column.id === 'action' ? (
+                      {cell.column.id === 'status' ? (
+                        
+                        <>
+                          <p
+                            className={`${
+                              cell.value === 'Active' && 'bg-green-100 text-green-700 py-1 px-4 -ml-2 lg:w-20 text-sm rounded-sm'
+                            } ${
+                              cell.value === 'Inactive' && 'bg-red-100 text-red-700 -ml-2 py-1 px-4 lg:w-20 text-sm rounded-sm'
+                            }
+                          `}
+                          >
+                            {cell.render('Cell')}
+                          </p>
+                        </>
+                      ) : cell.column.id === 'action' ? (
                         <div>
-                          <button onClick={() => setOpenDropdownIndex(openDropdownIndex === i ? null : i)}>
-                            {}
-                            <MenuIcon />
+                          <button onClick={() => setOpenDropdownIndex(openDropdownIndex === i ? null : i)} className='rounded-full py-3 pr-4 hover:bg-gray-100'>
+                            <MenuIcon className='ml-5 hover:bg-gray-100'/>
                           </button>
                           {openDropdownIndex === i && (
                             <div className="absolute right-6 top-7 w-28 bg-white shadow-lg rounded-lg z-10">
-                              <button
-                                className="flex items-center px-2 w-full rounded-t-lg py-2.5  text-gray-700  border-b hover:bg-gray-100"
-                                onClick={() => handleStatusChange(i, 'Active')}
-                              >
-                                Active
-                              </button>
-                              <button
-                                className="flex items-center px-1.5 py-2.5 w-full text-gray-700 hover:bg-gray-100"
-                                onClick={() => handleStatusChange(i, 'Inactive')}
-                              >
-                                Inactive
-                              </button>
+                              {actions.map((action, actionIndex) => (
+                                <button
+                                  key={actionIndex}
+                                  className="flex items-center px-2 w-full rounded-t-lg py-2.5 text-gray-700 border-b hover:bg-gray-100"
+                                  onClick={() => handleActionClick(i, action)}
+                                >
+                                  {action.label}
+                                </button>
+                              ))}
                             </div>
                           )}
                         </div>
                       ) : (
-                        <p
-                          className={`${
-                            cell.value === 'Active' && 'bg-green-100 text-green-700 py-1 px-2 xl:w-20 xl:mx-auto text-sm rounded-sm'
-                          } ${
-                            cell.value === 'Inactive' && 'bg-red-100 text-red-700 py-1 px-2 xl:w-20 xl:mx-auto text-sm rounded-sm'
-                          }`}
-                        >
-                          {cell.render('Cell')}
-                        </p>
+                        cell.render('Cell')
                       )}
                     </td>
                   ))}
@@ -169,9 +182,9 @@ const TableComponent = ({ columns, data, title, linkTitle, linkURL }) => {
         {/* Pagination Controls */}
         <div className="w-8/12 justify-center mx-auto text-sm text-center mt-3 flex">
           <button onClick={() => previousPage()} disabled={!canPreviousPage} className='flex bg-[#c2c9d6] text-white mr-2 px-3 py-1.5 rounded-sm'>
-          <span className="">
+            <span className="">
               <LeftIcon className="max-lg:w-3 max-lg:h-3" />
-          </span>
+            </span>
             Prev
           </button>
           {renderPageNumbers()}
@@ -179,7 +192,7 @@ const TableComponent = ({ columns, data, title, linkTitle, linkURL }) => {
             Next 
             <span className="">
               <RightIcon className="max-lg:w-3 max-lg:h-3" />
-          </span>
+            </span>
           </button>
         </div>
       </div>
