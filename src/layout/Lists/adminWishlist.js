@@ -6,6 +6,7 @@ const wishListData = [
         email: "ruth@gmail.com",
         datecreated: '09-12-2023',
         status: "Active",
+        flagged: false,
     },
     {
       user: 'Wale Ojo',
@@ -14,6 +15,7 @@ const wishListData = [
       email: "waleojogmail.com",
       datecreated: '09-12-2023',
       status: "Inactive",
+      flagged: true,
     },
     {
         user: 'Ruth Thompson',
@@ -22,6 +24,7 @@ const wishListData = [
         email: "ruth@gmail.com",
         datecreated: '09-12-2023',
         status: "Active",
+        flagged: false,
     },
     {
         user: 'Wale Ojo',
@@ -30,6 +33,7 @@ const wishListData = [
         email: "waleojogmail.com",
         datecreated: '09-12-2023',
         status: "Inactive",
+        flagged: false,
     },
     {
         user: 'Ruth Thompson',
@@ -38,6 +42,7 @@ const wishListData = [
         email: "ruth@gmail.com",
         datecreated: '09-12-2023',
         status: "Active",
+        flagged: false,
     },
     {
         user: 'Wale Ojo',
@@ -46,6 +51,7 @@ const wishListData = [
         email: "waleojogmail.com",
         datecreated: '09-12-2023',
         status: "Inactive",
+        flagged: true,
     },
     {
         user: 'Wale Ojo',
@@ -54,6 +60,7 @@ const wishListData = [
         email: "waleojogmail.com",
         datecreated: '09-12-2023',
         status: "Inactive",
+        flagged: false,
     },
     {
         user: 'Ruth Thompson',
@@ -62,6 +69,7 @@ const wishListData = [
         email: "ruth@gmail.com",
         datecreated: '09-12-2023',
         status: "Active",
+        flagged: true,
     },
     {
     user: 'Wale Ojo',
@@ -69,7 +77,8 @@ const wishListData = [
     tribute: "No",
     email: "waleojogmail.com",
     datecreated: '09-12-2023',
-    status: "Inactive"
+    status: "Inactive",
+    flagged: false,
     },
     {
     user: 'Ruth Thompson',
@@ -77,7 +86,8 @@ const wishListData = [
     tribute: "No",
     email: "ruth@gmail.com",
     datecreated: '09-12-2023',
-    status: "Active"
+    status: "Active",
+    flagged: true,
     },
     {
     user: 'Wale Ojo',
@@ -85,7 +95,8 @@ const wishListData = [
     tribute: "No",
     email: "waleojogmail.com",
     datecreated: '09-12-2023',
-    status: "Inactive"
+    status: "Inactive",
+    flagged: true,
     },
     {
     user: 'Ruth Thompson',
@@ -93,7 +104,8 @@ const wishListData = [
     tribute: "Yes",
     email: "ruth@gmail.com",
     datecreated: '09-12-2023',
-    status: "Active"
+    status: "Active",
+    flagged: false,
     },
     {
     user: 'Wale Ojo',
@@ -101,7 +113,8 @@ const wishListData = [
     tribute: "No",
     email: "waleojogmail.com",
     datecreated: '09-12-2023',
-    status: "Inactive"
+    status: "Inactive",
+    flagged: true,
     },
     {
     user: 'Wale Ojo',
@@ -109,7 +122,8 @@ const wishListData = [
     tribute: "No",
     email: "waleojogmail.com",
     datecreated: '09-12-2023',
-    status: "Inactive"
+    status: "Inactive",
+    flagged: true,
     },
 ]
 
