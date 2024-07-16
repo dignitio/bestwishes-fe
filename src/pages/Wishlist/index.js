@@ -18,6 +18,8 @@ import { ReactComponent as SendIcon } from "../../assets/icons/wishlist-send.svg
 import { ReactComponent as ShareIcon } from "../../assets/icons/link.svg";
 import { ReactComponent as DuplicateIcon } from "../../assets/icons/simcard-2.svg";
 import { ReactComponent as CopyIcon } from "../../assets/icons/size.svg";
+import { ReactComponent as Eye } from "../../assets/icons/eye.svg";
+import { ReactComponent as EyeSlash } from "../../assets/icons/eye-slash.svg";
 import emptyWishlist from "../../assets/images/wishlist-empty-state-image.png";
 import DuplicateWishlist from "./DuplicateWishlist";
 
@@ -44,48 +46,54 @@ function Wishlist() {
     setIsModalOpen(false);
   };
 
-  // const handleDropdownClick = (e) => {
-  //   e.preventDefault();
-  //   setDropdownOpen((prev) => !prev);
-  // };
+  // State to manage visibility of wallet balance
+  const [isBalanceVisible, setIsBalanceVisible] = useState(false);
 
-  // const handleDropdownItemClick = (action) => {
-  //   setDropdownOpen(false);
-  //   action();
-  // };
+  // Function to toggle visibility
+  const toggleBalanceVisibility = () => {
+    setIsBalanceVisible(!isBalanceVisible);
+  };
 
   return (
-    <div className=" flex flex-col w-full justify-between p-6">
-      <div className=" w-full flex flex-col md:flex-row justify-between ">
+    <div className="flex flex-col w-full justify-between p-6">
+      <div className="w-full flex flex-col md:flex-row justify-between">
         {wishListData && (
           <div className="py-3 md:py-[17px] text-black md:w-[290px] rounded-md bg-white md:mr-6 md:mb-0 mb-6">
-            <p className=" ml-4 text-lg font-nunito text-bgWalletBalance">Wallet Balance</p>
-            <span className=" ml-4 mt-2 text-bgWalletBalanceFigure text-2xl font-thin font-nunito flex max-md:text-2xl max-lg:text-3xl">
-              <p className="">&#x20A6;</p>
-              <p className="font-medium">126,997.90</p>
-            </span>
+            <div className="flex items-center justify-between">
+              <div>
+                <div className="flex items-center">
+                  <p className="ml-4 text-lg font-nunito text-bgWalletBalance">Wallet Balance</p>
+                  <div className="cursor-pointer ml-2" onClick={toggleBalanceVisibility}>
+                    {isBalanceVisible ? <EyeSlash /> : <Eye />}
+                  </div>
+                </div>
+                <span className="ml-4 mt-2 text-bgWalletBalanceFigure text-2xl font-thin font-nunito flex max-md:text-2xl max-lg:text-3xl">
+                  <p>&#x20A6;</p>
+                  <p className="font-medium">{isBalanceVisible ? "126,997.90" : "******"}</p>
+                </span>
+              </div>
+            </div>
           </div>
         )}
         <motion.button
           whileTap={{ scale: 0.8 }}
           whileHover={{ scale: 0.95 }}
-          className="bg-white text-primary px-5 py-3 md:mr-6 md:mb-6 w-full md:w-auto  rounded-md self-center border border-primary outline-none hover:bg-primary hover:text-white"
+          className="bg-white text-primary px-5 py-3 md:mr-6 md:mb-6 w-full md:w-auto rounded-md self-center border border-primary outline-none hover:bg-primary hover:text-white"
           type="button"
           onClick={openModal}
         >
-          {" "}
           Create Wishlist +
         </motion.button>
         <WishlistModal open={isModalOpen} onClose={closeModal} />
       </div>
-      {wishListData === 0 ? (
-        <div className=" bg-white h-[825px] w-auto mx-6 overflow-hidden flex flex-col justify-center items-center">
+      {wishListData.length === 0 ? (
+        <div className="bg-white h-[825px] w-auto mx-6 overflow-hidden flex flex-col justify-center items-center">
           <div>
             <img src={emptyWishlist} alt="empty-state" />
           </div>
-          <div className=" flex flex-col justify-center items-center capitalize mt-1 text-lg">
+          <div className="flex flex-col justify-center items-center capitalize mt-1 text-lg">
             <p>You Currently do not have any card available</p>
-            <div className=" mt-2">
+            <div className="mt-2">
               <span className="mr-1 text-primary cursor-pointer" onClick={() => setOpen(!open)}>
                 Click here
               </span>
@@ -99,14 +107,14 @@ function Wishlist() {
             {wishListData.map((wishlist) => (
               <Link
                 to={`/dashboard/wishlist/${wishlist.id}/edit`}
-                className={` bg-no-repeat bg-cover flex flex-col justify-between bg-center  relative h-[282px] mb-8 py-3.5 px-4 max-lg:mx-4 mr-12 max-h-68 lg:text-xs text-sm rounded-xl `}
+                className={`bg-no-repeat bg-cover flex flex-col justify-between bg-center relative h-[282px] mb-8 py-3.5 px-4 max-lg:mx-4 mr-12 max-h-68 lg:text-xs text-sm rounded-xl`}
                 style={{ backgroundImage: `url(${wishlist.photoSrc})` }}
                 key={wishlist.id}
               >
                 <div className="flex items-center justify-between mt-4">
-                  <div className=" flex flex-col">
-                    <p className=" text-white mb-1 text-[16px]">{wishlist.Title}</p>
-                    <p className=" text-white text-[14px]">{wishlist.Items}</p>
+                  <div className="flex flex-col">
+                    <p className="text-white mb-1 text-[16px]">{wishlist.Title}</p>
+                    <p className="text-white text-[14px]">{wishlist.Items}</p>
                   </div>
 
                   {wishlist.draft ? (
@@ -129,7 +137,7 @@ function Wishlist() {
                       onClick={() => {
                         setActiveSend(true);
                       }}
-                      className=" cursor-pointer"
+                      className="cursor-pointer"
                     />
                   </button>
                   <button
@@ -139,7 +147,6 @@ function Wishlist() {
                     }}
                     className="w-4 h-full bg-none"
                   >
-                    
                     <Dropdown
                       heading={
                         <VerticalDot
@@ -148,7 +155,7 @@ function Wishlist() {
                         />
                       }
                     >
-                      <div className="text-sm relative  tracking-tighter">
+                      <div className="text-sm relative tracking-tighter">
                         <div
                           className="flex items-center my-1.5 max-sm:my-3 max-lg:my-2 cursor-pointer hover:bg-gray-100 pl-2 max-sm:pl-3"
                           onClick={() => setDeleteModal(true)}

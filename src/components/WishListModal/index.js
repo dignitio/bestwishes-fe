@@ -9,6 +9,7 @@ import CustomInput from "components/CustomFormInputs/CustomInput";
 import CustomCalendar from "components/CustomFormInputs/CustomCalender";
 import Myeditor from "components/CustomFormInputs/CustomEditor";
 import CustomPriceInput from "components/CustomFormInputs/CustomPriceInput";
+import CustomTextArea from "components/CustomFormInputs/CustomTextArea";
 import Button from "components/Button";
 import Modal from "components/Modal";
 import { ReactComponent as UploadIcon } from "../../assets/icons/picture-upload.svg";
@@ -28,7 +29,7 @@ function WishlistModal({ open, onClose }) {
           wishListDescription: "",
           wishListDate: null,
           coverImage: null,
-          items: [{ img: "", itemName: "", price: "" }],
+          items: [{ img: "", itemName: "", price: "", description: "" }],
         }}
         validationSchema={wishlistSchema}
         onSubmit={(values, { resetForm }) => {
@@ -41,7 +42,7 @@ function WishlistModal({ open, onClose }) {
           <Form style={{ zIndex: 10 }} className=" !z-50 ">
             {/* STEP 1 */}
             {activeStep === 0 && (
-              <div className=" flex flex-col gap-4 ">
+              <div className=" flex flex-col gap-4 lg:mb-6 ">
                 <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
                   <fieldset
                     className={`relative h-[200px] md:h-full md:max-h-[460px] flex flex-col justify-end items-start border-2 border-solid border-primary rounded-lg  cursor-pointer rounded-5 bg-white `}
@@ -209,30 +210,35 @@ function WishlistModal({ open, onClose }) {
                           type="number"
                           placeholder="click here to enter price"
                         />
-                        {index === 0 &&
-                          (values.items[0].itemName ||
-                            values.items[0].img ||
-                            values.items[0].price) && (
-                            <motion.button
-                              whileHover={{ scale: 0.95 }}
-                              whileTap={{ scale: 0.8 }}
-                              onClick={() => {
-                                if (values.items.length > 1) {
-                                  setFieldValue(`items`, values.items.slice(1));
-                                } else {
-                                  setFieldValue(`items.0`, {
-                                    img: "",
-                                    itemName: "",
-                                    price: "",
-                                  });
-                                }
-                              }}
-                              type="button"
-                              className="text-primary self-start mt-2"
-                            >
-                              Remove All Items
-                            </motion.button>
-                          )}
+                        <CustomTextArea
+                          key={`items.${index}.description`}
+                          label="Description"
+                          name={`items.${index}.description`}
+                          placeholder="click here to type in description"
+                          className={`h-20`}
+                        />
+                        {values.items.length > 1 && (
+                          <motion.button
+                            whileHover={{ scale: 0.95 }}
+                            whileTap={{ scale: 0.8 }}
+                            onClick={() => {
+                              if (values.items.length > 1) {
+                                setFieldValue(`items`, values.items.slice(1));
+                              } else {
+                                setFieldValue(`items.0`, {
+                                  img: "",
+                                  itemName: "",
+                                  price: "",
+                                  description: "",
+                                });
+                              }
+                            }}
+                            type="button"
+                            className="bg-removeButton text-white mt-[15px] h-10 rounded py-2 px-8 border"
+                          >
+                            Remove Item
+                          </motion.button>
+                        )}
                       </div>
                     </div>
                   ))}
@@ -242,12 +248,13 @@ function WishlistModal({ open, onClose }) {
                     whileHover={{ scale: 0.95 }}
                     whileTap={{ scale: 0.8 }}
                     type="button"
-                    className=" outline-none w-full py-[24px] md:py-[30px] rounded-md flex justify-center items-center border-primary text-primary border-[1px] border-solid bg-white"
+                    className=" outline-none w-full py-[24px] md:py-[20px] rounded-md flex justify-center items-center border-primary text-primary border-[1px] border-solid bg-white"
                     onClick={() =>
                       setFieldValue(`items.${values.items.length}`, {
                         img: "",
                         itemName: "",
                         price: "",
+                        description: "",
                       })
                     }
                   >

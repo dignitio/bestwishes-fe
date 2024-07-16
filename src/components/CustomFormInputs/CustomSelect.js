@@ -8,7 +8,10 @@ export default function CustomSelect({ label, ...props }) {
 
   return (
     <div className="flex flex-col w-full ">
-      <label className="text-sm md:text-base text-[18px] text-[#1E1B1A] font-medium" htmlFor={label}>
+      <label
+        className="text-sm md:text-base text-[18px] text-[#1E1B1A] font-medium"
+        htmlFor={label}
+      >
         {label}
       </label>
       <motion.select
