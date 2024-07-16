@@ -95,7 +95,7 @@ function GuestWishlist() {
         open={open}
         onClose={() => setOpen(!open)}
       >
-        <div>
+        <div className=" lg:mb-6">
           <div className="flex justify-center items-center text-center text-sm lg:text-lg font-semibold pb-10">
             <span>
               {wishListData

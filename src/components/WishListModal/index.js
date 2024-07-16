@@ -42,7 +42,7 @@ function WishlistModal({ open, onClose }) {
           <Form style={{ zIndex: 10 }} className=" !z-50 ">
             {/* STEP 1 */}
             {activeStep === 0 && (
-              <div className=" flex flex-col gap-4 ">
+              <div className=" flex flex-col gap-4 lg:mb-6 ">
                 <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
                   <fieldset
                     className={`relative h-[200px] md:h-full md:max-h-[460px] flex flex-col justify-end items-start border-2 border-solid border-primary rounded-lg  cursor-pointer rounded-5 bg-white `}

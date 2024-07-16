@@ -61,14 +61,16 @@ function Wishlist() {
           <div className="py-3 md:py-[17px] text-black md:w-[290px] rounded-md bg-white md:mr-6 md:mb-0 mb-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="ml-4 text-lg font-nunito text-bgWalletBalance">Wallet Balance</p>
+                <div className="flex items-center">
+                  <p className="ml-4 text-lg font-nunito text-bgWalletBalance">Wallet Balance</p>
+                  <div className="cursor-pointer ml-2" onClick={toggleBalanceVisibility}>
+                    {isBalanceVisible ? <EyeSlash /> : <Eye />}
+                  </div>
+                </div>
                 <span className="ml-4 mt-2 text-bgWalletBalanceFigure text-2xl font-thin font-nunito flex max-md:text-2xl max-lg:text-3xl">
                   <p>&#x20A6;</p>
                   <p className="font-medium">{isBalanceVisible ? "126,997.90" : "******"}</p>
                 </span>
-              </div>
-              <div className="cursor-pointer" onClick={toggleBalanceVisibility}>
-                {isBalanceVisible ? <EyeSlash /> : <Eye />}
               </div>
             </div>
           </div>
