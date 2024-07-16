@@ -209,30 +209,27 @@ function WishlistModal({ open, onClose }) {
                           type="number"
                           placeholder="click here to enter price"
                         />
-                        {index === 0 &&
-                          (values.items[0].itemName ||
-                            values.items[0].img ||
-                            values.items[0].price) && (
-                            <motion.button
-                              whileHover={{ scale: 0.95 }}
-                              whileTap={{ scale: 0.8 }}
-                              onClick={() => {
-                                if (values.items.length > 1) {
-                                  setFieldValue(`items`, values.items.slice(1));
-                                } else {
-                                  setFieldValue(`items.0`, {
-                                    img: "",
-                                    itemName: "",
-                                    price: "",
-                                  });
-                                }
-                              }}
-                              type="button"
-                              className="bg-removeButton text-white mt-[15px] h-10 rounded py-2 px-8 border"
-                            >
-                              Remove Item
-                            </motion.button>
-                          )}
+                        {values.items.length > 1 && (
+                          <motion.button
+                            whileHover={{ scale: 0.95 }}
+                            whileTap={{ scale: 0.8 }}
+                            onClick={() => {
+                              if (values.items.length > 1) {
+                                setFieldValue(`items`, values.items.slice(1));
+                              } else {
+                                setFieldValue(`items.0`, {
+                                  img: "",
+                                  itemName: "",
+                                  price: "",
+                                });
+                              }
+                            }}
+                            type="button"
+                            className="bg-removeButton text-white mt-[15px] h-10 rounded py-2 px-8 border"
+                          >
+                            Remove Item
+                          </motion.button>
+                        )}
                       </div>
                     </div>
                   ))}
