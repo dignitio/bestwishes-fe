@@ -67,6 +67,7 @@ export const wishlistSchema = yup.object().shape({
       img: yup.mixed().required("Image is required"),
       itemName: yup.string().required("please enter an item name "),
       price: yup.number().required("please enter an amount"),
+      description: yup.string().required("please type in a description"),
     }),
   ),
 });

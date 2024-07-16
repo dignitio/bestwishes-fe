@@ -9,6 +9,7 @@ import CustomInput from "components/CustomFormInputs/CustomInput";
 import CustomCalendar from "components/CustomFormInputs/CustomCalender";
 import Myeditor from "components/CustomFormInputs/CustomEditor";
 import CustomPriceInput from "components/CustomFormInputs/CustomPriceInput";
+import CustomTextArea from "components/CustomFormInputs/CustomTextArea";
 import Button from "components/Button";
 import Modal from "components/Modal";
 import { ReactComponent as UploadIcon } from "../../assets/icons/picture-upload.svg";
@@ -28,7 +29,7 @@ function WishlistModal({ open, onClose }) {
           wishListDescription: "",
           wishListDate: null,
           coverImage: null,
-          items: [{ img: "", itemName: "", price: "" }],
+          items: [{ img: "", itemName: "", price: "", description: "" }],
         }}
         validationSchema={wishlistSchema}
         onSubmit={(values, { resetForm }) => {
@@ -209,6 +210,13 @@ function WishlistModal({ open, onClose }) {
                           type="number"
                           placeholder="click here to enter price"
                         />
+                        <CustomTextArea
+                          key={`items.${index}.description`}
+                          label="Description"
+                          name={`items.${index}.description`}
+                          placeholder="click here to type in description"
+                          className={`h-20`}
+                        />
                         {values.items.length > 1 && (
                           <motion.button
                             whileHover={{ scale: 0.95 }}
@@ -221,6 +229,7 @@ function WishlistModal({ open, onClose }) {
                                   img: "",
                                   itemName: "",
                                   price: "",
+                                  description: "",
                                 });
                               }
                             }}
@@ -245,6 +254,7 @@ function WishlistModal({ open, onClose }) {
                         img: "",
                         itemName: "",
                         price: "",
+                        description: "",
                       })
                     }
                   >
