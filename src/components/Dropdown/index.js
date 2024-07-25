@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 
-const Dropdown = ({ heading, children }) => {
+const Dropdown = ({ heading, children, headingClassName, dropdownClassName }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -29,15 +29,15 @@ const Dropdown = ({ heading, children }) => {
   return (
     <div ref={dropdownRef} className="relative inline-block text-left">
       <div
-        className="cursor-pointer inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm bg-white text-sm font-medium active:bg-gray-50"
+        className={`cursor-pointer inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm text-sm font-medium active:bg-gray-50 ${headingClassName}`}
         onClick={toggleDropdown}
       >
         {heading}
       </div>
 
       {isOpen && (
-        <div className="origin-top-right absolute -left-48 max-lg:-left-44 py-1 top-3 w-48 max-lg:w-44 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-40" style={{fontFamily: "Nunito Sans",}}>
-            {children}
+        <div className={`origin-top-right absolute -left-48 max-lg:-left-44 py-1 top-3 w-48 max-lg:w-44 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 z-40 ${dropdownClassName}`} style={{ fontFamily: "Nunito Sans" }}>
+          {children}
         </div>
       )}
     </div>

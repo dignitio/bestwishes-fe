@@ -72,6 +72,11 @@ export const wishlistSchema = yup.object().shape({
   ),
 });
 
+export const EditWishlistSchema = yup.object().shape({
+  editWishlistName : yup.string().required(),
+  editWishlistAmount: yup.number().required()
+})
+
 export const ProfileSchema = yup.object().shape({
   firstName: yup.string().required("First Name is required"),
   lastName: yup.string().required("Last Name is required"),
