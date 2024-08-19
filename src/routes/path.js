@@ -21,9 +21,9 @@ export const PATH_DASHBOARD = {
   wishcardLibrary: path(ROOTS_DASHBOARD, "/wishcard/library"),
   settings: path(ROOTS_DASHBOARD, "/settings"),
   support: path(ROOTS_DASHBOARD, "/support"),
-  profile: path(ROOTS_DASHBOARD, "/profile"),
-  bank: path(ROOTS_DASHBOARD, "/bank"),
-  security: path(ROOTS_DASHBOARD, "/security"),
+  profile: path(ROOTS_DASHBOARD, "/settings/profile"),
+  bank: path(ROOTS_DASHBOARD, "/settings/bank"),
+  security: path(ROOTS_DASHBOARD, "/settings/security"),
 };
 
 

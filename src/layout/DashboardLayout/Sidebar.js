@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useMatch } from "react-router-dom";
 import { PATH_DASHBOARD } from "routes/path";
 import logo from "../../assets/images/logo.png";
 import { ReactComponent as CategoryIcon } from "../../assets/icons/category.svg";
@@ -10,8 +10,9 @@ import { ReactComponent as SupportIcon } from "../../assets/icons/like-dislike.s
 import { ReactComponent as LogOutIcon } from "../../assets/icons/login.svg";
 import { ReactComponent as WalletIcon } from "../../assets/icons/wallet.svg";
 
-
 function Sidebar() {
+  const settingsMatch = useMatch(`${PATH_DASHBOARD.settings}/*`);
+
   return (
     <div className="bg-white flex flex-col h-full max-lg:hidden items-center py-4 px-6">
       <div className="w-20 mt-4 mb-16 mr-5">
@@ -90,7 +91,7 @@ function Sidebar() {
             }
           >
             <span className="mr-2">
-              <WalletIcon className="w-5"/>
+              <WalletIcon className="w-5" />
             </span>
             <span className="tracking-tight">Wallet</span>
           </NavLink>
@@ -99,7 +100,7 @@ function Sidebar() {
           <NavLink
             to={PATH_DASHBOARD.settings}
             className={({ isActive }) =>
-              isActive
+              isActive || settingsMatch
                 ? "flex items-end py-2.5 px-3 bg-gradient-to-r from-indigo-100 to-white"
                 : "flex items-end py-2.5 px-3 hover:bg-gradient-to-r from-indigo-100 to-white"
             }

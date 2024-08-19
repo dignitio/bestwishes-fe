@@ -4,15 +4,23 @@ import React, { useState } from "react";
 import { Field, Formik } from "formik";
 import CustomInput from "components/CustomFormInputs/CustomInput";
 import CustomSelect from "components/CustomFormInputs/CustomSelect";
+import { useForm, Controller, useWatch } from "react-hook-form";
+import CSelect from "components/CustomFormInputs/CSelect";
 
 function BankDetails() {
   const [isActive, setIsActive] = useState(false);
+  const {
+    control,
+
+    formState: { errors },
+    watch,
+  } = useForm();
 
   const handleLinkClick = (link) => {
     setIsActive(link);
   };
 
-  const [banks] = useState([
+  const banks = [
     { id: "1", name: "Access Bank", code: "044" },
     { id: "2", name: "Citibank", code: "023" },
     { id: "3", name: "Diamond Bank", code: "063" },
@@ -36,7 +44,13 @@ function BankDetails() {
     { id: "21", name: "Unity Bank Plc", code: "215" },
     { id: "22", name: "Wema Bank", code: "035" },
     { id: "23", name: "Zenith Bank", code: "057" },
-  ]);
+  ];
+
+  const bankOptions = banks.map(bank => ({
+    value: bank.code,
+    label: bank.name,
+  }));
+  
 
   return (
     <div className="flex justify-center lg:p-[38px] ">
@@ -81,7 +95,7 @@ function BankDetails() {
             >
               {({ values, handleSubmit, handleChange }) => (
                 <form onSubmit={handleSubmit} className="text-[18px] flex flex-col gap-[32px]">
-                  <CustomSelect
+                  {/* <CustomSelect
                     label="Select Bank"
                     name="selectedBank"
                     value={values.selectedBank}
@@ -89,11 +103,21 @@ function BankDetails() {
                     onchange={handleChange}
                   >
                     {banks.map((bank) => (
-                      <option value={bank.name}>
-                        {bank.name}
-                      </option>
+                      <option value={bank.name}>{bank.name}</option>
                     ))}
-                  </CustomSelect>
+                  </CustomSelect> */}
+
+                  <CSelect
+                    placeholder="click here to select"
+                    name="selectedBank"
+                    extraLabel="Select Bank"
+                    control={control}
+                    options={bankOptions}
+                    value={values.selectedBank}
+                    required
+                    onchange={handleChange}
+                    // handleChange={(e, a) => handleChange(e, a)}
+                 />
 
                   <CustomInput
                     label="Account Number"

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useRef, useEffect } from 'react';
 import { Link, NavLink } from "react-router-dom";
 import { PATH_DASHBOARD, PATH_HOME } from "routes/path";
 import MainNavButton from "components/MainNavButton";
@@ -18,6 +18,26 @@ function Nav() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showDropdownComponent, setShowDropDownComponent] = useState(false);
   const [play, setPlay] = useState(false);
+
+  const dropdownRef = useRef(null);
+
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setShowDropDownComponent(false);
+    }
+  };
+
+  useEffect(() => {
+    if (showDropdownComponent) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showDropdownComponent]);
 
   return (
     <div className="bg-white px-5 py-[20px] w-[100%] font-lexend">
@@ -40,7 +60,7 @@ function Nav() {
           </div>
         </div>
 
-        <div className="hidden lg:flex justify-center items-center gap-[48px]">
+        {/* <div className="hidden lg:flex justify-center items-center gap-[48px]">
           <div onClick={() => setOpen(!open)} className="cursor-pointer">
             <span className="text-[18px] cursor-pointer">Create a Tribute</span>
           </div>
@@ -68,19 +88,19 @@ function Nav() {
           >
             Why BestWishes.io
           </NavLink>
-        </div>
+        </div> */}
         <div className="flex items-center text-xs gap-[46px]">
-          {isLoggedIn ? (
-            <div className=" flex items-center gap-2">
-              <img src={userPix} alt="userPix" className="w-9" />
+          {/* {isLoggedIn ? ( */}
+            <div className=" flex items-center gap-3">
+              <img src={userPix} alt="userPix" className="w-11" />
               <span
-                className="hover:bg-gray-100 rounded-md"
+                className="hover:bg-gray-100 rounded-md cursor-pointer"
                 onClick={() => setShowDropDownComponent(!showDropdownComponent)}
               >
                 <ArrowDown />
               </span>
             </div>
-          ) : (
+          {/* ) : (
             <div className="hidden lg:flex gap-[24px]">
               <Button
                 type={Button}
@@ -96,28 +116,30 @@ function Nav() {
                 <Link to="/register">Create Account</Link>
               </Button>
             </div>
-          )}
-        </div>
+          )} */}
+        </div> 
 
         {showDropdownComponent && (
-          <div className=" bg-white border shadow-md rounded-md p-2 absolute w-[14rem] lg:w-[30rem] right-1 lg:right-2 top-[3rem] lg:top-[3rem] flex flex-col gap-y-[20px] z-20 font-medium ">
-            {/* edit profile */}
-            <div className=" flex items-center gap-x-4 ">
-              <NavLink to={PATH_DASHBOARD.root} className=" text-gray-700">
-                My Dashboard
-              </NavLink>
-            </div>
-            {/* change password */}
-            <div className=" flex gap-x-4 items-center">
-              <NavLink to={PATH_DASHBOARD.profile} className=" text-gray-700">
-                My profile
-              </NavLink>
-            </div>
-            <Button className=" text-primary flex gap-x-4 items-center font-bold ">
-              <span>Logout</span>
-            </Button>
+        <div
+          ref={dropdownRef}
+          className="bg-white border shadow-md rounded-md p-2 absolute w-[14rem] lg:w-[20rem] right-1 lg:right-2 top-[3rem] lg:top-[5rem] flex flex-col gap-y-[20px] z-20 font-medium"
+        >
+          <div className="flex items-center gap-x-4">
+            <NavLink to={PATH_DASHBOARD.root} className="text-gray-700">
+              My Dashboard
+            </NavLink>
           </div>
-        )}
+          <div className="flex gap-x-4 items-center">
+            <NavLink to={PATH_DASHBOARD.profile} className="text-gray-700">
+              My profile
+            </NavLink>
+          </div>
+          <Button className="flex justify-center text-white hover:text-primary items-center font-bold">
+            <span className="">Logout</span>
+          </Button>
+        </div>
+      )}
+
 
         <Modal width={600} open={open} onClose={() => setOpen(!open)}>
           <CreateTribute />

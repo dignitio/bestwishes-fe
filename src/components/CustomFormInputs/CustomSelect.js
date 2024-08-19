@@ -1,13 +1,14 @@
 import React from "react";
 import { useField } from "formik";
 import { motion } from "framer-motion";
+import {ReactComponent as DropdownIcon} from "assets/icons/downArrow.svg"
 
 // eslint-disable-next-line import/prefer-default-export
 export default function CustomSelect({ label, ...props }) {
   const [field, meta] = useField(props);
 
   return (
-    <div className="flex flex-col w-full ">
+    <div className=" relative flex flex-col w-full ">
       <label className="text-sm md:text-base text-[18px] text-[#1E1B1A] font-medium" htmlFor={label}>
         {label}
       </label>
@@ -20,6 +21,9 @@ export default function CustomSelect({ label, ...props }) {
         {...field}
         {...props}
       />
+      <div className="absolute">
+        <DropdownIcon/>
+      </div>
 
       <span>
         {meta.touched && meta.error && <div className="text-errorColor text-xs">{meta.error}</div>}

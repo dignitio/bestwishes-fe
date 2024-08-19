@@ -92,15 +92,15 @@ export default function Router() {
         },
         {
           element: <Profile />,
-          path: "profile",
+          path: "settings/profile",
         },
         {
           element: <BankDetails />,
-          path: "bank",
+          path: "settings/bank",
         },
         {
           element: <Security />,
-          path: "security",
+          path: "settings/security",
         },
         {
           element: <Support />,
