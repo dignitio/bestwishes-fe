@@ -1,23 +1,24 @@
-import { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { PATH_DASHBOARD, PATH_HOME } from "routes/path";
-import MainNavButton from "components/MainNavButton";
+import MainNavButton from "layout/GuestpageLayout/GuestNavButton";
+import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import Button from "components/Button";
 import Modal from "components/Modal";
 import CreateTribute from "pages/Tribute/CreateTribute";
-import NavMenuButton from "components/NavMenuButton";
 import playIcon from "assets/icons/play.png";
 import muteIcon from "assets/icons/mute.png";
-import userPix from "../../assets/images/userPix.png";
-import { ReactComponent as BellIcon } from "../../assets/icons/bell.svg";
-import { ReactComponent as ArrowDown } from "../../assets/icons/downArrow.svg";
-import { ReactComponent as SearchIcon } from "../../assets/icons/search.svg";
+import userPix from "assets/images/userPix.png";
+import { ReactComponent as BellIcon } from "assets/icons/bell.svg";
+import { ReactComponent as ArrowDown } from "assets/icons/downArrow.svg";
+import { ReactComponent as SearchIcon } from "assets/icons/search.svg";
 
 function Nav() {
   const [open, setOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [showDropdownComponent, setShowDropDownComponent] = useState(false);
   const [play, setPlay] = useState(false);
+
+
 
   return (
     <div className="bg-white px-5 py-[20px] w-[100%] font-lexend">
@@ -27,10 +28,7 @@ function Nav() {
             <MainNavButton />
           </div>
           <div className="w-[30px]">
-            <div
-              className="cursor-pointer p-1 lg:w-[40px]"
-              onClick={() => setPlay(!play)}
-            >
+            <div className="cursor-pointer p-1 lg:w-[40px]" onClick={() => setPlay(!play)}>
               {play ? (
                 <img src={playIcon} alt="play" className="w-full" />
               ) : (
@@ -40,7 +38,7 @@ function Nav() {
           </div>
         </div>
 
-        <div className="hidden lg:flex justify-center items-center gap-[48px]">
+        <div className="hidden lg:flex justify-center p-2 mx-auto items-center gap-14">
           <div onClick={() => setOpen(!open)} className="cursor-pointer">
             <span className="text-[18px] cursor-pointer">Create a Tribute</span>
           </div>
@@ -71,15 +69,41 @@ function Nav() {
         </div>
         <div className="flex items-center text-xs gap-[46px]">
           {isLoggedIn ? (
-            <div className=" flex items-center gap-2">
-              <img src={userPix} alt="userPix" className="w-9" />
-              <span
-                className="hover:bg-gray-100 rounded-md"
-                onClick={() => setShowDropDownComponent(!showDropdownComponent)}
+            <Menu>
+              <div className="flex items-center gap-3">
+                <img src={userPix} alt="userPix" className="w-11" />
+                <MenuButton className="hover:bg-gray-100 rounded-md cursor-pointer">
+                  <ArrowDown />
+                </MenuButton>
+              </div>
+
+              <MenuItems
+                transition
+                anchor="bottom end"
+                className="bg-white border shadow-md rounded-md p-2 absolute w-[14rem] lg:w-[20rem] right-1 lg:right-2 top-[3rem] lg:top-[5rem] flex flex-col gap-y-[20px] z-20 font-medium"
               >
-                <ArrowDown />
-              </span>
-            </div>
+                <MenuItem>
+                  <div className="flex items-center gap-x-4">
+                    <NavLink to={PATH_DASHBOARD.root} className="text-gray-700">
+                      My Dashboard
+                    </NavLink>
+                  </div>
+                </MenuItem>
+                <MenuItem>
+                  <div className="flex items-center gap-x-4">
+                    <NavLink to={PATH_DASHBOARD.profile} className="text-gray-700">
+                      My profile
+                    </NavLink>
+                  </div>
+                </MenuItem>
+
+                <MenuItem>
+                  <Button className="flex justify-center text-white hover:text-primary items-center font-bold">
+                    <span className="">Logout</span>
+                  </Button>
+                </MenuItem>
+              </MenuItems>
+            </Menu>
           ) : (
             <div className="hidden lg:flex gap-[24px]">
               <Button
@@ -98,26 +122,6 @@ function Nav() {
             </div>
           )}
         </div>
-
-        {showDropdownComponent && (
-          <div className=" bg-white border shadow-md rounded-md p-2 absolute w-[14rem] lg:w-[30rem] right-1 lg:right-2 top-[3rem] lg:top-[3rem] flex flex-col gap-y-[20px] z-20 font-medium ">
-            {/* edit profile */}
-            <div className=" flex items-center gap-x-4 ">
-              <NavLink to={PATH_DASHBOARD.root} className=" text-gray-700">
-                My Dashboard
-              </NavLink>
-            </div>
-            {/* change password */}
-            <div className=" flex gap-x-4 items-center">
-              <NavLink to={PATH_DASHBOARD.profile} className=" text-gray-700">
-                My profile
-              </NavLink>
-            </div>
-            <Button className=" text-primary flex gap-x-4 items-center font-bold ">
-              <span>Logout</span>
-            </Button>
-          </div>
-        )}
 
         <Modal width={600} open={open} onClose={() => setOpen(!open)}>
           <CreateTribute />

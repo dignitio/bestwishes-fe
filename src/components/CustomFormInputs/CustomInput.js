@@ -21,6 +21,7 @@ export default function CustomInput({ label, type, maxLength, obscured, numeric,
       <label className="text-sm md:text-base text-[#1E1B1A] font-medium mb-1.5" htmlFor={props.id}>
         {label}
       </label>
+      {/* {questionText && <p className="text-sm text-gray-500">{questionText}</p>} */}
       <motion.div whileHover={{ scale: 0.98 }} className="relative">
         <input
           id={props.id}

@@ -1,6 +1,7 @@
 import React from "react";
 import { useField } from "formik";
 import { motion } from "framer-motion";
+import {ReactComponent as DropdownIcon} from "assets/icons/downArrow.svg"
 
 // eslint-disable-next-line import/prefer-default-export
 export default function CustomSelect({ label, ...props }) {
@@ -23,6 +24,9 @@ export default function CustomSelect({ label, ...props }) {
         {...field}
         {...props}
       />
+      <div className="absolute">
+        <DropdownIcon/>
+      </div>
 
       <span>
         {meta.touched && meta.error && <div className="text-errorColor text-xs">{meta.error}</div>}

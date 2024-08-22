@@ -368,7 +368,7 @@ function Home() {
           <div className="flex md:hidden gap-[10px] text-white absolute right-[20px] top-[24px]">
             <button
               className="font-[14px] bg-primary p-2 px-[24px] rounded-md"
-              onClick={() => navigate("/wishlist")}
+              onClick={() => navigate("/guest-wishlist")}
             >
               Wishlist
             </button>
@@ -701,7 +701,7 @@ function Home() {
               {WishItems.map((items) => (
                 <div
                   className="bg-[#F0F1F5] rounded-xl cursor-pointer"
-                  onClick={() => navigate("/wishlist")}
+                  onClick={() => navigate("/guest-wishlist")}
                 >
                   <img src={items.image} className="rounded-t-xl" alt="wish" />
                   <div className="flex items-center p-[12px] justify-between">
@@ -719,7 +719,7 @@ function Home() {
             </div>
             <Button
               className="text-white font-bold mt-[30px]"
-              onClick={() => navigate("/wishlist")}
+              onClick={() => navigate("/guest-wishlist")}
             >
               See more
             </Button>

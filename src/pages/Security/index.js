@@ -97,7 +97,7 @@ function Security() {
           <div className="lg:w-[577px] w-[100%] flex flex-col gap-[32px]">
             <h1 className="text-[18px] font-bold">Change Security Pin</h1>
             <Formik
-              initialValues={{ password: "", otp: "", newPin : "" }}
+              initialValues={{ password: "", securityQuestion: "", newPin : "" }}
               onSubmit={(values) => console.log(values)}
             >
               {({ values, handleSubmit, handleChange }) => (
@@ -116,15 +116,16 @@ function Security() {
                   />
                  
                   <CustomInput
-                    label="OTP"
-                    type="password"
-                    name="otp"
-                    value={values.otp}
+                    label="Security Question"
+                    type="text"
+                    name="securityQuestion"
+                    value={values.securityQuestion}
                     required
                     obscured
                     readOnly={false}
-                    placeholder="enter the otp sent to your mail"
+                    placeholder="enter the answer to your security question"
                     onChange={handleChange}
+                    questionText="What is the name of your spouse?"
                   />
 
 <CustomInput
@@ -141,10 +142,10 @@ function Security() {
 
                   <button
                     type="submit"
-                    className={`w-full bg-primary px-[26px] py-[18px] text-white rounded-[4px] ${!values.password || !values.otp || !values.newPin ? "opacity-[0.2] cursor-not-allowed" : ""}`}
-                    disabled={!values.password || !values.otp || !values.newPin}
+                    className={`w-full bg-primary px-[26px] py-[18px] text-white rounded-[4px] ${!values.password || !values.securityQuestion || !values.newPin ? "opacity-[0.2] cursor-not-allowed" : ""}`}
+                    disabled={!values.password || !values.securityQuestion || !values.newPin}
                   >
-                    Cange Pin
+                    Change Pin
                   </button>
                 </form>
               )}
