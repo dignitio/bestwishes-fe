@@ -8,8 +8,11 @@ export default function CustomSelect({ label, ...props }) {
   const [field, meta] = useField(props);
 
   return (
-    <div className=" relative flex flex-col w-full ">
-      <label className="text-sm md:text-base text-[18px] text-[#1E1B1A] font-medium" htmlFor={label}>
+    <div className="flex flex-col w-full ">
+      <label
+        className="text-sm md:text-base text-[18px] text-[#1E1B1A] font-medium"
+        htmlFor={label}
+      >
         {label}
       </label>
       <motion.select

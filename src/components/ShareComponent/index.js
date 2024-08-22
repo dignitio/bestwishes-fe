@@ -16,7 +16,7 @@ function ShareWishlistModal({ open, onClose }) {
     <Modal width={500} open={open} onClose={onClose}>
       <div className="flex w-full flex-col">
         <span className="text-lg px-12 md:px-0 lg:px-0">Share</span>
-        <div className="flex gap-4 mt-3 lg:mt-5 md:mt-4 md:px-0 px-12 lg:pr-6 pb-1 scroll-bar-hide overflow-auto lg:overflow-auto lg:overflow-y-hidden cursor-pointer">
+        <div className="flex gap-4 mt-3 lg:mt-5 md:mt-4 md:px-0 px-12 lg:pr-6 pb-1 scroll-bar-hide lg:overflow-y-hidden cursor-pointer">
           {shareComponent.map((share) => (
             <motion.div
               key={share.id}

@@ -4,7 +4,7 @@ import Sidebar from "./Sidebar";
 
 function Layout() {
   return (
-    <div className="bg-gray-100 h-full relative overflow-clip flex font-nunito">
+    <div className="bg-gray-100 h-full relative overflow-clip flex font-lexend">
       <div className=" sticky h-screen top-0 left-0 ">
         <Sidebar />
       </div>
