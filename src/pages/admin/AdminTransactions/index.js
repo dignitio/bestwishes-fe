@@ -8,9 +8,15 @@ import SuccessPage from "./successPage";
 import TableComponent from "../../../components/Table";
 
 function AdminTransactions() {
-const[transactionRowData, setTransactionRowData] = useState()
-const[showSuccessPage, setShowSuccessPage] = useState()
+  const [transactionRowData, setTransactionRowData] = useState();
+  const [showSuccessPage, setShowSuccessPage] = useState();
 
+  const transactionType = [
+    { label: "All", value: "" },
+    { label: "Successful", value: "success" },
+    { label: "Pending", value: "pending" },
+    { label: "Failed", value: "failed" },
+  ];
 
   const getStatusStyle = (status) => {
     if (status === "Successful")
@@ -19,7 +25,7 @@ const[showSuccessPage, setShowSuccessPage] = useState()
       return "bg-[#FFF4DE] text-[#C28001] font-semibold py-1 px-4 text-center -ml-2 text-sm rounded-sm";
     if (status === "Failed")
       return "bg-[#FBD2D3] text-[#FF0000] font-semibold py-1 px-4 text-center -ml-2 text-sm rounded-sm";
-    return ""; 
+    return "";
   };
 
   return (
@@ -39,24 +45,25 @@ const[showSuccessPage, setShowSuccessPage] = useState()
             <img src={wallet} alt="wallet-icon" className="w-[60%]" />
           </div>
           <div className="flex flex-col gap-[3px]">
-            <h1 className="text-[#636363] text-[18px]">WIthdrawable Balance</h1>
+            <h1 className="text-[#636363] text-[18px]">Withdrawable Balance</h1>
             <h1 className="font-[800] text-[32px]">₦0.00</h1>
           </div>
         </div>
       </div>
 
-      <div className="w-full max-w-[1100px] md:max-w-[1300px] bg-white overflow-x-auto">
-        <div className="w-full min-w-[250px] md:w-full px-4 py-6">
+      <div className="w-full max-w-[1400px] bg-white overflow-x-auto">
+        <div className="w-full px-4 py-6">
           <TableComponent
             columns={Transactioncolumns}
             data={TransactionData}
             title={"Transaction Management"}
             actions={Transactionactions}
-            searchPlaceholder="search wallet"
-            filterText="All Type"
+            searchPlaceholder="Search transaction"
+            options={transactionType}
             getStatusStyle={getStatusStyle}
-            handleClick={(rowData) => {setTransactionRowData(rowData);
-              setShowSuccessPage(true)
+            handleClick={(rowData) => {
+              setTransactionRowData(rowData);
+              setShowSuccessPage(true);
             }}
           />
         </div>
@@ -68,7 +75,10 @@ const[showSuccessPage, setShowSuccessPage] = useState()
         open={showSuccessPage}
         onClose={() => setShowSuccessPage(!showSuccessPage)}
       >
-        <SuccessPage transactionRowData={transactionRowData} onClose={() => setShowSuccessPage(!showSuccessPage)} />
+        <SuccessPage
+          transactionRowData={transactionRowData}
+          onClose={() => setShowSuccessPage(!showSuccessPage)}
+        />
       </Modal>
     </div>
   );
