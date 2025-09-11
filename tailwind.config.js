@@ -2,12 +2,24 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    colors: {
-      primary: "#FF433C",
-      white: "#ffff"
-    },
-    extend: {},
+    extend: {
+      fontFamily: {
+        lexend: ["Lexend", "sans-serif"],
+        nunito: ["Nunito", "sans-serif"],
+        dancing: ["Dancing Script", "cursive"],
+      },
+      colors: {
+        primary: "#271F6B",
+        errorColor: "#FF433C",
+        removeButton: "#607D8B",
+        white: "#fff",
+        OauthButton: "#E8E8E8",
+        Draft: "#1061B1",
+        bgWalletBalanceFigure: "#1061B1",
+        bgWalletBalance: "#465C86",
+        hoverColor: "#271F6B30"
+      },
   },
   plugins: [],
+}
 };
-
