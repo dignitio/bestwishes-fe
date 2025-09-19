@@ -13,10 +13,13 @@ const TableComponent = ({
   data,
   title,
   searchPlaceholder,
-  filterText,
   getStatusStyle,
   actions,
   handleClick,
+  options,
+  selectedOption,
+  placeholder,
+  className = "",
 }) => {
   const [tableData, setTableData] = useState(data);
   const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
@@ -92,7 +95,7 @@ const TableComponent = ({
         <div className="pl-5 pr-8">
           <div className="flex justify-between items-center min-w-[1300px] w-full max-w-[1300px]">
             <h2 className="text-xl my-8 pl-3 font-semibold">{title}</h2>
-            <div className="flex">
+            <div className="flex gap-2">
               <button className="border border-gray-200 bg-gray-50 rounded-md h-9 px-3 flex items-center w-72">
                 {}
                 <span className="pr-1.5">
@@ -106,19 +109,22 @@ const TableComponent = ({
                   />
                 </span>
               </button>
-              <div className="border border-gray-200 bg-gray-50 rounded-md py-4 h-9 px-3 flex items-center w-36 ml-5">
-                <span className="w-full">
-                  <input
-                    type="text"
-                    placeholder={filterText}
-                    className="outline-0 bg-transparent text-sm placeholder:text-black h-20 w-full"
-                    value={filterStatus}
-                    onChange={handleFilterChange}
-                  />
-                </span>
-                <span>
-                  <FilterIcon className="max-lg:w-3 max-lg:h-3" />
-                </span>
+
+              <div className={`border border-gray-200 bg-gray-50 rounded-md h-9 px-3 flex items-center ${className}`}>
+                <select
+                  className="outline-0 bg-transparent text-sm h-full w-full cursor-pointer "
+                  value={selectedOption}
+                  onChange={handleFilterChange} // Make sure this function handles the selection change
+                >
+                  <option value="" disabled>
+                    {placeholder}
+                  </option>
+                  {options.map((option, index) => (
+                    <option key={index} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
           </div>
