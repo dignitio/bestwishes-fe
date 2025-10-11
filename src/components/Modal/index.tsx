@@ -1,0 +1,52 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
+import ReactModal from "react-modal";
+import { ReactComponent as Closeicon } from "assets/icons/close.svg";
+import "./modal.css";
+
+interface ModalProps {
+  open: boolean;
+  onClose: () => void;
+  customClass?: string;
+  width?: number;
+  children: React.ReactNode;
+  isWishList?: boolean;
+  [key: string]: any;
+}
+
+const Modal: React.FC<ModalProps> = ({ open, onClose, customClass, width, children, isWishList, ...props }) => {
+  const modalCustomStyles: any = {};
+  if (width) {
+    modalCustomStyles.width = `${width}px`;
+  }
+
+  return (
+    <ReactModal
+      isOpen={!!open}
+      onRequestClose={onClose}
+      className={`modal !z-50 ${customClass}`}
+      overlayClassName={"overlay"}
+      style={{ content: modalCustomStyles }}
+      {...props}
+    >
+      <div className="flex justify-end w-full cursor-pointer px-6 py-3 z-50 ">
+        <button type="button" className="w-4 cursor-pointer mr-5" onClick={onClose}>
+          <Closeicon className="w-5 " />
+        </button>
+      </div>
+      <div
+        className=" z-50 px-6 pb-6 box-border overflow-y-auto "
+        style={{
+          boxSizing: "border-box",
+          overflowY: "auto",
+          padding: "0 24px 0 24px",
+          fontFamily: "Nunito Sans",
+        }}
+      >
+        {children}
+      </div>
+    </ReactModal>
+  );
+};
+
+ReactModal.setAppElement("body");
+export default Modal;
