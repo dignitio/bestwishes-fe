@@ -12,6 +12,12 @@ const AdminTransactions: React.FC = () => {
   const [transactionRowData, setTransactionRowData] = useState<any>(null)
   const [showSuccessPage, setShowSuccessPage] = useState<any>(false)
 
+  const transactionType = [
+    { label: "All", value: "" },
+    { label: "Successful", value: "success" },
+    { label: "Pending", value: "pending" },
+    { label: "Failed", value: "failed" },
+  ];
 
   const getStatusStyle = (status: string) => {
     if (status === "Successful")
@@ -40,21 +46,21 @@ const AdminTransactions: React.FC = () => {
             <img src={wallet} alt="wallet-icon" className="w-[60%]" />
           </div>
           <div className="flex flex-col gap-[3px]">
-            <h1 className="text-[#636363] text-[18px]">WIthdrawable Balance</h1>
+            <h1 className="text-[#636363] text-[18px]">Withdrawable Balance</h1>
             <h1 className="font-[800] text-[32px]">₦0.00</h1>
           </div>
         </div>
       </div>
 
-      <div className="w-full max-w-[1100px] md:max-w-[1300px] bg-white overflow-x-auto">
-        <div className="w-full min-w-[250px] md:w-full px-4 py-6">
+      <div className="w-full max-w-[1400px] bg-white overflow-x-auto">
+        <div className="w-full px-4 py-6">
           <TableComponent
             columns={Transactioncolumns}
             data={TransactionData}
             title={"Transaction Management"}
             actions={Transactionactions}
-            searchPlaceholder="search wallet"
-            filterText="All Type"
+            searchPlaceholder="Search transaction"
+            options={transactionType}
             getStatusStyle={getStatusStyle}
             handleClick={(rowData) => {
               setTransactionRowData(rowData);
@@ -70,7 +76,10 @@ const AdminTransactions: React.FC = () => {
         open={showSuccessPage}
         onClose={() => setShowSuccessPage(!showSuccessPage)}
       >
-        <SuccessPage transactionRowData={transactionRowData} onClose={() => setShowSuccessPage(!showSuccessPage)} />
+        <SuccessPage
+          transactionRowData={transactionRowData}
+          onClose={() => setShowSuccessPage(!showSuccessPage)}
+        />
       </Modal>
     </div>
   );

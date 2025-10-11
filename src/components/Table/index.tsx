@@ -14,10 +14,14 @@ interface TableComponentProps {
   data: any[];
   title: string;
   searchPlaceholder: string;
-  filterText: string;
+  filterText?: string;
   getStatusStyle: (status: string) => string;
   actions: Array<{ label: string; onClick: (index: number, data: any[], setData: (data: any[]) => void) => void }>;
   handleClick?: (row: any) => void;
+  options?: Array<{ label: string; value: string }>;
+  selectedOption?: string;
+  placeholder?: string;
+  className?: string;
 }
 
 const TableComponent: React.FC<TableComponentProps> = ({
@@ -29,6 +33,10 @@ const TableComponent: React.FC<TableComponentProps> = ({
   getStatusStyle,
   actions,
   handleClick,
+  options = [],
+  selectedOption = "",
+  placeholder = "Select option",
+  className = "",
 }) => {
   const [tableData, setTableData] = useState(data);
   const [openDropdownIndex, setOpenDropdownIndex] = useState<number | null>(null);
@@ -39,7 +47,7 @@ const TableComponent: React.FC<TableComponentProps> = ({
     setOpenDropdownIndex(null);
   };
 
-  const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setFilterStatus(e.target.value);
   };
 
@@ -104,7 +112,7 @@ const TableComponent: React.FC<TableComponentProps> = ({
         <div className="pl-5 pr-8">
           <div className="flex justify-between items-center min-w-[1300px] w-full max-w-[1300px]">
             <h2 className="text-xl my-8 pl-3 font-semibold">{title}</h2>
-            <div className="flex">
+            <div className="flex gap-2">
               <button className="border border-gray-200 bg-gray-50 rounded-md h-9 px-3 flex items-center w-72">
                 { }
                 <span className="pr-1.5">
@@ -118,19 +126,22 @@ const TableComponent: React.FC<TableComponentProps> = ({
                   />
                 </span>
               </button>
-              <div className="border border-gray-200 bg-gray-50 rounded-md py-4 h-9 px-3 flex items-center w-36 ml-5">
-                <span className="w-full">
-                  <input
-                    type="text"
-                    placeholder={filterText}
-                    className="outline-0 bg-transparent text-sm placeholder:text-black h-20 w-full"
-                    value={filterStatus}
-                    onChange={handleFilterChange}
-                  />
-                </span>
-                <span>
-                  <FilterIcon className="max-lg:w-3 max-lg:h-3" />
-                </span>
+
+              <div className={`border border-gray-200 bg-gray-50 rounded-md h-9 px-3 flex items-center ${className}`}>
+                <select
+                  className="outline-0 bg-transparent text-sm h-full w-full cursor-pointer "
+                  value={selectedOption}
+                  onChange={handleFilterChange} // Make sure this function handles the selection change
+                >
+                  <option value="" disabled>
+                    {placeholder}
+                  </option>
+                  {options.map((option, index) => (
+                    <option key={index} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
           </div>
